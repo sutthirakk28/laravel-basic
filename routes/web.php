@@ -46,3 +46,8 @@ Route::match(['get','post'],'bill',function(){
 });
 
 Route::any('poll','Auth\LoginController@poll');
+
+Route::get('Movie','MovieController@index');
+Route::get('view','MovieController@view');
+Route::get('song','Music\SongController@index');
+Route::get('radio','RadioController@index');
