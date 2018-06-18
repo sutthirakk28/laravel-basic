@@ -1,0 +1,12 @@
+
+1.clone project from github
+2.composer update --no-scripts
+3.php artisan serve //--port=80
+
+*The only supported ciphers are AES-128-CBC and AES-256-CBC =>php artisan key:generate
+(run this command (php artisan key:generate)
+and the clear config cache using (php artisan config:clear)will solve this problem)
+
+4.commit project (comment discription)on github desktop
+5.Fetch Origin
+

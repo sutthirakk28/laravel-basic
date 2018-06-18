@@ -50,4 +50,5 @@ Route::any('poll','Auth\LoginController@poll');
 Route::get('Movie','MovieController@index');
 Route::get('view','MovieController@view');
 Route::get('song','Music\SongController@index');
+Route::get('songplay','Music\SongController@play');
 Route::get('radio','RadioController@index');
