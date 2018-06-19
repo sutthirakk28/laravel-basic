@@ -11,7 +11,7 @@ class SongController extends Controller
   public function index()
   {
     //return "Hello From Song Controller";
-    return view('song/index');
+    return ffview('song/index');
     //return view('song.index');
   }
 
@@ -33,5 +33,14 @@ class SongController extends Controller
   		'album' => 'tritan'
   	);
   	return view('song/player',$this->data);
+  }
+
+  public function band()
+  {
+  	$this->data =array(
+  		'band' => 'Isuzu',
+  		'album'=> '<u>D-max V-cross</u>'
+  	);
+  	return view('song/band',$this->data);
   }
 }

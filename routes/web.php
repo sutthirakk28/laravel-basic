@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| routes arela loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -52,3 +52,5 @@ Route::get('view','MovieController@view');
 Route::get('song','Music\SongController@index');
 Route::get('songplay','Music\SongController@play');
 Route::get('radio','RadioController@index');
+
+Route::get('band','Music\SongController@band');
