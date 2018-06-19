@@ -37,9 +37,13 @@ class SongController extends Controller
 
   public function band()
   {
+    $aCss=array('css/song/style.css');
+    $aScript=array('js/song/main.js');
   	$this->data =array(
   		'band' => 'Isuzu',
-  		'album'=> '<u>D-max V-cross</u>'
+  		'album'=> '<u>D-max V-cross</u>',
+      'style'=> $aCss,
+      'script'=>$aScript,
   	);
   	return view('song/band',$this->data);
   }

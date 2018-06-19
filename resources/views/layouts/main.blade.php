@@ -3,9 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<title>@yield('title')</title>
-	
+
 	{{--<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css')}}">--}}
 	{{ Html::style(('css/bootstrap.css'))}}
+	@if(isset($style))
+		@foreach($style as $css)
+			{{ Html::style(($css)) }}
+		@endforeach
+	@endif
 </head>
 <body>
 	<h1>Layout Main</h1>
@@ -18,5 +23,10 @@
 	--}}
 	{{Html::script('js/jquery.min.js')}}
 	{{Html::script('js/bootstrap.min.js')}}
+	@if(isset($script))
+		@foreach($script as $js)
+			{{ Html::script(($js)) }}
+		@endforeach
+	@endif
 </body>
 </html>
