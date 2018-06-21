@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Music;
 
 use App\Http\Controllers\Controller;
-
+use DB;
 /**
  *
  */
@@ -39,6 +39,12 @@ class SongController extends Controller
   {
     $aCss=array('css/song/style.css');
     $aScript=array('js/song/main.js');
+
+    $band=DB::table('blog_tbl')->find('3');
+    //var_dump($band);
+    //die();
+    dd($band);
+
   	$this->data =array(
   		'band' => 'Isuzu',
   		'album'=> '<u>D-max V-cross</u>',
