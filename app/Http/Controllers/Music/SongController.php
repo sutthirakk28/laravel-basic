@@ -40,9 +40,14 @@ class SongController extends Controller
     $aCss=array('css/song/style.css');
     $aScript=array('js/song/main.js');
 
-    $band=DB::table('blog_tbl')->find('3');
+    //$band=DB::table('blog_tbl')->find('3');
     //var_dump($band);
     //die();
+    //$band=DB::select('select title,blog_th from blog_tbl where deleted = ?',[0]);
+   //$band =DB::insert('insert into blog_tbl (title,blog_th) values (?,?)',['green day','bset fo year']);
+    //$band_u=DB::update('update blog_tbl set blog_th="best best best" where title=?',['green day']);
+    $band_del=DB::delete('delete from blog_tbl where title=?',['green day']);
+    $band=DB::table('blog_tbl')->get();
     dd($band);
 
   	$this->data =array(
