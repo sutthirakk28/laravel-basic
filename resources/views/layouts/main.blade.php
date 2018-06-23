@@ -13,7 +13,6 @@
 	@endif
 </head>
 <body>
-	<h1>Layout Main</h1>
 	<div class="container">
 		@yield('content')
 	</div>

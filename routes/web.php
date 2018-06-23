@@ -54,3 +54,6 @@ Route::get('songplay','Music\SongController@play');
 Route::get('radio','RadioController@index');
 
 Route::get('band','Music\SongController@band');
+
+
+Route::resource('lib','LibController');
