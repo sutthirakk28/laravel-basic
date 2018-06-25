@@ -14,14 +14,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+			@forelse ($lib as $l)
+				<tr>
+					<td>{{ $l['id'] }}</td>
+					<td>{{ $l['title'] }}</td>
+					<td>{{ $l['language'] }}</td>
+					<td>{{ $l['star'] }}</td>
+					<td>{{ $l['created_at'] }}</td>
+					<td>{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-primary')) }}</td>
+				</tr>
+			@empty
+				<tr>
+					<td colspan="6">No data</td>
+				</tr>
+			@endforelse
+
 		</tbody>
 	</table>
 	<div class="row">
@@ -30,6 +37,6 @@
 				'class' => 'btn btn-primary'
 			))
 		}}
-		</div>		
+		</div>
 	</div>
 @endsection

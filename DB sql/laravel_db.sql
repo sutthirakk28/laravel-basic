@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2018 at 11:10 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Jun 25, 2018 at 06:30 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -59,6 +59,20 @@ CREATE TABLE `libs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `libs`
+--
+
+INSERT INTO `libs` (`id`, `title`, `language`, `star`, `created_at`, `updated_at`) VALUES
+(1, 'Laravel', 'PHP', 5, '2018-06-25 08:43:09', '2018-06-25 08:43:09'),
+(2, 'auralia', 'Javascrip', 5, '2018-06-25 08:53:32', '2018-06-25 08:53:32'),
+(3, 'Zend', 'PHP', 5, '2018-06-25 08:57:26', '2018-06-25 08:57:26'),
+(4, 'Zend', 'PHP', 5, '2018-06-25 08:57:58', '2018-06-25 08:57:58'),
+(5, 'Zend', 'PHP', 5, '2018-06-25 08:58:24', '2018-06-25 08:58:24'),
+(6, 'Zend', 'PHP', 5, '2018-06-25 08:58:40', '2018-06-25 08:58:40'),
+(7, 'dd', 'ff', 11, '2018-06-25 08:59:45', '2018-06-25 08:59:45'),
+(8, 'tuy', 'tuy555', 4444555, '2018-06-25 09:28:44', '2018-06-25 09:28:44');
 
 -- --------------------------------------------------------
 
@@ -159,7 +173,7 @@ ALTER TABLE `blog_tbl`
 -- AUTO_INCREMENT for table `libs`
 --
 ALTER TABLE `libs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `migrations`
 --

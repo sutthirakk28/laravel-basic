@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use App\Lib;
 
 class LibController extends Controller
 {
@@ -14,7 +15,12 @@ class LibController extends Controller
      */
     public function index()
     {
-        return view('lib.index');
+        $lib =Lib::all();
+        //dd($lib);
+        $data = array(
+          'lib' => $lib
+        );
+        return view('lib.index',$data);
     }
 
     /**
@@ -40,6 +46,16 @@ class LibController extends Controller
             'language' => 'required|max:100',
             'star' => 'required|numeric'
         ]);
+
+        $lib = new Lib;
+
+        $lib->title = $request->title;
+        $lib->language = $request->language;
+        $lib->star = $request->star;
+
+        $lib->save();
+
+        return redirect('lib');
     }
 
     /**
@@ -50,7 +66,11 @@ class LibController extends Controller
      */
     public function show($id)
     {
-        //
+      $lib = Lib::find($id);
+      $data = array(
+        'lib' => $lib
+      );
+      return view('lib.show',$data);
     }
 
     /**
@@ -61,7 +81,7 @@ class LibController extends Controller
      */
     public function edit($id)
     {
-        //
+      //
     }
 
     /**
