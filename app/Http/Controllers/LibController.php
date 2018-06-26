@@ -81,7 +81,13 @@ class LibController extends Controller
      */
     public function edit($id)
     {
-      //
+      if ($id !== '') {
+          $lib = Lib::find($id);
+          $data = array(
+            'lib' => $lib
+          );
+          return view('lib/from',$data);
+      }
     }
 
     /**
@@ -93,7 +99,20 @@ class LibController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request,[
+          'title' => 'required|max:100',
+          'language' => 'required|max:100',
+          'star' => 'required|numeric'
+      ]);
+
+      $lib = Lib::find($id);
+      $lib->title = $request->title;
+      $lib->language = $request->language;
+      $lib->star = $request->star;
+      $lib->save();
+
+      Session::flash('massage','Success Update Lib');
+      return redirect('lib');
     }
 
     /**
@@ -104,6 +123,9 @@ class LibController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lib = Lib::find($id);
+        $lib->delete();
+        Session::flash('message','Success Delete Lib');
+        return redirect('lib');
     }
 }

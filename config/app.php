@@ -106,7 +106,7 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-128-CBC',
- 
+
    /*
     |--------------------------------------------------------------------------
     | Logging Configuration
@@ -163,7 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        'Collective\Html\HtmlServiceProvider',
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -225,9 +225,9 @@ return [
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
-        'Validator' => Illuminate\Support\Facades\Validator::class,        
-        'Form' => 'Collective\Html\FormFacade',
-      'Html' => 'Collective\Html\HtmlFacade',      
+        'Validator' => Illuminate\Support\Facades\Validator::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

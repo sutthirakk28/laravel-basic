@@ -2,6 +2,11 @@
 
 @section('content')
 	<h1>Hello blade Lib</h1>
+	@if(Session::has('message'))
+		<div class=" alert alert-info">
+			{{ Session::get('message') }}
+		</div>
+	@endif
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -21,7 +26,14 @@
 					<td>{{ $l['language'] }}</td>
 					<td>{{ $l['star'] }}</td>
 					<td>{{ $l['created_at'] }}</td>
-					<td>{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-primary')) }}</td>
+					<td>
+							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
+							<input type="hidden" name="_method" value="delete"/>
+							{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
+							{{ Html::link('lib/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
+							{{ Form::submit('Delete',array('class' => 'btn btn-danger')) }}
+							{{ Form::close()}}
+					</td>
 				</tr>
 			@empty
 				<tr>
