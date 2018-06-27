@@ -13,13 +13,16 @@ class CreateBlogTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_tbl', function (Blueprint $table) {
+        //Schema::rename($blog_tbl, $blogs);
+        Schema::create('blogs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('blog');
             $table->integer('deleted')->default('0');
             $table->timestamps();
         });
+
+
     }
 
     /**

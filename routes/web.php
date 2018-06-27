@@ -27,9 +27,13 @@ route::get('blog/{id}',function($id){
 });
 
 //Optional parameter
-Route::get('profile/{id?}',function($id=null){
-	return "my ID :".$id;
-});
+// Route::get('profile/{id?}',function($id=null){
+// 	return "my ID :".$id;
+// });
+
+Route::resource('blog','BlogController');
+
+
 
 //Rerular Expresion
 Route::get('book/{name}',function($name){
