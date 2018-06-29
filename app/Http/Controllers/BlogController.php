@@ -15,9 +15,11 @@ class BlogController extends Controller
      */
     public function index()
     {
+        $script = array('js/blog/app.js');
         $blog = Blog::all()->take(3);
         $comment = Comments::all();
         $data = array(
+          'script' => $script,
           'blog' => $blog,
           'comment' => $comment
         );

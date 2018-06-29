@@ -14,6 +14,9 @@
             {{ $b->blog_th }}
           </div>
           <div class="panel-footer text-right">
+            {{ Html::link('#','Comment',array(
+                'class' => 'addComment'
+              )) }}
             {{ $b->created_at->diffForHumans() }}
           </div>
         </div>
@@ -43,6 +46,20 @@
   @empty
     <h2>No Post!!</h2>
   @endforelse
-
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Comment</h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>    
+  </div>
+</div>
 @endsection
 @endsection
