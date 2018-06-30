@@ -15,7 +15,8 @@
           </div>
           <div class="panel-footer text-right">
             {{ Html::link('#','Comment',array(
-                'class' => 'addComment'
+                'class' => 'addComment',
+                'data-id' => $b->id
               )) }}
             {{ $b->created_at->diffForHumans() }}
           </div>
@@ -31,8 +32,15 @@
               <div class="panel-body">
                 {{ $c->comment }}
               </div>
-              <div class="panel-footer text-right">
-                {{ $c->created_at->diffForHumans() }}
+              <div class="panel-footer ">                
+                <div class="row">
+                  <div class="col-md-6 text-left">
+                   By : {{ $c->user }}
+                  </div>
+                  <div class="col-md-6 text-right">
+                   Time : {{ $c->created_at->diffForHumans() }}
+                  </div>                   
+                </div>
               </div>
             </div>
           </div>
@@ -48,17 +56,27 @@
   @endforelse
 <div class="modal fade">
   <div class="modal-dialog">
+    {{ Form::open(['method' => 'post', 'action' => 'CommentController@store']) }}
+    {{ Form::hidden('blog_id','',array('id' => 'id_comment')) }}
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Comment</h4>
       </div>
       <div class="modal-body">
-        
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          {{ Form::textarea('comment','',['class' => 'form-control']) }}
+        </div>
+        <div class="form-group">
+          <label for="user">User</label>
+          {{ Form::text('user','',['class' => 'form-control']) }}
+        </div>        
       </div>
       <div class="modal-footer">
-        
+        {{ Form::submit('Save',['class' => 'btn btn-primary']) }}
       </div>
-    </div>    
+    </div><!-- .modal-content-->
+    {{ Form::close() }}    
   </div>
 </div>
 @endsection

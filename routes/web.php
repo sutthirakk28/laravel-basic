@@ -32,7 +32,7 @@ route::get('blog/{id}',function($id){
 // });
 
 Route::resource('blog','BlogController');
-
+Route::resource('comment','CommentController');
 
 
 //Rerular Expresion

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comments;
 
 class CommentController extends Controller
 {
@@ -34,7 +35,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($_POST);
+        $this->validate($request,[
+            'comment' => 'required|max:200',
+            'user' => 'required|max:100'
+        ]);
+
+        $comment = new Comments;
+        $comment->blog_id = $request->blog_id;
+        $comment->comment = $request->comment;
+        $comment->user = $request->user;
+        $comment->save();
+        return redirect('blog');
     }
 
     /**
