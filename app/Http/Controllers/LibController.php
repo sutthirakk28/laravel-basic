@@ -17,6 +17,10 @@ class LibController extends Controller
     {
         $lib =Lib::all();
         //dd($lib);
+        //Session::put('language','Thai');
+        //Session(['english' => 'good','japanese' => 'poor']);
+        //Session::forget('japanese');
+        //Session::flush();
         $data = array(
           'lib' => $lib
         );
