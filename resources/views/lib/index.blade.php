@@ -1,12 +1,14 @@
 @extends('layouts/main')
 
 @section('content')
-	<h1>Hello blade Lib</h1>
+	<h1>Hello blade Lib</h1>	
+  	<h1>{{ Cookie::get('language') }}</h1>
 	@if(Session::has('message'))
 		<div class=" alert alert-info">
 			{{ Session::get('message') }}
 		</div>
 	@endif
+	<h2> {{ Session::get('name') }}</h2>
 	<h2> {{ Session::get('language') }}</h2>
 	<table class="table table-bordered">
 		<thead>

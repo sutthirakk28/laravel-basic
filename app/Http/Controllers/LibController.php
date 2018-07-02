@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Cookie;
 use App\Lib;
 
 class LibController extends Controller
@@ -17,10 +18,15 @@ class LibController extends Controller
     {
         $lib =Lib::all();
         //dd($lib);
+
         //Session::put('language','Thai');
         //Session(['english' => 'good','japanese' => 'poor']);
         //Session::forget('japanese');
         //Session::flush();
+
+        //Cookie::queue('name','value','minutes'); ตัวอย่าวงรูปแบบการสร้าง Cookie
+        Cookie::queue('language','thai',1);
+        Cookie::queue(Cookie::forever('name','sutthirak'));
         $data = array(
           'lib' => $lib
         );

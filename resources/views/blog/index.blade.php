@@ -2,7 +2,7 @@
 @section('title')
 
 @section('content')
-  <h1> Hello Blog</h1>
+  <h1> Hello Blog</h1>  
   @forelse ($blog as $b)
     <div class="row">
       <div class="col-md-12">
