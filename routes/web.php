@@ -61,3 +61,7 @@ Route::get('band','Music\SongController@band');
 
 
 Route::resource('lib','LibController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
