@@ -15,6 +15,25 @@
                     @endif
 
                     Welcom to News!!!
+                    <br>
+                    @if (Auth::check())
+                      <h2>{{ Auth::user()->name }}</h2>
+                    @endif
+                    <br>
+                    @if (Auth::guest())
+                        <a href="{{ route('register') }}">Register</a>
+                    @else
+
+                      <a href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                          Logout
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
+                    @endif
+
                 </div>
             </div>
         </div>

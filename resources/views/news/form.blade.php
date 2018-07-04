@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Welcom to form!!!
+                    Welcom {{ Auth::user()->name }} to News form!!!
                 </div>
             </div>
         </div>

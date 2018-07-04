@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
-{ 
-	
+{
+
   	public function __construct()
     {
     	//All below Auth normal
@@ -16,7 +16,7 @@ class NewsController extends Controller
         //$this->middleware('auth',['only' => ['index','form'] ]);
 
         //Except Function
-        $this->midleware('auth',['except' => ['index'] ]);
+        $this->middleware('auth',['except' => ['index'] ]);
     }
 
     public function index()
