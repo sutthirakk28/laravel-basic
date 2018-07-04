@@ -65,3 +65,6 @@ Route::resource('lib','LibController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/news','NewsController@index');
+Route::get('/news/form','NewsController@form');
