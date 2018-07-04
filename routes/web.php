@@ -68,3 +68,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/news','NewsController@index');
 Route::get('/news/form','NewsController@form');
+//Route::get('/news/form','NewsController@form')->middleware('auth');

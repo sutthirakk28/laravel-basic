@@ -9,7 +9,14 @@ class NewsController extends Controller
 	
   	public function __construct()
     {
-        $this->middleware('auth');
+    	//All below Auth normal
+        //$this->middleware('auth');
+
+        //Only Function
+        //$this->middleware('auth',['only' => ['index','form'] ]);
+
+        //Except Function
+        $this->midleware('auth',['except' => ['index'] ]);
     }
 
     public function index()
@@ -19,6 +26,7 @@ class NewsController extends Controller
 
     public function form()
     {
+    	//$this->middleware('auth');
     	return view('news/form');
     }
 }
