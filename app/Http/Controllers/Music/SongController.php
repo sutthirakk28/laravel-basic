@@ -11,7 +11,7 @@ class SongController extends Controller
   public function index()
   {
     //return "Hello From Song Controller";
-    return ffview('song/index');
+    return view('song/index');
     //return view('song.index');
   }
 

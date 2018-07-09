@@ -1,8 +1,7 @@
 @extends('layouts/main')
 
 @section('content')
-	<h1>Hello blade Lib</h1>	
-  	<h1>{{ Cookie::get('language') }}</h1>
+	<h1>ระบบจัดการพนักงาน</h1>	
 	@if(Session::has('message'))
 		<div class=" alert alert-info">
 			{{ Session::get('message') }}
@@ -13,22 +12,24 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Language</th>
-				<th>star</th>
-				<th>Create</th>
+				<th width="30">รหัส</th>
+				<th>ชื่อ - นามสกุล</th>
+				<th>ชื่อเล่น</th>
+				<th>อายุ</th>
+				<th>วันที่เข้างาน</th>
+				<th>วันที่ออกงาน</th>
 				<th width="200">Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			@forelse ($lib as $l)
 				<tr>
-					<td>{{ $l['id'] }}</td>
-					<td>{{ $l['title'] }}</td>
-					<td>{{ $l['language'] }}</td>
-					<td>{{ $l['star'] }}</td>
-					<td>{{ $l['created_at'] }}</td>
+					<td>{{ $l['id_employ'] }}</td>
+					<td>{{ $l['surname'] }}</td>
+					<td>{{ $l['age'] }}</td>
+					<td>{{ $l['job_start'] }}</td>
+					<td>{{ $l['	job_end'] }}</td>
+					<td>{{ $l['y_work'] }}</td>
 					<td>
 							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
 							<input type="hidden" name="_method" value="delete"/>
@@ -48,7 +49,7 @@
 	</table>
 	<div class="row">
 		<div class="col-xs-5">
-			{{ Html::link('lib/create','Add New', array(
+			{{ Html::link('lib/create','เพิ่มพนักงาน', array(
 				'class' => 'btn btn-primary'
 			))
 		}}

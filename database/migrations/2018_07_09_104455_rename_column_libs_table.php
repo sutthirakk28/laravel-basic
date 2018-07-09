@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLibsTable extends Migration
+class RenameColumnLibsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateLibsTable extends Migration
      */
     public function up()
     {
-        Schema::create('libs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('title');
-            $table->text('language');
-            $table->integer('star');
-            $table->timestamps();
+        Schema::table('libs', function (Blueprint $table) {
+            $table->renameColumn('title','surname');
+            $table->renameColumn('language','nickname');
+            $table->renameColumn('star','age');
         });
-
     }
 
     /**
@@ -30,6 +27,8 @@ class CreateLibsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libs');
+        Schema::table('libs', function (Blueprint $table) {
+            //
+        });
     }
 }

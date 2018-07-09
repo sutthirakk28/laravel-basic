@@ -28,8 +28,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        <!--{{ config('app.name', 'Laravel') }} -->บริษัท ทีพีเอ็ม(1980) จำกัด
                     </a>
                 </div>
 
