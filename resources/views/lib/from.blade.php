@@ -1,13 +1,13 @@
 @extends('layouts/main')
 
 @section('content')
-	<h1>Form Create</h1>
+	<h1>เพิ่มข้อมูลพนักงาน</h1>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			@if(isset($lib))
 				Edit form
 			@else
-				Add Form
+				แบบฟอร์มเพิ่มข้อมูลพนักงาน
 			@endif
 		</div>
 			@if(isset($lib))
@@ -16,6 +16,7 @@
 				{{ Form::open(['url' => 'lib']) }}
 			@endif
 
+		
 		 <div class="panel-body">
 		 	@if(count($errors) > 0 )
 				<div class=" alert alert-danger">
@@ -28,13 +29,28 @@
 		 	@endif
 			<div class="row">
 				<div class="col-xs-2">
-					{{ form::label('title','Title Library') }}
+					{{ form::label('id_employ','รหัสพนักงาน') }}
+				</div>
+				<div class="col-xs-5">
+					@if(isset($lib->nickname))
+						{{ form::text('id_employ', $lib->id_employ, ['class' => 'form-control'] ) }}
+					@else
+						{{ form::text('id_employ', '', ['class' => 'form-control']) }}
+					@endif
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			
+			<div class="row">
+				<div class="col-xs-2">
+					{{ form::label('surname','ชื่อ-นามสกุล') }}
 				</div>
 				<div class="col-xs-5">
 					@if(isset($lib->title))
-						{{ form::text('title',$lib->title, ['class' => 'form-control']) }}
+						{{ form::text('surname',$lib->surname, ['class' => 'form-control']) }}
 					@else
-						{{ form::text('title','', ['class' => 'form-control']) }}
+						{{ form::text('surname','', ['class' => 'form-control']) }}
 					@endif
 				</div>
 			</div>
@@ -42,13 +58,13 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-2">
-					{{ form::label('language','Language') }}
+					{{ form::label('nickname','ชื่อเล่น') }}
 				</div>
 				<div class="col-xs-5">
-					@if(isset($lib->language))
-						{{ form::text('language', $lib->language, ['class' => 'form-control'] ) }}
+					@if(isset($lib->nickname))
+						{{ form::text('nickname', $lib->nickname, ['class' => 'form-control'] ) }}
 					@else
-						{{ form::text('language', '', ['class' => 'form-control']) }}
+						{{ form::text('nickname', '', ['class' => 'form-control']) }}
 					@endif
 				</div>
 			</div>
@@ -56,13 +72,41 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-2">
-					{{ form::label('star','Star') }}
+					{{ form::label('age','อายุ') }}
 				</div>
 				<div class="col-xs-5">
 					@if(isset($lib->star))
-						{{ form::text('star', $lib->star, ['class'=>'form-control']) }}
+						{{ form::text('age', $lib->age, ['class'=>'form-control']) }}
 					@else
-						{{ form::text('star', '', ['class'=>'form-control']) }}
+						{{ form::text('age', '', ['class'=>'form-control']) }}
+					@endif
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-2">
+					{{ form::label('position','ตำแหน่ง') }}
+				</div>
+				<div class="col-xs-5">
+					@if(isset($lib->star))
+						{{ form::text('position', $lib->position, ['class'=>'form-control']) }}
+					@else
+						{{ form::text('position', '', ['class'=>'form-control']) }}
+					@endif
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-2">
+					{{ form::label('job_start','วันเริ่มงาน') }}
+				</div>
+				<div class="col-xs-5">
+					@if(isset($lib->y_work))
+						{{ form::date('job_start', $lib->job_start, ['class'=>'form-control']) }}
+					@else
+						{{ form::date('job_start', '', ['class'=>'form-control']) }}
 					@endif
 				</div>
 			</div>

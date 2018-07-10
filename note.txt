@@ -25,4 +25,6 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 ------------------------------------
 1.add column : php artisan make:migration add_table --table=libs
 2.rename column:$ php artisan make:migration rename_column_libs_table --table=libs
+3.chang type:composer require doctrine/dbal
+
 

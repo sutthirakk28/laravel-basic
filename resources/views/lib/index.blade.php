@@ -16,8 +16,9 @@
 				<th>ชื่อ - นามสกุล</th>
 				<th>ชื่อเล่น</th>
 				<th>อายุ</th>
-				<th>วันที่เข้างาน</th>
-				<th>วันที่ออกงาน</th>
+				<th>ตำแหน่ง</th>
+				<th>วันเริ่มงาน</th>
+				<th>อายุงาน/วัน</th>
 				<th width="200">Action</th>
 			</tr>
 		</thead>
@@ -26,9 +27,10 @@
 				<tr>
 					<td>{{ $l['id_employ'] }}</td>
 					<td>{{ $l['surname'] }}</td>
+					<td>{{ $l['nickname'] }}</td>
 					<td>{{ $l['age'] }}</td>
+					<td>{{ $l['position'] }}</td>
 					<td>{{ $l['job_start'] }}</td>
-					<td>{{ $l['	job_end'] }}</td>
 					<td>{{ $l['y_work'] }}</td>
 					<td>
 							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}

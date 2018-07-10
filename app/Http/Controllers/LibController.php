@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Session;
 use Cookie;
 use App\Lib;
+use DateTime;
+use Carbon\Carbon;
 
 class LibController extends Controller
 {
@@ -25,10 +27,12 @@ class LibController extends Controller
         //Session::flush();
 
         //Cookie::queue('name','value','minutes'); ตัวอย่าวงรูปแบบการสร้าง Cookie
-        Cookie::queue('language','thai',1);
-        Cookie::queue(Cookie::forever('name','sutthirak'));
+        //Cookie::queue('language','thai',1);
+        //Cookie::queue(Cookie::forever('name','sutthirak'));
+        
         $data = array(
-          'lib' => $lib
+          'lib' => $lib,
+
         );
         return view('lib.index',$data);
     }
@@ -52,16 +56,29 @@ class LibController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required|max:100',
-            'language' => 'required|max:100',
-            'star' => 'required|numeric'
+            'id_employ' => 'required|max:100',
+            'surname' => 'required|max:100'
         ]);
-
+        $now = new Carbon();
         $lib = new Lib;
 
-        $lib->title = $request->title;
-        $lib->language = $request->language;
-        $lib->star = $request->star;
+        function getAge($birthday) {
+            $then = strtotime($birthday);
+            return(floor((time()-$then)/31556926));
+        }
+
+        $work=number_format(getAge($request->job_start),0);
+
+        $lib->id_employ = $request->id_employ;
+        $lib->surname = $request->surname;
+        $lib->nickname = $request->nickname;                
+        $lib->job_start = $request->job_start;
+        $lib->age = $request->age;
+        $lib->position = $request->position;
+        $lib->created_at = $now;
+        $lib->y_work = $work;
+        $lib->job_end = $now;
+        
 
         $lib->save();
 
