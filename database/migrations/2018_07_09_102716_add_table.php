@@ -18,7 +18,6 @@ class AddTable extends Migration
             $table->date('job_start');
             $table->date('job_end');
             $table->integer('y_work');
-            $table->string('id_employ', 50)->change();
         });
     }
 
@@ -30,11 +29,7 @@ class AddTable extends Migration
     public function down()
     {
         Schema::table('libs', function (Blueprint $table) {
-            $table->dropColumn('id_employ');
-            $table->dropColumn('job_start');
-            $table->dropColumn('job_end');
             $table->dropColumn('y_work');
-            $table->dropColumn('position');
         });
     }
 }

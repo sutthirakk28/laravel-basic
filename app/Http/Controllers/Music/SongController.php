@@ -48,7 +48,7 @@ class SongController extends Controller
     //$band_u=DB::update('update blog_tbl set blog_th="best best best" where title=?',['green day']);
     $band_del=DB::delete('delete from blog_tbl where title=?',['green day']);
     $band=DB::table('blog_tbl')->get();
-    dd($band);
+    //dd($band);
 
   	$this->data =array(
   		'band' => 'Isuzu',

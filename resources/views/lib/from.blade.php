@@ -76,9 +76,9 @@
 				</div>
 				<div class="col-xs-5">
 					@if(isset($lib->star))
-						{{ form::text('age', $lib->age, ['class'=>'form-control']) }}
+						{{ form::date('age', $lib->age, ['class'=>'form-control']) }}
 					@else
-						{{ form::text('age', '', ['class'=>'form-control']) }}
+						{{ form::date('age', '', ['class'=>'form-control']) }}
 					@endif
 				</div>
 			</div>

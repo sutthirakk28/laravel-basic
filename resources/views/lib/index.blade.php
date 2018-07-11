@@ -28,10 +28,10 @@
 					<td>{{ $l['id_employ'] }}</td>
 					<td>{{ $l['surname'] }}</td>
 					<td>{{ $l['nickname'] }}</td>
-					<td>{{ $l['age'] }}</td>
+					<td>{{ $age.' ปี' }}</td>
 					<td>{{ $l['position'] }}</td>
 					<td>{{ $l['job_start'] }}</td>
-					<td>{{ $l['y_work'] }}</td>
+					<td>{{ $l['job_start'] }}</td>
 					<td>
 							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
 							<input type="hidden" name="_method" value="delete"/>

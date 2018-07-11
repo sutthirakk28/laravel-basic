@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2018 at 12:54 PM
+-- Generation Time: Jul 11, 2018 at 12:37 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -98,28 +98,26 @@ CREATE TABLE `libs` (
   `id` int(10) UNSIGNED NOT NULL,
   `surname` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `nickname` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `age` int(11) NOT NULL,
+  `age` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `id_employ` int(11) NOT NULL,
+  `id_employ` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `job_start` date NOT NULL,
   `job_end` date NOT NULL,
-  `y_work` int(11) NOT NULL
+  `y_work` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `libs`
 --
 
-INSERT INTO `libs` (`id`, `surname`, `nickname`, `age`, `created_at`, `updated_at`, `id_employ`, `job_start`, `job_end`, `y_work`) VALUES
-(1, 'Laravel', 'PHP', 5, '2018-06-25 08:43:09', '2018-06-25 08:43:09', 0, '0000-00-00', '0000-00-00', 0),
-(2, 'auralia', 'Javascrip', 5, '2018-06-25 08:53:32', '2018-06-25 08:53:32', 0, '0000-00-00', '0000-00-00', 0),
-(3, 'Zend', 'PHP', 53, '2018-06-25 08:57:26', '2018-07-08 21:49:47', 0, '0000-00-00', '0000-00-00', 0),
-(5, 'Zend', 'PHP', 5, '2018-06-25 08:58:24', '2018-06-25 08:58:24', 0, '0000-00-00', '0000-00-00', 0),
-(6, 'Zend', 'PHP', 5, '2018-06-25 08:58:40', '2018-06-25 08:58:40', 0, '0000-00-00', '0000-00-00', 0),
-(7, 'dd', 'ff', 11, '2018-06-25 08:59:45', '2018-06-25 08:59:45', 0, '0000-00-00', '0000-00-00', 0),
-(8, 'tuy', 'tuy555', 4444555, '2018-06-25 09:28:44', '2018-06-25 09:28:44', 0, '0000-00-00', '0000-00-00', 0),
-(11, 'นายวันชัย  คุชิตา', 'กุ้ง', 25, NULL, NULL, 2, '2016-08-22', '2017-08-22', 3);
+INSERT INTO `libs` (`id`, `surname`, `nickname`, `age`, `created_at`, `updated_at`, `id_employ`, `job_start`, `job_end`, `y_work`, `position`) VALUES
+(11, 'นายวันชัย  คุชิตา', 'กุ้ง', '2014-05-12', '2018-07-08 17:00:00', NULL, 'TP002', '2016-08-22', '2017-08-22', '3', 'พนักงานช่างติดตั้ง'),
+(12, 'ดเ่เ่เาสวสส', '้่า้ส้่ส่ส', '2016-08-22', '2018-07-10 10:13:01', '2018-07-10 10:13:01', 'rt012', '2018-07-01', '2018-07-01', '99', 'กดเกดเ'),
+(14, 'หดห', 'หดหกด', '2010-11-01', '2018-07-10 10:37:56', '2018-07-10 10:37:56', 'หกดห', '2016-01-05', '2018-07-10', '2', 'หกด'),
+(15, 'นายวิทวัส  บุญยงค์', 'ชำ', '2011-10-22', '2018-07-10 10:38:34', '2018-07-10 10:38:34', 'TP003', '2013-01-04', '2018-07-10', '5', 'หัวหน้าช่างติดตั้ง'),
+(16, 'นายมงคล ใจสุข', 'น้อย', '1985-07-05', '2018-07-11 10:12:51', '2018-07-11 10:12:51', 'TP004', '2015-09-13', '2018-07-11', '99', 'ช่างติดตั้ง');
 
 -- --------------------------------------------------------
 
@@ -145,7 +143,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2018_06_23_063730_create_libs_table', 3),
 (6, '2018_06_28_102428_create_comments_table', 4),
 (7, '2018_07_09_102716_add_table', 5),
-(8, '2018_07_09_104455_rename_column_libs_table', 6);
+(8, '2018_07_09_104455_rename_column_libs_table', 6),
+(9, '2018_07_10_162438_add_position_to_libs_table', 7),
+(10, '2018_07_10_163838_change_id_employ_type_in_libs_table', 8),
+(11, '2018_07_11_103804_change_age_type_in_libs_table', 9),
+(13, '2018_07_11_104512_change_y_work_type_in_libs_table', 10),
+(14, '2018_07_11_105646_change_y_work_type_in_libs_table', 11);
 
 -- --------------------------------------------------------
 
@@ -262,13 +265,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `libs`
 --
 ALTER TABLE `libs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

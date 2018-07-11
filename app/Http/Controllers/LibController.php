@@ -8,9 +8,11 @@ use Cookie;
 use App\Lib;
 use DateTime;
 use Carbon\Carbon;
+use DB;
 
 class LibController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +20,9 @@ class LibController extends Controller
      */
     public function index()
     {
+        $aCss=array('css/lib/style.css');
+        $aScript=array('js/lib/main.js');
+
         $lib =Lib::all();
         //dd($lib);
 
@@ -30,11 +35,30 @@ class LibController extends Controller
         //Cookie::queue('language','thai',1);
         //Cookie::queue(Cookie::forever('name','sutthirak'));
         
+        
+        $libs = DB::table('libs')->get();    
+        
+        function getAge($birthday) {
+            $then = strtotime($birthday);
+            return(floor((time()-$then)/31556926));
+        }
+        
+        foreach ($libs as $lib1) {
+           // echo $libs->age.'<br />';
+           //echo $work1=number_format(getAge($libs->age),0).'<br />';
+           echo $work=getAge($lib1->age).'<br />';
+        
+       }
+       echo $work=getAge($lib1->age).'.....'.'<br />'.'11';
         $data = array(
-          'lib' => $lib,
-
+            'lib' => $lib,
+            'age' => $work,
+            'style' => $aCss,
+            'script'=> $aScript,
         );
+        
         return view('lib.index',$data);
+        
     }
 
     /**
@@ -60,14 +84,7 @@ class LibController extends Controller
             'surname' => 'required|max:100'
         ]);
         $now = new Carbon();
-        $lib = new Lib;
-
-        function getAge($birthday) {
-            $then = strtotime($birthday);
-            return(floor((time()-$then)/31556926));
-        }
-
-        $work=number_format(getAge($request->job_start),0);
+        $lib = new Lib;        
 
         $lib->id_employ = $request->id_employ;
         $lib->surname = $request->surname;
@@ -76,9 +93,8 @@ class LibController extends Controller
         $lib->age = $request->age;
         $lib->position = $request->position;
         $lib->created_at = $now;
-        $lib->y_work = $work;
-        $lib->job_end = $now;
-        
+        $lib->y_work = 99;
+        $lib->job_end = $now;        
 
         $lib->save();
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPositionToLibsTable extends Migration
+class ChangeYWorkTypeInLibsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPositionToLibsTable extends Migration
      */
     public function up()
     {
-        Schema::table('libs', function (Blueprint $table) {            
-            $table->char('position',100)->change();
+        Schema::table('libs', function (Blueprint $table) {
+            $table->text('y_work')->change();
         });
     }
 

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>@yield('title')</title>
 
-	{{--<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css')}}">--}}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css')}}">
 	{{ Html::style(('css/bootstrap.css'))}}
 	@if(isset($style))
 		@foreach($style as $css)
