@@ -22,6 +22,8 @@ class LibController extends Controller
     {
         $aCss=array('css/lib/style.css');
         $aScript=array('js/lib/main.js');
+        
+        
 
         $lib =Lib::all();
         //dd($lib);
@@ -34,31 +36,14 @@ class LibController extends Controller
         //Cookie::queue('name','value','minutes'); ตัวอย่าวงรูปแบบการสร้าง Cookie
         //Cookie::queue('language','thai',1);
         //Cookie::queue(Cookie::forever('name','sutthirak'));
-        
-        
-        $libs = DB::table('libs')->get();    
-        
-        function getAge($birthday) {
-            $then = strtotime($birthday);
-            return(floor((time()-$then)/31556926));
-        }
-        
-        foreach ($libs as $lib1) {
-           // echo $libs->age.'<br />';
-           //echo $work1=number_format(getAge($libs->age),0).'<br />';
-           echo $work=getAge($lib1->age).'<br />';
-        
-       }
-       echo $work=getAge($lib1->age).'.....'.'<br />'.'11';
+              
         $data = array(
             'lib' => $lib,
-            'age' => $work,
             'style' => $aCss,
             'script'=> $aScript,
         );
         
-        return view('lib.index',$data);
-        
+        return view('lib.index',$data);        
     }
 
     /**
@@ -68,7 +53,12 @@ class LibController extends Controller
      */
     public function create()
     {
-        return view('lib.from');
+        $aCss=array('css/lib/style.css');
+        $data = array(
+            'style' => $aCss
+        );
+        return view('lib.from',$data);
+
     }
 
     /**

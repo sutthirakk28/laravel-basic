@@ -1,0 +1,41 @@
+.center{
+	text-align: center;
+}
+.thead{
+	font-family: Taviraj;
+	text-align: center;
+	font-size: 15px;
+}
+.h1{
+	font-family: Kanit;
+	color:yellow;
+	font-size: 29px;
+	font-weight: 900;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.tbody{
+	font-family: Kanit;
+	color: black;
+	font-weight:bolder;
+	font-size: 14px;
+}
+
+.panel.panel-primary.div1{
+	font-family: Taviraj;
+	text-align: center;
+	font-size: 15px;
+}
+.panel-primary .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    font-size: 25px;
+}
+.navbar-default {
+    font-family: Taviraj;
+    color: black;
+    font-weight: 700;
+}
+.navbar-nav>li>.dropdown-menu {
+    font-family: monospace;
+}
