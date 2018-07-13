@@ -10,13 +10,13 @@ class NewsController extends Controller
   	public function __construct()
     {
     	//All below Auth normal
-        //$this->middleware('auth');
+        $this->middleware('auth');
 
         //Only Function
         //$this->middleware('auth',['only' => ['index','form'] ]);
 
         //Except Function
-        $this->middleware('auth',['except' => ['index'] ]);
+        //$this->middleware('auth',['except' => ['index'] ]);
     }
 
     public function index()

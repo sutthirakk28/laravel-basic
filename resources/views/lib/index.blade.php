@@ -1,5 +1,7 @@
 @extends('layouts/main')
-
+@section('title')
+ระบบจัดการข้อมูลพนักงาน
+@endsection
 @section('content')
 	<h1 class="h1">ระบบจัดการข้อมูลพนักงาน</h1>	
 	@if(Session::has('message'))
@@ -7,8 +9,6 @@
 			{{ Session::get('message') }}
 		</div>
 	@endif
-	<h2> {{ Session::get('name') }}</h2>
-	<h2> {{ Session::get('language') }}</h2>
 	<table id="lib" class="table table-striped table-bordered nowrap" style="width:100%">
 		<thead class="thead">
 			<tr>
@@ -16,8 +16,8 @@
 				<th>ชื่อ - นามสกุล</th>
 				<th>ชื่อเล่น</th>
 				<th>อายุ</th>
+				<th>ฝ่าย</th>
 				<th>ตำแหน่ง</th>
-				<th>วันเริ่มงาน</th>
 				<th>อายุงาน</th>
 				<th width="200">Action</th>
 			</tr>
@@ -37,14 +37,14 @@
         	@endphp
 
 			@foreach ($lib as $l)
-				<tr >
-					<td>{{ $l['id_employ'] }}</td>
-					<td>{{ $l['surname'] }}</td>
-					<td>{{ $l['nickname'] }}</td>
-					<td>{{ getAge($l['age']).' ปี'}}</td>
-					<td>{{ $l['position'] }}</td>
-					<td>{{ $l['job_start'] }}</td>				
-					<td>{{ getDate1($l['job_start']) }}</td>
+				<!-- <tr >
+					<td>{{ $l['libs.id_employ'] }}</td>
+					<td>{{ $l['libs.surname'] }}</td>
+					<td>{{ $l['libs.nickname'] }}</td>
+					<td>{{ getAge($l['libs.age']).' ปี'}}</td>
+					<td></td>
+					<td>{{ $l['pos.name_pos'] }}</td>								
+					<td>{{ getDate1($l['libs.job_start']) }}</td>
 					<td class="center">
 							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
 							<input type="hidden" name="_method" value="delete"/>
@@ -52,6 +52,10 @@
 							{{ Html::link('lib/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
 							{{ Form::submit('Delete',array('class' => 'btn btn-danger')) }}
 							{{ Form::close()}}
+					</td>
+				</tr> -->
+				<tr >
+					<td>
 					</td>
 				</tr>
 			@endforeach

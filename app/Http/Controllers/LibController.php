@@ -6,12 +6,25 @@ use Illuminate\Http\Request;
 use Session;
 use Cookie;
 use App\Lib;
+use App\dep;
+use App\pos;
 use DateTime;
 use Carbon\Carbon;
 use DB;
 
 class LibController extends Controller
 {
+    public function __construct()
+    {
+        //All below Auth normal
+        $this->middleware('auth');
+
+        //Only Function
+        //$this->middleware('auth',['only' => ['index','form'] ]);
+
+        //Except Function
+        //$this->middleware('auth',['except' => ['index'] ]);
+    }
     
     /**
      * Display a listing of the resource.
@@ -25,8 +38,23 @@ class LibController extends Controller
         
         
 
-        $lib =Lib::all();
-        //dd($lib);
+        //$lib =Lib::all();
+        $lib = DB::table('pos')
+            ->join('libs', 'pos.id_pos', '=', 'libs.position')
+            ->select('libs.id_employ', 'pos.name_pos')
+            ->get();
+        // $lib = DB::select('SELECT
+        //                     libs.id_employ,
+        //                     libs.surname,
+        //                     libs.nickname,
+        //                     libs.age,
+        //                     libs.job_start,
+        //                     pos.name_pos,
+        //                     libs.id
+        //                     FROM
+        //                     pos
+        //                     INNER JOIN libs ON pos.id_pos = libs.position');
+        
 
         //Session::put('language','Thai');
         //Session(['english' => 'good','japanese' => 'poor']);
@@ -36,14 +64,14 @@ class LibController extends Controller
         //Cookie::queue('name','value','minutes'); ตัวอย่าวงรูปแบบการสร้าง Cookie
         //Cookie::queue('language','thai',1);
         //Cookie::queue(Cookie::forever('name','sutthirak'));
-              
-        $data = array(
-            'lib' => $lib,
-            'style' => $aCss,
-            'script'=> $aScript,
-        );
         
-        return view('lib.index',$data);        
+        // $data = array(
+        //     'lib' => $lib,
+        //     'style' => $aCss,
+        //     'script'=> $aScript,
+        // );
+        
+         return view('lib.index',$lib);        
     }
 
     /**
@@ -99,11 +127,14 @@ class LibController extends Controller
      */
     public function show($id)
     {
-      $lib = Lib::find($id);
-      $data = array(
-        'lib' => $lib
-      );
-      return view('lib.show',$data);
+        $aCss=array('css/lib/style.css');
+        $lib = Lib::find($id);
+        $data = array(
+            'lib' => $lib,
+            'style' => $aCss
+        );
+
+        return view('lib.show',$data);
     }
 
     /**

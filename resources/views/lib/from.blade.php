@@ -1,5 +1,7 @@
 @extends('layouts/main')
-
+@section('title')
+เพิ่มข้อมูลพนักงาน
+@endsection
 @section('content')
 	<h1 class="h1">เพิ่มข้อมูลพนักงาน</h1>
 	<div class="panel panel-primary div1">

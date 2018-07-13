@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2018 at 12:37 PM
+-- Generation Time: Jul 13, 2018 at 01:00 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -91,6 +91,31 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dep`
+--
+
+CREATE TABLE `dep` (
+  `id_dep` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name_dep` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dep`
+--
+
+INSERT INTO `dep` (`id_dep`, `created_at`, `updated_at`, `name_dep`) VALUES
+(1, NULL, NULL, 'ฝ่ายบุคคล'),
+(2, NULL, NULL, 'ฝ่ายการเงิน'),
+(3, NULL, NULL, 'ฝ่ายขาย'),
+(4, NULL, NULL, 'ฝ่ายบริการหลังการขาย'),
+(5, NULL, NULL, 'ฝ่ายติดตั้ง'),
+(6, NULL, NULL, 'ฝ่ายคลังสินค้า');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `libs`
 --
 
@@ -105,7 +130,7 @@ CREATE TABLE `libs` (
   `job_start` date NOT NULL,
   `job_end` date NOT NULL,
   `y_work` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -113,11 +138,13 @@ CREATE TABLE `libs` (
 --
 
 INSERT INTO `libs` (`id`, `surname`, `nickname`, `age`, `created_at`, `updated_at`, `id_employ`, `job_start`, `job_end`, `y_work`, `position`) VALUES
-(11, 'นายวันชัย  คุชิตา', 'กุ้ง', '2014-05-12', '2018-07-08 17:00:00', NULL, 'TP002', '2016-08-22', '2017-08-22', '3', 'พนักงานช่างติดตั้ง'),
-(12, 'ดเ่เ่เาสวสส', '้่า้ส้่ส่ส', '2016-08-22', '2018-07-10 10:13:01', '2018-07-10 10:13:01', 'rt012', '2018-07-01', '2018-07-01', '99', 'กดเกดเ'),
-(14, 'หดห', 'หดหกด', '2010-11-01', '2018-07-10 10:37:56', '2018-07-10 10:37:56', 'หกดห', '2016-01-05', '2018-07-10', '2', 'หกด'),
-(15, 'นายวิทวัส  บุญยงค์', 'ชำ', '2011-10-22', '2018-07-10 10:38:34', '2018-07-10 10:38:34', 'TP003', '2013-01-04', '2018-07-10', '5', 'หัวหน้าช่างติดตั้ง'),
-(16, 'นายมงคล ใจสุข', 'น้อย', '1985-07-05', '2018-07-11 10:12:51', '2018-07-11 10:12:51', 'TP004', '2015-09-13', '2018-07-11', '99', 'ช่างติดตั้ง');
+(11, 'นายวันชัย  คุชิตา', 'กุ้ง', '2014-05-12', '2018-07-08 17:00:00', NULL, 'TP002', '2016-08-22', '2017-08-22', '3', 7),
+(16, 'นายมงคล ใจสุข', 'น้อย', '1985-07-05', '2018-07-11 10:12:51', '2018-07-11 10:12:51', 'TP004', '2015-09-13', '2018-07-11', '99', 7),
+(18, 'นายสุทธิรักษ์  นาระถี', 'ตุ่ย', '1992-10-16', '2018-07-12 04:20:03', '2018-07-12 04:20:03', 'TPM008', '2016-02-01', '2018-07-12', '99', 4),
+(19, 'นางสาวพิมพ์พิไล  งามแสง', 'พิ', '1990-10-13', '2018-07-12 06:52:16', '2018-07-12 06:52:16', 'TPM009', '2017-06-10', '2018-07-12', '99', 10),
+(20, 'นายสรศักดิ์  แซ่ตั้ง', 'ไก่', '1992-10-04', '2018-07-12 08:36:49', '2018-07-12 08:36:49', 'TPM004', '2016-04-04', '2018-07-12', '99', 7),
+(21, 'นายสุชิน  บุญคำ', 'ชิน', '1987-03-12', '2018-07-12 09:45:25', '2018-07-12 09:45:25', 'TPM002', '2010-06-01', '2018-07-12', '99', 7),
+(22, 'ทดสอบ', 'ทดสอบ', '2018-07-09', '2018-07-13 02:11:57', '2018-07-13 02:11:57', 'TP000', '2018-05-18', '2018-07-13', '99', 7);
 
 -- --------------------------------------------------------
 
@@ -148,7 +175,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2018_07_10_163838_change_id_employ_type_in_libs_table', 8),
 (11, '2018_07_11_103804_change_age_type_in_libs_table', 9),
 (13, '2018_07_11_104512_change_y_work_type_in_libs_table', 10),
-(14, '2018_07_11_105646_change_y_work_type_in_libs_table', 11);
+(14, '2018_07_11_105646_change_y_work_type_in_libs_table', 11),
+(15, '2018_07_11_105804_change_age_type_in_libs_table', 12),
+(16, '2018_07_13_101411_create_dep_table', 12),
+(17, '2018_07_13_104459_create_pos_table', 13),
+(18, '2018_07_13_154452_change_position_type_in_libs_table', 14);
 
 -- --------------------------------------------------------
 
@@ -172,6 +203,45 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pos`
+--
+
+CREATE TABLE `pos` (
+  `id_pos` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name_pos` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_dep` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pos`
+--
+
+INSERT INTO `pos` (`id_pos`, `created_at`, `updated_at`, `name_pos`, `id_dep`) VALUES
+(1, NULL, NULL, 'เจ้าหน้าที่บัญชี', 2),
+(2, NULL, NULL, 'พนักงานขาย', 3),
+(3, NULL, NULL, 'เจ้าหน้าที่ฝ่ายบุคคล', 1),
+(4, NULL, NULL, 'เจ้าหน้าที่ programmer', 1),
+(5, NULL, NULL, 'ล่ามแปลภาษา', 1),
+(6, NULL, NULL, 'พนักงานทำความสะอาด', 1),
+(7, NULL, NULL, 'ช่างติดตั้ง', 5),
+(8, NULL, NULL, 'หัวหน้าช่างติดตั้ง', 5),
+(9, NULL, NULL, 'หัวหน้าฝ่ายบริการหลังการขาย', 4),
+(10, NULL, NULL, 'พนักงานหลังการขาย', 4),
+(11, NULL, NULL, 'พนักงานคลังสินค้า', 6),
+(12, NULL, NULL, 'หัวหน้าฝ่ายคลังสินค้า', 6),
+(13, NULL, NULL, 'หัวหน้าฝ่ายขาย', 3),
+(14, NULL, NULL, 'หัวหน้าฝ่ายการเงิน', 2),
+(15, NULL, NULL, 'หัวหน้าฝ่ายบุคคล', 1),
+(16, NULL, NULL, 'ช่างซ่อมบริการหลังการขาย', 4),
+(17, NULL, NULL, 'หัวหน้าช่างซ่อมบริการหลังการขาย', 4),
+(18, NULL, NULL, 'ทนายความ', 1),
+(19, NULL, NULL, 'ทวงหนี้', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -190,7 +260,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'wUxM2igqYmKlx0XlaHKZ3sale3E2PWazXIlJiuLLfL88T1p2NAqw9bmIb8HY', '2018-07-08 21:55:56', '2018-07-08 21:55:56');
+(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'eARYpEv8ebpwGIRwPktbQM28IgKWp0OpOAQRT8QTl9nzmGkr8BVHSR6KC1Pz', '2018-07-08 21:55:56', '2018-07-08 21:55:56');
 
 --
 -- Indexes for dumped tables
@@ -215,6 +285,12 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dep`
+--
+ALTER TABLE `dep`
+  ADD PRIMARY KEY (`id_dep`);
+
+--
 -- Indexes for table `libs`
 --
 ALTER TABLE `libs`
@@ -231,6 +307,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `pos`
+--
+ALTER TABLE `pos`
+  ADD PRIMARY KEY (`id_pos`);
 
 --
 -- Indexes for table `users`
@@ -262,16 +344,28 @@ ALTER TABLE `comments`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `dep`
+--
+ALTER TABLE `dep`
+  MODIFY `id_dep` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `libs`
 --
 ALTER TABLE `libs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `pos`
+--
+ALTER TABLE `pos`
+  MODIFY `id_pos` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`

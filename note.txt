@@ -23,9 +23,13 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 5.Fetch Origin
 
 ------------------------------------
+0.create table: $ php artisan make:migration create_dep_table --create=dep
 1.add column : php artisan make:migration add_table --table=libs
 2.rename column:$ php artisan make:migration rename_column_libs_table --table=libs
 3.chang type:composer require doctrine/dbal
 3.1 $ php artisan make:migration change_id_employ_type_in_libs_table --table=libs
+4.create model: php artisan make:model pos
+
+
 
 

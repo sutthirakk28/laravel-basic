@@ -25,6 +25,34 @@
 	text-align: center;
 	font-size: 15px;
 }
+.div2{
+	font-family: Taviraj;
+	text-align: left;
+	padding-left: 50px;
+	font-size: 27px;
+	font-weight: 900;
+}
+.div3{
+	font-family: Taviraj;
+	font-size: 18px;
+	font-weight: 600;
+}
+.div4{
+	font-family: Kanit;
+	font-size: 18px;
+	font-weight: 600;
+	padding: auto;
+	margin: auto;
+}
+.div5{
+	background-color:#feff0085;
+}
+.div6{
+	background-color:#7fff93b0;
+}
+.div7{
+	background-color:#f5060680;
+}
 .panel-primary .panel-heading {
     color: #fff;
     background-color: #337ab7;
@@ -38,4 +66,7 @@
 }
 .navbar-nav>li>.dropdown-menu {
     font-family: monospace;
+}
+.show{
+	font-size: 20px;
 }
