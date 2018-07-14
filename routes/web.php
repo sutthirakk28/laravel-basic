@@ -61,6 +61,7 @@ Route::get('band','Music\SongController@band');
 
 
 Route::resource('lib','LibController');
+//Route::get('lib/{id}','LibController@show');
 
 Auth::routes();
 

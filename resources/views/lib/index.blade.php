@@ -35,31 +35,25 @@
 
         	}
         	@endphp
-
 			@foreach ($lib as $l)
-				<!-- <tr >
-					<td>{{ $l['libs.id_employ'] }}</td>
-					<td>{{ $l['libs.surname'] }}</td>
-					<td>{{ $l['libs.nickname'] }}</td>
-					<td>{{ getAge($l['libs.age']).' ปี'}}</td>
-					<td></td>
-					<td>{{ $l['pos.name_pos'] }}</td>								
-					<td>{{ getDate1($l['libs.job_start']) }}</td>
-					<td class="center">
-							{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
-							<input type="hidden" name="_method" value="delete"/>
-							{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
-							{{ Html::link('lib/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
-							{{ Form::submit('Delete',array('class' => 'btn btn-danger')) }}
-							{{ Form::close()}}
-					</td>
-				</tr> -->
-				<tr >
-					<td>
-					</td>
-				</tr>
+			<tr >
+				<td>{{ $l['id_employ'] }}</td>
+				<td>{{ $l['surname'] }}</td>
+				<td>{{ $l['nickname'] }}</td>
+				<td>{{ getAge($l['age']).' ปี'}}</td>        
+		      	<td>{{ $l['name_dep'] }}</td>
+				<td>{{ $l['name_pos'] }}</td>							
+				<td>{{ getDate1($l['job_start']) }}</td>
+				<td class="center">
+					{{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
+					<input type="hidden" name="_method" value="delete"/>
+					{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
+					{{ Html::link('lib/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
+					{{ Form::submit('Delete',array('class' => 'btn btn-danger')) }}
+					{{ Form::close()}}
+				</td>
+			</tr>				
 			@endforeach
-
 		</tbody>
 	</table>
 	<div class="row">

@@ -34,28 +34,15 @@ class LibController extends Controller
     public function index()
     {
         $aCss=array('css/lib/style.css');
-        $aScript=array('js/lib/main.js');
-        
-        
+        $aScript=array('js/lib/main.js');              
 
         //$lib =Lib::all();
-        $lib = DB::table('pos')
-            ->join('libs', 'pos.id_pos', '=', 'libs.position')
-            ->select('libs.id_employ', 'pos.name_pos')
+        $lib = DB::table('libs')
+            ->join('pos', 'libs.position', '=', 'pos.id_pos')
+            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','dep.name_dep')
             ->get();
-        // $lib = DB::select('SELECT
-        //                     libs.id_employ,
-        //                     libs.surname,
-        //                     libs.nickname,
-        //                     libs.age,
-        //                     libs.job_start,
-        //                     pos.name_pos,
-        //                     libs.id
-        //                     FROM
-        //                     pos
-        //                     INNER JOIN libs ON pos.id_pos = libs.position');
         
-
         //Session::put('language','Thai');
         //Session(['english' => 'good','japanese' => 'poor']);
         //Session::forget('japanese');
@@ -64,14 +51,13 @@ class LibController extends Controller
         //Cookie::queue('name','value','minutes'); ตัวอย่าวงรูปแบบการสร้าง Cookie
         //Cookie::queue('language','thai',1);
         //Cookie::queue(Cookie::forever('name','sutthirak'));
-        
-        // $data = array(
-        //     'lib' => $lib,
-        //     'style' => $aCss,
-        //     'script'=> $aScript,
-        // );
-        
-         return view('lib.index',$lib);        
+        $result = json_decode($lib, true); 
+        $data = array(
+            'lib' => $result,
+            'style' => $aCss,
+            'script'=> $aScript,
+        );
+         return view('lib.index',$data);        
     }
 
     /**
@@ -128,13 +114,19 @@ class LibController extends Controller
     public function show($id)
     {
         $aCss=array('css/lib/style.css');
-        $lib = Lib::find($id);
+        //$lib = Lib::find($id);
+        $lib = DB::table('libs')
+            ->join('pos', 'libs.position', '=', 'pos.id_pos')
+            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','dep.name_dep')
+            ->where('libs.id','=',$id)
+            ->get();
+        $result = json_decode($lib, true); 
         $data = array(
-            'lib' => $lib,
-            'style' => $aCss
+            'lib' => $result,
+            'style' => $aCss,
         );
-
-        return view('lib.show',$data);
+         return view('lib.show',$data);
     }
 
     /**
