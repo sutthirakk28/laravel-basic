@@ -87,6 +87,9 @@
                                         <a href="{{ url('/lib') }}">
                                             จัดการข้อมูลพนักงาน
                                         </a>
+                                        <a href="{{ url('/dep') }}">
+                                            จัดการข้อมูลฝ่าย
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

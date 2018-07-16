@@ -6,17 +6,9 @@
 
 3.php artisan serve //--port=80
 
-
-
-
-
-
-
-
 *The only supported ciphers are AES-128-CBC and AES-256-CBC =>php artisan key:generate
 (run this command (php artisan key:generate)
 and the clear config cache using (php artisan config:clear)will solve this problem)
-
 
 4.commit project (comment discription)on github desktop
 
@@ -24,11 +16,12 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 
 ------------------------------------
 0.create table: $ php artisan make:migration create_dep_table --create=dep
-1.add column : php artisan make:migration add_table --table=libs
+1.add column : $ php artisan make:migration add_id_to_dep_table --table=dep
 2.rename column:$ php artisan make:migration rename_column_libs_table --table=libs
 3.chang type:composer require doctrine/dbal
 3.1 $ php artisan make:migration change_id_employ_type_in_libs_table --table=libs
 4.create model: php artisan make:model pos
+5.create Contoller : php artisan make:controller PhotoController --resource
 
 
 

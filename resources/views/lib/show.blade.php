@@ -88,7 +88,7 @@
         <tr class="div5">
 
           <td class="div4"><span >กำหนดรับเอกสารประเมิน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+10 days',strtotime($libs['job_start']))) }}</span></td>
+          <td><span class="div3">{{ thai_date(strtotime('+70 days',strtotime($libs['job_start']))) }}</span></td>
         </tr>
         <tr>
           <td class="div4"><span >ครบ 90 วัน</span></td>

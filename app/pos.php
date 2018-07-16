@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class pos extends Model
 {
-        protected $fillable = ['id_pos','name_pos'];
+        protected $fillable = ['id_pos','name_pos','id_dep'];
 
 }

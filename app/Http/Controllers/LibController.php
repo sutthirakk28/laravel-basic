@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Session;
 use Cookie;
 use App\Lib;
-use App\dep;
-use App\pos;
+use App\Dep;
+use App\Pos;
 use DateTime;
 use Carbon\Carbon;
 use DB;
@@ -85,7 +85,11 @@ class LibController extends Controller
     {
         $this->validate($request,[
             'id_employ' => 'required|max:100',
-            'surname' => 'required|max:100'
+            'surname' => 'required|max:100',
+            'nickname' => 'required|max:100',
+            'age' => 'required|max:100',
+            'position' => 'required|max:100',
+            'job_start' => 'required|max:100'
         ]);
         $now = new Carbon();
         $lib = new Lib;        
@@ -126,6 +130,7 @@ class LibController extends Controller
             'lib' => $result,
             'style' => $aCss,
         );
+
          return view('lib.show',$data);
     }
 
@@ -142,6 +147,7 @@ class LibController extends Controller
           $data = array(
             'lib' => $lib
           );
+          
           return view('lib/from',$data);
       }
     }
@@ -181,7 +187,7 @@ class LibController extends Controller
     {
         $lib = Lib::find($id);
         $lib->delete();
-        Session::flash('message','Success Delete Lib');
+        Session::flash('message','ลบข้อมูลพนักงานเรียบร้อยแล้ว');
         return redirect('lib');
     }
 }

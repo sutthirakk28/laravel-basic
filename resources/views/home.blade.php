@@ -114,6 +114,7 @@
                     <a href="#" class="link1">อนุมัติการลา</a>
                     <a href="#" class="link1">ประวัติการลา</a>
                     <a href="{{ url('/lib') }}" class="link1">จัดการข้อมูลพนักงาน</a>
+                    <a href="{{ url('/dep') }}" class="link1">จัดการข้อมูลฝ่าย</a>
                 </div>
             </div>
         </div>
