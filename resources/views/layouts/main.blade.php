@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css')}}">
 	<link href="https://fonts.googleapis.com/css?family=Taviraj:100,600" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Kanit:100,600" rel="stylesheet" type="text/css">
 
@@ -23,8 +24,7 @@
     {{ Html::style(('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css'))}}
 	{{ Html::style(('https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css'))}}
 	{{ Html::style(('https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css'))}}
-	{{ Html::style(('https://fonts.googleapis.com/css?family=Taviraj:100,600'))}}
-	{{ Html::style(('https://fonts.googleapis.com/css?family=Kanit:100,600'))}}
+	
 	@if(isset($style))
 		@foreach($style as $css)
 			{{ Html::style(($css)) }}
@@ -90,6 +90,9 @@
                                         <a href="{{ url('/dep') }}">
                                             จัดการข้อมูลฝ่าย
                                         </a>
+                                        <a href="{{ url('/pos') }}">
+                                            จัดการข้อมูลตำแหน่ง
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -121,15 +124,15 @@
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js')}}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
-
-	{{Html::script('https://code.jquery.com/jquery-3.3.1.js')}}
+	
 	{{Html::script('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')}}
 	{{Html::script('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js')}}
     {{Html::script('https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js')}}
     {{Html::script('https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js')}}
     {{Html::script('https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js')}}
-
+    
 	@if(isset($script))
 		@foreach($script as $js)
 			{{ Html::script(($js)) }}

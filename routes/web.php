@@ -62,6 +62,7 @@ Route::get('band','Music\SongController@band');
 
 Route::resource('lib','LibController');
 Route::resource('dep','DepController');
+Route::resource('pos','PosController');
 
 Auth::routes();
 

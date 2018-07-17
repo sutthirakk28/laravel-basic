@@ -68,6 +68,17 @@
     font-family: sans-serif;
     font-weight: normal;
 }
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+    font-weight: 900;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
 h1 {
   	font-family: Taviraj;
   	font-size: 40px;

@@ -3,7 +3,7 @@
 ระบบจัดการข้อมูลพนักงาน
 @endsection
 @section('content')
-	<h1 class="h1">ระบบจัดการข้อมูลพนักงาน</h1>	
+	<h1 class="elegantshadow">ระบบจัดการข้อมูลพนักงาน</h1>	
 	@if(Session::has('message'))
 		<div class=" alert alert-info">
 			{{ Session::get('message') }}

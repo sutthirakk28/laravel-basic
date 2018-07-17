@@ -80,7 +80,7 @@ class DepController extends Controller
      */
     public function show($id)
     {
-        $aCss=array('css/lib/style.css');
+        $aCss=array('css/dep/style.css');
         $dep = DB::table('dep')
             ->select('dep.*')
             ->where('id_dep','=',$id)
@@ -129,20 +129,18 @@ class DepController extends Controller
           'name_dep' => 'required|max:100'
         ]);
         $now = new Carbon();
-            $depUpdate = Dep::where('id_dep',$id)
-                ->update([
-                        'name_dep' => $request->input('name_dep'),
-                        'updated_at' => $now,
-                    ]);
+        $depUpdate = Dep::where('id_dep',$id)
+        ->update([
+            'name_dep' => $request->input('name_dep'),
+            'updated_at' => $now,
+        ]);
 
         if($depUpdate){
-            //Session::put('language','Thai');
-            Session::flash('massage','hfghfh');
+            Session::flash('masupdate','แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('dep');
             // return redirect('dep')
             // ->with('success', 'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
         }
-
         return back()->withInput();
     }
 
@@ -154,9 +152,13 @@ class DepController extends Controller
      */
     public function destroy($id)
     {
-        $dep = Dep::find($id);
-        $dep->delete();
-        Session::flash('message','ลบข้อมูลฝ่ายเรียบร้อยแล้ว');
-        return redirect('lib');
+        //$dep = Dep::find($id);
+        $depDelete = Dep::where('id_dep',$id)
+            ->delete();
+
+        if($depDelete){
+            Session::flash('masdelete','ลบข้อมูลฝ่ายเรียบร้อยแล้ว');
+            return redirect('dep');
+        }
     }
 }

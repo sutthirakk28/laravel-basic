@@ -6,13 +6,7 @@
 	text-align: center;
 	font-size: 15px;
 }
-.h1{
-	font-family: Kanit;
-	color:yellow;
-	font-size: 29px;
-	font-weight: 900;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+
 .tbody{
 	font-family: Kanit;
 	color: black;
@@ -74,4 +68,17 @@
     text-align: left;
     font-family: sans-serif;
     font-weight: normal;
+}
+h1 {
+  	font-family: Taviraj;
+  	font-size: 40px;
+  	padding: 10px 10px;
+  	text-align: center;
+  	text-transform: uppercase;
+  	text-rendering: optimizeLegibility;
+}
+.elegantshadow {
+	color: #171616bf;
+	font-weight: 600;
+	letter-spacing: .10em;
 }

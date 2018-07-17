@@ -31,7 +31,7 @@
     }
 
   @endphp
-	<h1 class="elegantshadow">จัดการข้อมูลฝ่าย</h1>	
+	<h1 class="elegantshadow">จัดการข้อมูลตำแหน่ง</h1>	
 	@if(Session::has('masupdate'))
 		<div class="alert alert-success alert-dismissible fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -45,26 +45,27 @@
 		</div>
 	@endif
 
-	<table id="dep" class="table table-bordered" style="wid_depth:100%">
+	<table id="pos" class="table table-bordered" style="wid_depth:100%">
 		<thead class="thead">
 			<tr>
-				<th width="100">รหัส</th>
-				<th >ชื่อฝ่าย</th>
+				<th width="100">รหัสตำแหน่ง</th>
+				<th>ชื่อฝ่าย</th>
+				<th >ชื่อตำแหน่ง</th>
 				<th width="300">Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach ($dep as $d)
+			@foreach ($pos as $p)
 			<tr >
-				<td>{{ $d['id_dep'] }}</td>
-				<td>{{ $d['name_dep'] }}</td>
-				
+				<td>{{ $p['id_pos'] }}</td>
+				<td>{{ $p['name_dep'] }}</td>
+				<td>{{ $p['name_pos'] }}</td>
 				<td class="center">
-					{{ Form::open(['route' => ['dep.destroy',$d['id_dep'], 'method' => 'DELETE'] ]) }}
+					{{ Form::open(['route' => ['pos.destroy',$p['id_pos'], 'method' => 'DELETE'] ]) }}
 					<input type="hidden" name="_method" value="delete"/>
-					{{ Html::link('dep/create','Add', array(	'class' => 'btn btn-primary thead')) }}
-					{{ Html::link('dep/'.$d['id_dep'], 'View', array('class' => 'btn btn-success')) }}
-					{{ Html::link('dep/'.$ib=$d['id_dep'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
+					{{ Html::link('pos/create','Add', array('class' => 'btn btn-primary thead')) }}
+					{{ Html::link('pos/'.$p['id_pos'], 'View', array('class' => 'btn btn-success')) }}
+					{{ Html::link('pos/'.$p['id_pos'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
 					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
 					{{ Form::close()}}
 				</td>

@@ -3,7 +3,6 @@
 เพิ่มข้อมูลพนักงาน
 @endsection
 @section('content')
-	<h1 class="h1">เพิ่มข้อมูลพนักงาน</h1>
 	<div class="panel panel-primary div1">
 		<div class="panel-heading">
 			@if(isset($lib))

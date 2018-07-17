@@ -3,9 +3,7 @@
 เพิ่มข้อมูลฝ่าย
 @endsection
 @section('content')
-
-
-	<h1 class="h1">เพิ่มข้อมูลฝ่าย</h1>
+	
 	<div class="panel panel-primary div1">
 		<div class="panel-heading">
 				แบบฟอร์มเพิ่มข้อมูลฝ่าย
