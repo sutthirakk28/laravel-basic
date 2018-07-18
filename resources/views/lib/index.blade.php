@@ -4,9 +4,16 @@
 @endsection
 @section('content')
 	<h1 class="elegantshadow">ระบบจัดการข้อมูลพนักงาน</h1>	
-	@if(Session::has('message'))
-		<div class=" alert alert-info">
-			{{ Session::get('message') }}
+	@if(Session::has('masupdate'))
+		<div class="alert alert-success alert-dismissible fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			{{ Session::get('masupdate') }}
+		</div>
+	@endif
+	@if(Session::has('masdelete'))	
+		<div class="alert alert-danger alert-dismissible fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			{{ Session::get('masdelete') }}
 		</div>
 	@endif
 	<table id="lib" class="table table-striped table-bordered nowrap" style="width:100%">
@@ -49,7 +56,7 @@
 					<input type="hidden" name="_method" value="delete"/>
 					{{ Html::link('lib/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
 					{{ Html::link('lib/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
-					{{ Form::submit('Delete',array('class' => 'btn btn-danger')) }}
+					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คุณต้องการลบข้อมูลของพนักงานจริงไหม ?')" )) }}
 					{{ Form::close()}}
 				</td>
 			</tr>				

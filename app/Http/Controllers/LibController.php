@@ -68,10 +68,16 @@ class LibController extends Controller
     public function create()
     {
         $aCss=array('css/lib/style.css');
+        $pos = DB::table('dep')
+            ->join('pos', 'dep.id_dep', '=', 'pos.id_dep')
+            ->select('pos.*', 'name_dep')
+            ->get();
+        $result = json_decode($pos, true);    
         $data = array(
-            'style' => $aCss
+            'style' => $aCss,
+            'pos' => $result,
         );
-        return view('lib.from',$data);
+        return view('lib.add',$data);
 
     }
 
@@ -102,8 +108,7 @@ class LibController extends Controller
         $lib->position = $request->position;
         $lib->created_at = $now;
         $lib->y_work = 99;
-        $lib->job_end = $now;        
-
+        $lib->job_end = $now;
         $lib->save();
 
         return redirect('lib');
@@ -131,7 +136,7 @@ class LibController extends Controller
             'style' => $aCss,
         );
 
-         return view('lib.show',$data);
+        return view('lib.show',$data);
     }
 
     /**
@@ -141,14 +146,36 @@ class LibController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-      if ($id !== '') {
-          $lib = Lib::find($id);
-          $data = array(
-            'lib' => $lib
-          );
-          
-          return view('lib/from',$data);
+    {        
+        $aCss=array('css/lib/style.css');
+        if ($id !== '') {
+
+            $lib = DB::table('libs')
+            ->join('pos', 'libs.position', '=', 'pos.id_pos')
+            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','dep.name_dep')
+            ->where('libs.id','=',$id)
+            ->get();
+
+            $pos = DB::table('dep')
+            ->join('pos', 'dep.id_dep', '=', 'pos.id_dep')
+            ->select('pos.*', 'name_dep')
+            ->get();
+            // $pos = DB::table('pos')
+            // ->join('libs', 'libs.position', '=', 'pos.id_pos')
+            // ->select('pos.id_pos','pos.name_pos','id')
+            // ->where('id','=',$id)
+            // ->get();            
+
+            $result1 = json_decode($lib, true);
+            $result2 = json_decode($pos, true); 
+
+            $data = array(
+                'lib' => $result1,
+                'pos' => $result2,
+                'style' => $aCss,
+            );     
+        return view('lib.from',$data);
       }
     }
 
@@ -162,19 +189,31 @@ class LibController extends Controller
     public function update(Request $request, $id)
     {
       $this->validate($request,[
-          'title' => 'required|max:100',
-          'language' => 'required|max:100',
-          'star' => 'required|numeric'
+          'id_employ' => 'required|max:100',
+          'surname' => 'required|max:100',
+          'nickname' => 'required|max:100',
+          'id_pos' => 'required|max:100',
+          'job_start' => 'required|max:100',
+          'age' => 'required|max:100'
       ]);
 
-      $lib = Lib::find($id);
-      $lib->title = $request->title;
-      $lib->language = $request->language;
-      $lib->star = $request->star;
-      $lib->save();
+        $now = new Carbon();
+        $libsUpdate = Lib::where('id',$id)
+        ->update([
+            'surname' => $request->input('surname'),
+            'nickname' => $request->input('nickname'),
+            'age' => $request->input('age'),
+            'updated_at' => $now,
+            'id_employ' => $request->input('id_employ'),
+            'job_start' => $request->input('job_start'),
+            'position' => $request->input('id_pos')
+        ]);
 
-      Session::flash('massage','Success Update Lib');
-      return redirect('lib');
+        if($libsUpdate){
+            Session::flash('masupdate','แก้ไขข้อมูลพนักงานเรียบร้อยแล้ว');
+            return redirect('lib');
+        }
+        return back()->withInput();
     }
 
     /**
@@ -185,9 +224,12 @@ class LibController extends Controller
      */
     public function destroy($id)
     {
-        $lib = Lib::find($id);
-        $lib->delete();
-        Session::flash('message','ลบข้อมูลพนักงานเรียบร้อยแล้ว');
-        return redirect('lib');
+        $libDelete = Lib::where('id',$id)
+            ->delete();
+
+        if($libDelete){
+            Session::flash('masdelete','ลบข้อมูลตำแหน่งเรียบร้อยแล้ว');
+            return redirect('lib');
+        }
     }
 }

@@ -7,7 +7,7 @@
 @foreach ($dep as $deps)
 	<div class="panel panel-primary div1">
 		<div class="panel-heading">
-				แบบฟอร์มแก้ไข้อมูลฝ่าย
+				แบบฟอร์มแก้ไขข้อมูลฝ่าย
 		</div>
 				{{ Form::open(['method' => 'put','route' =>['dep.update', $deps['id_dep'] ]]) }}
 		 <div class="panel-body">

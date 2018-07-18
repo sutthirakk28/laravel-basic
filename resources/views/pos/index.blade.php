@@ -66,7 +66,7 @@
 					{{ Html::link('pos/create','Add', array('class' => 'btn btn-primary thead')) }}
 					{{ Html::link('pos/'.$p['id_pos'], 'View', array('class' => 'btn btn-success')) }}
 					{{ Html::link('pos/'.$p['id_pos'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
-					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
+					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบตำแหน่งข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
 					{{ Form::close()}}
 				</td>
 			</tr>				
