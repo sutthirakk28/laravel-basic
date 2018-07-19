@@ -7,7 +7,7 @@
 		<div class="panel-heading">
 			แบบฟอร์มเพิ่มข้อมูลพนักงาน
 		</div>
-				{{ Form::open(['url' => 'lib']) }}
+				{{ Form::open(['url' => 'lib','files' => true]) }}
 		 <div class="panel-body">
 		 	@if(count($errors) > 0 )
 				<div class=" alert alert-danger">
@@ -27,11 +27,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-body">
-			
+		<div class="panel-body">			
 			<div class="row">
 				<div class="col-xs-2">
-					{{ form::label('surname','ชื่อ-นามสกุล') }}
+					{{ form::label('user_photo','รูปภาพ',['class' => 'control-label']) }}
+				</div>
+				<div class="col-xs-5">
+					{{ form::file('user_photo',['class' => 'form-control']) }}
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">			
+			<div class="row">
+				<div class="col-xs-2">
+					{{ form::label('surname','ชื่อ-นามสกุล',['class' => 'control-label']) }}
 				</div>
 				<div class="col-xs-5">
 						{{ form::text('surname','', ['class' => 'form-control']) }}

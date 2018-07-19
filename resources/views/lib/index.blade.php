@@ -20,6 +20,7 @@
 		<thead class="thead">
 			<tr>
 				<th width="30">รหัส</th>
+				<th>รูปภาพ</th>
 				<th>ชื่อ - นามสกุล</th>
 				<th>ชื่อเล่น</th>
 				<th>อายุ</th>
@@ -45,6 +46,9 @@
 			@foreach ($lib as $l)
 			<tr >
 				<td>{{ $l['id_employ'] }}</td>
+				<td>
+					{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
+				</td>
 				<td>{{ $l['surname'] }}</td>
 				<td>{{ $l['nickname'] }}</td>
 				<td>{{ getAge($l['age']).' ปี'}}</td>        

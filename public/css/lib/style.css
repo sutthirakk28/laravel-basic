@@ -92,3 +92,7 @@ h1 {
 	font-weight: 600;
 	letter-spacing: .10em;
 }
+img.image {
+    height: 68px;
+    width: 65px;
+}

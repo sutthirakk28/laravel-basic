@@ -33,6 +33,7 @@ class LibController extends Controller
      */
     public function index()
     {
+      
         $aCss=array('css/lib/style.css');
         $aScript=array('js/lib/main.js');              
 
@@ -42,7 +43,7 @@ class LibController extends Controller
             ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
             ->select('libs.*', 'pos.name_pos','dep.name_dep')
             ->get();
-        
+
         //Session::put('language','Thai');
         //Session(['english' => 'good','japanese' => 'poor']);
         //Session::forget('japanese');
@@ -57,6 +58,7 @@ class LibController extends Controller
             'style' => $aCss,
             'script'=> $aScript,
         );
+        
          return view('lib.index',$data);        
     }
 
@@ -95,10 +97,14 @@ class LibController extends Controller
             'nickname' => 'required|max:100',
             'age' => 'required|max:100',
             'position' => 'required|max:100',
-            'job_start' => 'required|max:100'
+            'job_start' => 'required|max:100',
+            'user_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $now = new Carbon();
         $lib = new Lib;        
+
+        $photoName = time().'.'.$request->user_photo->getClientOriginalExtension();
+        $request->user_photo->move(public_path('images'), $photoName);
 
         $lib->id_employ = $request->id_employ;
         $lib->surname = $request->surname;
@@ -109,6 +115,7 @@ class LibController extends Controller
         $lib->created_at = $now;
         $lib->y_work = 99;
         $lib->job_end = $now;
+        $lib->user_photo = $photoName;
         $lib->save();
 
         return redirect('lib');
@@ -189,31 +196,42 @@ class LibController extends Controller
     public function update(Request $request, $id)
     {
       $this->validate($request,[
-          'id_employ' => 'required|max:100',
-          'surname' => 'required|max:100',
-          'nickname' => 'required|max:100',
-          'id_pos' => 'required|max:100',
-          'job_start' => 'required|max:100',
-          'age' => 'required|max:100'
+            'id_employ' => 'required|max:100',
+            'surname' => 'required|max:100',
+            'nickname' => 'required|max:100',
+            'id_pos' => 'required|max:100',
+            'job_start' => 'required|max:100',
+            'age' => 'required|max:100'
       ]);
 
-        $now = new Carbon();
-        $libsUpdate = Lib::where('id',$id)
-        ->update([
-            'surname' => $request->input('surname'),
-            'nickname' => $request->input('nickname'),
-            'age' => $request->input('age'),
-            'updated_at' => $now,
-            'id_employ' => $request->input('id_employ'),
-            'job_start' => $request->input('job_start'),
-            'position' => $request->input('id_pos')
-        ]);
+      if ($request->hasFile('user_photo')){
 
-        if($libsUpdate){
-            Session::flash('masupdate','แก้ไขข้อมูลพนักงานเรียบร้อยแล้ว');
-            return redirect('lib');
-        }
-        return back()->withInput();
+        $photoName = time().'.'.$request->user_photo->getClientOriginalExtension();
+        $request->user_photo->move(public_path('images'), $photoName);
+        //dd($photoName);
+      }else{
+        $photoName =$request->user_photoOld;
+        //dd($photoName);
+      }
+
+      $now = new Carbon();
+      $libsUpdate = Lib::where('id',$id)
+      ->update([
+          'surname' => $request->input('surname'),
+          'nickname' => $request->input('nickname'),
+          'age' => $request->input('age'),
+          'updated_at' => $now,
+          'id_employ' => $request->input('id_employ'),
+          'job_start' => $request->input('job_start'),
+          'position' => $request->input('id_pos'),
+          'user_photo' => $photoName,
+      ]);
+
+      if($libsUpdate){
+          Session::flash('masupdate','แก้ไขข้อมูลพนักงานเรียบร้อยแล้ว');
+          return redirect('lib');
+      }
+      return back()->withInput();
     }
 
     /**

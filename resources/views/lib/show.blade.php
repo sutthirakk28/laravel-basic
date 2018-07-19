@@ -45,6 +45,7 @@
   @foreach ($lib as $libs)
   <div class="panel panel-primary">
     <div class="panel-heading div2">
+      {{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image')) }}
       {{ $libs['surname'] }}
     </div>
     <div class="panel-body show">

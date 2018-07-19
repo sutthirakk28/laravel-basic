@@ -9,7 +9,7 @@
 		<div class="panel-heading">
 				แบบฟอร์มแก้ไขข้อมูลพนักงาน
 		</div>
-	{{ Form::open(['method' => 'put','route' =>['lib.update', $l['id'] ]]) }}		
+	{{ Form::open(['method' => 'put','route' =>['lib.update', $l['id']],'files' => true ]) }}		
 		 <div class="panel-body">
 		 	@if(count($errors) > 0 )
 				<div class=" alert alert-danger">
@@ -27,6 +27,17 @@
 				<div class="col-xs-5">
 					{{ form::text('id_employ', $l['id_employ'], ['class' => 'form-control'] ) }}
 					</div>
+			</div>
+		</div>		
+		<div class="panel-body">			
+			<div class="row">
+				<div class="col-xs-2">
+					{{ form::label('user_photo','รูปภาพ',['class' => 'control-label']) }}
+				</div>
+				<div class="col-xs-5">
+					{{ form::file('frontimage',['class' => 'form-control']) }}
+					<input type="hidden" name="user_photoOld" value="{{ $l['user_photo'] }}"/>
+				</div>
 			</div>
 		</div>
 		<div class="panel-body">

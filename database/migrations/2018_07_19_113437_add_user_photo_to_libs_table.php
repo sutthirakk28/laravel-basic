@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIdToDepTable extends Migration
+class AddUserPhotoToLibsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddIdToDepTable extends Migration
      */
     public function up()
     {
-        Schema::table('dep', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::table('libs', function (Blueprint $table) {
+            $table->binary('user_photo');
         });
     }
 
@@ -25,8 +25,8 @@ class AddIdToDepTable extends Migration
      */
     public function down()
     {
-        Schema::table('dep', function (Blueprint $table) {
-            $table->dropColumn('id');
+        Schema::table('libs', function (Blueprint $table) {
+            $table->dropColumn('user_photo');
         });
     }
 }
