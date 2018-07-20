@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Lib;
 use App\Dep;
 use DateTime;
 use Carbon\Carbon;
 use Session;
+use DB;
 
 class DepController extends Controller
 {
@@ -25,8 +25,8 @@ class DepController extends Controller
     {   
         $aCss=array('css/dep/style.css');
         $aScript=array('js/dep/main.js'); 
-        $dep = DB::table('dep')
-            ->select('dep.*')
+        $dep = DB::table('deps')
+            ->select('deps.*')
             ->get();
         $result = json_decode($dep, true); 
         $data = array(
@@ -66,9 +66,10 @@ class DepController extends Controller
         $dep = new Dep;        
 
         $dep->name_dep = $requestdep->name_dep;
-        $dep->created_at = $now;
-        $dep->save();
 
+        $dep->created_at = $now;
+        
+        $dep->save();
         return redirect('dep');
     }
 
@@ -81,8 +82,8 @@ class DepController extends Controller
     public function show($id)
     {
         $aCss=array('css/dep/style.css');
-        $dep = DB::table('dep')
-            ->select('dep.*')
+        $dep = DB::table('deps')
+            ->select('deps.*')
             ->where('id_dep','=',$id)
             ->get();
         $result = json_decode($dep, true); 
@@ -103,8 +104,8 @@ class DepController extends Controller
     {   
         if($ib !== ''){
             $aCss=array('css/dep/style.css');       
-            $dep = DB::table('dep')
-                ->select('dep.*')
+            $dep = DB::table('deps')
+                ->select('deps.*')
                 ->where('id_dep','=',$ib)
                 ->get();
             $result = json_decode($dep, true);

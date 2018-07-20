@@ -35,7 +35,7 @@
 					{{ form::label('user_photo','รูปภาพ',['class' => 'control-label']) }}
 				</div>
 				<div class="col-xs-5">
-					{{ form::file('frontimage',['class' => 'form-control']) }}
+					{{ form::file('user_photo',['class' => 'form-control']) }}
 					<input type="hidden" name="user_photoOld" value="{{ $l['user_photo'] }}"/>
 				</div>
 			</div>

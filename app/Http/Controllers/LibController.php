@@ -11,6 +11,7 @@ use App\Pos;
 use DateTime;
 use Carbon\Carbon;
 use DB;
+use File;
 
 class LibController extends Controller
 {
@@ -40,8 +41,8 @@ class LibController extends Controller
         //$lib =Lib::all();
         $lib = DB::table('libs')
             ->join('pos', 'libs.position', '=', 'pos.id_pos')
-            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
-            ->select('libs.*', 'pos.name_pos','dep.name_dep')
+            ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','deps.name_dep')
             ->get();
 
         //Session::put('language','Thai');
@@ -70,8 +71,8 @@ class LibController extends Controller
     public function create()
     {
         $aCss=array('css/lib/style.css');
-        $pos = DB::table('dep')
-            ->join('pos', 'dep.id_dep', '=', 'pos.id_dep')
+        $pos = DB::table('deps')
+            ->join('pos', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*', 'name_dep')
             ->get();
         $result = json_decode($pos, true);    
@@ -133,8 +134,8 @@ class LibController extends Controller
         //$lib = Lib::find($id);
         $lib = DB::table('libs')
             ->join('pos', 'libs.position', '=', 'pos.id_pos')
-            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
-            ->select('libs.*', 'pos.name_pos','dep.name_dep')
+            ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','deps.name_dep')
             ->where('libs.id','=',$id)
             ->get();
         $result = json_decode($lib, true); 
@@ -159,13 +160,13 @@ class LibController extends Controller
 
             $lib = DB::table('libs')
             ->join('pos', 'libs.position', '=', 'pos.id_pos')
-            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
-            ->select('libs.*', 'pos.name_pos','dep.name_dep')
+            ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
+            ->select('libs.*', 'pos.name_pos','deps.name_dep')
             ->where('libs.id','=',$id)
             ->get();
 
-            $pos = DB::table('dep')
-            ->join('pos', 'dep.id_dep', '=', 'pos.id_dep')
+            $pos = DB::table('deps')
+            ->join('pos', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*', 'name_dep')
             ->get();
             // $pos = DB::table('pos')
@@ -205,13 +206,17 @@ class LibController extends Controller
       ]);
 
       if ($request->hasFile('user_photo')){
-
         $photoName = time().'.'.$request->user_photo->getClientOriginalExtension();
         $request->user_photo->move(public_path('images'), $photoName);
-        //dd($photoName);
+        File::delete(public_path('images/'.$request->user_photoOld));
       }else{
-        $photoName =$request->user_photoOld;
+        if($request->user_photoOld==''){
+          $photoName = '0000000000.jpg';
+        }else{
+          $photoName =$request->user_photoOld;
         //dd($photoName);
+        }
+        
       }
 
       $now = new Carbon();
@@ -241,9 +246,11 @@ class LibController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $lib = Lib::find($id);
+        File::delete(public_path('images/'.$lib->user_photo));
         $libDelete = Lib::where('id',$id)
-            ->delete();
+            ->delete();        
 
         if($libDelete){
             Session::flash('masdelete','ลบข้อมูลตำแหน่งเรียบร้อยแล้ว');

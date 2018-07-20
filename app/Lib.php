@@ -9,8 +9,5 @@ class Lib extends Model
     protected $fillable = ['surname','nickname','age','id_employ','job_start','position','user_photo'];
     //protected $guarded = ['id'];
 
-    public function pos()
-    {
-        return $this->belongsTo('App\Pos');
-    }
+    
 }

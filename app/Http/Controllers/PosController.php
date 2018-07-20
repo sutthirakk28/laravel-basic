@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+
 use App\Lib;
 use App\Dep;
 use App\Pos;
 use DateTime;
 use Carbon\Carbon;
 use Session;
-
+use DB;
 class PosController extends Controller
 {
     public function __construct()
@@ -27,7 +27,7 @@ class PosController extends Controller
         $aCss=array('css/pos/style.css');
         $aScript=array('js/pos/main.js'); 
         $pos = DB::table('pos')
-            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+            ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*','name_dep')
             ->get();
         $result = json_decode($pos, true); 
@@ -74,7 +74,6 @@ class PosController extends Controller
         $pos->id_dep = $request->name_dep;
         $pos->created_at = $now;
         $pos->save();
-
         return redirect('pos');
     }
 
@@ -88,7 +87,7 @@ class PosController extends Controller
     {
         $aCss=array('css/pos/style.css');
         $pos = DB::table('pos')
-            ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+            ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*','name_dep')
             ->where('id_pos','=',$id)
             ->get();
@@ -112,7 +111,7 @@ class PosController extends Controller
             $aCss=array('css/pos/style.css');
             $dep = Dep::all();       
             $pos = DB::table('pos')
-                ->join('dep', 'dep.id_dep', '=', 'pos.id_dep')
+                ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
                 ->select('pos.*','name_dep')
                 ->where('id_pos','=',$id)
                 ->get();
