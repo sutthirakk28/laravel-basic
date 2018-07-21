@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css')}}">
 	<link href="https://fonts.googleapis.com/css?family=Taviraj:100,600" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Kanit:100,600" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" type="text/css">
 
 	{{ Html::style(('css/app.css'))}}
     {{ Html::style(('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'))}}
@@ -75,7 +76,7 @@
                                         <a href="{{ url('/home') }}">
                                             หน้าแรก
                                         </a>
-                                        <a href="{{ url('#') }}">
+                                        <a href="{{ url('/leave/create') }}">
                                             เขียนใบลา
                                         </a>
                                         <a href="{{ url('#') }}">

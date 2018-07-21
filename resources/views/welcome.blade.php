@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="#" class="link1">เขียนใบลา</a>
+                    <a href="{{ url('/leave/create') }}" class="link1">เขียนใบลา</a>
                     <a href="#" class="link1">อนุมัติการลา</a>
                     <a href="#" class="link1">ประวัติการลา</a>
                     <a href="{{ url('/lib') }}" class="link1">จัดการข้อมูลพนักงาน</a>

@@ -1,0 +1,367 @@
+.center{
+	text-align: center;
+}
+.thead{
+	font-family: Taviraj;
+	text-align: center;
+	font-size: 15px;
+}
+.tbody{
+	font-family: Kanit;
+	color: black;
+	font-weight:bolder;
+	font-size: 14px;
+}
+
+.panel.panel-primary.div1{
+	font-family: Taviraj;
+	text-align: center;
+	font-size: 15px;
+	font-weight: 900;
+}
+.panel-primary .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    font-size: 25px;
+}
+.navbar-default {
+    font-family: Taviraj;
+    color: black;
+    font-weight: 700;
+}
+.navbar-nav>li>.dropdown-menu {
+    font-family: monospace;
+}
+h1 {
+  	font-family: Taviraj;
+  	font-size: 40px;
+  	padding: 10px 10px;
+  	text-align: center;
+  	text-transform: uppercase;
+  	text-rendering: optimizeLegibility;
+}
+.elegantshadow {
+	color: #171616bf;
+	font-weight: 600;
+	letter-spacing: .10em;
+}
+
+.ui-checkbox{
+    display: inline-block;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 5px;
+    perspective: 100px;
+    transform-style: preserve-3d;
+    vertical-align: middle;
+}
+
+.ui-checkbox input{
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    position: relative;
+    z-index: 100;
+    width: 20px;
+    height: 20px;
+}
+
+.ui-checkbox [data-checked]:before, .ui-checkbox .ui-checked{
+    content: attr(data-checked);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+.ui-checkbox [data-unchecked]:after, .ui-checkbox .ui-unchecked{
+    content: attr(data-unchecked);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+.ui-checkbox input:checked + [data-checked]:before, .ui-checkbox input:checked + .ui-custom .ui-checked{
+    visibility: visible;
+}
+
+.ui-checkbox input:not(:checked) + [data-unchecked]:after, .ui-checkbox input:not(:checked) + .ui-custom .ui-unchecked{
+    visibility: visible;
+}
+
+/* Size */
+
+.ui-small{
+    width: 20px;
+    height: 20px;
+}
+
+.ui-small [data-checked]:before, .ui-small [data-unchecked]:after, .ui-small .ui-custom{
+    font-size: 16px;
+}
+
+.ui-small input{
+    width: 20px;
+    height: 20px;
+}
+
+.ui-medium{
+    width: 30px;
+    height: 30px;
+}
+
+.ui-medium [data-checked]:before, .ui-medium [data-unchecked]:after, .ui-medium .ui-custom{
+    font-size: 18px;
+}
+
+.ui-medium input{
+    width: 30px;
+    height: 30px;
+}
+
+.ui-large{
+    width: 50px;
+    height: 50px;
+}
+
+.ui-large [data-checked]:before, .ui-large [data-unchecked]:after, .ui-large .ui-custom{
+    font-size: 30px;
+}
+
+.ui-large input{
+    width: 50px;
+    height: 50px;
+}
+
+.ui-checkbox.noround{
+    border-radius: none !important;
+    border: none !important;
+}
+
+.ui-checkbox.round{
+    border-radius: 50%;
+}
+
+/* Color */
+
+.ui-checkbox.bg-tomato, .ui-checkbox.bg-gray, .ui-checkbox.bg-tomato, .ui-checkbox.bg-dodgerblue, .ui-checkbox.bg-gold, .ui-checkbox.bg-limegreen, .ui-checkbox.bg-crimson, .ui-checkbox.bg-cadetblue, .ui-checkbox.bg-indigo, .ui-checkbox.bg-magenta, .ui-checkbox.bg-darkkhaki, .ui-checkbox.bg-sandybrown, .ui-checkbox.bg-hotpink{
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+.ui-checkbox.bg-tomato{
+    border-color: Tomato;
+    background-color: transparent;
+    color: Tomato;
+}
+
+/* color set */
+.ui-checkbox.bg-gray{
+    border-color: #CCC;
+    background-color: transparent;
+    color: #CCC;
+}
+
+.ui-checkbox.bg-tomato{
+    border-color: Tomato;
+    background-color: transparent;
+    color: Tomato;
+}
+
+.ui-checkbox.bg-dodgerblue{
+    border-color: dodgerblue;
+    background-color: transparent;
+    color: dodgerblue;
+}
+
+.ui-checkbox.bg-gold{
+    border-color: gold;
+    background-color: transparent;
+    color: gold;
+}
+
+.ui-checkbox.bg-limegreen{
+    border-color: limegreen;
+    background-color: transparent;
+    color: limegreen;
+}
+
+.ui-checkbox.bg-crimson{
+    border-color: crimson;
+    background-color: transparent;
+    color: crimson;
+}
+
+.ui-checkbox.bg-cadetblue{
+    border-color: CadetBlue;
+    background-color: transparent;
+    color: CadetBlue;
+}
+
+
+.ui-checkbox.bg-indigo{
+    border-color: indigo;
+    background-color: transparent;
+    color: indigo;
+}
+
+.ui-checkbox.bg-magenta{
+    border-color: magenta;
+    background-color: transparent;
+    color: magenta;
+}
+
+.ui-checkbox.bg-darkkhaki{
+    border-color: darkkhaki;
+    background-color: transparent;
+    color: darkkhaki;
+}
+
+.ui-checkbox.bg-sandybrown{
+    border-color: sandybrown;
+    background-color: transparent;
+    color: sandybrown;
+}
+
+
+.ui-checkbox.bg-hotpink{
+    border-color: hotpink;
+    background-color: transparent;
+    color: hotpink;
+}
+
+
+/* Fadein Animation */
+.ui-checkbox.ui-animation-fadein [data-checked]:before, .ui-checkbox.ui-animation-fadein .ui-checked{
+    opacity: 0;
+    transition: all 1s cubic-bezier(0,.98,.21,.96);
+}
+
+.ui-checkbox.ui-animation-fadein [data-unchecked]:after, .ui-checkbox.ui-animation-fadein .ui-unchecked{
+    opacity: 0;
+    transition: all 1s cubic-bezier(0,.98,.21,.96);
+}
+
+.ui-checkbox.ui-animation-fadein input:checked + [data-checked]:before, .ui-checkbox.ui-animation-fadein input:checked + .ui-custom .ui-checked{
+    visibility: visible;
+    opacity: 1;
+}
+
+.ui-checkbox.ui-animation-fadein input:not(:checked) + [data-unchecked]:after, .ui-checkbox.ui-animation-fadein input:not(:checked) + .ui-custom .ui-unchecked{
+    visibility: visible;
+    opacity: 1;
+}
+
+/* zoom Animation */
+.ui-checkbox.ui-animation-zoom [data-checked]:before, .ui-checkbox.ui-animation-zoom .ui-checked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) translateZ(-100px);
+}
+
+.ui-checkbox.ui-animation-zoom [data-unchecked]:after, .ui-checkbox.ui-animation-zoom .ui-unchecked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) translateZ(-100px);
+}
+
+.ui-checkbox.ui-animation-zoom input:checked + [data-checked]:before, .ui-checkbox.ui-animation-zoom input:checked + .ui-custom .ui-checked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) translateZ(0px);
+}
+
+.ui-checkbox.ui-animation-zoom input:not(:checked) + [data-unchecked]:after, .ui-checkbox.ui-animation-zoom input:not(:checked) + .ui-custom .ui-unchecked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) translateZ(0px);
+}
+
+/* flip Animation */
+.ui-checkbox.ui-animation-flip [data-checked]:before, .ui-checkbox.ui-animation-flip .ui-checked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) rotateX(90deg);
+}
+
+.ui-checkbox.ui-animation-flip [data-unchecked]:after, .ui-checkbox.ui-animation-flip .ui-unchecked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) rotateX(90deg);
+}
+
+.ui-checkbox.ui-animation-flip input:checked + [data-checked]:before, .ui-checkbox.ui-animation-flip input:checked + .ui-custom .ui-checked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) rotateX(0deg);
+}
+
+.ui-checkbox.ui-animation-flip input:not(:checked) + [data-unchecked]:after, .ui-checkbox.ui-animation-flip input:not(:checked) + .ui-custom .ui-unchecked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) rotateX(0deg);
+}
+
+/* rotate Animation */
+.ui-checkbox.ui-animation-rotate [data-checked]:before, .ui-checkbox.ui-animation-rotate .ui-checked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) rotateY(360deg);
+}
+
+.ui-checkbox.ui-animation-rotate [data-unchecked]:after, .ui-checkbox.ui-animation-rotate .ui-unchecked{
+    transition: transform 1s cubic-bezier(0,.98,.21,.96);
+    transform: translateX(-50%) translateY(-50%) rotateY(360deg);
+}
+
+.ui-checkbox.ui-animation-rotate input:checked + [data-checked]:before, .ui-checkbox.ui-animation-rotate input:checked + .ui-custom .ui-checked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) rotateY(0deg);
+}
+
+.ui-checkbox.ui-animation-rotate input:not(:checked) + [data-unchecked]:after, .ui-checkbox.ui-animation-rotate input:not(:checked) + .ui-custom .ui-unchecked{
+    visibility: visible;
+    transform: translateX(-50%) translateY(-50%) rotateY(0deg);
+}
+
+/* Remove this css it's for demo ui */
+.element{
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+    padding: 10px;
+    /*border: 1px solid #DDD;*/
+    font-family: Taviraj;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;    
+    margin-top: 10px;
+}
+
+.element .el-child + .el-child{
+    margin-top: 10px;
+}
+
+.element h2{
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 5px;
+}
+
+label{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.el-child-inline{
+    display: inline-block;
+    margin: 5px;
+}
+
+.wrapper{
+    /*display: inherit;*/
+    grid-template-columns: auto auto;
+    grid-gap: 30px;
+    width: 90%;
+    margin: auto;      
+}
+
+
