@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Lib;
 use App\Dep;
+use App\Leave;
 use DateTime;
 use Carbon\Carbon;
 use Session;
@@ -53,7 +54,12 @@ class LeaveController extends Controller
     {
         $aCss=array('css/leave/style.css');
         $aScript=array('js/leave/main.js');
+        $lib = DB::table('libs')
+            ->select('surname', 'nickname','id')
+            ->get();
+        $result = json_decode($lib, true); 
         $data = array(
+            'lib' => $result,
             'style' => $aCss,
             'script'=> $aScript,
         );
@@ -68,9 +74,22 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($requestdep,[
-            'name_dep' => 'required|max:100'
+        $request->merge([ 
+            'proof_leave' => implode(',', (array) $request->get('proof_leave'))
         ]);
+        
+        dd($request->merge);
+
+        $this->validate($request,[
+            'id_per' => 'required|max:100',
+            'type_leave' => 'required|max:100',
+            'date_leave' => 'required|max:100',
+            'dstart_leave' => 'required|max:100',
+            'dend_leave' => 'required|max:100',
+            'approved' => 'required|max:100'           
+        ]);
+    
+        
         $now = new Carbon();
         $dep = new Dep;        
 

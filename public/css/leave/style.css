@@ -326,7 +326,7 @@ h1 {
 .element{
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
     padding: 10px;
-    /*border: 1px solid #DDD;*/
+    border: 1px solid #DDD;
     font-family: Taviraj;
     font-size: 14px;
     font-weight: bold;
@@ -342,7 +342,7 @@ h1 {
     padding: 10px;
     text-align: center;
     margin: 0;
-    border-bottom: 1px solid #CCC;
+    /*border-bottom: 1px solid #CCC;*/
     margin-bottom: 5px;
 }
 
@@ -363,5 +363,9 @@ label{
     width: 90%;
     margin: auto;      
 }
-
-
+h2.h2 {
+    color: #f50101;
+}
+.width{
+    width: 70%;
+}

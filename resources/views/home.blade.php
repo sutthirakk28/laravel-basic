@@ -112,7 +112,7 @@
                 <div class="links">
                     <a href="{{ url('/leave/create') }}" class="link1">เขียนใบลา</a>
                     <a href="#" class="link1">อนุมัติการลา</a>
-                    <a href="#" class="link1">ประวัติการลา</a>
+                    <a href="{{ url('/leave/') }}" class="link1">ประวัติการลา</a>
                     <a href="{{ url('/lib') }}" class="link1">จัดการข้อมูลพนักงาน</a>
                     <a href="{{ url('/dep') }}" class="link1">จัดการข้อมูลฝ่าย</a>
                     <a href="{{ url('/pos') }}" class="link1">จัดการข้อมูลตำแหน่ง</a>

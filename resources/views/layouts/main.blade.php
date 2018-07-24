@@ -10,6 +10,12 @@
 	<meta charset="utf-8">
 	<title>@yield('title')</title>
 	<!-- Styles -->
+
+    <!-- datepicker 
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css')}}">
+    -->    
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css')}}">
@@ -82,7 +88,7 @@
                                         <a href="{{ url('#') }}">
                                             อนุมัติการลา
                                         </a>
-                                        <a href="{{ url('#') }}">
+                                        <a href="{{ url('/leave/') }}">
                                             ประวัติการลา
                                         </a>
                                         <a href="{{ url('/lib') }}">
@@ -119,6 +125,12 @@
     </div>
 
     <!-- Scripts -->
+
+    <!-- datepicker 
+    <script type="text/javascript" src="{{ asset('https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('https://code.jquery.com/jquery-2.1.4.js')}}"></script>
+    -->
+
 	<script type="text/javascript" src="{{ asset('https://code.jquery.com/jquery-3.3.1.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js')}}"></script>

@@ -1,6 +1,6 @@
 @extends('layouts/main')
 @section('title')
-ระบบจัดการข้อมูลพนักงาน
+ข้อมูลประวัติการลา
 @endsection
 @section('content')
 
@@ -31,7 +31,7 @@
     }
 
   @endphp
-	<h1 class="elegantshadow">จัดการข้อมูลฝ่าย</h1>	
+	<h1 class="elegantshadow">ประวัติการลา</h1>	
 	@if(Session::has('masupdate'))
 		<div class="alert alert-success alert-dismissible fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
