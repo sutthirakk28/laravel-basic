@@ -74,12 +74,6 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge([ 
-            'proof_leave' => implode(',', (array) $request->get('proof_leave'))
-        ]);
-        
-        dd($request->merge);
-
         $this->validate($request,[
             'id_per' => 'required|max:100',
             'type_leave' => 'required|max:100',
@@ -88,16 +82,25 @@ class LeaveController extends Controller
             'dend_leave' => 'required|max:100',
             'approved' => 'required|max:100'           
         ]);
-    
-        
-        $now = new Carbon();
-        $dep = new Dep;        
 
-        $dep->name_dep = $requestdep->name_dep;
+        $now = new Carbon();        
 
-        $dep->created_at = $now;
+        foreach ($request->input("proof_leave") as $hobby){
+
+            $leave = new Leave;
+            $leave->id_per = $request->id_per;
+            $leave->type_leave = $request->type_leave;
+            $leave->date_leave = $request->date_leave;
+            $leave->reason_leave = $request->reason_leave;
+            $leave->dstart_leave = $request->dstart_leave;
+            $leave->dend_leave = $request->dend_leave;
+            $leave->proof_leave = $hobby;
+            $leave->approved = $request->approved;
+            $leave->created_at = $now;
+
+            $leave->save();
+        }       
         
-        $dep->save();
         return redirect('leave');
     }
 
