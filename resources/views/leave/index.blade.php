@@ -4,7 +4,12 @@
 @endsection
 @section('content')
 
-@php    
+@php
+    function getDate1($day,$day2) {
+      $diff  = date_diff( date_create($day), date_create($day2) );
+      return($diff->y.' ปี '.$diff->m.' เดือน '.$diff->d.' วัน');
+    }
+
     function thai_date($time){
       $thai_day_arr=array("อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์");
       $thai_month_arr=array(
@@ -22,11 +27,9 @@
         "11"=>"พ.ย.",
         "12"=>"ธ.ค."
       );
-      $thai_date_return="วัน ".$thai_day_arr[date("w",$time)];
-      $thai_date_return.= " ที่ ".date("j",$time);
+      $thai_date_return= date("j",$time);
       $thai_date_return.=" ".$thai_month_arr[date("n",$time)];
       $thai_date_return.= " ".(date("Y",$time)+543);
-      $thai_date_return.= "  ".date("H:i",$time)." น.";
       return $thai_date_return;
     }
 
@@ -45,26 +48,37 @@
 		</div>
 	@endif
 
-	<table id="dep" class="table table-bordered" style="wid_depth:100%">
+	<table id="leave" class="table table-striped table-bordered nowrap center" style="width:100%">
 		<thead class="thead">
 			<tr>
-				<th width="100">รหัส</th>
-				<th >ชื่อฝ่าย</th>
+				<th width="100">วันที่ยื่น</th>
+				<th >รูป</th>
+				
+				<th >วันที่ลา</th>
+				<th >ชื่อ-นามสกุล</th>
 				<th width="300">Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach ($dep as $d)
-			<tr >
-				<td>{{ $d['id_dep'] }}</td>
-				<td>{{ $d['name_dep'] }}</td>
-				
+			@foreach ($leave as $l)
+			<tr >				
+				<td>{{ thai_date(strtotime($l['date_leave'])) }}</td>
+				<td>
+					{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
+				</td>
+				<td>
+					{{ thai_date(strtotime($l['dstart_leave'])) }} 
+					ถึง 
+					{{ thai_date(strtotime($l['dend_leave'])) }}
+					{{ getDate1($l['dend_leave'],$l['dstart_leave']) }}
+				</td>
+				<td>{{ $l['surname'].'/'.$l['nickname']}}</td>				
 				<td class="center">
-					{{ Form::open(['route' => ['leave.destroy',$d['id_dep'], 'method' => 'DELETE'] ]) }}
+					{{ Form::open(['route' => ['leave.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
 					<input type="hidden" name="_method" value="delete"/>
 					{{ Html::link('leave/create','Add', array(	'class' => 'btn btn-primary thead')) }}
-					{{ Html::link('leave/'.$d['id_dep'], 'View', array('class' => 'btn btn-success')) }}
-					{{ Html::link('leave/'.$id=$d['id_dep'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
+					{{ Html::link('leave/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
+					{{ Html::link('leave/'.$id=$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
 					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
 					{{ Form::close()}}
 				</td>

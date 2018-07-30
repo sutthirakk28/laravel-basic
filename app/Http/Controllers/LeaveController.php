@@ -33,12 +33,14 @@ class LeaveController extends Controller
     {
         $aCss=array('css/leave/style.css');
         $aScript=array('js/leave/main.js'); 
-        $dep = DB::table('deps')
-            ->select('deps.*')
+        $leave = DB::table('leaves')
+            ->join('libs', 'libs.id', '=', 'leaves.id_per')
+            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
+            ->orderBy('leaves.date_leave', 'DESC')
             ->get();
-        $result = json_decode($dep, true); 
+        $result = json_decode($leave, true); 
         $data = array(
-            'dep' => $result,
+            'leave' => $result,
             'style' => $aCss,
             'script'=> $aScript,
         );

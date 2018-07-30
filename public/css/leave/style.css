@@ -369,3 +369,7 @@ h2.h2 {
 .width{
     width: 70%;
 }
+img.image {
+    height: 65px;
+    width: 65px;
+}

@@ -15,7 +15,7 @@
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true">
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
                       @foreach($lib as $l)
-                        <option data-tokens="{{ $l['surname'] }}" value="{{ $l['id'] }}">{{ $l['surname'] }}</option>
+                        <option data-tokens="{{ $l['surname'] }}{{ $l['nickname'] }}" value="{{ $l['id'] }}">{{ $l['surname'] }}/{{ $l['nickname'] }}</option>
                       @endforeach
                     </select>
                 </div>

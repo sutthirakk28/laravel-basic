@@ -75,6 +75,54 @@
           <td><span class="div3">{{ $libs['name_pos'] }}</span></td>
         </tr>
         <tr>
+          <td class="div4"><span >วุฒิการศึกษา</span></td>
+          <td>
+            <span class="div3">
+              @if($libs['education'] == 1)
+                มัธยมศึกษาตอนต้น
+              @elseif($libs['education'] == 2)
+                มัธยมศึกษาตอนปลาย
+              @elseif($libs['education'] == 3)
+                ปวช. (ประกาศนียบัตรวิชาชีพ)
+              @elseif($libs['education'] == 4)
+                ปวส. (ประกาศนียบัตรวิชาชีพชั้นสูง) 
+              @elseif($libs['education'] == 5)
+                ปริญญาตรี
+              @elseif($libs['education'] == 6)
+                ปริญญาโท
+              @elseif($libs['education'] == 7)
+                ปริญญาเอก
+              @else
+                -
+              @endif
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="div4"><span >คณะ/สาขา</span></td>
+          <td>
+            <span class="div3">
+              @if(isset($libs['n_education']))
+                {{ $libs['n_education'] }}
+              @else
+                -
+              @endif
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="div4"><span >เบอร์โทรศัพท์</span></td>
+          <td>
+            <span class="div3">
+              @if(isset($libs['phone']))
+                0-{{ $libs['phone'] }}
+              @else
+                -
+              @endif
+            </span>
+          </td>
+        </tr>
+        <tr>
           <td class="div4"><span >วันเริ่มงาน</span></td>
           <td><span class="div3">{{ thai_date(strtotime($libs['job_start'])) }}</span></td>
         </tr>

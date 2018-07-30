@@ -100,6 +100,7 @@ class LibController extends Controller
             'position' => 'required|max:100',
             'job_start' => 'required|max:100',
             'user_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone' => 'required|regex:/[0-9]/',
         ]);
         $now = new Carbon();
         $lib = new Lib;        
@@ -117,6 +118,9 @@ class LibController extends Controller
         $lib->y_work = 99;
         $lib->job_end = $now;
         $lib->user_photo = $photoName;
+        $lib->education = $request->education;
+        $lib->n_education = $request->n_education;
+        $lib->phone = $request->phone;
         $lib->save();
 
         return redirect('lib');
@@ -169,12 +173,6 @@ class LibController extends Controller
             ->join('pos', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*', 'name_dep')
             ->get();
-            // $pos = DB::table('pos')
-            // ->join('libs', 'libs.position', '=', 'pos.id_pos')
-            // ->select('pos.id_pos','pos.name_pos','id')
-            // ->where('id','=',$id)
-            // ->get();            
-
             $result1 = json_decode($lib, true);
             $result2 = json_decode($pos, true); 
 
@@ -230,6 +228,9 @@ class LibController extends Controller
           'job_start' => $request->input('job_start'),
           'position' => $request->input('id_pos'),
           'user_photo' => $photoName,
+          'education' => $request->education,
+          'n_education' => $request->n_education,
+          'phone' => $request->phone,
       ]);
 
       if($libsUpdate){
