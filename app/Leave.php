@@ -11,9 +11,9 @@ class Leave extends Model
    'type_leave',
    'date_leave',
    'reason_leave',
-   'dstart_leave',
-   'dend_leave',
    'proof_leave',
    'approved',
+   'nstart_day',
+   'nend_day',
    ];
 }

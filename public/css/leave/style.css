@@ -385,3 +385,9 @@ img.image {
 .black{
 	color: #121213;
 }
+.font1{
+    color: #0586f5;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 15px;
+}

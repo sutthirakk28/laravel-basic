@@ -59,11 +59,13 @@ class LeaveController extends Controller
         $lib = DB::table('libs')
             ->select('surname', 'nickname','id')
             ->get();
+        $now = Carbon::today()->toDateString();
         $result = json_decode($lib, true);
         $data = array(
             'lib' => $result,
             'style' => $aCss,
             'script'=> $aScript,
+            'now1' => $now,
         );
         return view('leave.add',$data);
     }
@@ -79,29 +81,26 @@ class LeaveController extends Controller
         $this->validate($request,[
             'id_per' => 'required|max:100',
             'type_leave' => 'required|max:100',
-            'date_leave' => 'required|max:100',
-            'dstart_leave' => 'required|max:100',
+            'nstart_day' => 'required|max:100',
+            'nend_day' => 'required|max:100',
             'dend_leave' => 'required|max:100',
             'approved' => 'required|max:100'
         ]);
 
         $now = new Carbon();
-
-        foreach ($request->input("proof_leave") as $hobby){
-
-            $leave = new Leave;
-            $leave->id_per = $request->id_per;
-            $leave->type_leave = $request->type_leave;
-            $leave->date_leave = $request->date_leave;
-            $leave->reason_leave = $request->reason_leave;
-            $leave->dstart_leave = $request->dstart_leave;
-            $leave->dend_leave = $request->dend_leave;
-            $leave->proof_leave = $hobby;
-            $leave->approved = $request->approved;
-            $leave->created_at = $now;
-
-            $leave->save();
-        }
+        $checkBox = implode(',', $request->proof_leave);
+        dd('dddd');
+        $leave = new Leave;
+        $leave->id_per = $request->id_per;
+        $leave->type_leave = $request->type_leave;
+        $leave->date_leave = $request->date_leave;
+        $leave->reason_leave = $request->reason_leave;
+        $leave->nstart_day = $request->nstart_day;
+        $leave->nend_day = $request->nend_day;
+        $leave->proof_leave = $checkBox;
+        $leave->approved = $request->approved;
+        $leave->created_at = $now;
+        $leave->save();        
 
         return redirect('leave');
     }

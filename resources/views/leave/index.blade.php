@@ -48,7 +48,7 @@
 		</div>
 	@endif
 
-	<table id="leave" class="table table-striped table-bordered nowrap center" style="width:100%">
+	<table id="leave" class="table table-striped table-bordered nowrap" style="width:100%">
 		<thead class="thead">
 			<tr>
         <th width="5">ID</th>
@@ -67,8 +67,8 @@
 		<tbody>
 			@foreach ($leave as $l)
 			<tr >
-        <td>{{ $l['id']}}</td>
-				<td>{{ thai_date(strtotime($l['date_leave'])) }}</td>
+        <td >{{ $l['id']}}</td>
+				<td class="center">{{ thai_date(strtotime($l['date_leave'])) }}</td>
 				<td>
 					{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
 				</td>
@@ -86,7 +86,7 @@
            อื่นๆ
          @endif
         </td>
-				<td>
+				<td class="center">
 					{{ thai_date(strtotime($l['dstart_leave'])) }}<br>
 					ถึง<br>
 					{{ thai_date(strtotime($l['dend_leave'])) }}
@@ -103,7 +103,23 @@
           {{ $l['reason_leave'] }}
         </td>
         <td>
-          {{ $l['proof_leave'] }}
+          @php
+            $proof_leave=explode(",",$l['proof_leave']);
+          @endphp
+          @foreach($proof_leave as $p)
+            @if($p == 1)
+              ใบรับรองแพทย์
+            @endif
+            @if($p == 2)
+              ใบติดต่อราชการ
+            @endif
+            @if($p == 3)
+              ตารางสอบ/เรียน
+            @endif
+            @if($p == 4)
+              หลักฐานอื่นๆ
+            @endif
+          @endforeach          
         </td>
         <td>
           @if ($l['approved'] == 1)

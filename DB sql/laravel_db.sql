@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2018 at 12:48 PM
+-- Generation Time: Jul 31, 2018 at 12:47 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -134,22 +134,27 @@ CREATE TABLE `leaves` (
   `proof_leave` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '1=ใบรับรองแพทย์ 2=ใบติดต่อราชการ 3=ตารางสอบ/เรียน 4=หลักฐานอื่นๆ',
   `approved` int(11) NOT NULL COMMENT '1=ประธานบริษัท 2=กรรมการผู้จัดการ 3=เจ้าหน้าที่ฝ่ายบุคคล 4=หัวหน้าฝ่าย',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `nstart_day` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nend_day` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `leaves`
 --
 
-INSERT INTO `leaves` (`id`, `id_per`, `type_leave`, `date_leave`, `reason_leave`, `dstart_leave`, `dend_leave`, `proof_leave`, `approved`, `created_at`, `updated_at`) VALUES
-(1, 21, 3, '2018-07-06', 'xxx', '2018-07-05', '2018-07-18', '3', 2, '2018-07-24 11:38:43', '2018-07-24 11:38:43'),
-(2, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '1', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27'),
-(3, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '2', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27'),
-(4, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '3', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27'),
-(5, 38, 1, '2018-07-28', 'คลอดลูกที่ต่างจังหวัด', '2018-07-29', '2018-07-29', '1', 3, '2018-07-30 08:42:18', '2018-07-30 08:42:18'),
-(6, 38, 1, '2018-07-28', 'คลอดลูกที่ต่างจังหวัด', '2018-07-29', '2018-07-29', '4', 3, '2018-07-30 08:42:18', '2018-07-30 08:42:18'),
-(7, 40, 4, '2018-07-13', 'ลาไปสมัครงาน', '2018-07-26', '2018-07-28', '2', 1, '2018-07-30 10:04:56', '2018-07-30 10:04:56'),
-(8, 37, 2, '2018-07-27', 'dend_leave', '2018-07-06', '2018-07-06', '2', 1, '2018-07-30 10:43:07', '2018-07-30 10:43:07');
+INSERT INTO `leaves` (`id`, `id_per`, `type_leave`, `date_leave`, `reason_leave`, `dstart_leave`, `dend_leave`, `proof_leave`, `approved`, `created_at`, `updated_at`, `nstart_day`, `nend_day`) VALUES
+(1, 21, 3, '2018-07-06', 'xxx', '2018-07-05', '2018-07-18', '3', 2, '2018-07-24 11:38:43', '2018-07-24 11:38:43', NULL, NULL),
+(2, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '1', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27', NULL, NULL),
+(3, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '2', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27', NULL, NULL),
+(4, 31, 2, '2018-07-12', 'cccccccc', '2018-07-13', '2018-07-08', '3', 1, '2018-07-24 11:39:27', '2018-07-24 11:39:27', NULL, NULL),
+(5, 38, 1, '2018-07-28', 'คลอดลูกที่ต่างจังหวัด', '2018-07-29', '2018-07-29', '1', 3, '2018-07-30 08:42:18', '2018-07-30 08:42:18', NULL, NULL),
+(6, 38, 1, '2018-07-28', 'คลอดลูกที่ต่างจังหวัด', '2018-07-29', '2018-07-29', '4', 3, '2018-07-30 08:42:18', '2018-07-30 08:42:18', NULL, NULL),
+(7, 40, 4, '2018-07-13', 'ลาไปสมัครงาน', '2018-07-26', '2018-07-28', '2', 1, '2018-07-30 10:04:56', '2018-07-30 10:04:56', NULL, NULL),
+(8, 37, 2, '2018-07-27', 'dend_leave', '2018-07-06', '2018-07-06', '2', 1, '2018-07-30 10:43:07', '2018-07-30 10:43:07', NULL, NULL),
+(9, 31, 3, '2018-07-18', 'dadada', '2018-07-31', '2018-08-01', '2,3,4', 4, '2018-07-31 03:06:46', '2018-07-31 03:06:46', NULL, NULL),
+(10, 40, 3, '2018-07-21', NULL, '2018-07-31', '2018-07-31', '1,2,3,4', 1, '2018-07-31 04:11:54', '2018-07-31 04:11:54', NULL, NULL),
+(11, 31, 2, '2018-07-20', 'sssssssssss', '2018-07-18', '2018-07-20', '1,2,4', 3, '2018-07-31 10:02:56', '2018-07-31 10:02:56', '2018-08-01T08:30', '2018-08-02T17:30');
 
 -- --------------------------------------------------------
 
@@ -226,7 +231,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2018_07_24_164746_change_proof_leave_type_in_leaves_table', 17),
 (23, '2018_07_30_113720_add_education_to_libs_table', 18),
 (24, '2018_07_30_113832_add_n_education_to_libs_table', 18),
-(25, '2018_07_30_114434_add_phone_to_libs_table', 19);
+(25, '2018_07_30_114434_add_phone_to_libs_table', 19),
+(26, '2018_07_31_171201_add_nstart_day_to_leaves_table', 20),
+(27, '2018_07_31_171244_add_nend_day_to_leaves_table', 20);
 
 -- --------------------------------------------------------
 
@@ -416,7 +423,7 @@ ALTER TABLE `deps`
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `libs`
@@ -428,7 +435,7 @@ ALTER TABLE `libs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `pos`

@@ -12,7 +12,7 @@
             <div class="element">
                 <h2>เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
-                    <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true">
+                    <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
                       @foreach($lib as $l)
                         <option data-tokens="{{ $l['surname'] }}{{ $l['nickname'] }}" value="{{ $l['id'] }}">{{ $l['surname'] }}/{{ $l['nickname'] }}</option>
@@ -82,16 +82,30 @@
             <div class="element">
                 <h2 class="h2">วันที่ลา</h2>
                 <div class="row">
-                    <div class="col-xs-5">
-                        {{ form::date('dstart_leave','', ['class' => 'form-control']) }}
+                   
+                    <div class="col-xs-1">
+                       <p class="font1">เริ่มต้น</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{ $now1 }}T08:30" class="form-control" required>
                     </div>
                     <div class="col-xs-2">
                        <div class="input-group-addon">ถึง</div>
                     </div>
-                    <div class="col-xs-5">
-                        {{ form::date('dend_leave','', ['class' => 'form-control']) }}
+                    <div class="col-xs-1">
+                       <p class="font1">สิ้นสุด</p>
                     </div>
+                    <div class="col-xs-4">
+                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
+                    </div>
+                   
                 </div>
+                <!-- <h2 class="h2">ชั่วโมง</h2>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-4">
+                       <span class="font1">เวลา : </span><input type="time" id="myTime">
+                    </div>
+                </div> -->
             </div>
             <div class="element">
                 <h2>หลักฐานการลา</h2>
