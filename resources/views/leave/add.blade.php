@@ -6,7 +6,7 @@
 	<div class="panel panel-primary div1">
 		<div class="panel-heading">
 				แบบฟอร์มลางานของพนักงาน
-		</div> 
+		</div>
     {{ Form::open(['method' => 'post','route' =>['leave.store']]) }}
         <div class="wrapper">
             <div class="element">
@@ -72,7 +72,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                    </div>                
+                    </div>
                 </div>
             </div>
             <div class="element">
@@ -82,7 +82,7 @@
             <div class="element">
                 <h2 class="h2">วันที่ลา</h2>
                 <div class="row">
-                   
+
                     <div class="col-xs-1">
                        <p class="font1">เริ่มต้น</p>
                     </div>
@@ -98,8 +98,10 @@
                     <div class="col-xs-4">
                         <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
                     </div>
-                   
                 </div>
+								<div class="alert alert-danger day">
+								  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
+								</div>
                 <!-- <h2 class="h2">ชั่วโมง</h2>
                 <div class="row">
                     <div class="col-md-3 col-md-offset-4">
@@ -160,7 +162,7 @@
                     </div>
                     <label for="Seema2">หัวหน้าฝ่าย</label>
                 </div>
-            </div>       
+            </div>
         </div>
     <div class="panel-body">
         <div class="row">
@@ -168,7 +170,7 @@
                 {{ form::submit('บันทึกคำร้อง',['class' => 'btn btn-primary'] ) }}
             </div>
         </div>
-    </div>    
-	{{ Form::close() }} 
+    </div>
+	{{ Form::close() }}
 </div>
 @endsection

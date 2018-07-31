@@ -5,6 +5,7 @@
 @section('content')
 
 @php
+    error_reporting(E_ALL ^ E_NOTICE);
     function getDate1($day,$day2) {
       $diff  = date_diff( date_create($day), date_create($day2) );
       return($diff->d);
@@ -87,9 +88,20 @@
          @endif
         </td>
 				<td class="center">
-					{{ thai_date(strtotime($l['dstart_leave'])) }}<br>
-					ถึง<br>
-					{{ thai_date(strtotime($l['dend_leave'])) }}
+          @php
+            $nstart_day=explode("T",$l['nstart_day']);
+            $nend_day=explode("T",$l['nend_day']);
+
+          @endphp
+
+          @if ($nstart_day[0] == $nend_day[0])
+            {{ thai_date(strtotime($nstart_day[0]))}}
+          {{ '('.$nstart_day[1].'-'.$nend_day[1].')'}}
+          @else
+            {{ thai_date(strtotime($nstart_day[0])).'('.$nstart_day[1].')' }}<br>
+  					ถึง<br>
+  					{{ thai_date(strtotime($nend_day[0])).'('.$nend_day[1].')' }}
+          @endif
 				</td>
         <td>
           @php
@@ -119,7 +131,10 @@
             @if($p == 4)
               หลักฐานอื่นๆ
             @endif
-          @endforeach          
+            @if($p=='')
+              ไม่มีหลักฐาน
+            @endif
+          @endforeach
         </td>
         <td>
           @if ($l['approved'] == 1)
