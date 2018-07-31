@@ -32,13 +32,13 @@ class LeaveController extends Controller
     public function index()
     {
         $aCss=array('css/leave/style.css');
-        $aScript=array('js/leave/main.js'); 
+        $aScript=array('js/leave/main.js');
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
             ->orderBy('leaves.date_leave', 'DESC')
             ->get();
-        $result = json_decode($leave, true); 
+        $result = json_decode($leave, true);
         $data = array(
             'leave' => $result,
             'style' => $aCss,
@@ -59,7 +59,7 @@ class LeaveController extends Controller
         $lib = DB::table('libs')
             ->select('surname', 'nickname','id')
             ->get();
-        $result = json_decode($lib, true); 
+        $result = json_decode($lib, true);
         $data = array(
             'lib' => $result,
             'style' => $aCss,
@@ -82,10 +82,10 @@ class LeaveController extends Controller
             'date_leave' => 'required|max:100',
             'dstart_leave' => 'required|max:100',
             'dend_leave' => 'required|max:100',
-            'approved' => 'required|max:100'           
+            'approved' => 'required|max:100'
         ]);
 
-        $now = new Carbon();        
+        $now = new Carbon();
 
         foreach ($request->input("proof_leave") as $hobby){
 
@@ -101,8 +101,8 @@ class LeaveController extends Controller
             $leave->created_at = $now;
 
             $leave->save();
-        }       
-        
+        }
+
         return redirect('leave');
     }
 
@@ -119,7 +119,7 @@ class LeaveController extends Controller
             ->select('deps.*')
             ->where('id_dep','=',$id)
             ->get();
-        $result = json_decode($dep, true); 
+        $result = json_decode($dep, true);
         $data = array(
             'dep' => $result,
             'style' => $aCss
@@ -136,7 +136,7 @@ class LeaveController extends Controller
     public function edit($id)
     {
         if($id !== ''){
-            $aCss=array('css/leave/style.css');       
+            $aCss=array('css/leave/style.css');
             $dep = DB::table('deps')
                 ->select('deps.*')
                 ->where('id_dep','=',$id)

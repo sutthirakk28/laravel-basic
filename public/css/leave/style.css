@@ -330,7 +330,7 @@ h1 {
     font-family: Taviraj;
     font-size: 14px;
     font-weight: bold;
-    color: #555;    
+    color: #555;
     margin-top: 10px;
 }
 
@@ -361,7 +361,7 @@ label{
     grid-template-columns: auto auto;
     grid-gap: 30px;
     width: 90%;
-    margin: auto;      
+    margin: auto;
 }
 h2.h2 {
     color: #f50101;
@@ -372,4 +372,16 @@ h2.h2 {
 img.image {
     height: 65px;
     width: 65px;
+}
+.yellow{
+	color: #7b0df1;
+}
+.red{
+	color: red;
+}
+.blue{
+	color: #0ddaf1;
+}
+.black{
+	color: #121213;
 }
