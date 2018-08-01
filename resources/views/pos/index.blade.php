@@ -73,4 +73,12 @@
 			@endforeach
 		</tbody>
 	</table>
+	<div class="row">
+		<div class="col-xs-5">
+			{{ 
+				Html::link('pos/create','Add', array('class' => 'btn btn-primary thead'))
+			}}
+		</div>
+	</div>
+	
 @endsection

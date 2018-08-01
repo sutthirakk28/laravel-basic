@@ -6,6 +6,7 @@
 
 @php
     error_reporting(E_ALL ^ E_NOTICE);
+
     function getDate1($day,$day2) {
       $diff  = date_diff( date_create($day), date_create($day2) );
       return($diff->d);
@@ -34,6 +35,29 @@
       return $thai_date_return;
     }
 
+    function dateDiv($t1,$t2){
+      $t1Arr=splitTime($t1);
+      $t2Arr=splitTime($t2);
+     
+      $Time1=mktime($t1Arr["h"], $t1Arr["m"], $t1Arr["s"], $t1Arr["M"], $t1Arr["D"], $t1Arr["Y"]);
+      $Time2=mktime($t2Arr["h"], $t2Arr["m"], $t2Arr["s"], $t2Arr["M"], $t2Arr["D"], $t2Arr["Y"]);
+     $TimeDiv=abs($Time2-$Time1);
+
+      $Time["D"]=intval($TimeDiv/86400); 
+      $Time["H"]=intval(($TimeDiv%86400)/3600); 
+      $Time["M"]=intval((($TimeDiv%86400)%3600)/60); 
+      $Time["S"]=intval(((($TimeDiv%86400)%3600)%60));
+     return $Time;
+    }
+    function splitTime($time){  
+      $timeArr["Y"]= substr($time,2,2);
+      $timeArr["M"]= substr($time,5,2);
+      $timeArr["D"]= substr($time,8,2);
+      $timeArr["h"]= substr($time,11,2);
+      $timeArr["m"]= substr($time,14,2);
+       $timeArr["s"]= substr($time,17,2);
+      return $timeArr;
+    }
   @endphp
 	<h1 class="elegantshadow">ประวัติการลา</h1>
 	@if(Session::has('masupdate'))
@@ -89,27 +113,45 @@
         </td>
 				<td class="center">
           @php
-            $nstart_day=explode("T",$l['nstart_day']);
-            $nend_day=explode("T",$l['nend_day']);
-
+            $nstart_day = explode("T",$l['nstart_day']);
+            $nend_day = explode("T",$l['nend_day']);
+            $start_day_year = $nstart_day[0];
+            $start_day_times = $nstart_day[1];
+            $end_day_year = $nend_day[0];
+            $end_day_times = $nend_day[1];
           @endphp
 
-          @if ($nstart_day[0] == $nend_day[0])
-            {{ thai_date(strtotime($nstart_day[0]))}}
-          {{ '('.$nstart_day[1].'-'.$nend_day[1].')'}}
+          @if ($start_day_year == $end_day_year)
+            {{ thai_date(strtotime($start_day_year))}}
+          {{ '('.$start_day_times.'-'.$end_day_times.')'}}
           @else
-            {{ thai_date(strtotime($nstart_day[0])).'('.$nstart_day[1].')' }}<br>
+            {{ thai_date(strtotime($start_day_year)).'('.$start_day_times.')' }}<br>
   					ถึง<br>
-  					{{ thai_date(strtotime($nend_day[0])).'('.$nend_day[1].')' }}
+  					{{ thai_date(strtotime($end_day_year)).'('.$end_day_times.')' }}
           @endif
 				</td>
-        <td>
+        <td class="center">
           @php
-            $stop_date = date('Y-m-d', strtotime($l['dend_leave'] . ' +1 day'));
-            //$num_day1 = strtotime($l['dstart_leave'] . ' +1 day');
-            $num_day = getDate1($stop_date,$l['dstart_leave']);
+            $a1=$start_day_year.' '.$start_day_times;
+            $a2=$end_day_year.' '.$end_day_times;
+
+            $stop_date = date('Y-m-d', strtotime($end_day_year . ' +1 day'));
+            $num_day = dateDiv($start_day_year,$stop_date);
+
+            $time=dateDiv($a1,$a2);
           @endphp
-          {{ $num_day.' วัน' }}
+
+          @if($start_day_times == '08:30' && $end_day_times == '17:30')
+
+            {{ $num_day['D'].' วัน ' }}
+          @else
+            @if($time['D'] == '0')
+              {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+            @else
+              {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+            @endif            
+          @endif         
+                   
         </td>
         <td>
           {{ $l['reason_leave'] }}

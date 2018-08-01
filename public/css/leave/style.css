@@ -380,7 +380,7 @@ img.image {
 	color: red;
 }
 .blue{
-	color: #0ddaf1;
+	color: #0d86f1;
 }
 .black{
 	color: #121213;
@@ -396,4 +396,8 @@ img.image {
 }
 .day1{
 	color: green;
+}
+table.dataTable {
+    font-family: Taviraj;
+    font-weight: 900;
 }
