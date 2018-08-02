@@ -1,123 +1,114 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-        <title>TPM1980</title>
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Material Dashboard by Creative Tim
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+</head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Taviraj:100,600" rel="stylesheet" type="text/css">
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 25px;
-                font-weight: 700;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                font-family: 'Taviraj', sans-serif;
-            }
-
-            .m-b-md {
-                margin-bottom: 15px;
-                font-size: 70px;
-                font-family: 'Taviraj', sans-serif;
-            }
-            a.link1:link {
-                color: #636b6f;
-            }
-            a.link1:visited {
-                color: #636b6f;
-            }
-            a.link1:hover {
-                color: green;
-                text-decoration: underline;
-            }
-            a.link1:active {
-                color: blue;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-           <!-- @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif-->
-            <div class="top-right links">
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                    Logout
+        Tip 2: you can also add an image using data-image tag
+    -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-normal">
+          Creative Tim
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <!-- your sidebar here -->
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">notifications</i> Notifications
                 </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </div>
-            <div class="content">
-                <div class="title m-b-md">
-                    ระบบลางานออนไลน์สำหรับพนักงาน
-                </div>
-                <div class="title m-b-md">
-                    TPM(1980)CO., LTD.
-                </div>
-
-                <div class="links">
-                    <a href="{{ url('/leave/create') }}" class="link1">เขียนใบลา</a>
-                    <a href="#" class="link1">อนุมัติการลา</a>
-                    <a href="{{ url('/leave/') }}" class="link1">ประวัติการลา</a>
-                    <a href="{{ url('/lib') }}" class="link1">จัดการข้อมูลพนักงาน</a>
-                    <a href="{{ url('/dep') }}" class="link1">จัดการข้อมูลฝ่าย</a>
-                    <a href="{{ url('/pos') }}" class="link1">จัดการข้อมูลตำแหน่ง</a>
-                </div>
-            </div>
+              </li>
+              <!-- your navbar here -->
+            </ul>
+          </div>
         </div>
-    </body>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <!-- your content here -->
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="http://tpm1980.com/" target="_blank">
+                  TPM(1980)CO., LTD.
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, made with <i class="material-icons">favorite</i> by
+            <a href="https://bit.ly/2LTrur8" target="_blank">Sutthirak </a> for TPM(1980)CO., LTD.
+          </div>
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="js/core/popper.min.js" type="text/javascript"></script>
+  <script src="js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chartist JS -->
+  <script src="js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+</body>
+
 </html>

@@ -146,9 +146,17 @@
             {{ $num_day['D'].' วัน ' }}
           @else
             @if($time['D'] == '0')
-              {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+              @if($time['M'] == '0')
+                {{  $time['H'].' ชั่วโมง ' }}
+              @else                
+                {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+              @endif
             @else
-              {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+              @if($time['M'] == '0')
+                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}
+              @else
+                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+              @endif              
             @endif            
           @endif         
                    

@@ -401,3 +401,6 @@ table.dataTable {
     font-family: Taviraj;
     font-weight: 900;
 }
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 129px;
+}
