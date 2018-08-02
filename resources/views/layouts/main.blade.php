@@ -11,10 +11,10 @@
 	<title>@yield('title')</title>
 	<!-- Styles -->
 
-    <!-- datepicker 
+    <!-- datepicker
     <link rel="stylesheet" type="text/css" href="{{ asset('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css')}}">
-    -->    
+    -->
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')}}">
@@ -31,14 +31,14 @@
     {{ Html::style(('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css'))}}
 	{{ Html::style(('https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css'))}}
 	{{ Html::style(('https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css'))}}
-	
+
 	@if(isset($style))
 		@foreach($style as $css)
 			{{ Html::style(($css)) }}
 		@endforeach
 	@endif
 </head>
-<body>	
+<body>
 	<div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -105,7 +105,7 @@
                                                      document.getElementById('logout-form').submit();">
                                                      <span class="glyphicon glyphicon-log-in"></span>
                                             Logout
-                                        </a>                                      
+                                        </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -121,12 +121,12 @@
         <div class="container">
 			@yield('content')
         </div>
-        	
+
     </div>
 
     <!-- Scripts -->
 
-    <!-- datepicker 
+    <!-- datepicker
     <script type="text/javascript" src="{{ asset('https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('https://code.jquery.com/jquery-2.1.4.js')}}"></script>
     -->
@@ -139,13 +139,13 @@
     <script type="text/javascript" src="{{ asset('https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js')}}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
-	
+
 	{{Html::script('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')}}
 	{{Html::script('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js')}}
     {{Html::script('https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js')}}
     {{Html::script('https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js')}}
     {{Html::script('https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js')}}
-    
+
 	@if(isset($script))
 		@foreach($script as $js)
 			{{ Html::script(($js)) }}
