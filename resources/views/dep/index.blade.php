@@ -1,48 +1,15 @@
 @extends('layouts.tpm')
-@section('menu')
-<li class="nav-item">
-  <a class="nav-link" href="{{ url('/home') }}">
-    <i class="material-icons">dashboard</i>
-    <p>Dashboard</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/leave/create') }}">
-    <i class="material-icons">person</i>
-    <p>เขียนใบลา</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/leave/') }}">
-    <i class="material-icons">content_paste</i>
-    <p>ประวัติการลา</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/lib') }}">
-    <i class="material-icons">library_books</i>
-    <p>จัดการข้อมูลพนักงาน</p>
-  </a>
-</li>
-<li class="nav-item active ">
-  <a class="nav-link" href="{{ url('/dep') }}">
-    <i class="material-icons">bubble_chart</i>
-    <p>จัดการข้อมูลฝ่าย</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/pos') }}">
-    <i class="material-icons">location_ons</i>
-    <p>จัดการข้อมูลตำแหน่ง</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="#">
-    <i class="material-icons">notifications</i>
-    <p>Notifications</p>
-  </a>
-</li>
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+    <div id="breadcrumb"> <a href="{{ url('/dep') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> จัดการข้อมูลฝ่าย</a></div>
+  </div>  
+@endsection
+
 @section('content')
 @php
     function thai_date($time){
@@ -253,4 +220,39 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/excanvas.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.flot.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.flot.resize.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
+<script src="{{ asset('js/main/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('js/main/maruti.dashboard.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.chat.js') }}"></script> 
+
+<script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+      
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();            
+          } 
+          // else, send page to designated URL            
+          else {  
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+</script>
 @endsection

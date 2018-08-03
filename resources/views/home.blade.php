@@ -1,458 +1,300 @@
 @extends('layouts.tpm')
-@section('menu')
-<li class="nav-item active  ">
-  <a class="nav-link" href="{{ url('/home') }}">
-    <i class="material-icons">dashboard</i>
-    <p>Dashboard</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/leave/create') }}">
-    <i class="material-icons">person</i>
-    <p>เขียนใบลา</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/leave/') }}">
-    <i class="material-icons">content_paste</i>
-    <p>ประวัติการลา</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/lib') }}">
-    <i class="material-icons">library_books</i>
-    <p>จัดการข้อมูลพนักงาน</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/dep') }}">
-    <i class="material-icons">bubble_chart</i>
-    <p>จัดการข้อมูลฝ่าย</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="{{ url('/pos') }}">
-    <i class="material-icons">location_ons</i>
-    <p>จัดการข้อมูลตำแหน่ง</p>
-  </a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="#">
-    <i class="material-icons">notifications</i>
-    <p>Notifications</p>
-  </a>
-</li>
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+    <div id="breadcrumb"> <a href="{{ url('/home') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+  </div>  
+@endsection
+
 @section('content')
-  <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-header card-header-warning card-header-icon">
-          <div class="card-icon">
-            <i class="material-icons">content_copy</i>
-          </div>
-          <p class="card-category">Used Space</p>
-          <h3 class="card-title">49/50
-            <small>GB</small>
-          </h3>
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+    <ul class="quick-actions">
+          <li> <a href="#"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
+          <li> <a href="#"> <i class="icon-shopping-bag"></i> Shopping Cart</a> </li>
+          <li> <a href="#"> <i class="icon-web"></i> Web Marketing </a> </li>
+          <li> <a href="#"> <i class="icon-people"></i> Manage Users </a> </li>
+          <li> <a href="#"> <i class="icon-calendar"></i> Manage Events </a> </li>
+        </ul>
+   </div>
+   
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
+          <h5>Site Analytics</h5>
+          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
         </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons text-danger">warning</i>
-            <a href="#pablo">Get More Space...</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-header card-header-success card-header-icon">
-          <div class="card-icon">
-            <i class="material-icons">store</i>
-          </div>
-          <p class="card-category">Revenue</p>
-          <h3 class="card-title">$34,245</h3>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">date_range</i> Last 24 Hours
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-header card-header-danger card-header-icon">
-          <div class="card-icon">
-            <i class="material-icons">info_outline</i>
-          </div>
-          <p class="card-category">Fixed Issues</p>
-          <h3 class="card-title">75</h3>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">local_offer</i> Tracked from Github
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-header card-header-info card-header-icon">
-          <div class="card-icon">
-            <i class="fa fa-twitter"></i>
-          </div>
-          <p class="card-category">Followers</p>
-          <h3 class="card-title">+245</h3>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">update</i> Just Updated
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card card-chart">
-        <div class="card-header card-header-success">
-          <div class="ct-chart" id="dailySalesChart"></div>
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">Daily Sales</h4>
-          <p class="card-category">
-            <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">access_time</i> updated 4 minutes ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card card-chart">
-        <div class="card-header card-header-warning">
-          <div class="ct-chart" id="websiteViewsChart"></div>
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">Email Subscriptions</h4>
-          <p class="card-category">Last Campaign Performance</p>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">access_time</i> campaign sent 2 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card card-chart">
-        <div class="card-header card-header-danger">
-          <div class="ct-chart" id="completedTasksChart"></div>
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">Completed Tasks</h4>
-          <p class="card-category">Last Campaign Performance</p>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="material-icons">access_time</i> campaign sent 2 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-md-12">
-      <div class="card">
-        <div class="card-header card-header-tabs card-header-primary">
-          <div class="nav-tabs-navigation">
-            <div class="nav-tabs-wrapper">
-              <span class="nav-tabs-title">Tasks:</span>
-              <ul class="nav nav-tabs" data-tabs="tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#profile" data-toggle="tab">
-                    <i class="material-icons">bug_report</i> Bugs
-                    <div class="ripple-container"></div>
-                  </a>
+        <div class="widget-content">
+          <div class="row-fluid">
+            <div class="span8">
+              <div class="chart"></div>
+            </div>
+            <div class="span4">
+              <ul class="stat-boxes2">
+                <li>
+                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+10%</div>
+                  <div class="right"> <strong>15598</strong> Visits </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#messages" data-toggle="tab">
-                    <i class="material-icons">code</i> Website
-                    <div class="ripple-container"></div>
-                  </a>
+                <li>
+                  <div class="left peity_line_neutral"><span><span style="display: none;">10,15,8,14,13,10,10,15</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>10%</div>
+                  <div class="right"> <strong>150</strong> New Users </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#settings" data-toggle="tab">
-                    <i class="material-icons">cloud</i> Server
-                    <div class="ripple-container"></div>
-                  </a>
+                <li>
+                  <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>-40%</div>
+                  <div class="right"> <strong>4560</strong> Orders</div>
+                </li>
+                <li>
+                  <div class="left peity_line_good"><span><span style="display: none;">12,6,9,13,14,10,17</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+60%</div>
+                  <div class="right"> <strong>936</strong> Register </div>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active" id="profile">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked>
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="">
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="">
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                    </td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked>
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+      </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
+            <h5>Latest Posts</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <ul class="recent-posts">
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
+                </div>
+              <li>
+                <button class="btn btn-warning btn-mini">View All</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
+            <h5>News updates</h5>
+          </div>
+          <div class="widget-content nopadding updates">
+            <div class="new-update clearfix"><i class="icon-ok-sign"></i>
+              <div class="update-done"><a title="" href="#"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></a> <span>dolor sit amet, consectetur adipiscing eli</span> </div>
+              <div class="update-date"><span class="update-day">20</span>jan</div>
             </div>
-            <div class="tab-pane" id="messages">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked>
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                    </td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="">
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="tab-pane" id="settings">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="">
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked>
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                    </td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked>
-                          <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                        <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a title="" href="#"><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a title="" href="#"><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a title="" href="#"><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a title="" href="#"><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-md-12">
-      <div class="card">
-        <div class="card-header card-header-warning">
-          <h4 class="card-title">Employees Stats</h4>
-          <p class="card-category">New employees on 15th September, 2016</p>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="widget-box widget-chat">
+          <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
+            <h5>Chat Option</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <div class="chat-users panel-right2">
+              <div class="panel-title">
+                <h5>Online Users</h5>
+              </div>
+              <div class="panel-content nopadding">
+                <ul class="contact-list">
+                  <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>Sunil</span></a></li>
+                  <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>Laukik</span></a></li>
+                  <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>Vijay</span></a><span class="msg-count badge badge-info">3</span></li>
+                  <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>Jignesh</span></a></li>
+                  <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>Malay</span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="chat-content panel-left2">
+              <div class="chat-messages" id="chat-messages">
+                <div id="chat-messages-inner"></div>
+              </div>
+              <div class="chat-message well">
+                <button class="btn btn-success">Send</button>
+                <span class="input-box">
+                <input type="text" name="msg-box" id="msg-box" />
+                </span> </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body table-responsive">
-          <table class="table table-hover">
-            <thead class="text-warning">
-              <th>ID</th>
-              <th>Name</th>
-              <th>Salary</th>
-              <th>Country</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Dakota Rice</td>
-                <td>$36,738</td>
-                <td>Niger</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Minerva Hooper</td>
-                <td>$23,789</td>
-                <td>Curaçao</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Sage Rodriguez</td>
-                <td>$56,142</td>
-                <td>Netherlands</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Philip Chaney</td>
-                <td>$38,735</td>
-                <td>Korea, South</td>
-              </tr>
-            </tbody>
-          </table>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title">
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#tab1">Tab1</a></li>
+              <li><a data-toggle="tab" href="#tab2">Tab2</a></li>
+              <li><a data-toggle="tab" href="#tab3">Tab3</a></li>
+            </ul>
+          </div>
+          <div class="widget-content tab-content">
+            <div id="tab1" class="tab-pane active">
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+              <img src="images/img/demo/demo-image1.jpg" alt="demo-image"/></div>
+            <div id="tab2" class="tab-pane"> <img src="images/img/demo/demo-image2.jpg" alt="demo-image"/>
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+            </div>
+            <div id="tab3" class="tab-pane">
+              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. </p>
+              <img src="images/img/demo/demo-image3.jpg" alt="demo-image"/></div>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-user"></i></span>
+            <h5>Our Partner (Box with Fix height)</h5>
+          </div>
+          <div class="widget-content nopadding fix_hgt">
+            <ul class="recent-posts">
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
+                <div class="article-post"> <span class="user-info">John Deo</span>
+                  <p>Web Desginer &amp; creative Front end developer</p>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="accordion" id="collapse-group">
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 1</h5>
+                </a> </div>
+            </div>
+            <div class="collapse in accordion-body" id="collapseGOne">
+              <div class="widget-content"> It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
+            </div>
+          </div>
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGTwo" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 2</h5>
+                </a> </div>
+            </div>
+            <div class="collapse accordion-body" id="collapseGTwo">
+              <div class="widget-content">And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.</div>
+            </div>
+          </div>
+          <div class="accordion-group widget-box">
+            <div class="accordion-heading">
+              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGThree" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
+                <h5>Accordion Example 3</h5>
+                </a> </div>
+            </div>
+            <div class="collapse accordion-body" id="collapseGThree">
+              <div class="widget-content"> Waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box collapsible">
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseOne"> <span class="icon"><i class="icon-arrow-right"></i></span>
+            <h5>Toggle, Open by default, </h5>
+            </a> </div>
+          <div id="collapseOne" class="collapse in">
+            <div class="widget-content"> This box is opened by default, paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
+          </div>
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseTwo"> <span class="icon"><i class="icon-remove"></i></span>
+            <h5>Toggle, closed by default</h5>
+            </a> </div>
+          <div id="collapseTwo" class="collapse">
+            <div class="widget-content"> This box is now open </div>
+          </div>
+          <div class="widget-title"> <a data-toggle="collapse" href="#collapseThree"> <span class="icon"><i class="icon-remove"></i></span>
+            <h5>Toggle, closed by default</h5>
+            </a> </div>
+          <div id="collapseThree" class="collapse">
+            <div class="widget-content"> This box is now open </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/excanvas.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.flot.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.flot.resize.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
+<script src="{{ asset('js/main/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('js/main/maruti.dashboard.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.chat.js') }}"></script> 
+
+<script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+      
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();            
+          } 
+          // else, send page to designated URL            
+          else {  
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+</script>
 @endsection
