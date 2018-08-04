@@ -40,24 +40,26 @@ $(document).ready(function(){
 	});
 	
 	// === jQeury Gritter, a growl-like notifications === //
-	$.gritter.add({
-		title:	'Important Unread messages',
-		text:	'You have 12 unread messages.',
-		image: 	'img/demo/envelope.png',
-		sticky: false
-	});	
-	$('#gritter-notify .normal').click(function(){
+	// $.gritter.add({
+	// 	title:	'แจ้งเตือน',
+	// 	text:	'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว',
+	// 	image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
+	// 	sticky: false
+	// });	
+	$('#gritter-notify .normal').show(function(){
 		$.gritter.add({
-			title:	'Normal notification',
-			text:	'This is a normal notification',
+			title:	'แจ้งเตือน',
+			text:	'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว',
+			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
 			sticky: false
 		});		
 	});
 	
-	$('#gritter-notify .sticky').click(function(){
+	$('#gritter-notify .sticky').show(function(){
 		$.gritter.add({
-			title:	'Sticky notification',
-			text:	'This is a sticky notification',
+			title:	'แจ้งเตือน',
+			text:	'ลบข้อมูลฝ่ายเรียบร้อยแล้ว',
+			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
 			sticky: true
 		});		
 	});
@@ -66,7 +68,7 @@ $(document).ready(function(){
 		var imgsrc = $(this).attr('data-image');
 		$.gritter.add({
 			title:	'Important Unread messages',
-			text:	'You have 12 unread messages.',
+			text:	'Youแแแหหห have 12 unread messages.',
 			image: imgsrc,
 			sticky: false
 		});		

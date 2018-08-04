@@ -1,12 +1,15 @@
 @extends('layouts.tpm')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
 @endsection
 
 @section('content-header')
 <div id="content-header">
-    <div id="breadcrumb"> <a href="{{ url('/dep') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> จัดการข้อมูลฝ่าย</a></div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
+"></i> จัดการข้อมูลฝ่าย</a></div>
   </div>  
 @endsection
 
@@ -38,221 +41,93 @@
     }
 
   @endphp
-	<h1 class="elegantshadow">จัดการข้อมูลฝ่าย</h1>
 	@if(Session::has('masupdate'))
-		<div class="alert alert-success alert-dismissible fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{{ Session::get('masupdate') }}
-		</div>
+		<div id="gritter-notify">
+      <div class="normal"></div>
+    </div>
+
 	@endif
-	@if(Session::has('masdelete'))
-		<div class="alert alert-danger alert-dismissible fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{{ Session::get('masdelete') }}
-		</div>
+	@if(Session::has('masdelete'))		
+    <div id="gritter-notify">
+      <div class="sticky"></div>
+    </div>
 	@endif
 
-	<table id="dep" class="table table-bordered" style="wid_depth:100%">
-		<thead class="thead">
-			<tr>
-				<th width="100">รหัส</th>
-				<th >ชื่อฝ่าย</th>
-				<th width="300">Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach ($dep as $d)
-			<tr >
-				<td>{{ $d['id_dep'] }}</td>
-				<td>{{ $d['name_dep'] }}</td>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title">
+             <span class="icon"><i class="icon-th"></i></span> 
+            <h5 class="f_th1">จัดการข้อมูลฝ่าย</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th width="100">รหัส</th>
+                  <th >ชื่อฝ่าย</th>
+                  <th width="300">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($dep as $d)
+                <tr >
+                  <td >{{ $d['id_dep'] }}</td>
+                  <td ><span class="dep">{{ $d['name_dep'] }}</span></td>
 
-				<td class="center">
-					{{ Form::open(['route' => ['dep.destroy',$d['id_dep'], 'method' => 'DELETE'] ]) }}
-					<input type="hidden" name="_method" value="delete"/>
-					{{ Html::link('dep/create','Add', array(	'class' => 'btn btn-primary')) }}
-					{{ Html::link('dep/'.$d['id_dep'], 'View', array('class' => 'btn btn-success')) }}
-					{{ Html::link('dep/'.$ib=$d['id_dep'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
-					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
-					{{ Form::close()}}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
-	<div class="row">
-		<div class="col-xs-5">
-			{{ Html::link('dep/create','Add', array(	'class' => 'btn btn-primary thead')) }}
-		</div>
-	</div>
-
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header card-header-primary">
-        <h4 class="card-title ">Simple Table</h4>
-        <p class="card-category"> Here is a subtitle for this table</p>
+                  <td class="center">                                        
+                    {{ Html::link('dep/'.$d['id_dep'], 'View', array('class' => 'btn btn-success')) }}
+                    {{ Html::link('dep/'.$ib=$d['id_dep'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
+                    <a href="#myAlert" data-toggle="modal" data-id="{{$d['id_dep']}}" class="addDialog btn btn-danger">Delete</a>
+                    
+                    <!--modal delete -->
+                    <div id="myAlert" class="modal hide">
+                      <div class="modal-header">
+                        <button data-dismiss="modal" class="close" type="button">×</button>
+                        <h3><i class="material-icons" style="font-size:15px;color:red">error_outline</i> คำเตือน! </h3>
+                      </div>
+                      <div class="modal-body">
+                        <p>เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
+                      </div>
+                      <div class="modal-footer">
+                        {{ Form::open(['route' => ['dep.destroy',$d['id_dep'], 'method' => 'DELETE'] ]) }}
+                        <input type="hidden" name="_method" value="delete"/>
+                        <input type="hidden" name="depId" value="" id="depId"> 
+                        {{ Form::submit('Confirm',array('class' => 'btn btn-primary')) }}
+                        <a data-dismiss="modal" class="btn" href="#">Cancel</a> 
+                        {{ Form::close()}} 
+                        
+                      </div>
+                    </div>
+                    <!--end modal delete -->
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>       
       </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class=" text-primary">
-              <th>
-                ID
-              </th>
-              <th>
-                Name
-              </th>
-              <th>
-                Country
-              </th>
-              <th>
-                City
-              </th>
-              <th>
-                Salary
-              </th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  1
-                </td>
-                <td>
-                  Dakota Rice
-                </td>
-                <td>
-                  Niger
-                </td>
-                <td>
-                  Oud-Turnhout
-                </td>
-                <td class="text-primary">
-                  $36,738
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  2
-                </td>
-                <td>
-                  Minerva Hooper
-                </td>
-                <td>
-                  Curaçao
-                </td>
-                <td>
-                  Sinaai-Waas
-                </td>
-                <td class="text-primary">
-                  $23,789
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  3
-                </td>
-                <td>
-                  Sage Rodriguez
-                </td>
-                <td>
-                  Netherlands
-                </td>
-                <td>
-                  Baileux
-                </td>
-                <td class="text-primary">
-                  $56,142
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  4
-                </td>
-                <td>
-                  Philip Chaney
-                </td>
-                <td>
-                  Korea, South
-                </td>
-                <td>
-                  Overland Park
-                </td>
-                <td class="text-primary">
-                  $38,735
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  5
-                </td>
-                <td>
-                  Doris Greene
-                </td>
-                <td>
-                  Malawi
-                </td>
-                <td>
-                  Feldkirchen in Kärnten
-                </td>
-                <td class="text-primary">
-                  $63,542
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  6
-                </td>
-                <td>
-                  Mason Porter
-                </td>
-                <td>
-                  Chile
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-primary">
-                  $78,615
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        {{ Html::link('dep/create','Add', array(  'class' => 'btn btn-primary thead')) }}
       </div>
     </div>
   </div>
 @endsection
 
 @section('js')
-<script src="{{ asset('js/main/excanvas.min.js') }}"></script>
-<script src="{{ asset('js/main/jquery.flot.min.js') }}"></script> 
-<script src="{{ asset('js/main/jquery.flot.resize.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.tables.js') }}"></script>
+
+<script src="{{ asset('js/main/jquery.gritter.min.js') }}"></script> 
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
-<script src="{{ asset('js/main/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('js/main/maruti.dashboard.js') }}"></script> 
-<script src="{{ asset('js/main/maruti.chat.js') }}"></script> 
-
-<script type="text/javascript">
-  // This function is called from the pop-up menus to transfer to
-  // a different page. Ignore if the value returned is a null string:
-  function goPage (newURL) {
-
-      // if url is empty, skip the menu dividers and reset the menu selection to default
-      if (newURL != "") {
-      
-          // if url is "-", it is this page -- reset the menu:
-          if (newURL == "-" ) {
-              resetMenu();            
-          } 
-          // else, send page to designated URL            
-          else {  
-            document.location.href = newURL;
-          }
-      }
-  }
-
-// resets the menu selection upon entry to this page:
-function resetMenu() {
-   document.gomenu.selector.selectedIndex = 2;
-}
-</script>
+<script src="{{ asset('js/main/maruti.interface.js') }}"></script>
+<script src="{{ asset('js/main/maruti.popover.js') }}"></script>
 @endsection

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-  
+<html lang="{{ app()->getLocale() }}">  
 <head>
-    <title>Maruti Admin</title><meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+    <title>ระบบลางานออนไลน์</title><meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
     <link rel="stylesheet" href="{{ asset('css/main/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/main/bootstrap-responsive.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/main/maruti-style.css') }}" />
     <link rel="stylesheet" class="skin-color" href="{{ asset('css/main/maruti-media.css') }}" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:100,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Maitree:100,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Maitree:100,600" rel="stylesheet" type="text/css">
+
     @yield('css')
   <style type="text/css">
     [class^="icon-"], [class*=" icon-"] {
@@ -29,7 +33,9 @@
     #header h1 {
       background: url('images/img/logo.png') no-repeat scroll 0 0 transparent;
     }
-
+    .select2-container .select2-choice div b {
+      background: url('images/img/select2.png') no-repeat 0 1px;
+    }
   </style>
   @if(isset($style))
     @foreach($style as $css)
@@ -51,19 +57,19 @@
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
-    <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+    <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">ข้อมูลผู้ดูแล</span></a></li>
+    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-cog"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#">new message</a></li>
-        <li><a class="sInbox" title="" href="#">inbox</a></li>
-        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-        <li><a class="sTrash" title="" href="#">trash</a></li>
+        <li><a class="sAdd" title="" href="#">เพิ่มผู้ดูแล</a></li>
+        <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มประวัติการลา</a></li>
+        <li><a class="sOutbox" title="" href="{{ url('/lib/create') }}">เพิ่มพนักงาน</a></li>
+        <li><a class="sTrash" title="" href="{{ url('/dep/create') }}">เพิ่มฝ่าย</a></li>
+        <li><a class="sTrash" title="" href="{{ url('/pos/create') }}">เพิ่มตำแหน่ง</a></li>
       </ul>
     </li>
-    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
     <li class=""><a title="" href="{{ route('logout') }}" onclick="event.preventDefault();
              document.getElementById('logout-form').submit();"><i class="icon icon-share-alt"></i> 
-    <span class="text">Logout</span></a></li> 
+    <span class="text">ออกจากระบบ</span></a></li> 
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>

@@ -6,7 +6,7 @@
 
 @section('content-header')
 <div id="content-header">
-    <div id="breadcrumb"> <a href="{{ url('/home') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
   </div>  
 @endsection
 
@@ -14,11 +14,10 @@
 <div class="container-fluid">
     <div class="quick-actions_homepage">
     <ul class="quick-actions">
-          <li> <a href="#"> <i class="icon-dashboard"></i> My Dashboard </a> </li>
-          <li> <a href="#"> <i class="icon-shopping-bag"></i> Shopping Cart</a> </li>
-          <li> <a href="#"> <i class="icon-web"></i> Web Marketing </a> </li>
-          <li> <a href="#"> <i class="icon-people"></i> Manage Users </a> </li>
-          <li> <a href="#"> <i class="icon-calendar"></i> Manage Events </a> </li>
+          <li> <a href="#"> <i class="icon-people"></i>จัดการข้อมูลผู้ดูแล</a> </li>
+          <li> <a href="#"> <i class="icon-client"></i>จัดการข้อมูลพนักงาน</a> </li>
+          <li> <a href="#"> <i class="icon-calendar"></i> จัดการกิจกรรม </a> </li>
+          <li> <a href="#"> <i class="icon-lock"></i>ล็อคหน้าจอ</a></li>
         </ul>
    </div>
    

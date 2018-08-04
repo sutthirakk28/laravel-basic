@@ -1,9 +1,22 @@
-@extends('layouts/main')
-@section('title')
-เพิ่มข้อมูลฝ่าย
+@extends('layouts.tpm')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 @endsection
-@section('content')
-	
+
+@section('content-header')
+<div id="content-header">
+				<div id="breadcrumb">
+				<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> จัดการข้อมูลฝ่าย</a>
+				<a href="#">แก้ไขจัดการข้อมูลฝ่าย</a>
+				</div>
+                <h1>Form validation</h1>
+			</div>
+ 
+@endsection
+
+@section('content')	
 	<div class="panel panel-primary div1">
 		<div class="panel-heading">
 				แบบฟอร์มเพิ่มข้อมูลฝ่าย
@@ -53,5 +66,11 @@
 		</div>
 		{{ Form::close() }}		
 	</div>
+@endsection
 
+@section('js')
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.validate.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
 @endsection

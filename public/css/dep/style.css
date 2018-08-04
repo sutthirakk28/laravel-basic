@@ -1,84 +1,32 @@
 .center{
 	text-align: center;
+	font-family: Maitree;
 }
-.thead{
-	font-family: Taviraj;
-	text-align: center;
+.DataTables_sort_wrapper {
+    font-family: Maitree;
 	font-size: 15px;
 }
-
-.tbody{
+td.center {
+    text-align: center;
+}
+.f_th1{
+	font-family: Taviraj;
+}
+.f_th2{
 	font-family: Kanit;
-	color: black;
-	font-weight:bolder;
-	font-size: 14px;
 }
-
-.panel.panel-primary.div1{
+.f_th3{
+	font-family: Maitree;
+}
+h5.f_th1 {
 	font-family: Taviraj;
-	text-align: center;
-	font-size: 15px;
-	font-weight: 900;
+	font-size: 17px;
 }
-.div2{
-	font-family: Taviraj;
-	text-align: left;
-	padding-left: 50px;
-	font-size: 27px;
-	font-weight: 900;
+.sorting_1 {
+    font-family: Maitree;
+    text-align: center;
 }
-.div3{
-	font-family: Taviraj;
-	font-size: 18px;
-	font-weight: 600;
-}
-.div4{
-	font-family: Kanit;
-	font-size: 18px;
-	font-weight: 600;
-	width: 40%;
-}
-.div5{
-	background-color:#feff0085;
-}
-.div6{
-	background-color:#7fff93b0;
-}
-.div7{
-	background-color:#f5060680;
-}
-.panel-primary .panel-heading {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
-    font-size: 25px;
-}
-.navbar-default {
-    font-family: Taviraj;
-    color: black;
-    font-weight: 700;
-}
-.navbar-nav>li>.dropdown-menu {
-    font-family: monospace;
-}
-.show{
-	font-size: 20px;
-}
-.alert-danger {
-    text-align: left;
-    font-family: sans-serif;
-    font-weight: normal;
-}
-h1 {
-  	font-family: Taviraj;
-  	font-size: 40px;
-  	padding: 10px 10px;
-  	text-align: center;
-  	text-transform: uppercase;
-  	text-rendering: optimizeLegibility;
-}
-.elegantshadow {
-	color: #171616bf;
-	font-weight: 600;
-	letter-spacing: .10em;
+.odd {
+	font-family: Maitree;
+    text-align: center;
 }

@@ -144,7 +144,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 /* Content */
 #content {
-    background:url(../../images/backgrounds/bodyBg.png) repeat #fff;
+    background:url("../../images/images/backgrounds/bodyBg.png") repeat #fff;
     margin-left:0px;
     margin-right: 0;
 	margin-top:80px;

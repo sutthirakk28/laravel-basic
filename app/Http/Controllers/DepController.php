@@ -45,7 +45,9 @@ class DepController extends Controller
     public function create()
     {
         $aCss=array('css/dep/style.css');
+        $aScript=array('js/dep/main.js'); 
         $data = array(
+            'style' => $aCss,
             'style' => $aCss,
         );
         return view('dep.add',$data);
@@ -151,10 +153,10 @@ class DepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy(Request $request,$id)
+    {   
         //$dep = Dep::find($id);
-        $depDelete = Dep::where('id_dep',$id)
+        $depDelete = Dep::where('id_dep',$request->depId)
             ->delete();
 
         if($depDelete){
