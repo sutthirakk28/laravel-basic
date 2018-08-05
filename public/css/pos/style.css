@@ -1,94 +1,56 @@
 .center{
 	text-align: center;
+	font-family: Maitree;
 }
-.thead{
-	font-family: Taviraj;
-	text-align: center;
+.DataTables_sort_wrapper {
+    font-family: Maitree;
 	font-size: 15px;
 }
-.tbody{
+td.center {
+    text-align: center;
+}
+.f_th1{
+	font-family: Taviraj;
+}
+.f_th2{
 	font-family: Kanit;
-	color: black;
-	font-weight:bolder;
-	font-size: 14px;
 }
-
-.panel.panel-primary.div1{
+.f_th3{
+	font-family: Maitree;
+}
+h5.f_th1 {
 	font-family: Taviraj;
-	text-align: center;
-	font-size: 15px;
-	font-weight: 900;
+	font-size: 17px;
 }
-.div2{
-	font-family: Taviraj;
-	text-align: left;
-	padding-left: 50px;
-	font-size: 27px;
-	font-weight: 900;
+.sorting_1 {
+    font-family: Maitree;
+    text-align: center;
 }
-.div3{
-	font-family: Taviraj;
-	font-size: 18px;
-	font-weight: 600;
+.odd {
+	font-family: Maitree;
+    text-align: center;
 }
-.div4{
-	font-family: Kanit;
-	font-size: 18px;
-	font-weight: 600;
-	width: 40%;
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url('../../images/img/glyphicons-halflings.png');
 }
-.div5{
-	background-color:#feff0085;
+#sidebar > ul li a i {
+  background-image: url('../../images/img/glyphicons-halflings-white.png');
 }
-.div6{
-	background-color:#7fff93b0;
+#user-nav > ul > li > a > i, #sidebar li a i {
+  background-image: url('../../images/img/glyphicons-halflings-white.png');
 }
-.div7{
-	background-color:#f5060680;
+#breadcrumb a {
+  background-image: url('../../images/img/breadcrumb.png');
 }
-.panel-primary .panel-heading {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
-    font-size: 25px;
+.icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
+  background-image: url('../../images/img/glyphicons-halflings-white.png');
 }
-.navbar-default {
-    font-family: Taviraj;
-    color: black;
-    font-weight: 700;
+#header h1 {
+  background: url('../../images/img/logo.png') no-repeat scroll 0 0 transparent;
 }
-.navbar-nav>li>.dropdown-menu {
-    font-family: monospace;
+.select2-container .select2-choice div b {
+  background: url('../../images/img/select2.png') no-repeat 0 1px;
 }
-.show{
-	font-size: 20px;
-}
-.alert-danger {
-    text-align: left;
-    font-family: sans-serif;
-    font-weight: normal;
-}
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-    width: 100%;
-    font-weight: 900;
-}
-.bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    display: inline-block;
-    overflow: hidden;
-    width: 100%;
-    text-align: left;
-    font-weight: bold;
-}
-h1 {
-  	font-family: Taviraj;
-  	font-size: 40px;
-  	padding: 10px 10px;
-  	text-align: center;
-  	text-transform: uppercase;
-  	text-rendering: optimizeLegibility;
-}
-.elegantshadow {
-	color: #171616bf;
-	font-weight: 600;
-	letter-spacing: .10em;
+.controls.select2 {
+    width: 244px;
 }

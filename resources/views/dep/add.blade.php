@@ -7,65 +7,58 @@
 
 @section('content-header')
 <div id="content-header">
-				<div id="breadcrumb">
-				<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> จัดการข้อมูลฝ่าย</a>
-				<a href="#">แก้ไขจัดการข้อมูลฝ่าย</a>
-				</div>
-                <h1>Form validation</h1>
-			</div>
- 
+	<div id="breadcrumb">
+		<a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+			<i class="icon-book"></i> จัดการข้อมูลฝ่าย</a>
+		<a href="#">เพิ่มข้อมูลฝ่าย</a>
+	</div>
+</div> 
 @endsection
 
-@section('content')	
-	<div class="panel panel-primary div1">
-		<div class="panel-heading">
-				แบบฟอร์มเพิ่มข้อมูลฝ่าย
+@section('content')
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon">
+						<i class="icon-pencil"></i>									
+					</span>
+					<h5 class="f_th1">แบบฟอร์มเพิ่มข้อมูลฝ่าย</h5>
+				</div>
+				<div class="widget-content nopadding f_th3">
+					{{ Form::open(array('url' => url('dep'), 'class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate')) }}
+					
+		                @if(count($errors) > 0 )
+							<div class=" alert alert-danger">
+								<ul>
+									@foreach($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+					 	@endif
+		                <div class="control-group">
+		                    <label class="control-label">รหัสฝ่าย : </label>
+		                    <div class="controls">
+		                        {{ form::text('id_dep', 'อัตโนมัติ', ['class' => 'f_th3','readonly' => 'true']) }}
+		                    </div>
+		                </div>
+		                <div class="control-group">
+		                    <label class="control-label">ชื่อฝ่าย : </label>
+		                    <div class="controls">	                        
+		                        {{ form::text('name_dep','',array('required' => 'required')) }}	                        
+		                    </div>
+		                </div>
+		                <div class="form-actions">
+		                    {{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
+		                </div>
+		            {{ Form::close() }}	
+				</div>
+			</div>			
 		</div>
-				{{ Form::open(['url' => 'dep']) }}		
-		 <div class="panel-body">
-		 	@if(count($errors) > 0 )
-				<div class=" alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-		 	@endif
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('id_dep','รหัสฝ่าย') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('id_dep', 'อัตโนมัติ', ['class' => 'form-control', 'readonly' => 'true']) }}
-				</div>
-			</div>
-		</div>
-		<div class="panel-body">
-			
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('name_dep','ชื่อฝ่าย') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('name_dep','', ['class' => 'form-control']) }}
-				</div>
-			</div>
-		</div>		
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-5">
-					{{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
-				</div>
-			</div>
-		</div> 
 	</div>
-	<div class="row">
-		<div class="col-xs-2">
-			
-		</div>
-		{{ Form::close() }}		
-	</div>
+</div>
 @endsection
 
 @section('js')

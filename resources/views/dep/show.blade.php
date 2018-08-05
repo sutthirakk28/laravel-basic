@@ -1,7 +1,20 @@
-@extends('layouts/main')
-@section('title')
-ระบบจัดการข้อมูลพนักงาน
+@extends('layouts.tpm')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+  <div id="breadcrumb">
+    <a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+      <i class="icon-book"></i> จัดการข้อมูลฝ่าย</a>
+    <a href="#">ข้อมูลฝ่าย</a>
+  </div>
+</div> 
+@endsection
+
 @section('content')
 @php    
     function thai_date($time){
@@ -28,33 +41,49 @@
       $thai_date_return.= "  ".date("H:i",$time)." น.";
       return $thai_date_return;
     }
+  @endphp
 
-  @endphp  
   @foreach ($dep as $d)
-  <div class="panel panel-primary">
-    <div class="panel-heading div2">
-      {{ $d['name_dep'] }}
-    </div>
-    <div class="panel-body show">
-      <table class="table" style="width:100%">
-        <tr>
-          <td class="div4"><span >รหัสฝ่าย</span></td>
-          <td><span class="div3">{{ $d['id_dep'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ชื่อฝ่าย</span></td>
-          <td><span class="div3">{{ $d['name_dep'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >สร้างเมื่อ</span></td>
-          <td><span class="div3">{{ thai_date(strtotime($d['created_at'])) }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >แก้ไขเมื่อ</span></td>
-          <td><span class="div3">{{ thai_date(strtotime($d['updated_at'])) }}</span></td>
-        </tr>        
-      </table>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5 class="f_th1">{{ $d['name_dep'] }}</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr class="odd gradeX">
+                  <td>รหัสฝ่าย</td>
+                  <td>{{ $d['id_dep'] }}</td>
+                </tr>
+                  <tr class="odd gradeX">
+                  <td>ชื่อฝ่าย</td>
+                  <td>{{ $d['name_dep'] }}</td>
+                </tr>
+                  <tr class="odd gradeX">
+                  <td>สร้างเมื่อ</td>
+                  <td>{{ thai_date(strtotime($d['created_at'])) }}</td>
+                </tr>
+                  <tr class="odd gradeX">
+                  <td>แก้ไขเมื่อ</td>
+                  <td>{{ thai_date(strtotime($d['updated_at'])) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>        
+      </div>
     </div>
   </div>
   @endforeach
+
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.tables.js') }}"></script>
 @endsection

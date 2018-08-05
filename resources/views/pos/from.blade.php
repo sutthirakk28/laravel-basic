@@ -1,75 +1,87 @@
-@extends('layouts/main')
-@section('title')
-เพิ่มข้อมูลตำแหน่ง
+@extends('layouts.tpm')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+  <div id="breadcrumb">
+    <a href="{{ url('/pos/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+      <i class="icon-book"></i> จัดการข้อมูลตำแหน่ง</a>
+    <a href="#">แก้ไขข้อมูลตำแหน่ง</a>
+  </div>
+</div> 
+@endsection
+
 @section('content')
 
 @foreach ($pos as $poss)
-	<div class="panel panel-primary div1">
-		<div class="panel-heading">
-				แบบฟอร์มแก้ไข้อมูลตำแหน่ง
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon">
+						<i class="icon-pencil"></i>									
+					</span>
+					<h5 class="f_th1">แบบฟอร์มแก้ไข้อมูลตำแหน่ง</h5>
+				</div>
+				<div class="widget-content nopadding f_th3">
+					{{ Form::open(['method' => 'put','route' =>['pos.update', $poss['id_pos'] ],'class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate']) }}
+		                @if(count($errors) > 0 )
+							<div class=" alert alert-danger">
+								<ul>
+									@foreach($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+					 	@endif
+		                <div class="control-group">
+		                    <label class="control-label">รหัสตำแหน่ง : </label>
+		                    <div class="controls">
+		                        {{ form::text('id_pos', $poss['id_pos'], ['class' => 'f_th3', 'readonly' => 'true'] ) }}
+		                    </div>
+		                </div>
+		                <div class="control-group">
+		                    <label class="control-label">เลือกฝ่าย : </label>
+		                    <div class="controls select2">		                        
+								<select name="id_dep" id="id_dep" required>
+				                    @foreach($dep as $d)
+									  	@if($d->id_dep == $poss['id_dep'])
+									  		<option value="{{ $d->id_dep }}" selected>{{ $d['name_dep'] }}</option>
+									  	@else
+									  		<option value="{{ $d->id_dep }}">{{ $d['name_dep'] }}</option>
+									  	@endif					    
+								  	@endforeach
+				                </select>                       
+		                    </div>
+		                </div>
+		                <div class="control-group">
+		                    <label class="control-label">ชื่อตำแหน่ง : </label>
+		                    <div class="controls"> 
+		                        {{ form::text('name_pos',$poss['name_pos'],array('required' => 'required')) }}                       
+		                    </div>
+		                </div>
+		                <div class="form-actions">
+		                    {{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
+		                </div>
+		            {{ Form::close() }}	
+				</div>
+			</div>			
 		</div>
-				{{ Form::open(['method' => 'put','route' =>['pos.update', $poss['id_pos'] ]]) }}
-		 <div class="panel-body">
-		 	@if(count($errors) > 0 )
-				<div class=" alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-		 	@endif
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('id_pos','รหัสตำแหน่ง') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('id_pos', $poss['id_pos'], ['class' => 'form-control', 'readonly' => 'true'] ) }}
-				</div>
-			</div>
-		</div>		
-		<div class="panel-body">			
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('id_dep','เลือกฝ่าย') }}
-				</div>
-				<div class="col-xs-5 ">
-					<select name="id_dep" id="id_dep" class="selectpicker show-tick select" data-live-search="true">
-						@foreach($dep as $d)
-						  	@if($d->id_dep == $poss['id_dep'])
-						  		<option data-tokens="{{ $d['name_dep'] }}" value="{{ $d->id_dep }}" selected>{{ $d['name_dep'] }}</option>
-						  	@else
-						  		<option data-tokens="{{ $d['name_dep'] }}" value="{{ $d->id_dep }}">{{ $d['name_dep'] }}</option>
-						  	@endif					    
-					  	@endforeach
-					</select>	
-				</div>
-			</div>
-		</div>
-		<div class="panel-body">			
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('name_pos','ชื่อตำแหน่ง') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('name_pos',$poss['name_pos'], ['class' => 'form-control']) }}
-				</div>
-			</div>
-		</div>		
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-5">
-					{{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
-				</div>
-			</div>
-		</div> 
 	</div>
-	<div class="row">
-		<div class="col-xs-2">
-			
-		</div>
-		{{ Form::close() }}		
-	</div>
+</div>
 @endforeach
+
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.validate.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
+<script src="{{ asset('js/main/maruti.form_common.js') }}"></script>
 @endsection

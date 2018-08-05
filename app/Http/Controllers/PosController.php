@@ -162,9 +162,9 @@ class PosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $posDelete = Pos::where('id_pos',$id)
+        $posDelete = Pos::where('id_pos',$request->depId)
             ->delete();
 
         if($posDelete){
