@@ -39,6 +39,14 @@ function getDate1($day) {
 	return($diff->y.' ปี '.$diff->m.' เดือน '.$diff->d.' วัน');
 
 }
+
+function count_day($day1){
+      $date1=date_create($day1);
+      $date2=date_create("2018-08-07");
+      $d=date_diff($date1,$date2);
+      $count = $d->format("%a");
+      return $count;
+    }
 @endphp
 
 <div class="container-fluid">
@@ -67,7 +75,17 @@ function getDate1($day) {
 	          <tbody>
 	            @foreach ($lib as $l)
 	            <tr >
-	            	<td>{{ $l['id_employ'] }}</td>
+	            	@php
+	                  $day_pro=count_day($l['job_start']);
+	                @endphp
+	            	<td>
+	            		{{ $l['id_employ'] }}
+	            		@if($day_pro >= '119')
+		                	<span class="label label-important2">ผ่านโปร</span>
+		                @else
+		                    <span class="label label-important">ยังไม่ผ่านโปร</span>
+		                @endif
+	            	</td>
 					<td>
 						{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
 					</td>

@@ -58,3 +58,18 @@ img.image {
   width: 50px;
   height: 50px;
 }
+tr.odd.gradeX.yellow {
+  color: #fbb450;
+}
+tr.odd.gradeX.red {
+    color: #f70404;
+}
+tr.odd.gradeX.gray {
+    color:#2ad402;
+}
+tr.odd.gradeX.orenge {
+    color:#0070ff;
+}
+span.label.label-important2 {
+    background-color: cornflowerblue;
+}
