@@ -92,10 +92,10 @@ class LibController extends Controller
      */
     public function store(Request $request)
     {
+     
         $this->validate($request,[
             'id_employ' => 'required|max:100',
             'surname' => 'required|max:100',
-            'nickname' => 'required|max:100',
             'age' => 'required|max:100',
             'position' => 'required|max:100',
             'job_start' => 'required|max:100',
@@ -103,7 +103,10 @@ class LibController extends Controller
             'phone' => 'required|regex:/[0-9]/',
         ]);
         $now = new Carbon();
-        $lib = new Lib;        
+        $lib = new Lib;
+
+
+         //dd($request->all());
 
         $photoName = time().'.'.$request->user_photo->getClientOriginalExtension();
         $request->user_photo->move(public_path('images'), $photoName);
@@ -246,11 +249,11 @@ class LibController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {   
-        $lib = Lib::find($id);
+        $lib = Lib::find($request->depId);
         File::delete(public_path('images/'.$lib->user_photo));
-        $libDelete = Lib::where('id',$id)
+        $libDelete = Lib::where('id',$request->depId)
             ->delete();        
 
         if($libDelete){

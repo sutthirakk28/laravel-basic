@@ -14,9 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Maitree:100,600" rel="stylesheet" type="text/css">
 
     @yield('css')
-  <style type="text/css">
-    
-  </style>
+  
   @if(isset($style))
     @foreach($style as $css)
       {{ Html::style(($css)) }}

@@ -1,7 +1,20 @@
-@extends('layouts/main')
-@section('title')
-ระบบจัดการข้อมูลพนักงาน
+@extends('layouts.tpm')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+  <div id="breadcrumb">
+    <a href="{{ url('/lib/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+      <i class="icon-book"></i> จัดการข้อมูลพนักงาน</a>
+    <a href="#">ข้อมูลพนักงาน</a>
+  </div>
+</div> 
+@endsection
+
 @section('content')
 
 
@@ -42,121 +55,133 @@
     }
 
   @endphp
-  @foreach ($lib as $libs)
-  <div class="panel panel-primary">
-    <div class="panel-heading div2">
-      {{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image')) }}
-      {{ $libs['surname'] }}
-    </div>
-    <div class="panel-body show">
-      <table class="table" style="width:100%">
-        <tr>
-          <td class="div4"><span >รหัสพนักงาน</span></td>
-          <td><span class="div3">{{ $libs['id_employ'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ชื่อ-นามสกุล</span></td>
-          <td><span class="div3">{{ $libs['surname'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ชื่อเล่น</span></td>
-          <td><span class="div3">{{ $libs['nickname'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >อายุ</span></td>
-          <td><span class="div3">{{ getAge($libs['age']).' ปี'}}</span></td>
-        </tr>
-        <tr>
-          <td  class="div4"><span>ฝ่าย</span></td>
-          <td><span class="div3">{{ $libs['name_dep']}}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ตำแหน่ง</span></td>
-          <td><span class="div3">{{ $libs['name_pos'] }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >วุฒิการศึกษา</span></td>
-          <td>
-            <span class="div3">
-              @if($libs['education'] == 1)
-                มัธยมศึกษาตอนต้น
-              @elseif($libs['education'] == 2)
-                มัธยมศึกษาตอนปลาย
-              @elseif($libs['education'] == 3)
-                ปวช. (ประกาศนียบัตรวิชาชีพ)
-              @elseif($libs['education'] == 4)
-                ปวส. (ประกาศนียบัตรวิชาชีพชั้นสูง) 
-              @elseif($libs['education'] == 5)
-                ปริญญาตรี
-              @elseif($libs['education'] == 6)
-                ปริญญาโท
-              @elseif($libs['education'] == 7)
-                ปริญญาเอก
-              @else
-                -
-              @endif
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="div4"><span >คณะ/สาขา</span></td>
-          <td>
-            <span class="div3">
-              @if(isset($libs['n_education']))
-                {{ $libs['n_education'] }}
-              @else
-                -
-              @endif
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="div4"><span >เบอร์โทรศัพท์</span></td>
-          <td>
-            <span class="div3">
-              @if(isset($libs['phone']))
-                0-{{ $libs['phone'] }}
-              @else
-                -
-              @endif
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="div4"><span >วันเริ่มงาน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime($libs['job_start'])) }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ครบ 45 วัน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+45 days',strtotime($libs['job_start']))) }}</span></td>
-        </tr>
-        <tr class="div5">
-          <td class="div4"><span >ครบ 60 วันส่งเอกสารการประเมิน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+60 days',strtotime($libs['job_start']))) }}</span></td>
-        </tr>
-        <tr class="div5">
 
-          <td class="div4"><span >กำหนดรับเอกสารประเมิน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+70 days',strtotime($libs['job_start']))) }}</span></td>
-        </tr>
-        <tr>
-          <td class="div4"><span >ครบ 90 วัน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+90 days',strtotime($libs['job_start']))) }}</span></td>
-        </tr>
-        <tr class="div6">
-          <td class="div4"><span >ผ่านทดลองาน 119 วัน</span></td>
-          <td><span class="div3">{{ thai_date(strtotime('+119 days',strtotime($libs['job_start']))) }}</span></td>
-        </tr>
-        <tr >
-          <td class="div4"><span >อายุงาน</span></td>
-          <td><span class="div3">{{ getDate1($libs['job_start']) }}</span></td>
-        </tr>
-        <tr class="div7">
-          <td class="div4"><span>วันที่ลาออก</span></td>
-          <td><span class="div3">0000-00-00</span></td>
-        </tr>
-      </table>
+@foreach ($lib as $libs)
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+          <h5 class="f_th1">
+            <!-- {{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image')) }} -->
+            {{ $libs['surname'] }}
+          </h5>
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered table-striped">
+            <tbody>
+              <tr class="odd gradeX">
+                <td>รหัสพนักงาน</td>
+                <td>{{ $libs['id_employ'] }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ชื่อ-นามสกุล</td>
+                <td>{{ $libs['surname'] }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ชื่อเล่น</td>
+                <td>{{ $libs['nickname'] }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>อายุ</td>
+                <td>{{ getAge($libs['age']).' ปี'}}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ฝ่าย</td>
+                <td>{{ $libs['name_dep'] }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ตำแหน่ง</td>
+                <td>{{ $libs['name_pos'] }}</td>
+              </tr>
+              <tr class="odd gradeX">
+              </td>
+              <td>วุฒิการศึกษา</td>
+              <td>
+                @if($libs['education'] == 1)
+                  มัธยมศึกษาตอนต้น
+                @elseif($libs['education'] == 2)
+                  มัธยมศึกษาตอนปลาย
+                @elseif($libs['education'] == 3)
+                  ปวช. (ประกาศนียบัตรวิชาชีพ)
+                @elseif($libs['education'] == 4)
+                  ปวส. (ประกาศนียบัตรวิชาชีพชั้นสูง) 
+                @elseif($libs['education'] == 5)
+                  ปริญญาตรี
+                @elseif($libs['education'] == 6)
+                  ปริญญาโท
+                @elseif($libs['education'] == 7)
+                  ปริญญาเอก
+                @else
+                  -
+                @endif
+              </td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>คณะ/สาขา</td>
+                <td>
+                  @if(isset($libs['n_education']))
+                    {{ $libs['n_education'] }}
+                  @else
+                    -
+                  @endif
+                </td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>เบอร์โทรศัพท์</td>
+                <td>
+                   @if(isset($libs['phone']))
+                    0-{{ $libs['phone'] }}
+                  @else
+                    -
+                  @endif
+                </td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>วันเริ่มงาน</td>
+                <td>{{ thai_date(strtotime($libs['job_start'])) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ครบ 45 วัน</td>
+                <td>{{ thai_date(strtotime('+45 days',strtotime($libs['job_start']))) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ครบ 60 วันส่งเอกสารการประเมิน</td>
+                <td>{{ thai_date(strtotime('+60 days',strtotime($libs['job_start']))) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>กำหนดรับเอกสารประเมิน</td>
+                <td>{{ thai_date(strtotime('+70 days',strtotime($libs['job_start']))) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ครบ 90 วัน</td>
+                <td>{{ thai_date(strtotime('+90 days',strtotime($libs['job_start']))) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>ผ่านทดลองาน 119 วัน</td>
+                <td>{{ thai_date(strtotime('+119 days',strtotime($libs['job_start']))) }}}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>อายุงาน</td>
+                <td>{{ getDate1($libs['job_start']) }}</td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>วันที่ลาออก</td>
+                <td>0000-00-00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>        
     </div>
   </div>
-  @endforeach
+</div>
+@endforeach
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.tables.js') }}"></script>
 @endsection

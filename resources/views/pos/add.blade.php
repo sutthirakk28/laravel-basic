@@ -46,7 +46,7 @@
 		                    </div>
 		                </div>
 		                <div class="control-group">
-		                    <label class="control-label">เลือกฝ่าย : </label>
+		                    <label class="control-label">*เลือกฝ่าย : </label>
 		                    <div class="controls select2">
 								<select name="name_dep" id="name_dep" required>
 				                    @foreach($dep as $d)
@@ -57,7 +57,7 @@
 		                </div>
 
 		                <div class="control-group">
-		                    <label class="control-label">ชื่อตำแหน่ง : </label>
+		                    <label class="control-label">*ชื่อตำแหน่ง : </label>
 		                    <div class="controls">
 		                        {{ form::text('name_pos','', array('required' => 'required')) }}                        
 		                    </div>

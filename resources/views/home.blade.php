@@ -2,6 +2,29 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" />
+<style type="text/css">  
+  [class^="icon-"], [class*=" icon-"] {
+    background-image: url('images/img/glyphicons-halflings.png');
+  }
+  #sidebar > ul li a i {
+    background-image: url('images/img/glyphicons-halflings-white.png');
+  }
+  #user-nav > ul > li > a > i, #sidebar li a i {
+    background-image: url('images/img/glyphicons-halflings-white.png');
+  }
+  #breadcrumb a {
+    background-image: url('images/img/breadcrumb.png');
+  }
+  .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
+    background-image: url('images/img/glyphicons-halflings-white.png');
+  }
+  #header h1 {
+    background: url('images/img/logo.png') no-repeat scroll 0 0 transparent;
+  }
+  .select2-container .select2-choice div b {
+    background: url('images/img/select2.png') no-repeat 0 1px;
+  }
+</style>
 @endsection
 
 @section('content-header')
