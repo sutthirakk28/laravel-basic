@@ -49,7 +49,7 @@ $(document).ready(function(){
 	$('#gritter-notify .normal').show(function(){
 		$.gritter.add({
 			title:	'แจ้งเตือน',
-			text:	'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว',
+			text:	'แก้ไขข้อมูลเรียบร้อยแล้ว',
 			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
 			sticky: false
 		});		
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	$('#gritter-notify .sticky').show(function(){
 		$.gritter.add({
 			title:	'แจ้งเตือน',
-			text:	'ลบข้อมูลฝ่ายเรียบร้อยแล้ว',
+			text:	'ลบข้อมูลเรียบร้อยแล้ว',
 			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
 			sticky: true
 		});		

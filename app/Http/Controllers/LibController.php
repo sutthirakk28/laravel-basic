@@ -197,6 +197,7 @@ class LibController extends Controller
      */
     public function update(Request $request, $id)
     {
+      
       $this->validate($request,[
             'id_employ' => 'required|max:100',
             'surname' => 'required|max:100',

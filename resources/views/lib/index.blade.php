@@ -108,7 +108,7 @@ function count_day($day1){
 	                    <h3><i class="material-icons" style="font-size:15px;color:red">error_outline</i> คำเตือน! </h3>
 	                  </div>
 	                  <div class="modal-body">
-	                    <p>เมื่อลบตำแหน่งข้อมูลอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
+	                    <p>เมื่อลบข้อมูลพนักงานอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
 	                  </div>
 	                  <div class="modal-footer">
 	                    {{ Form::open(['route' => ['lib.destroy',$l['id'], 'method' => 'DELETE'] ]) }}

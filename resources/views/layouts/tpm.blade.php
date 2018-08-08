@@ -36,7 +36,7 @@
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
     <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">ข้อมูลผู้ดูแล</span></a></li>
-    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-cog"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+    <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon-plus-sign"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a class="sAdd" title="" href="#">เพิ่มผู้ดูแล</a></li>
         <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มประวัติการลา</a></li>
@@ -46,7 +46,7 @@
       </ul>
     </li>
     <li class=""><a title="" href="{{ route('logout') }}" onclick="event.preventDefault();
-             document.getElementById('logout-form').submit();"><i class="icon icon-share-alt"></i> 
+             document.getElementById('logout-form').submit();"><i class="icon-off"></i> 
     <span class="text">ออกจากระบบ</span></a></li> 
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
@@ -63,12 +63,12 @@
       <a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Menu</a><ul>
     <li class="active"><a href="{{ url('/home') }}"><i class="icon icon-home"></i> <span>Home</span></a> </li>
     <li> <a href="#"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
-    <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-inbox"></i> <span>เขียนใบลา</span></a> </li>
-    <li><a href="{{ url('/leave/') }}"><i class="icon icon-th"></i> <span>ประวัติการลา</span></a><span class="label label-important">new 3</span></li>
-    <li><a href="{{ url('/lib') }}"><i class="icon icon-fullscreen"></i> <span>จัดการข้อมูลพนักงาน</span></a></li>
+    <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
+    <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ประวัติการลา</span></a><span class="label label-important">new 3</span></li>
+    <li><a href="{{ url('/lib') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลพนักงาน</span></a></li>
     
-    <li><a href="{{ url('/dep') }}"><i class="icon icon-tint"></i> <span>จัดการข้อมูลฝ่าย</span></a></li>
-    <li><a href="{{ url('/pos') }}"><i class="icon icon-pencil"></i> <span>จัดการข้อมูลตำแหน่ง</span></a></li>
+    <li><a href="{{ url('/dep') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลฝ่าย</span></a></li>
+    <li><a href="{{ url('/pos') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลตำแหน่ง</span></a></li>
   </ul>    
 </div>
 

@@ -1,16 +1,25 @@
-@extends('layouts/main')
-@section('title')
-ระบบลางานออนไลน์
+@extends('layouts.tpm')
+
+@section('css')
+
 @endsection
+
+@section('content-header')
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
+            <i class="icon-book"></i> จัดการข้อมูลพนักงาน</a>
+        <a href="#">แบบฟอร์มลางานของพนักงาน</a>
+    </div>
+</div> 
+@endsection
+
 @section('content')
 	<div class="panel panel-primary div1">
-		<div class="panel-heading">
-				แบบฟอร์มลางานของพนักงาน
-		</div>
     {{ Form::open(['method' => 'post','route' =>['leave.store']]) }}
-        <div class="wrapper">
+        <div class="wrapper f_th1">
             <div class="element">
-                <h2>เลือกชื่อพนักงาน</h2>
+                <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
@@ -21,51 +30,34 @@
                 </div>
             </div>
             <div class="element">
-                <h2>ประเภทการลา</h2>
+                <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-crimson ui-medium ui-animation-flip round">
-                        <input type="radio" id="type_leave" name="type_leave" value="1">
-                        <span class="ui-custom">
-                            <span class="ui-checked"><i class="fas fa-user-md"></i></span>
-                            <span class="ui-unchecked" style="color: #CCC;"><i class="fas fa-user-md"></i></span>
-                        </span>
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        {{ form::radio('approved','1') }}<span data-checked="&#10004;" />
                     </div>
-                    <label for="Notes">ลาคลอด</label>
+                    <label for="Karim2">ลาคลอด</label>
                 </div>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-crimson ui-medium ui-animation-rotate round">
-                        <input type="radio" id="type_leave" name="type_leave" value="2">
-                        <span class="ui-custom">
-                            <span class="ui-checked"><i class="fas fa-procedures"></i></span>
-                            <span class="ui-unchecked" style="color: #CCC;"><i class="fas fa-procedures"></i></span>
-                        </span>
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        {{ form::radio('approved','2') }}<span data-checked="&#10004;" />
                     </div>
-                    <label for="doctor">ลาป่วย</label>
+                    <label for="Ayaan2">ลาป่วย</label>
                 </div>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-crimson ui-medium ui-animation-zoom round">
-                        <input type="radio" id="type_leave" name="type_leave" value="3">
-                        <span class="ui-custom">
-                            <span class="ui-checked"><i class="fas fa-user-lock"></i></span>
-                            <span class="ui-unchecked" style="color: #CCC;"><i class="fas fa-user-lock"></i></span>
-                        </span>
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        {{ form::radio('approved','3') }}<span data-checked="&#10004;" />
                     </div>
-                    <label for="stethoscope">ลากิจ</label>
+                    <label for="Zoya2">ลากิจ</label>
                 </div>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-crimson ui-medium ui-animation-zoom round">
-                        <input type="radio" id="type_leave" name="type_leave" value="4">
-                        <span class="ui-custom">
-                            <span class="ui-checked"><i class="fas fa-user-tie"></i></span>
-                            <span class="ui-unchecked" style="color: #CCC;"><i class="fas fa-user-tie"></i></span>
-                        </span>
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        {{ form::radio('approved','4') }}<span data-checked="&#10004;" />
                     </div>
-                    <label for="stethoscope">ลากิจ-ราชการ</label>
+                    <label for="Seema2">ลากิจ-ราชการ</label>
                 </div>
             </div>
-
             <div class="element">
-                <h2>วันที่ยื่น</h2>
+                <h2>*วันที่ยื่น</h2>
                 <div class="form-group">
                     <div class='input-group'>
                         {{ form::date('date_leave','', ['class' => 'form-control']) }}
@@ -83,31 +75,17 @@
                 <h2 class="h2">วันที่ลา</h2>
                 <div class="row">
 
-                    <div class="col-xs-1">
-                       <p class="font1">เริ่มต้น</p>
-                    </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-12">
+                       <strong class="font1">*เริ่มต้น</strong>
                         <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{ $now1 }}T08:30" class="form-control" required>
-                    </div>
-                    <div class="col-xs-2">
-                       <div class="input-group-addon">ถึง</div>
-                    </div>
-                    <div class="col-xs-1">
-                       <p class="font1">สิ้นสุด</p>
-                    </div>
-                    <div class="col-xs-4">
+                        <strong>-  ถึง  -</strong>
+                        <strong class="font1">*สิ้นสุด</strong>
                         <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
                     </div>
                 </div>
-								<div class="alert alert-danger day">
-								  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
-								</div>
-                <!-- <h2 class="h2">ชั่วโมง</h2>
-                <div class="row">
-                    <div class="col-md-3 col-md-offset-4">
-                       <span class="font1">เวลา : </span><input type="time" id="myTime">
-                    </div>
-                </div> -->
+				<div class="alert alert-danger day">
+				  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
+				</div>
             </div>
             <div class="element">
                 <h2>หลักฐานการลา</h2>
@@ -137,7 +115,7 @@
                 </div>
             </div>
             <div class="element">
-                <h2>อนุมัติโดย</h2>
+                <h2>*อนุมัติโดย</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
                         {{ form::radio('approved','1') }}<span data-checked="&#10004;" />
@@ -164,13 +142,18 @@
                 </div>
             </div>
         </div>
-    <div class="panel-body">
+    <div class="panel-body patding">
         <div class="row">
             <div class="col-xs-5">
-                {{ form::submit('บันทึกคำร้อง',['class' => 'btn btn-primary'] ) }}
+                {{ form::submit('บันทึกคำร้อง',['class' => 'btn btn-primary b1'] ) }}
             </div>
         </div>
     </div>
 	{{ Form::close() }}
 </div>
+
+@endsection
+
+@section('js')
+
 @endsection
