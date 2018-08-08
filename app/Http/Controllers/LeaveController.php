@@ -78,15 +78,15 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
             'id_per' => 'required|max:100',
             'type_leave' => 'required|max:100',
-            'date_leave' => 'required|max:100',
+            'date_leave' => 'required|date_format:Y-m-d',
             'nstart_day' => 'required|max:100',
             'nend_day' => 'required|max:100',
             'approved' => 'required|max:100'
         ]);
-
         $now = new Carbon();
         $now1 = Carbon::today()->toDateString();
 

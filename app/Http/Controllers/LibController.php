@@ -96,9 +96,9 @@ class LibController extends Controller
         $this->validate($request,[
             'id_employ' => 'required|max:100',
             'surname' => 'required|max:100',
-            'age' => 'required|max:100',
+            'age' => 'required|date_format:Y-m-d',
             'position' => 'required|max:100',
-            'job_start' => 'required|max:100',
+            'job_start' => 'required|date_format:Y-m-d',
             'user_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'phone' => 'required|regex:/[0-9]/',
         ]);
@@ -203,8 +203,8 @@ class LibController extends Controller
             'surname' => 'required|max:100',
             'nickname' => 'required|max:100',
             'id_pos' => 'required|max:100',
-            'job_start' => 'required|max:100',
-            'age' => 'required|max:100'
+            'job_start' => 'required|date_format:Y-m-d',
+            'age' => 'required|date_format:Y-m-d'
       ]);
 
       if ($request->hasFile('user_photo')){

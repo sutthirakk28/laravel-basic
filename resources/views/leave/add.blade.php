@@ -18,6 +18,15 @@
 	<div class="panel panel-primary div1">
     {{ Form::open(['method' => 'post','route' =>['leave.store']]) }}
         <div class="wrapper f_th1">
+            @if(count($errors) > 0 )
+                <div class=" alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="element">
                 <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
@@ -33,25 +42,25 @@
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','1') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="1" required><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาคลอด</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','2') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="2" ><span data-checked="&#10004;" />
                     </div>
                     <label for="Ayaan2">ลาป่วย</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','3') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="3" ><span data-checked="&#10004;" />
                     </div>
                     <label for="Zoya2">ลากิจ</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','4') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="4" ><span data-checked="&#10004;" />
                     </div>
                     <label for="Seema2">ลากิจ-ราชการ</label>
                 </div>
@@ -60,7 +69,7 @@
                 <h2>*วันที่ยื่น</h2>
                 <div class="form-group">
                     <div class='input-group'>
-                        {{ form::date('date_leave','', ['class' => 'form-control']) }}
+                        {{ form::date('date_leave','',array('required' => 'required','class' => 'form-control')) }}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -118,25 +127,25 @@
                 <h2>*อนุมัติโดย</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','1') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="approved" value="1" required><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ประธานบริษัท</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','2') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="approved" value="2"><span data-checked="&#10004;" />
                     </div>
                     <label for="Ayaan2">กรรมการผู้จัดการ</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','3') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="approved" value="3"><span data-checked="&#10004;" />
                     </div>
                     <label for="Zoya2">เจ้าหน้าที่ฝ่ายบุคคล</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        {{ form::radio('approved','4') }}<span data-checked="&#10004;" />
+                        <input type="radio" name="approved" value="4"><span data-checked="&#10004;" />
                     </div>
                     <label for="Seema2">หัวหน้าฝ่าย</label>
                 </div>

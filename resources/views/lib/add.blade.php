@@ -31,7 +31,15 @@
 				</div>
 				<div class="widget-content nopadding f_th3">
 					{{ Form::open(array('url' => url('lib'),'files' => 'true','class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate')) }}
-					
+						@if(count($errors) > 0 )
+			                <div class=" alert alert-danger">
+			                    <ul>
+			                        @foreach($errors->all() as $error)
+			                            <li>{{ $error }}</li>
+			                        @endforeach
+			                    </ul>
+			                </div>
+			            @endif
 		                <div class="control-group">
 		                    <label class="control-label">*รหัสพนักงาน : </label>
 		                    <div class="controls">
