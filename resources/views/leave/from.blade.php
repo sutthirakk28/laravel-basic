@@ -143,183 +143,84 @@
             </div>
             <div class="element">
                 <h2>หลักฐานการลา</h2>
-                @php
-                  $proof_leave=explode(",",$l['proof_leave']);
-                @endphp
+	        @php
+	          $proof_leave=explode(",",$l['proof_leave']);
+	          $t1_1=0; $t1_2=0; $t2_1=0; $t2_2=0; $t3_1=0; $t3_2=0; $t4_1=0; $t4_2=0;
+	        @endphp
+            @foreach($proof_leave as $proof)
+            	@if($proof == 1) @php $t1_1 = $proof; @endphp @else @php $t1_2 = $proof; @endphp @endif
+            	@if($proof == 2) @php $t2_1 = $proof; @endphp @else @php $t2_2 = $proof; @endphp @endif
+            	@if($proof == 3) @php $t3_1 = $proof; @endphp @else @php $t3_2 = $proof; @endphp @endif
+            	@if($proof == 4) @php $t4_1 = $proof; @endphp @else @php $t4_2 = $proof; @endphp @endif
+            @endforeach	               
 
-                <!-- @foreach($proof_leave as $p)
-	                @if($p == 1)
-	                <div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Karim">ใบรับรองแพทย์</label>
-	                </div>
-		            @elseif($p == 2)
-	                <div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Ayaan">ใบติดต่อราชการ</label>
-	                </div>
-		            @elseif($p == 3)
-	            	<div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Zoya">ตารางสอบ/เรียน</label>
-	                </div>
-		            @elseif($p == 4)
-	            	<div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Seema">หลักฐานอื่นๆ</label>
-	                </div>
-		            @endif
-		        @endforeach -->
-
-
-		        @for($leave=1; $leave<=4; $leave++)
-		        	
-		        		@if($leave == 1)
-		        		@foreach($proof_leave as $p)
-		        			@if($p == 1)
-		        			<div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" checked><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Karim">ใบรับรองแพทย์</label>
-			                </div>
-			                @elseif($p != 2 &&  $p != 3 && $p != 4)
-			                <div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" ><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Karim">ใบรับรองแพทย์</label>
-			                </div>
-			                @endif
-			            @endforeach
-		        		@endif
-
-		        		@if($leave == 2)
-		        		@foreach($proof_leave as $p)
-		        			@if($p == 2)
-		        			<div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Ayaan">ใบติดต่อราชการ</label>
-			                </div>			                
-			                @elseif($p != 1 &&  $p != 3 && $p != 4)
-			                <div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2"><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Ayaan">ใบติดต่อราชการ</label>
-			                </div>
-			                @endif
-			            @endforeach
-		        		@endif
-
-		        		@if($leave == 3)
-		        		@foreach($proof_leave as $p)
-		        			@if($p == 3)
-		        			<div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Zoya">ตารางสอบ/เรียน</label>
-			                </div>
-			                @else
-			               	<div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3"><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Zoya">ตารางสอบ/เรียน</label>
-			                </div>
-			                @break;
-		        			@endif
-		        		@endforeach		        			
-		        		@endif
-
-		        		@if($leave == 4)
-		        		@foreach($proof_leave as $p)
-		        			@if($p == 4)
-		        			<div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Seema">หลักฐานอื่นๆ</label>
-			                </div>
-			                @elseif($p != 1 &&  $p != 2 && $p != 3)
-			                <div class="el-child-inline">
-			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-			                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4"><span data-checked="&#10004;" />
-			                    </div>
-			                    <label for="Seema">หลักฐานอื่นๆ</label>
-			                </div>
-			                @endif
-			            @endforeach	
-		        		@endif		        	
-
-		        @endfor
-		        <!-- @foreach($proof_leave as $p)
-		            @if($p == 2)
-	                <div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Ayaan">ใบติดต่อราชการ</label>
-	                </div>
-		            @else
-		                <div class="el-child-inline">
-		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-		                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2"><span data-checked="&#10004;" />
-		                    </div>
-		                    <label for="Ayaan">ใบติดต่อราชการ</label>
-		                </div>
-		            @endif
-		        @endforeach
-
-		        @foreach($proof_leave as $p)
-		            @if($p == 3)
-	                <div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Zoya">ตารางสอบ/เรียน</label>
-	                </div>
-		            @else
-		                <div class="el-child-inline">
-		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-		                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3"><span data-checked="&#10004;" />
-		                    </div>
-		                    <label for="Zoya">ตารางสอบ/เรียน</label>
-		                </div>
-		            @endif
-		        @endforeach
-
-		        @foreach($proof_leave as $p)
-		            @if($p == 4)
-	                <div class="el-child-inline">
-	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-	                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
-	                    </div>
-	                    <label for="Seema">หลักฐานอื่นๆ</label>
-	                </div>
-		            @else
-		                <div class="el-child-inline">
-		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
-		                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4"><span data-checked="&#10004;" />
-		                    </div>
-		                    <label for="Seema">หลักฐานอื่นๆ</label>
-		                </div>
-		            @endif
-		        @endforeach -->
-
-		                    
+                
+            @if($t1_1 == 1)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" checked><span data-checked="&#10004;" />
+                </div>
+                <label for="Karim">ใบรับรองแพทย์</label>
             </div>
+            @elseif($t1_1 == 0)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1"><span data-checked="&#10004;" />
+                </div>
+                <label for="Karim">ใบรับรองแพทย์</label>
+            </div>
+            @endif
+
+            @if($t2_1 == 2)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
+                </div>
+                <label for="Ayaan">ใบติดต่อราชการ</label>
+            </div>
+            @elseif($t2_1 == 0)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2"><span data-checked="&#10004;" />
+                </div>
+                <label for="Ayaan">ใบติดต่อราชการ</label>
+            </div>
+            @endif
+
+            @if($t3_1 == 3)
+        	<div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
+                </div>
+                <label for="Zoya">ตารางสอบ/เรียน</label>
+            </div>
+            @elseif($t3_1 == 0)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3"><span data-checked="&#10004;" />
+                </div>
+                <label for="Zoya">ตารางสอบ/เรียน</label>
+            </div>
+            @endif
+
+            @if($t4_1== 4)
+        	<div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
+                </div>
+                <label for="Seema">หลักฐานอื่นๆ</label>
+            </div>
+            @elseif($t4_1 == 0)
+            <div class="el-child-inline">
+                <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+                    <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4"><span data-checked="&#10004;" />
+                </div>
+                <label for="Seema">หลักฐานอื่นๆ</label>
+            </div>
+            @endif
+
+		   </div>
+
             <div class="element">
                 <h2>*อนุมัติโดย</h2>
                 @if($l['approved'] == '1')
