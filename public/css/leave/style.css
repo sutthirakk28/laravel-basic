@@ -424,8 +424,13 @@ h5.f_th1 {
 }
 .odd {
     font-family: Maitree;
-  text-align: center;
+    text-align: center;
 }
+.even {
+    font-family: Maitree;
+    text-align: center;
+}
+
 [class^="icon-"], [class*=" icon-"] {
   background-image: url('../../images/img/glyphicons-halflings.png');
 }
@@ -472,4 +477,11 @@ input.btn.btn-primary.b1 {
     font-family: Taviraj;
     font-size: 15px;
     font-weight: 600;
+}
+td.reason {
+    width: 5%;
+    text-align: left;
+}
+td.img {
+    width: 50px;
 }

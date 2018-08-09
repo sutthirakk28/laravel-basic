@@ -38,9 +38,10 @@ class LeaveController extends Controller
             ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
             ->orderBy('leaves.date_leave', 'DESC')
             ->get();
-        $result = json_decode($leave, true);
+        
+        $result = json_decode($leave, true);        
         $data = array(
-            'leave' => $result,
+            'leave' => $result,            
             'style' => $aCss,
             'script'=> $aScript,
         );
@@ -144,14 +145,24 @@ class LeaveController extends Controller
     {
         if($id !== ''){
             $aCss=array('css/leave/style.css');
-            $dep = DB::table('deps')
-                ->select('deps.*')
-                ->where('id_dep','=',$id)
+            $aScript=array('js/leave/main.js');
+            $leave = DB::table('leaves')
+                ->join('libs', 'libs.id', '=', 'leaves.id_per')
+                ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
+                ->orderBy('leaves.date_leave', 'DESC')
+                ->where('leaves.id','=',$id)
                 ->get();
-            $result = json_decode($dep, true);
+            $lib = DB::table('libs')
+                ->select('id', 'surname','nickname')
+                ->get();
+            
+            $result = json_decode($leave, true);
+            $result2 = json_decode($lib, true);
             $data = array(
-                'dep' => $result,
-                'style' => $aCss
+                'leave' => $result,
+                'lib' => $result2,
+                'style' => $aCss,                
+                'script'=> $aScript
             );
             return view('leave.from',$data);
         }

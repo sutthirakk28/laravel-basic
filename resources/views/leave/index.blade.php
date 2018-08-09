@@ -1,7 +1,18 @@
-@extends('layouts/main')
-@section('title')
-ข้อมูลประวัติการลา
+@extends('layouts.tpm')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
 @endsection
+
+@section('content-header')
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
+"></i> ประวัติการลางานออนไลน์</a></div>
+  </div>  
+@endsection
+
 @section('content')
 
 @php
@@ -59,158 +70,208 @@
       return $timeArr;
     }
   @endphp
-	<h1 class="elegantshadow">ประวัติการลา</h1>
 	@if(Session::has('masupdate'))
-		<div class="alert alert-success alert-dismissible fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{{ Session::get('masupdate') }}
-		</div>
-	@endif
-	@if(Session::has('masdelete'))
-		<div class="alert alert-danger alert-dismissible fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{{ Session::get('masdelete') }}
-		</div>
-	@endif
+    <div id="gritter-notify">
+    <div class="normal"></div>
+  </div>
 
-	<table id="leave" class="table table-striped table-bordered nowrap" style="width:100%">
-		<thead class="thead">
-			<tr>
-        <th width="5">ID</th>
-				<th width="100">วันที่ยื่น</th>
-				<th >รูป</th>
-        <th >ชื่อ-นามสกุล</th>
-        <th >ประเภท</th>
-				<th >วันที่ลา</th>
-        <th >จำนวน</th>
-        <th >เหตุผล</th>
-        <th >หลักฐานการลา</th>
-        <th >อนุมัติโดย</th>
-				<th width="300">Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach ($leave as $l)
-			<tr >
-        <td >{{ $l['id']}}</td>
-				<td class="center">{{ thai_date(strtotime($l['date_leave'])) }}</td>
-				<td>
-					{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
-				</td>
-        <td>{{ $l['surname'].'/'.$l['nickname']}}</td>
-        <td>
-         @if ($l['type_leave'] == 1)
-           <span class="yellow">ลาคลอด</span>
-         @elseif ($l['type_leave'] == 2)
-           <span class="red">ลาป่วย</span>
-         @elseif ($l['type_leave'] == 3)
-           <span class="blue">ลากิจ</span>
-         @elseif ($l['type_leave'] == 4)
-           <span class="black">ลากิจ-ราชการ</span>
-         @else
-           อื่นๆ
-         @endif
-        </td>
-				<td class="center">
-          @php
-            $nstart_day = explode("T",$l['nstart_day']);
-            $nend_day = explode("T",$l['nend_day']);
-            $start_day_year = $nstart_day[0];
-            $start_day_times = $nstart_day[1];
-            $end_day_year = $nend_day[0];
-            $end_day_times = $nend_day[1];
-          @endphp
+  @endif
+  @if(Session::has('masdelete'))    
+  <div id="gritter-notify">
+    <div class="sticky"></div>
+  </div>
+  @endif
 
-          @if ($start_day_year == $end_day_year)
-            {{ thai_date(strtotime($start_day_year))}}
-          {{ '('.$start_day_times.'-'.$end_day_times.')'}}
-          @else
-            {{ thai_date(strtotime($start_day_year)).'('.$start_day_times.')' }}<br>
-  					ถึง<br>
-  					{{ thai_date(strtotime($end_day_year)).'('.$end_day_times.')' }}
-          @endif
-				</td>
-        <td class="center">
-          @php
-            $a1=$start_day_year.' '.$start_day_times;
-            $a2=$end_day_year.' '.$end_day_times;
 
-            $stop_date = date('Y-m-d', strtotime($end_day_year . ' +1 day'));
-            $num_day = dateDiv($start_day_year,$stop_date);
+  <div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget-box">
+        <div class="widget-title">
+           <span class="icon"><i class="icon-th"></i></span> 
+          <h5 class="f_th1">ประวัติการลางาน</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered data-table">
+            <thead>
+              <tr>
+                <th width="5">ID</th>
+                <th width="80">วันที่ยื่น</th>
+                <th >รูป</th>
+                <th >ชื่อ-นามสกุล</th>
+                <th width="80">ประเภท</th>
+                <th >วันที่ลา</th>
+                <th width="50">จำนวน</th>
+                <!-- <th >เหตุผล</th> -->
+                <th >หลักฐานการลา</th>
+                <th >อนุมัติโดย</th>
+                <th width="200">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($leave as $l)
+              <tr >                
+                <td >{{ $l['id']}}</td>
+                <td class="center">{{ thai_date(strtotime($l['date_leave'])) }}</td>
+                <td class="img">
+                  {{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
+                </td>
+                <td>{{ $l['surname'].'/'.$l['nickname']}}</td>
+                <td>
+                 @if ($l['type_leave'] == 1)
+                   <span class="yellow">ลาคลอด</span>
+                 @elseif ($l['type_leave'] == 2)
+                   <span class="red">ลาป่วย</span>
+                 @elseif ($l['type_leave'] == 3)
+                   <span class="blue">ลากิจ</span>
+                 @elseif ($l['type_leave'] == 4)
+                   <span class="black">ลากิจ-ราชการ</span>
+                 @else
+                   อื่นๆ
+                 @endif
+                </td>
+                <td class="center">
+                @php
+                  $nstart_day = explode("T",$l['nstart_day']);
+                  $nend_day = explode("T",$l['nend_day']);
+                  $start_day_year = $nstart_day[0];
+                  $start_day_times = $nstart_day[1];
+                  $end_day_year = $nend_day[0];
+                  $end_day_times = $nend_day[1];
+                @endphp
 
-            $time=dateDiv($a1,$a2);
-          @endphp
+                @if ($start_day_year == $end_day_year)
+                  {{ thai_date(strtotime($start_day_year))}}
+                {!! nl2br(e('('.$start_day_times.'-'.$end_day_times.')')) !!}
+                @else
+                  {{ thai_date(strtotime($start_day_year)).'('.$start_day_times.')' }}<br>
+                  ถึง<br>
+                  {{ thai_date(strtotime($end_day_year)).'('.$end_day_times.')' }}
+                @endif
+              </td>
+              <td class="center">
+                @php
+                  $a1=$start_day_year.' '.$start_day_times;
+                  $a2=$end_day_year.' '.$end_day_times;
 
-          @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                  $stop_date = date('Y-m-d', strtotime($end_day_year . ' +1 day'));
+                  $num_day = dateDiv($start_day_year,$stop_date);
 
-            {{ $num_day['D'].' วัน ' }}
-          @else
-            @if($time['D'] == '0')
-              @if($time['M'] == '0')
-                {{  $time['H'].' ชั่วโมง ' }}
-              @else                
-                {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
-              @endif
-            @else
-              @if($time['M'] == '0')
-                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}
-              @else
-                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
-              @endif              
-            @endif            
-          @endif         
-                   
-        </td>
-        <td>
-          {{ $l['reason_leave'] }}
-        </td>
-        <td>
-          @php
-            $proof_leave=explode(",",$l['proof_leave']);
-          @endphp
-          @foreach($proof_leave as $p)
-            @if($p == 1)
-              ใบรับรองแพทย์
-            @endif
-            @if($p == 2)
-              ใบติดต่อราชการ
-            @endif
-            @if($p == 3)
-              ตารางสอบ/เรียน
-            @endif
-            @if($p == 4)
-              หลักฐานอื่นๆ
-            @endif
-            @if($p=='')
-              ไม่มีหลักฐาน
-            @endif
-          @endforeach
-        </td>
-        <td>
-          @if ($l['approved'] == 1)
-            ประธานบริษัท
-          @elseif ($l['approved'] == 2)
-            กรรมการผู้จัดการ
-          @elseif ($l['approved'] == 3)
-            เจ้าหน้าที่ฝ่ายบุคคล
-          @elseif ($l['approved'] == 4)
-            หัวหน้าฝ่าย
-          @else
-            อื่นๆ
-          @endif
-        </td>
+                  $time=dateDiv($a1,$a2);
+                @endphp
 
-				<td class="center">
-					{{ Form::open(['route' => ['leave.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
-					<input type="hidden" name="_method" value="delete"/>
-					{{ Html::link('leave/create','Add', array(	'class' => 'btn btn-primary thead')) }}
-					{{ Html::link('leave/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
-					{{ Html::link('leave/'.$id=$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}
-					{{ Form::submit('Delete',array('class' => 'btn btn-danger','onclick'=>"return confirm('คำเตือน! เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ ควรปรับเป็นการแก้ไขดีกว่า ?')" )) }}
-					{{ Form::close()}}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
+                @if($start_day_times == '08:30' && $end_day_times == '17:30')
+
+                  {{ $num_day['D'].' วัน ' }}
+                @else
+                  @if($time['D'] == '0')
+                    @if($time['M'] == '0')
+                      {{  $time['H'].' ชั่วโมง ' }}
+                    @else                
+                      {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+                    @endif
+                  @else
+                    @if($time['M'] == '0')
+                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}
+                    @else
+                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+                    @endif              
+                  @endif            
+                @endif         
+                         
+              </td>
+              <!-- <td class="reason">
+                {{ $l['reason_leave'] }}
+              </td> -->
+              <td>
+                <ul>                  
+                @php
+                  $proof_leave=explode(",",$l['proof_leave']);
+                @endphp
+                @foreach($proof_leave as $p)
+                  @if($p == 1)
+                    <li>ใบรับรองแพทย์</li>
+                  @endif
+                  @if($p == 2)
+                    <li>ใบติดต่อราชการ</li>
+                  @endif
+                  @if($p == 3)
+                    <li>ตารางสอบ/เรียน</li>
+                  @endif
+                  @if($p == 4)
+                    <li>หลักฐานอื่นๆ</li>
+                  @endif
+                  @if($p=='')
+                    <li>ไม่มีหลักฐาน</li>
+                  @endif
+                @endforeach
+                </ul>
+              </td>
+              <td>
+                @if ($l['approved'] == 1)
+                  ประธานบริษัท
+                @elseif ($l['approved'] == 2)
+                  กรรมการผู้จัดการ
+                @elseif ($l['approved'] == 3)
+                  เจ้าหน้าที่ฝ่ายบุคคล
+                @elseif ($l['approved'] == 4)
+                  หัวหน้าฝ่าย
+                @else
+                  อื่นๆ
+                @endif
+              </td>
+              <td class="center">                                        
+                {{ Html::link('leave/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
+                {{ Html::link('leave/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
+                <a href="#myAlert" data-toggle="modal" data-id="{{$l['id']}}" class="addDialog btn btn-danger">Delete</a>
+                
+                <!--modal delete -->
+                <div id="myAlert" class="modal hide">
+                  <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">×</button>
+                    <h3><i class="material-icons" style="font-size:15px;color:red">error_outline</i> คำเตือน! </h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>เมื่อลบข้อมูลพนักงานอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
+                  </div>
+                  <div class="modal-footer">
+                    {{ Form::open(['route' => ['leave.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="hidden" name="depId" value="" id="depId"> 
+                    {{ Form::submit('Confirm',array('class' => 'btn btn-primary')) }}
+                    <a data-dismiss="modal" class="btn" href="#">Cancel</a> 
+                    {{ Form::close()}} 
+                    
+                  </div>
+                </div>
+                <!--end modal delete -->
+              </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>       
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      {{ Html::link('leave/create','Add', array(  'class' => 'btn btn-primary thead')) }}
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.dataTables_desc.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.tables.js') }}"></script>
+
+<script src="{{ asset('js/main/jquery.gritter.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.interface.js') }}"></script>
+<script src="{{ asset('js/main/maruti.popover.js') }}"></script>
 @endsection

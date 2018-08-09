@@ -1,58 +1,404 @@
-@extends('layouts/main')
-@section('title')
-เพิ่มข้อมูลฝ่าย
-@endsection
-@section('content')
+@extends('layouts.tpm')
 
-@foreach ($dep as $deps)
+@section('css')
+
+@endsection
+
+@section('content-header')
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
+            <i class="icon-book"></i> ประวัติการลางานออนไลน์</a>
+        <a href="#">แบบฟอร์มอก้ไขลางานของพนักงาน</a>
+    </div>
+</div> 
+@endsection
+
+@section('content')
+	@foreach($leave as $l)
 	<div class="panel panel-primary div1">
-		<div class="panel-heading">
-				แบบฟอร์มแก้ไขข้อมูลฝ่าย
-		</div>
-				{{ Form::open(['method' => 'put','route' =>['dep.update', $deps['id_dep'] ]]) }}
-		 <div class="panel-body">
-		 	@if(count($errors) > 0 )
-				<div class=" alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
+    {{ Form::open(['method' => 'put','route' =>['leave.update', $l['id']]]) }}
+        <div class="wrapper f_th1">
+            @if(count($errors) > 0 )
+                <div class=" alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="element">
+                <h2>*เลือกชื่อพนักงาน</h2>
+                <div class="el-child-inline width">
+                    <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>                
+	                    @foreach($lib as $libs)
+						  	@if($libs['id'] == $l['id_per'])
+						  		<option value="{{ $libs['id'] }}" selected>{{ $libs['surname'] }}/{{ $libs['nickname'] }}</option>
+						  	@else
+						  		<option value="{{ $libs['id'] }}">{{ $libs['surname'] }}/{{ $libs['nickname'] }}</option>
+						  	@endif					    
+					  	@endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="element">
+                <h2>*ประเภทการลา</h2>                
+                @if($l['type_leave'] == 1)
+                	<div class="el-child-inline">
+                		<div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                			<input type="radio" name="type_leave" value="1" checked>
+                			<span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Karim2">ลาคลอด</label>
+	                </div>
+                @else
+                	<div class="el-child-inline">
+                		<div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                			<input type="radio" name="type_leave" value="1">
+                			<span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Karim2">ลาคลอด</label>
+	                </div>
+                @endif
+
+                @if($l['type_leave'] == 2)
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="2" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Ayaan2">ลาป่วย</label>
+	                </div>
+                @else
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="2" ><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Ayaan2">ลาป่วย</label>
+	                </div>
+                @endif
+
+                @if($l['type_leave'] == 3)
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="3" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Zoya2">ลากิจ</label>
+	                </div>
+                @else
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="3" ><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Zoya2">ลากิจ</label>
+	                </div>
+                @endif
+
+                @if($l['type_leave'] == 4)
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="4" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Seema2">ลากิจ-ราชการ</label>
+	                </div>
+                @else
+                	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+	                        <input type="radio" name="type_leave" value="4" ><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Seema2">ลากิจ-ราชการ</label>
+	                </div>
+                @endif                       
+            </div>
+            <div class="element">
+                <h2>*วันที่ยื่น</h2>
+                <div class="form-group">
+                    <div class='input-group'>
+                        {{ form::date('date_leave',$l['date_leave'],array('required' => 'required','class' => 'form-control')) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="element">
+                <h2>เหตุผลการลา</h2>
+                {{ form::textarea('reason_leave',$l['reason_leave'], ['class' => 'form-control']) }}
+            </div>
+            <div class="element">
+                <h2 class="h2">วันที่ลา</h2>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                       <strong class="font1">*เริ่มต้น</strong>
+                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{$l['nstart_day']}}" class="form-control" required>
+                        <strong>-  ถึง  -</strong>
+                        <strong class="font1">*สิ้นสุด</strong>
+                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{$l['nend_day']}}" class="form-control" required>
+                    </div>
+                </div>
+				<div class="alert alert-danger day">
+				  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
 				</div>
-		 	@endif
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('id_dep','รหัสฝ่าย') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('id_dep', $deps['id_dep'], ['class' => 'form-control', 'readonly' => 'true'] ) }}
-				</div>
-			</div>
-		</div>
-		<div class="panel-body">
-			
-			<div class="row">
-				<div class="col-xs-2">
-					{{ form::label('name_dep','ชื่อฝ่าย') }}
-				</div>
-				<div class="col-xs-5">
-						{{ form::text('name_dep',$deps['name_dep'], ['class' => 'form-control']) }}
-				</div>
-			</div>
-		</div>		
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-5">
-					{{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
-				</div>
-			</div>
-		</div> 
+            </div>
+            <div class="element">
+                <h2>หลักฐานการลา</h2>
+                @php
+                  $proof_leave=explode(",",$l['proof_leave']);
+                @endphp
+
+                <!-- @foreach($proof_leave as $p)
+	                @if($p == 1)
+	                <div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Karim">ใบรับรองแพทย์</label>
+	                </div>
+		            @elseif($p == 2)
+	                <div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Ayaan">ใบติดต่อราชการ</label>
+	                </div>
+		            @elseif($p == 3)
+	            	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Zoya">ตารางสอบ/เรียน</label>
+	                </div>
+		            @elseif($p == 4)
+	            	<div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Seema">หลักฐานอื่นๆ</label>
+	                </div>
+		            @endif
+		        @endforeach -->
+
+
+		        @for($leave=1; $leave<=4; $leave++)
+		        	
+		        		@if($leave == 1)
+		        		@foreach($proof_leave as $p)
+		        			@if($p == 1)
+		        			<div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" checked><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Karim">ใบรับรองแพทย์</label>
+			                </div>
+			                @elseif($p != 2 &&  $p != 3 && $p != 4)
+			                <div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave1" name="proof_leave[]" value="1" ><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Karim">ใบรับรองแพทย์</label>
+			                </div>
+			                @endif
+			            @endforeach
+		        		@endif
+
+		        		@if($leave == 2)
+		        		@foreach($proof_leave as $p)
+		        			@if($p == 2)
+		        			<div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Ayaan">ใบติดต่อราชการ</label>
+			                </div>			                
+			                @elseif($p != 1 &&  $p != 3 && $p != 4)
+			                <div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2"><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Ayaan">ใบติดต่อราชการ</label>
+			                </div>
+			                @endif
+			            @endforeach
+		        		@endif
+
+		        		@if($leave == 3)
+		        		@foreach($proof_leave as $p)
+		        			@if($p == 3)
+		        			<div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Zoya">ตารางสอบ/เรียน</label>
+			                </div>
+			                @else
+			               	<div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3"><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Zoya">ตารางสอบ/เรียน</label>
+			                </div>
+			                @break;
+		        			@endif
+		        		@endforeach		        			
+		        		@endif
+
+		        		@if($leave == 4)
+		        		@foreach($proof_leave as $p)
+		        			@if($p == 4)
+		        			<div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Seema">หลักฐานอื่นๆ</label>
+			                </div>
+			                @elseif($p != 1 &&  $p != 2 && $p != 3)
+			                <div class="el-child-inline">
+			                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+			                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4"><span data-checked="&#10004;" />
+			                    </div>
+			                    <label for="Seema">หลักฐานอื่นๆ</label>
+			                </div>
+			                @endif
+			            @endforeach	
+		        		@endif		        	
+
+		        @endfor
+		        <!-- @foreach($proof_leave as $p)
+		            @if($p == 2)
+	                <div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Ayaan">ใบติดต่อราชการ</label>
+	                </div>
+		            @else
+		                <div class="el-child-inline">
+		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+		                        <input type="checkbox" id="proof_leave2" name="proof_leave[]" value="2"><span data-checked="&#10004;" />
+		                    </div>
+		                    <label for="Ayaan">ใบติดต่อราชการ</label>
+		                </div>
+		            @endif
+		        @endforeach
+
+		        @foreach($proof_leave as $p)
+		            @if($p == 3)
+	                <div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Zoya">ตารางสอบ/เรียน</label>
+	                </div>
+		            @else
+		                <div class="el-child-inline">
+		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+		                        <input type="checkbox" id="proof_leave3" name="proof_leave[]" value="3"><span data-checked="&#10004;" />
+		                    </div>
+		                    <label for="Zoya">ตารางสอบ/เรียน</label>
+		                </div>
+		            @endif
+		        @endforeach
+
+		        @foreach($proof_leave as $p)
+		            @if($p == 4)
+	                <div class="el-child-inline">
+	                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+	                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4" checked><span data-checked="&#10004;" />
+	                    </div>
+	                    <label for="Seema">หลักฐานอื่นๆ</label>
+	                </div>
+		            @else
+		                <div class="el-child-inline">
+		                    <div class="ui-checkbox bg-limegreen ui-small ui-animation-zoom">
+		                        <input type="checkbox" id="proof_leave4" name="proof_leave[]" value="4"><span data-checked="&#10004;" />
+		                    </div>
+		                    <label for="Seema">หลักฐานอื่นๆ</label>
+		                </div>
+		            @endif
+		        @endforeach -->
+
+		                    
+            </div>
+            <div class="element">
+                <h2>*อนุมัติโดย</h2>
+                @if($l['approved'] == '1')
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="1" checked><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Karim2">ประธานบริษัท</label>
+                </div>
+	            @else
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="1" ><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Karim2">ประธานบริษัท</label>
+                </div>
+	            @endif
+
+	            @if($l['approved'] == '2')
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="2" checked><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Ayaan2">กรรมการผู้จัดการ</label>
+                </div>
+	            @else
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="2"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Ayaan2">กรรมการผู้จัดการ</label>
+                </div>
+	            @endif
+
+	            @if($l['approved'] == '3')
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="3" checked><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Zoya2">เจ้าหน้าที่ฝ่ายบุคคล</label>
+                </div>
+	            @else
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="3"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Zoya2">เจ้าหน้าที่ฝ่ายบุคคล</label>
+                </div>
+	            @endif
+
+	            @if($l['approved'] == '4')
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="4" checked><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Seema2">หัวหน้าฝ่าย</label>
+                </div>
+	            @else
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="approved" value="4"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Seema2">หัวหน้าฝ่าย</label>
+                </div>
+	            @endif              
+            </div>
+        </div>
+    <div class="panel-body patding">
+        <div class="row">
+            <div class="col-xs-5">
+                {{ form::submit('แก้ไขคำร้อง',['class' => 'btn btn-primary b1'] ) }}
+            </div>
+        </div>
+    </div>
+	{{ Form::close() }}
 	</div>
-	<div class="row">
-		<div class="col-xs-2">
-			
-		</div>
-		{{ Form::close() }}		
-	</div>
-@endforeach
+	@endforeach
+@endsection
+
+@section('js')
+
 @endsection

@@ -8,7 +8,7 @@
 <div id="content-header">
     <div id="breadcrumb">
         <a href="{{ url('/leave') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
-            <i class="icon-book"></i> จัดการข้อมูลพนักงาน</a>
+            <i class="icon-book"></i> ประวัติการลางานออนไลน์</a>
         <a href="#">แบบฟอร์มลางานของพนักงาน</a>
     </div>
 </div> 
