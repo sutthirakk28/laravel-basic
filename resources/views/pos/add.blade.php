@@ -9,7 +9,7 @@
 <div id="content-header">
 	<div id="breadcrumb">
 		<a href="{{ url('/pos/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
-			<i class="icon-book"></i> จัดการข้อมูลตำแหน่ง</a>
+			<i class="icon-book"></i> ข้อมูลตำแหน่ง</a>
 		<a href="#">เพิ่มข้อมูลตำแหน่ง</a>
 	</div>
 </div> 

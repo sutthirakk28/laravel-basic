@@ -56,7 +56,15 @@ h5.f_th1 {
 }
 img.image {
   width: 50px;
-  height: 50px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+img.image1 {
+  width: 15%;
+  border-radius: 8px;
+  border:1px solid #08abf9;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 tr.odd.gradeX.yellow {
   color: #fbb450;
@@ -72,4 +80,19 @@ tr.odd.gradeX.orenge {
 }
 span.label.label-important2 {
     background-color: cornflowerblue;
+}
+span.label.label-important3 {
+    background-color: green;
+}
+.yellow{
+  color: #f79306;
+}
+.red{
+  color: red;
+}
+.blue{
+  color: #0d86f1;
+}
+.black{
+  color: #121213;
 }

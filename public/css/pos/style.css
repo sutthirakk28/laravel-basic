@@ -54,3 +54,9 @@ h5.f_th1 {
 .controls.select2 {
     width: 244px;
 }
+span.label.label-important2 {
+    background-color: cornflowerblue;
+}
+span.label.label-important3 {
+    background-color: green;
+}

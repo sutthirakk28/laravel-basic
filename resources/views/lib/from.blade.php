@@ -11,7 +11,7 @@
 <div id="content-header">
 	<div id="breadcrumb">
 		<a href="{{ url('/lib/') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
-			<i class="icon-book"></i> จัดการข้อมูลพนักงาน</a>
+			<i class="icon-book"></i> ข้อมูลพนักงาน</a>
 		<a href="#">แก้ไขข้อมูลพนักงาน</a>
 	</div>
 </div> 

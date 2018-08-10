@@ -51,3 +51,9 @@ h5.f_th1 {
 .select2-container .select2-choice div b {
   background: url('../../images/img/select2.png') no-repeat 0 1px;
 }
+span.label.label-important2 {
+    background-color: cornflowerblue;
+}
+span.label.label-important3 {
+    background-color: green;
+}

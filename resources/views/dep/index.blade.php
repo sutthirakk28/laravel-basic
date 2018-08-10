@@ -9,7 +9,7 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> จัดการข้อมูลฝ่าย</a></div>
+"></i> ข้อมูลฝ่าย</a></div>
   </div>  
 @endsection
 
@@ -74,8 +74,22 @@
                 @foreach ($dep as $d)
                 <tr >
                   <td >{{ $d['id_dep'] }}</td>
-                  <td ><span class="dep">{{ $d['name_dep'] }}</span></td>
+                  <td >
+                    <span class="dep">
+                      {{ $d['name_dep'] }}
 
+                      @foreach ($pos as $p)
+                        @if($p['id_dep'] == $d['id_dep'])
+                          <span class="label label-important3"> {{ $p['count_id'] }} ตำแหน่ง </span>                       
+                        @endif
+                      @endforeach
+                      @foreach ($lib as $l)
+                        @if($l['id_dep'] == $d['id_dep'])
+                          <span class="label label-important2"> {{ $l['count_id'] }} คน </span>                         
+                        @endif
+                      @endforeach
+                    </span>
+                  </td>
                   <td class="center">                                        
                     {{ Html::link('dep/'.$d['id_dep'], 'View', array('class' => 'btn btn-success')) }}
                     {{ Html::link('dep/'.$ib=$d['id_dep'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   

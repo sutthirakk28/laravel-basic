@@ -7,9 +7,9 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb">
-        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
-            <i class="icon-book"></i> ประวัติการลางานออนไลน์</a>
-        <a href="#">แบบฟอร์มอก้ไขลางานของพนักงาน</a>
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลการลางาน" class="tip-bottom">
+            <i class="icon-book"></i> ข้อมูลการลางาน</a>
+        <a href="#">แบบฟอร์มแก้ไขลางานของพนักงาน</a>
     </div>
 </div> 
 @endsection

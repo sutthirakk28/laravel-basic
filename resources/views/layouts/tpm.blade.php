@@ -64,11 +64,11 @@
     <li class="active"><a href="{{ url('/home') }}"><i class="icon icon-home"></i> <span>Home</span></a> </li>
     <li> <a href="#"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
-    <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ประวัติการลางานออนไลน์</span></a><span class="label label-important">3</span></li>
-    <li><a href="{{ url('/lib') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลพนักงาน</span></a></li>
+    <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a><span class="label label-important">3</span></li>
+    <li><a href="{{ url('/lib') }}"><i class="icon-book"></i> <span>ข้อมูลพนักงาน</span></a></li>
     
-    <li><a href="{{ url('/dep') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลฝ่าย</span></a></li>
-    <li><a href="{{ url('/pos') }}"><i class="icon-cog"></i> <span>จัดการข้อมูลตำแหน่ง</span></a></li>
+    <li><a href="{{ url('/dep') }}"><i class="icon-book"></i> <span>ข้อมูลฝ่าย</span></a></li>
+    <li><a href="{{ url('/pos') }}"><i class="icon-book"></i> <span>ข้อมูลตำแหน่ง</span></a></li>
   </ul>    
 </div>
 

@@ -10,7 +10,7 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> จัดการข้อมูลตำแหน่ง</a></div>
+"></i> ข้อมูลตำแหน่ง</a></div>
   </div>  
 @endsection
 

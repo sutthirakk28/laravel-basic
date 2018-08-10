@@ -361,6 +361,7 @@ h2.h2 {
 img.image {
     height: 65px;
     width: 65px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .yellow{
 	color: #7b0df1;
@@ -484,4 +485,10 @@ td.reason {
 }
 td.img {
     width: 50px;
+}
+span.label.label-important2 {
+    background-color: cornflowerblue;
+}
+span.label.label-important3 {
+    background-color: green;
 }

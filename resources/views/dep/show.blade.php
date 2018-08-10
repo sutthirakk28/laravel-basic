@@ -9,8 +9,8 @@
 <div id="content-header">
   <div id="breadcrumb">
     <a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
-      <i class="icon-book"></i> จัดการข้อมูลฝ่าย</a>
-    <a href="#">ข้อมูลฝ่าย</a>
+      <i class="icon-book"></i> ข้อมูลฝ่าย</a>
+    <a href="#">แสดงข้อมูลฝ่าย</a>
   </div>
 </div> 
 @endsection
@@ -60,7 +60,19 @@
                 </tr>
                   <tr class="odd gradeX">
                   <td>ชื่อฝ่าย</td>
-                  <td>{{ $d['name_dep'] }}</td>
+                  <td>
+                    {{ $d['name_dep'] }}
+                    @foreach ($pos as $p)
+                        @if($p['id_dep'] == $d['id_dep'])
+                          <span class="label label-important3"> {{ $p['count_id'] }} ตำแหน่ง </span>                       
+                        @endif
+                      @endforeach
+                      @foreach ($lib as $l)
+                        @if($l['id_dep'] == $d['id_dep'])
+                          <span class="label label-important2"> {{ $l['count_id'] }} คน </span>                         
+                        @endif
+                      @endforeach
+                  </td>
                 </tr>
                   <tr class="odd gradeX">
                   <td>สร้างเมื่อ</td>

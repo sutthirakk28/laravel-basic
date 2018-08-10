@@ -9,7 +9,7 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> ประวัติการลางานออนไลน์</a></div>
+"></i> ข้อมูลการลางาน</a></div>
   </div>  
 @endsection
 
@@ -114,9 +114,11 @@
                 <td >{{ $l['id']}}</td>
                 <td class="center">{{ thai_date(strtotime($l['date_leave'])) }}</td>
                 <td class="img">
-                  {{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}
+                  <a href="{{ url('lib/'.$l['lib_id']) }}" target="_blank">{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}</a>
                 </td>
-                <td>{{ $l['surname'].'/'.$l['nickname']}}</td>
+                <td>
+                  <a href="{{ url('lib/'.$l['lib_id']) }}" target="_blank">{{ $l['surname'].'/'.$l['nickname']}}</a>
+                </td>
                 <td>
                  @if ($l['type_leave'] == 1)
                    <span class="yellow">ลาคลอด</span>

@@ -10,8 +10,8 @@
 <div id="content-header">
   <div id="breadcrumb">
     <a href="{{ url('/lib/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
-      <i class="icon-book"></i> จัดการข้อมูลพนักงาน</a>
-    <a href="#">ข้อมูลพนักงาน</a>
+      <i class="icon-book"></i> ข้อมูลพนักงาน</a>
+    <a href="#">แสดงข้อมูลพนักงาน</a>
   </div>
 </div> 
 @endsection
@@ -112,8 +112,18 @@
             <table class="table table-bordered table-striped">
             <tbody>                
               <tr class="odd gradeX">
-                <td><i class="icon-user"></i>   รูป</td>
-                <td>{{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image')) }}</td>
+                <td>
+                  <div class="alert alert-info">
+              <strong>ชี้แจง !</strong> <span class="label label-important3"> ? </span> ใช้สิทธิลา <span class="label label-important"> ? </span> ครบสิทธิลา(มีการหักเงิน)</div>
+                  <i class="icon-plus"></i>    <span class="yellow">ลาคลอด</span> <span class="label label-important3">2</span><br/>
+                  <i class="icon-plus"></i>    <span class="red">ลาป่วย</span> <span class="label label-important3">3</span><br/>
+                  <i class="icon-plus"></i>    <span class="blue">ลากิจ</span> <span class="label label-important3">5</span><br/>
+                  <i class="icon-plus"></i>    <span class="black">ลากิจ-ราชการ</span> <span class="label label-important3">9</span><br/>                  
+                </td>
+                <td>
+                  {{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image1')) }}
+                  
+                </td>
               </tr>
               <tr class="odd gradeX">
                 <td><i class="icon-user"></i>   รหัสพนักงาน</td>
@@ -247,7 +257,7 @@
             <tbody>
               <tr class="odd gradeX">
                 <td><i class="icon-user"></i>   รูป</td>
-                <td>{{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image')) }}</td>
+                <td>{{ Html::image('images/'.$libs['user_photo'], '', array('class' => 'image1')) }}</td>
               </tr>
               <tr class="odd gradeX">
                 <td><i class="icon-user"></i>   รหัสพนักงาน</td>

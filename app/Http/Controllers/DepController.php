@@ -27,14 +27,30 @@ class DepController extends Controller
         $aScript=array('js/dep/main.js'); 
         $dep = DB::table('deps')
             ->select('deps.*')
-            ->get();
-        $result = json_decode($dep, true); 
+            ->get();       
+
+        $pos = DB::table('pos')
+             ->select(DB::raw('count(*) as count_id, id_dep'))
+             ->groupBy('id_dep')
+             ->get();
+
+        $lib = DB::table('libs')
+             ->select(DB::raw('count(libs.position) as count_id, pos.id_dep'))
+             ->join('pos', 'pos.id_pos', '=', 'libs.position')
+             ->groupBy('pos.id_dep')
+             ->get();     
+
+        $result = json_decode($dep, true);
+        $result2 = json_decode($pos, true);
+        $result3 = json_decode($lib, true);  
         $data = array(
             'dep' => $result,
+            'pos' => $result2,
+            'lib' => $result3,
             'style' => $aCss,
             'script'=> $aScript,
         );
-         return view('dep.index',$data);    
+        return view('dep.index',$data);    
     }
 
     /**
@@ -88,9 +104,27 @@ class DepController extends Controller
             ->select('deps.*')
             ->where('id_dep','=',$id)
             ->get();
-        $result = json_decode($dep, true); 
+
+        $pos = DB::table('pos')
+             ->select(DB::raw('count(*) as count_id, id_dep'))
+             ->where('id_dep',$id)
+             ->groupBy('id_dep')
+             ->get();
+
+        $lib = DB::table('libs')
+             ->select(DB::raw('count(libs.position) as count_id, pos.id_dep'))
+             ->join('pos', 'pos.id_pos', '=', 'libs.position')
+             ->where('pos.id_dep',$id)
+             ->groupBy('pos.id_dep')
+             ->get();
+
+        $result = json_decode($dep, true);
+        $result2 = json_decode($pos, true);
+        $result3 = json_decode($lib, true); 
         $data = array(
             'dep' => $result,
+            'pos' => $result2,
+            'lib' => $result3,
             'style' => $aCss
         );
          return view('dep.show',$data);

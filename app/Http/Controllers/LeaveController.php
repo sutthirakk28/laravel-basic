@@ -35,7 +35,7 @@ class LeaveController extends Controller
         $aScript=array('js/leave/main.js');
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
-            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
+            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id')
             ->orderBy('leaves.date_leave', 'DESC')
             ->get();
         
@@ -123,14 +123,19 @@ class LeaveController extends Controller
     public function show($id)
     {
         $aCss=array('css/leave/style.css');
-        $dep = DB::table('deps')
-            ->select('deps.*')
-            ->where('id_dep','=',$id)
+        $aScript=array('js/leave/main.js'); 
+        $leave = DB::table('leaves')
+            ->join('libs', 'libs.id', '=', 'leaves.id_per')
+            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id')
+            ->orderBy('leaves.date_leave', 'DESC')
+            ->where('leaves.id','=',$id)
             ->get();
-        $result = json_decode($dep, true);
+        
+        $result = json_decode($leave, true);        
         $data = array(
-            'dep' => $result,
-            'style' => $aCss
+            'leave' => $result,            
+            'style' => $aCss,
+            'script'=> $aScript,
         );
          return view('leave.show',$data);
     }
@@ -178,20 +183,41 @@ class LeaveController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-          'name_dep' => 'required|max:100'
+          'id_per' => 'required|max:100',
+          'type_leave' => 'required|max:100',
+          'date_leave' => 'required|date_format:Y-m-d',
+          'nstart_day' => 'required|max:100',
+          'nend_day' => 'required|max:100',
+          'approved' => 'required|max:100'
         ]);
+
         $now = new Carbon();
-        $depUpdate = Dep::where('id_dep',$id)
+        $now1 = Carbon::today()->toDateString();
+
+        if(isset($request->proof_leave)){
+          $checkBox = implode(',', $request->proof_leave);
+        }else{
+            $checkBox ='';
+        }
+
+        $leaveUpdate = Leave::where('id',$id)
         ->update([
-            'name_dep' => $request->input('name_dep'),
+            'id_per' => $request->id_per,
+            'type_leave' => $request->type_leave,
+            'date_leave' => $request->date_leave,
+            'reason_leave' => $request->reason_leave,
+            'dstart_leave' => $now1,
+            'dend_leave' => $now1,
+            'nstart_day' => $request->nstart_day,
+            'nend_day' => $request->nend_day,
+            'proof_leave' => $checkBox,
+            'approved' => $request->approved,
             'updated_at' => $now,
         ]);
 
-        if($depUpdate){
+        if($leaveUpdate){
             Session::flash('masupdate','แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('leave');
-            // return redirect('dep')
-            // ->with('success', 'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
         }
         return back()->withInput();
     }
@@ -202,12 +228,12 @@ class LeaveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $depDelete = Dep::where('id_dep',$id)
+        $leaveDelete = Leave::where('id',$request->depId)
             ->delete();
 
-        if($depDelete){
+        if($leaveDelete){
             Session::flash('masdelete','ลบข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('leave');
         }

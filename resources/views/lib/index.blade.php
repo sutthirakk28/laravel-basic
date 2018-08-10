@@ -10,7 +10,7 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> ระบบจัดการข้อมูลพนักงาน</a></div>
+"></i> ข้อมูลพนักงาน</a></div>
   </div>  
 @endsection
 
@@ -65,7 +65,7 @@ function count_day($day1){
 					<th>รูปภาพ</th>
 					<th>ชื่อ - นามสกุล</th>
 					<th>ชื่อเล่น</th>
-					<th width="10">อายุ</th>
+					<th width="20">อายุ</th>
 					<th>ฝ่าย</th>
 					<th>ตำแหน่ง</th>
 					<th>อายุงาน</th>
