@@ -77,9 +77,19 @@
 	            @foreach ($pos as $p)
 	            <tr >
 	            	<td>{{ $p['id_pos'] }}</td>
-					<td><span class="dep">{{ $p['name_dep'] }}</span></td>
-					<td>{{ $p['name_pos'] }}</td>	             
-
+					<td>
+						<span class="dep">
+							{{ $p['name_dep'] }}							
+						</span>
+					</td>
+					<td>
+						{{ $p['name_pos'] }}
+						@foreach ($lib as $l)
+	                        @if($l['position'] == $p['id_pos'])
+	                          <span class="label label-important2"> {{ $l['count_id'] }} คน </span>                         
+	                        @endif
+		                @endforeach
+					</td> 
 	              <td class="center">                                        
 	                {{ Html::link('pos/'.$p['id_pos'], 'View', array('class' => 'btn btn-success')) }}
 					{{ Html::link('pos/'.$p['id_pos'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   

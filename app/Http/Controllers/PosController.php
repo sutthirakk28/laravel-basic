@@ -30,13 +30,21 @@ class PosController extends Controller
             ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
             ->select('pos.*','name_dep')
             ->get();
+
+        $lib = DB::table('libs')
+             ->select(DB::raw('count(position) as count_id, position'))
+             ->groupBy('position')
+             ->get();
+
         $result = json_decode($pos, true); 
+        $result2 = json_decode($lib, true);
         $data = array(
             'pos' => $result,
+            'lib' => $result2,
             'style' => $aCss,
             'script'=> $aScript,
         );
-         return view('pos.index',$data);
+        return view('pos.index',$data);
     }
 
     /**
@@ -91,9 +99,18 @@ class PosController extends Controller
             ->select('pos.*','name_dep')
             ->where('id_pos','=',$id)
             ->get();
+
+        $lib = DB::table('libs')
+             ->select(DB::raw('count(position) as count_id, position'))
+             ->where('position',$id)
+             ->groupBy('position')
+             ->get();
+
         $result = json_decode($pos, true); 
+        $result2 = json_decode($lib, true);
         $data = array(
             'pos' => $result,
+            'lib' => $result2,
             'style' => $aCss
         );
          return view('pos.show',$data);

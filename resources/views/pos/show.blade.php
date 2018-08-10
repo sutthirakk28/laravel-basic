@@ -64,7 +64,14 @@
                 </tr>
                 <tr class="odd gradeX">
                   <td>ชื่อตำแหน่ง</td>
-                  <td>{{ $p['name_pos'] }}</td>
+                  <td>
+                    {{ $p['name_pos'] }}
+                    @foreach ($lib as $l)
+                      @if($l['position'] == $p['id_pos'])
+                        <span class="label label-important2"> {{ $l['count_id'] }} คน </span>                         
+                      @endif
+                    @endforeach
+                  </td>
                 </tr>
                 <tr class="odd gradeX">
                   <td>สร้างเมื่อ</td>
