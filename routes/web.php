@@ -64,6 +64,8 @@ Route::resource('lib','LibController');
 Route::resource('dep','DepController');
 Route::resource('pos','PosController');
 Route::resource('leave','LeaveController');
+Route::get('leave/report/{id}', 'LeaveController@report');
+
 
 Auth::routes();
 

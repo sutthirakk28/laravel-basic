@@ -30,6 +30,10 @@ h5.f_th1 {
 	font-family: Maitree;
   text-align: center;
 }
+.even {
+  font-family: Maitree;
+  text-align: center;
+}
 [class^="icon-"], [class*=" icon-"] {
   background-image: url('../../images/img/glyphicons-halflings.png');
 }
@@ -85,7 +89,7 @@ span.label.label-important3 {
     background-color: green;
 }
 .yellow{
-  color: #f79306;
+  color: #7b0df1;
 }
 .red{
   color: red;
@@ -95,4 +99,7 @@ span.label.label-important3 {
 }
 .black{
   color: #121213;
+}
+.orange {
+  color: #f1be4b;
 }

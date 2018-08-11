@@ -42,6 +42,12 @@
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                        <input type="radio" name="type_leave" value="0" required><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Karim2">ลาบวช-ทำหมัน</label>
+                </div>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
                         <input type="radio" name="type_leave" value="1" required><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาคลอด</label>

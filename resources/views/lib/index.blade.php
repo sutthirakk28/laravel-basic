@@ -42,7 +42,7 @@ function getDate1($day) {
 
 function count_day($day1){
       $date1=date_create($day1);
-      $date2=date_create("2018-08-07");
+      $date2=date_create(date("Y-m-d"));
       $d=date_diff($date1,$date2);
       $count = $d->format("%a");
       return $count;
@@ -83,7 +83,8 @@ function count_day($day1){
 	            		@if($day_pro >= '119')
 		                	<span class="label label-important2">ผ่านโปร</span>
 		                @else
-		                    <span class="label label-important">ยังไม่ผ่านโปร</span>
+		                	@php $total = $day_pro - 119; @endphp
+		                    <span class="label label-important">ไม่ผ่านโปร {{$total}}</span>
 		                @endif
 	            	</td>
 					<td>

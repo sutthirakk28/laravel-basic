@@ -140,6 +140,25 @@ class LeaveController extends Controller
          return view('leave.show',$data);
     }
 
+    public function report($id)
+    {
+        $aCss=array('css/leave/style.css');
+        $aScript=array('js/leave/main.js'); 
+        $lib = DB::table('leaves')
+            ->join('libs', 'libs.id', '=', 'leaves.id_per')
+            ->select('leaves.*','libs.surname','libs.nickname')
+            ->where('leaves.id_per','=',$id)
+            ->orderBy('leaves.date_leave')
+            ->get();
+        $result = json_decode($lib, true);        
+        $data = array(
+            'lib' => $result,            
+            'style' => $aCss,
+            'script'=> $aScript,
+        );
+        return view('leave.report',$data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

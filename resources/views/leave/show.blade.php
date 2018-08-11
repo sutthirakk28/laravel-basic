@@ -118,7 +118,9 @@
               <tr class="odd gradeX">
                 <td>ประเภท</td>
                 <td>
-                  @if ($l['type_leave'] == 1)
+                  @if ($l['type_leave'] == 0)
+                   <span class="orange">ลาบวช-ทำหมัน</span>
+                  @elseif($l['type_leave'] == 1)
                    <span class="yellow">ลาคลอด</span>
                  @elseif ($l['type_leave'] == 2)
                    <span class="red">ลาป่วย</span>

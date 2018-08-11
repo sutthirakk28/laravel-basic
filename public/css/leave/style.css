@@ -363,6 +363,12 @@ img.image {
     width: 65px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+img.image1 {
+  width: 15%;
+  border-radius: 8px;
+  border:1px solid #08abf9;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .yellow{
 	color: #7b0df1;
 }
@@ -374,6 +380,9 @@ img.image {
 }
 .black{
 	color: #121213;
+}
+.orange {
+  color: #f1be4b;
 }
 .font1{
     color: #0586f5;
@@ -491,4 +500,20 @@ span.label.label-important2 {
 }
 span.label.label-important3 {
     background-color: green;
+}
+.alert.alert-error {
+    margin-bottom: 5px;
+    font-family: Taviraj;
+}
+.alert-num{
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    font-family: maitree;
+}
+i.icon-plus {
+    margin-top: 8px;
+}
+.deduct{
+    color: #498bed;
 }

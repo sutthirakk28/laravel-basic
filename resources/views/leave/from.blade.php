@@ -43,7 +43,25 @@
                 </div>
             </div>
             <div class="element">
-                <h2>*ประเภทการลา</h2>                
+                <h2>*ประเภทการลา</h2>
+                @if($l['type_leave'] == 0)
+                    <div class="el-child-inline">
+                        <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                            <input type="radio" name="type_leave" value="0" checked>
+                            <span data-checked="&#10004;" />
+                        </div>
+                        <label for="Karim2">ลาบวช-ทำหมัน</label>
+                    </div>
+                @else
+                    <div class="el-child-inline">
+                        <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
+                            <input type="radio" name="type_leave" value="0">
+                            <span data-checked="&#10004;" />
+                        </div>
+                        <label for="Karim2">ลาบวช-ทำหมัน</label>
+                    </div>
+                @endif
+
                 @if($l['type_leave'] == 1)
                 	<div class="el-child-inline">
                 		<div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">

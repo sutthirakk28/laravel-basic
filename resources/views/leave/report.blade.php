@@ -8,14 +8,18 @@
 
 @section('content-header')
 <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> ข้อมูลการลางาน</a></div>
-  </div>  
+    <div id="breadcrumb">
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลการลางาน" class="tip-bottom">
+            <i class="icon-book"></i> ข้อมูลการลางาน</a>
+        <a href="#">แสดงข้อมูลลางาน</a>
+    </div>
+</div>  
 @endsection
 
 @section('content')
 
-@php
+
+  @php
     error_reporting(E_ALL ^ E_NOTICE);
 
     function getDate1($day,$day2) {
@@ -69,35 +73,32 @@
        $timeArr["s"]= substr($time,17,2);
       return $timeArr;
     }
+    
   @endphp
-	@if(Session::has('masupdate'))
-    <div id="gritter-notify">
-    <div class="normal"></div>
-  </div>
 
-  @endif
-  @if(Session::has('masdelete'))    
-  <div id="gritter-notify">
-    <div class="sticky"></div>
-  </div>
-  @endif
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+<div class="widget-box">
+  <div class="alert alert-error"><strong>ชี้แจง ! <span class="label label-important3"> ? </span> = ใช้สิทธิลา <span class="label label-important"> ? </span> = ครบสิทธิลา<span class="deduct">(มีการหักเงิน)</span></strong></div>
+  <div class="alert-num">
+    <!-- <i class="icon-plus"></i> -->   <span class="orange">ลาบวช-ทำหมัน</span> <span class="label label-important3">2</span>
+    <!-- <i class="icon-plus"></i> -->   <span class="yellow">ลาคลอด</span> <span class="label label-important3">2</span>
+    <!-- <i class="icon-plus"></i>  -->  <span class="red">ลาป่วย</span> <span class="label label-important3">3</span>
+    <!-- <i class="icon-plus"></i> -->   <span class="blue">ลากิจ</span> <span class="label label-important3">5</span>
+    <!-- <i class="icon-plus"></i> -->   <span class="black">ลากิจ-ราชการ</span> <span class="label label-important3">9</span>
+  </div> 
 
-
-  <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="widget-box">
-        <div class="widget-title">
-           <span class="icon"><i class="icon-th"></i></span> 
-          <h5 class="f_th1">ประวัติการลางาน</h5>
-        </div>
-        <div class="widget-content nopadding">
-          <table class="table table-bordered data-table">
+    <div class="widget-content nopadding">
+            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+              <h5 class="f_th1">
+                jjjjjjjjjj
+              </h5>
+            </div>
+            <table class="table table-bordered data-table">
             <thead>
               <tr>
                 <th width="5">ID</th>
-                <th width="80">วันที่ยื่น</th>
-                <th >รูป</th>
                 <th >ชื่อ-นามสกุล</th>
                 <th width="90">ประเภท</th>
                 <th >วันที่ลา</th>
@@ -105,21 +106,16 @@
                 <!-- <th >เหตุผล</th> -->
                 <th >หลักฐานการลา</th>
                 <th >อนุมัติโดย</th>
-                <th width="200">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($leave as $l)
+              @foreach ($lib as $l)
               <tr >                
                 <td >{{ $l['id']}}</td>
-                <td class="center">{{ thai_date(strtotime($l['date_leave'])) }}</td>
-                <td class="img">
-                  <a href="{{ url('leave/report/'.$id=$l['lib_id']) }}">{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}</a>
+                <td >
+                  {{ $l['surname'].'/'.$l['nickname']}}
                 </td>
-                <td>
-                  <a href="{{ url('leave/report/'.$id=$l['lib_id']) }}">{{ $l['surname'].'/'.$l['nickname']}}</a>
-                  
-                </td>
+                
                 <td>
                  @if ($l['type_leave'] == 0)
                    <span class="orange">ลาบวช-ทำหมัน</span>
@@ -225,58 +221,21 @@
                   อื่นๆ
                 @endif
               </td>
-              <td class="center">                                        
-                {{ Html::link('leave/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
-                {{ Html::link('leave/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
-                <a href="#myAlert" data-toggle="modal" data-id="{{$l['id']}}" class="addDialog btn btn-danger">Delete</a>
-                
-                <!--modal delete -->
-                <div id="myAlert" class="modal hide">
-                  <div class="modal-header">
-                    <button data-dismiss="modal" class="close" type="button">×</button>
-                    <h3><i class="material-icons" style="font-size:15px;color:red">error_outline</i> คำเตือน! </h3>
-                  </div>
-                  <div class="modal-body">
-                    <p>เมื่อลบข้อมูลพนักงานอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
-                  </div>
-                  <div class="modal-footer">
-                    {{ Form::open(['route' => ['leave.destroy',$l['id'], 'method' => 'DELETE'] ]) }}
-                    <input type="hidden" name="_method" value="delete"/>
-                    <input type="hidden" name="depId" value="" id="depId"> 
-                    {{ Form::submit('Confirm',array('class' => 'btn btn-primary')) }}
-                    <a data-dismiss="modal" class="btn" href="#">Cancel</a> 
-                    {{ Form::close()}} 
-                    
-                  </div>
-                </div>
-                <!--end modal delete -->
-              </td>
               </tr>
               @endforeach
             </tbody>
           </table>
-        </div>
-      </div>       
-    </div>
-  </div>
+          </div>                            
 </div>
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span12">
-      {{ Html::link('leave/create','Add', array(  'class' => 'btn btn-primary thead')) }}
-    </div>
-  </div>
 </div>
+</div>
+</div>
+
 @endsection
 
 @section('js')
 <script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
-<script src="{{ asset('js/main/select2.min.js') }}"></script> 
-<script src="{{ asset('js/main/jquery.dataTables_desc.min.js') }}"></script> 
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.tables.js') }}"></script>
-
-<script src="{{ asset('js/main/jquery.gritter.min.js') }}"></script> 
-<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
-<script src="{{ asset('js/main/maruti.interface.js') }}"></script>
-<script src="{{ asset('js/main/maruti.popover.js') }}"></script>
 @endsection
