@@ -50,6 +50,30 @@
       return $thai_date_return;
     }
 
+    function thai_date2($time){
+      $thai_day_arr=array("อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์");
+      $thai_month_arr=array(
+        "0"=>"",
+        "1"=>"ม.ค.",
+        "2"=>"ก.พ.",
+        "3"=>"มี.ค.",
+        "4"=>"เม.ย.",
+        "5"=>"พ.ค.",
+        "6"=>"มิ.ย.",
+        "7"=>"ก.ค.",
+        "8"=>"ส.ค.",
+        "9"=>"ก.ย.",
+        "10"=>"ต.ค.",
+        "11"=>"พ.ย.",
+        "12"=>"ธ.ค."
+      );
+      $thai_date_return= date("j",$time);
+      $thai_date_return.=" ".$thai_month_arr[date("n",$time)];
+      $thai_date_return.= " ".(date("Y",$time)+543);
+      $thai_date_return.= "  ".date("H:i",$time)." น.";
+      return $thai_date_return;
+    }
+
     function dateDiv($t1,$t2){
       $t1Arr=splitTime($t1);
       $t2Arr=splitTime($t2);
@@ -92,46 +116,41 @@
     <div class="widget-content nopadding">
             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
               <h5 class="f_th1">
-                jjjjjjjjjj
+                @php
+            $t1_1=0;
+          @endphp
+            @foreach($lib as $proof)
+              @if($t1_1 == 0)
+                {{ $proof['surname'] .'/'. $proof['nickname'] }} 
+                @php $t1_1 =1; @endphp
+              @endif
+            @endforeach  
               </h5>
             </div>
             <table class="table table-bordered data-table">
             <thead>
               <tr>
                 <th width="5">ID</th>
-                <th >ชื่อ-นามสกุล</th>
+                <th >วันที่ยื่น</th>
+                <th >วันที่ลา</th>                
                 <th width="90">ประเภท</th>
-                <th >วันที่ลา</th>
+                
                 <th width="50">จำนวน</th>
                 <!-- <th >เหตุผล</th> -->
                 <th >หลักฐานการลา</th>
                 <th >อนุมัติโดย</th>
+                <th >สร้างเมื่อ</th>
+                <th >แก้ไขเมื่อ</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($lib as $l)
               <tr >                
-                <td >{{ $l['id']}}</td>
-                <td >
-                  {{ $l['surname'].'/'.$l['nickname']}}
-                </td>
-                
-                <td>
-                 @if ($l['type_leave'] == 0)
-                   <span class="orange">ลาบวช-ทำหมัน</span>
-                  @elseif($l['type_leave'] == 1)
-                   <span class="yellow">ลาคลอด</span>
-                 @elseif ($l['type_leave'] == 2)
-                   <span class="red">ลาป่วย</span>
-                 @elseif ($l['type_leave'] == 3)
-                   <span class="blue">ลากิจ</span>
-                 @elseif ($l['type_leave'] == 4)
-                   <span class="black">ลากิจ-ราชการ</span>
-                 @else
-                   อื่นๆ
-                 @endif
-                </td>
+                <td >{{ $l['id']}}</td>                                
                 <td class="center">
+                  {{ thai_date(strtotime($l['date_leave'])) }}
+                </td>
+                <td >
                 @php
                   $nstart_day = explode("T",$l['nstart_day']);
                   $nend_day = explode("T",$l['nend_day']);
@@ -149,7 +168,23 @@
                   ถึง<br>
                   {{ thai_date(strtotime($end_day_year)).'('.$end_day_times.')' }}
                 @endif
-              </td>
+                </td>                
+                <td>
+                 @if ($l['type_leave'] == 0)
+                   <span class="orange">ลาบวช-ทำหมัน</span>
+                  @elseif($l['type_leave'] == 1)
+                   <span class="yellow">ลาคลอด</span>
+                 @elseif ($l['type_leave'] == 2)
+                   <span class="red">ลาป่วย</span>
+                 @elseif ($l['type_leave'] == 3)
+                   <span class="blue">ลากิจ</span>
+                 @elseif ($l['type_leave'] == 4)
+                   <span class="black">ลากิจ-ราชการ</span>
+                 @else
+                   อื่นๆ
+                 @endif
+                </td>
+                
               <td class="center">
                 @php
                   $a1=$start_day_year.' '.$start_day_times;
@@ -221,6 +256,12 @@
                   อื่นๆ
                 @endif
               </td>
+              <td>
+                {{ thai_date2(strtotime($l['created_at'])) }}
+              </td>
+              <td>
+                {{ thai_date2(strtotime($l['updated_at'])) }}
+              </td>
               </tr>
               @endforeach
             </tbody>
@@ -236,6 +277,6 @@
 @section('js')
 <script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
 <script src="{{ asset('js/main/select2.min.js') }}"></script>
-<script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
+<script src="{{ asset('js/main/jquery.dataTables_desc.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.tables.js') }}"></script>
 @endsection

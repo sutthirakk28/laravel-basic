@@ -148,11 +148,13 @@ class LeaveController extends Controller
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->select('leaves.*','libs.surname','libs.nickname')
             ->where('leaves.id_per','=',$id)
-            ->orderBy('leaves.date_leave')
-            ->get();
-        $result = json_decode($lib, true);        
+            ->get();        
+        $lib2 = DB::table('libs')->select('id','surname','nickname')->where('id', $id)->first();
+        $result = json_decode($lib, true); 
+        $result2 = json_decode(json_encode($lib2),true);
         $data = array(
-            'lib' => $result,            
+            'lib' => $result,
+            'tuy' => $result2,            
             'style' => $aCss,
             'script'=> $aScript,
         );
