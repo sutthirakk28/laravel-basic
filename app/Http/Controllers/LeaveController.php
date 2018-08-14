@@ -35,7 +35,7 @@ class LeaveController extends Controller
         $aScript=array('js/leave/main.js');
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
-            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id')
+            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id','libs.job_start')
             ->orderBy('leaves.date_leave', 'DESC')
             ->get();
         
@@ -146,10 +146,10 @@ class LeaveController extends Controller
         $aScript=array('js/leave/main.js'); 
         $lib = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
-            ->select('leaves.*','libs.surname','libs.nickname')
+            ->select('leaves.*','libs.surname','libs.nickname','libs.job_start')
             ->where('leaves.id_per','=',$id)
             ->get();        
-        $lib2 = DB::table('libs')->select('id','surname','nickname')->where('id', $id)->first();
+        $lib2 = DB::table('libs')->select('id','surname','nickname  as i','job_start')->where('id', $id)->first();
         $result = json_decode($lib, true); 
         $result2 = json_decode(json_encode($lib2),true);
         $data = array(

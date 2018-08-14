@@ -69,6 +69,13 @@
        $timeArr["s"]= substr($time,17,2);
       return $timeArr;
     }
+    function count_day($day1){
+      $date1=date_create($day1);
+      $date2=date_create(date("Y-m-d"));
+      $d=date_diff($date1,$date2);
+      $count = $d->format("%a");
+      return $count;
+    }
   @endphp
 	@if(Session::has('masupdate'))
     <div id="gritter-notify">
@@ -116,9 +123,17 @@
                 <td class="img">
                   <a href="{{ url('leave/report/'.$id=$l['lib_id']) }}">{{ Html::image('images/'.$l['user_photo'], '', array('class' => 'image')) }}</a>
                 </td>
+                @php
+                  $day_pro=count_day($l['job_start']);
+                @endphp
                 <td>
-                  <a href="{{ url('leave/report/'.$id=$l['lib_id']) }}">{{ $l['surname'].'/'.$l['nickname']}}</a>
-                  
+                  <a href="{{ url('leave/report/'.$id=$l['lib_id']) }}">{{ $l['surname'].'/'.$l['nickname']}}</a><br>
+                  @if($day_pro >= '119')
+                      <span class="label label-important2">ผ่านโปร</span>
+                    @else
+                      @php $total = $day_pro - 119; @endphp
+                        <span class="label label-important">ไม่ผ่านโปร {{$total}}</span>
+                    @endif
                 </td>
                 <td>
                  @if ($l['type_leave'] == 0)

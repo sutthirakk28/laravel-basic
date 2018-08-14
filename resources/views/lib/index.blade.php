@@ -41,12 +41,12 @@ function getDate1($day) {
 }
 
 function count_day($day1){
-      $date1=date_create($day1);
-      $date2=date_create(date("Y-m-d"));
-      $d=date_diff($date1,$date2);
-      $count = $d->format("%a");
-      return $count;
-    }
+  $date1=date_create($day1);
+  $date2=date_create(date("Y-m-d"));
+  $d=date_diff($date1,$date2);
+  $count = $d->format("%a");
+  return $count;
+}
 @endphp
 
 <div class="container-fluid">
