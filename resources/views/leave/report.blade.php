@@ -243,13 +243,12 @@
             @elseif ($l['type_leave'] == 4)
               @php $Government_day = $d; @endphp
             @endif
-
           @else
             @if($time['D'] == '0')
               @if($time['M'] == '0')
                 {{  $time['H'].' ชั่วโมง ' }}
                 @php
-                  $d = $num_day['H'] * 60;
+                  $d = $time['H'] * 60;
                   $sum = $d;
                 @endphp
                   @if ($l['type_leave'] == 0)
@@ -264,23 +263,41 @@
                     @php $Government_day = $d; @endphp
                   @endif
               @else                
-                {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
-                @php 
-                  $m = $time['H'] * 60;
-                  $minutes = $time['M'] + $m;
-                  $sum = $minutes;
-                @endphp
-                  @if ($l['type_leave'] == 0)
-                    @php $ordain_day = $minutes; @endphp
-                  @elseif($l['type_leave'] == 1)
-                    @php $deliver_day = $minutes; @endphp 
-                  @elseif ($l['type_leave'] == 2)
-                    @php $sick_day = $minutes; @endphp
-                  @elseif ($l['type_leave'] == 3)
-                    @php $Work_day = $minutes; @endphp
-                  @elseif ($l['type_leave'] == 4)
-                    @php $Government_day = $minutes; @endphp
-                  @endif
+                @if($time['H'] == '0')
+                  {{ $time['M'].' นาที' }}
+                  @php
+                    $sum = $time['M'];
+                  @endphp
+                    @if ($l['type_leave'] == 0)
+                      @php $ordain_day = $time['M']; @endphp
+                    @elseif($l['type_leave'] == 1)
+                      @php $deliver_day = $time['M']; @endphp 
+                    @elseif ($l['type_leave'] == 2)
+                      @php $sick_day = $time['M']; @endphp
+                    @elseif ($l['type_leave'] == 3)
+                      @php $Work_day = $time['M']; @endphp
+                    @elseif ($l['type_leave'] == 4)
+                      @php $Government_day = $time['M']; @endphp
+                    @endif
+                @else
+                    {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+                  @php 
+                    $m = $time['H'] * 60;
+                    $minutes = $time['M'] + $m;
+                    $sum = $minutes;
+                  @endphp
+                    @if ($l['type_leave'] == 0)
+                      @php $ordain_day = $minutes; @endphp
+                    @elseif($l['type_leave'] == 1)
+                      @php $deliver_day = $minutes; @endphp 
+                    @elseif ($l['type_leave'] == 2)
+                      @php $sick_day = $minutes; @endphp
+                    @elseif ($l['type_leave'] == 3)
+                      @php $Work_day = $minutes; @endphp
+                    @elseif ($l['type_leave'] == 4)
+                      @php $Government_day = $minutes; @endphp
+                    @endif
+                @endif                
               @endif
             @else
               @if($time['M'] == '0')
