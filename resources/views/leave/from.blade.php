@@ -117,14 +117,14 @@
 	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
 	                        <input type="radio" name="type_leave" value="4" checked><span data-checked="&#10004;" />
 	                    </div>
-	                    <label for="Seema2">ลากิจ-ราชการ</label>
+	                    <label for="Seema2">พักร้อน</label>
 	                </div>
                 @else
                 	<div class="el-child-inline">
 	                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
 	                        <input type="radio" name="type_leave" value="4" ><span data-checked="&#10004;" />
 	                    </div>
-	                    <label for="Seema2">ลากิจ-ราชการ</label>
+	                    <label for="Seema2">พักร้อน</label>
 	                </div>
                 @endif                       
             </div>

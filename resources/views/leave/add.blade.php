@@ -68,7 +68,7 @@
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
                         <input type="radio" name="type_leave" value="4" ><span data-checked="&#10004;" />
                     </div>
-                    <label for="Seema2">ลากิจ-ราชการ</label>
+                    <label for="Seema2">พักร้อน</label>
                 </div>
             </div>
             <div class="element">

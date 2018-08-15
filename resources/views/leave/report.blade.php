@@ -201,7 +201,7 @@
            @elseif ($l['type_leave'] == 3)
              <span class="blue">ลากิจ</span>
            @elseif ($l['type_leave'] == 4)
-             <span class="black">ลากิจ-ราชการ</span>
+             <span class="black">พักร้อน</span>
            @else
              อื่นๆ
            @endif
@@ -404,13 +404,53 @@
 
   </div>
 
-  <div class="alert alert-error"><span class="badge badge-info">{{secondsToTime($leave_sum*60)}}</span><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน </strong></div>
+  <div class="alert alert-error"><span class="badge badge-info">{{secondsToTime($leave_sum*60)}}</span><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>
   <div class="alert-num">
-    <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-success">{{secondsToTime($leave_ordain*60)}}</span>
-    <span class="yellow">ลาคลอด</span> <span class="badge badge-success">{{secondsToTime($leave_deliver*60)}}</span>
-    <span class="red">ลาป่วย</span> <span class="badge badge-success">{{secondsToTime($leave_sick*60)}}</span>
-    <span class="blue">ลากิจ</span> <span class="badge badge-success">{{secondsToTime($leave_Work*60)}}</span>
-    <span class="black">ลากิจ-ราชการ</span> <span class="badge badge-success">{{secondsToTime($leave_Government*60)}}</span>
+
+    @php 
+    
+    @endphp
+    
+    @if($leave_ordain == 21600)
+      <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-warning">{{secondsToTime($leave_ordain*60)}}</span>
+    @elseif($leave_ordain < 21600)
+      <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-success">{{secondsToTime($leave_ordain*60)}}</span>
+    @else
+      <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-important">{{secondsToTime($leave_ordain*60)}}</span>
+    @endif
+
+    @if($leave_deliver == 129600)
+      <span class="orange">ลาคลอด</span> <span class="badge badge-warning">{{secondsToTime($leave_deliver*60)}}</span>
+    @elseif($leave_deliver < 129600)
+      <span class="orange">ลาคลอด</span> <span class="badge badge-success">{{secondsToTime($leave_deliver*60)}}</span>
+    @else
+      <span class="orange">ลาคลอด</span> <span class="badge badge-important">{{secondsToTime($leave_deliver*60)}}</span>
+    @endif
+
+    @if($leave_sick == 43200)
+      <span class="orange">ลาป่วย</span> <span class="badge badge-warning">{{secondsToTime($leave_sick*60)}}</span>
+    @elseif($leave_sick < 43200)
+      <span class="orange">ลาป่วย</span> <span class="badge badge-success">{{secondsToTime($leave_sick*60)}}</span>
+    @else
+      <span class="orange">ลาป่วย</span> <span class="badge badge-important">{{secondsToTime($leave_sick*60)}}</span>
+    @endif
+
+    @if($leave_Work == 8640)
+      <span class="orange">ลากิจ</span> <span class="badge badge-warning">{{secondsToTime($leave_Work*60)}}</span>
+    @elseif($leave_Work < 8640)
+      <span class="orange">ลากิจ</span> <span class="badge badge-success">{{secondsToTime($leave_Work*60)}}</span>
+    @else
+      <span class="orange">ลากิจ</span> <span class="badge badge-important">{{secondsToTime($leave_Work*60)}}</span>
+    @endif
+
+    @if($leave_Government == 8640)
+      <span class="orange">พักร้อน</span> <span class="badge badge-warning">{{secondsToTime($leave_Government*60)}}</span>
+    @elseif($leave_Government < 8640)
+      <span class="orange">พักร้อน</span> <span class="badge badge-success">{{secondsToTime($leave_Government*60)}}</span>
+    @else
+      <span class="orange">พักร้อน</span> <span class="badge badge-important">{{secondsToTime($leave_Government*60)}}</span>
+    @endif
+    
   </div> 
 </div>
 </div>

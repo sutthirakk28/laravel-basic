@@ -145,7 +145,7 @@
                  @elseif ($l['type_leave'] == 3)
                    <span class="blue">ลากิจ</span>
                  @elseif ($l['type_leave'] == 4)
-                   <span class="black">ลากิจ-ราชการ</span>
+                   <span class="black">พักร้อน</span>
                  @else
                    อื่นๆ
                  @endif
@@ -187,8 +187,12 @@
                   @if($time['D'] == '0')
                     @if($time['M'] == '0')
                       {{  $time['H'].' ชั่วโมง ' }}
-                    @else                
-                      {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+                    @else
+                      @if($time['H'] == '0')
+                        {{ $time['M'].' นาที' }}
+                      @else
+                        {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+                      @endif 
                     @endif
                   @else
                     @if($time['M'] == '0')

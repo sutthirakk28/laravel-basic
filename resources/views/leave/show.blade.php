@@ -127,7 +127,7 @@
                  @elseif ($l['type_leave'] == 3)
                    <span class="blue">ลากิจ</span>
                  @elseif ($l['type_leave'] == 4)
-                   <span class="black">ลากิจ-ราชการ</span>
+                   <span class="black">พักร้อน</span>
                  @else
                    อื่นๆ
                  @endif
