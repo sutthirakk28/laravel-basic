@@ -30,7 +30,7 @@
             <div class="element">
                 <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
-                    <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>
+                    <select name="id_per" id="idper_chang" class="selectpicker show-tick select" data-live-search="true" required>
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
                       @foreach($lib as $l)
                         <option data-tokens="{{ $l['surname'] }}{{ $l['nickname'] }}" value="{{ $l['id'] }}">{{ $l['surname'] }}/{{ $l['nickname'] }}</option>
@@ -71,6 +71,9 @@
                     <label for="Seema2">พักร้อน</label>
                 </div>
             </div>
+            <div class="element" id="e_textshow">
+                <input type="text" name="textshow" id="textshow" class="textshow" value=""></input>
+            </div>    
             <div class="element">
                 <h2>*วันที่ยื่น</h2>
                 <div class="form-group">
