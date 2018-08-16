@@ -10,6 +10,7 @@ use DateTime;
 use Carbon\Carbon;
 use Session;
 use DB;
+use Response;
 
 class LeaveController extends Controller
 {
@@ -45,7 +46,7 @@ class LeaveController extends Controller
             'style' => $aCss,
             'script'=> $aScript,
         );
-         return view('leave.index',$data);
+        return view('leave.index',$data);
     }
 
     /**
@@ -161,13 +162,14 @@ class LeaveController extends Controller
         return view('leave.report',$data);
     }
 
-    public function selectAjax(Request $request, $id)
-    {   dd(112);      
-        $states = DB::table('libs')
-            ->where('id','=',$request->id)
-            ->all();
-        $data = view('leave.ajax-select',compact('states'))->render();
-        return response()->json(['options'=>$data]);        
+    public function fetch(Request $request)
+    {   
+        //$data1 = Leave::find ($request->id);
+
+        $data1 = DB::table('leaves')
+            ->where('id_per', $request->id)
+            ->get();
+        return Response()->json($data1);
     }
 
     /**

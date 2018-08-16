@@ -30,7 +30,7 @@
             <div class="element">
                 <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
-                    <select name="id_per" id="idper_chang" class="selectpicker show-tick select" data-live-search="true" required>
+                    <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" data-dependent="id_person" required>
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
                       @foreach($lib as $l)
                         <option data-tokens="{{ $l['surname'] }}{{ $l['nickname'] }}" value="{{ $l['id'] }}">{{ $l['surname'] }}/{{ $l['nickname'] }}</option>
@@ -72,9 +72,9 @@
                 </div>
             </div>
             <div class="element" id="e_textshow">
-                <input type="text" name="textshow2" id="textshow2" class="textshow2" value=""></input><br>
                 
-                {!! Form::select('id_state',[''=>'--- Select State ---'],null,['class'=>'form-control']) !!}
+                <div name="id_person" id="id_person"></div>
+                {{ csrf_field() }}
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
@@ -189,5 +189,4 @@
 @endsection
 
 @section('js')
-
 @endsection

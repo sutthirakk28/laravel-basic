@@ -4,18 +4,26 @@ $(document).on("click", "#addDialog", function () {
      console.log(myBookId);     
 });
 
-  $("select[name='id_per']").change(function(){
-      var id_country = $(this).val();
-      var token = $("input[name='_token']").val();
-      console.log(id_country);
+$(document).ready(function(){
+  $('#id_per').change(function(){
+
+    if($(this).val() !=''){
+      
+      var value = $(this).val();
+
+      var _token = $('input[name="_token"]').val();
+      console.log(value);
+
       $.ajax({
-          url: "<?php echo route('leave/select-ajax') ?>",
-          method: 'POST',
-          data: {id:id_country, _token:token},
-          success: function(data) {
-            $("select[name='id_state'").html('');
-            $("select[name='id_state'").html(data.options);
-            console.log(id_country);
-          }
-      });
+        url:"{{ route('fetch') }}",
+        method:"POST",
+        data:{'id':value, _token:_token},
+        success:function(data1){
+          $('#id_person').html(data1);
+          console.log(data1);
+        }
+      })
+    }
   });
+
+});
