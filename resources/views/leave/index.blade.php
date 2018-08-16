@@ -247,7 +247,7 @@
               <td class="center">                                        
                 {{ Html::link('leave/'.$l['id'], 'View', array('class' => 'btn btn-success')) }}
                 {{ Html::link('leave/'.$l['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
-                <a href="#myAlert" data-toggle="modal" data-id="{{$l['id']}}" class="addDialog btn btn-danger">Delete</a>
+                <a href="#myAlert" data-toggle="modal" data-id="{{$l['id']}}" class="addDialog btn btn-danger" id="addDialog">Delete</a>
                 
                 <!--modal delete -->
                 <div id="myAlert" class="modal hide">

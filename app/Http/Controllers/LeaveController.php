@@ -161,6 +161,15 @@ class LeaveController extends Controller
         return view('leave.report',$data);
     }
 
+    public function selectAjax(Request $request, $id)
+    {   dd(112);      
+        $states = DB::table('libs')
+            ->where('id','=',$request->id)
+            ->all();
+        $data = view('leave.ajax-select',compact('states'))->render();
+        return response()->json(['options'=>$data]);        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

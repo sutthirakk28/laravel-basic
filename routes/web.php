@@ -65,7 +65,8 @@ Route::resource('dep','DepController');
 Route::resource('pos','PosController');
 Route::resource('leave','LeaveController');
 Route::get('leave/report/{id}', 'LeaveController@report');
-
+// Route::get('leave/ajax-leave/{id}', 'LeaveController@ajax_report');
+Route::post('leave/select-ajax','LeaveController@selectAjax');
 
 Auth::routes();
 

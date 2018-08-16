@@ -72,7 +72,23 @@
                 </div>
             </div>
             <div class="element" id="e_textshow">
-                <input type="text" name="textshow" id="textshow" class="textshow" value=""></input>
+                <input type="text" name="textshow2" id="textshow2" class="textshow2" value=""></input><br>
+                
+                {!! Form::select('id_state',[''=>'--- Select State ---'],null,['class'=>'form-control']) !!}
+                <h2>*ประเภทการลา</h2>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
+                        <input type="radio" name="type_leave2" value="0" required><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Karim2">ลาบวช-ทำหมัน</label>
+                </div>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
+                        <input type="radio" name="type_leave2" value="1" required><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Karim2">ลาคลอด</label>
+                </div>
+
             </div>    
             <div class="element">
                 <h2>*วันที่ยื่น</h2>
