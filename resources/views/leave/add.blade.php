@@ -72,9 +72,19 @@
                 </div>
             </div>
             <div class="element" id="e_textshow">
-                
-                <div name="id_person" id="id_person"></div>
-                {{ csrf_field() }}
+                <table border="1" style="text-align:center;color: #b624da;">
+                    <thead>
+                        <tr>
+                            <th>รหัสพนักงาน</th>
+                            <th>ประเภท</th>
+                            <th>เริ่ม</th>
+                            <th>สิ้นสุด</th>
+                        </tr>   
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>    
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
@@ -189,4 +199,24 @@
 @endsection
 
 @section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+        loadScore(72)
+    });
+
+    //function ajax
+    function loadScore(studentid)
+    {   
+        $.ajax({
+            type :'get',
+            url : "{{ url('/getDataScore') }}",
+            data : {studentid:studentid},
+            dataType : 'json',
+            success : function(data)
+            {
+                console.log(data);
+            }
+        })
+    }
+</script>
 @endsection

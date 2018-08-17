@@ -160,17 +160,31 @@ class LeaveController extends Controller
             'script'=> $aScript,
         );
         return view('leave.report',$data);
+    }    
+
+    
+    public function getFormScore()
+    {     
+        $IDs = lib::select('id')->get();
+        return view('ajax.score',compact('IDs'));
+    }
+    public function getDataScore(Request $request)
+    {
+        if($request->ajax())
+        {            
+            $student = leave::find($request->studentid);            
+            // $nstart_day = $student->nstart_day;
+            // $nend_day = $student->nend_day;
+            // $id_per = $student->id_per;
+            // $type_leave = $student->type_leave;
+            $result = json_decode($student, true);
+            $data = array(
+                'leave' => $result
+            );
+            return response($data);
+        }
     }
 
-    public function fetch(Request $request)
-    {   
-        //$data1 = Leave::find ($request->id);
-
-        $data1 = DB::table('leaves')
-            ->where('id_per', $request->id)
-            ->get();
-        return Response()->json($data1);
-    }
 
     /**
      * Show the form for editing the specified resource.

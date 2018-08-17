@@ -66,7 +66,9 @@ Route::resource('pos','PosController');
 Route::resource('leave','LeaveController');
 Route::get('leave/report/{id}', 'LeaveController@report');
 
-Route::post('fetch', 'LeaveController@fetch');
+Route::get('/getFormScore', 'LeaveController@getFormScore');
+Route::get('/getDataScore', 'LeaveController@getDataScore');
+Route::get('leave/getDataScore', 'LeaveController@getDataScore');
 
 Auth::routes();
 
