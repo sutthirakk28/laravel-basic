@@ -517,10 +517,17 @@ i.icon-plus {
 .deduct{
     color: #498bed;
 }
-.ui-checkbox.bg-dodgerred.ui-small.ui-animation-zoom.round {
-    border-color: #ec0510;
-    background-color: transparent;
-    color: #f7061d;
-    border-width: 2px;
-    border-style: solid;
+.alert.alert-error.leave {
+    font-size: 12px;
+    margin-top: 15px;
+}
+h2.underline {
+    text-decoration: underline;    
+    font-style: italic;
+}
+span#span-name {
+    text-decoration: none;
+    color: dodgerblue;
+    font-family: Kanit;
+    font-style: normal;
 }

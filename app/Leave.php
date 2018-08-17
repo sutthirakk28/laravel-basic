@@ -16,4 +16,17 @@ class Leave extends Model
    'nstart_day',
    'nend_day',
    ];
+
+  protected $primaryKey = 'id_per'; // or null
+  public $incrementing = false;
+
+    public function leaves()
+    {
+      return $this->belongsTo('App\Leaves');
+    }
 }
+// class Leave extends Eloquent {
+
+//     protected $fillable = array('id_per', 'type_leave', 'nstart_day', 'nend_day');
+
+// }

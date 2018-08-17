@@ -12,6 +12,10 @@ use Session;
 use DB;
 use Response;
 
+use App\Leaves;
+use App\Libss;
+use App\Position;
+use App\Department;
 class LeaveController extends Controller
 {
     public function __construct()
@@ -165,23 +169,39 @@ class LeaveController extends Controller
     
     public function getFormScore()
     {     
-        $IDs = lib::select('id')->get();
+        $IDs = lib::select('id','surname')->get();
         return view('ajax.score',compact('IDs'));
     }
     public function getDataScore(Request $request)
     {
         if($request->ajax())
         {            
-            $student = leave::find($request->studentid);            
-            // $nstart_day = $student->nstart_day;
-            // $nend_day = $student->nend_day;
+             $student = Leave::where('id_per', '=', $request->studentid)
+                ->select('id_per','type_leave','nstart_day','nend_day')
+                ->orderBy('type_leave', 'asc')
+                ->take(100)
+                ->get();
+             //$student = Leave::where('id_per', $request->studentid)->first();
+             // $student = Leave::find($request->studentid);
+            //$student = leave::where('id_per', '=', $request->studentid)->get();
+
+            // $student = DB::table('leaves')->where('id_per', '=', $request->studentid)->get();
+             // $response = array(
+             //      'id_per' => $student->id_per,
+             //      'type_leave' => $student->type_leave,
+             //      'nstart_day' => $student->nstart_day,
+             //      'nend_day' => $student->nend_day
+             //  );
+             $result = json_decode($student, true); 
+              return response()->json($result);
+
             // $id_per = $student->id_per;
             // $type_leave = $student->type_leave;
-            $result = json_decode($student, true);
-            $data = array(
-                'leave' => $result
-            );
-            return response($data);
+            // $nstart_day = $student->nstart_day;
+            // $nend_day = $student->nend_day;
+
+            // return response(['id_per'=>$id_per ,'type_leave'=>$type_leave ,'nstart_day'=>$nstart_day ,'nend_day'=>$nend_day ]);
+            
         }
     }
 

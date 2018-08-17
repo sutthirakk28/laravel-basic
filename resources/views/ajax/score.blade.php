@@ -28,7 +28,7 @@
 		select StudentID : <select name="studentid" id="studentid">
 		<option value="">--------</option>
 		@foreach($IDs as $id)
-		<option value="{{ $id->id }}">{{ $id->id }}</option>
+		<option value="{{ $id->id }}">{{ $id->id }}/{{ $id->surname }}</option>
 		@endforeach
 		</select>
 		<table border="1" style="text-align:center;color: #b624da;">
@@ -43,41 +43,55 @@
 	        <tbody>
 
 	        </tbody>
+	        <tfoot>
+	        </tfoot>
 	    </table>  
+	    <meta name="csrf-token" content="{{ csrf_token() }}">
 	</div>
 	<script type="text/javascript">
     $(document).ready(function(){
-        loadScore(44)
+        $('#studentid').on('change',function(){
+        	var studentid = $(this).val();
+        	console.log(studentid);
+        	loadScore(studentid);
+        })
     });
 
     //function ajax
     function loadScore(studentid)
     {   
+    	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            type :'get',
+            type :'POST',
             url : "{{ url('/getDataScore') }}",
-            data : {studentid:studentid},
+            data : {_token: CSRF_TOKEN,studentid:studentid},
             dataType : 'json',
-            success : function(data)
-            {
+            success : function(student)
+            {	 console.log(student);
                 $('tbody').empty();
-                $.each(data.id_per,function(i,data){
-
+                $.each(student,function(index){
+                	
                 	var row = $('<tr/>');
 	                row.append($('<td/>',{
-	                	text : data.id_per,
+	                	text : student[index].id_per,
 	                })).append($('<td/>',{
-	                	text : data.type_leave
+	                	text : student[index].type_leave,
 	                })).append($('<td/>',{
-	                	text : data.nstart_day
+	                	text : student[index].nstart_day,
 	                })).append($('<td/>',{
-	                	text : data.nend_day
+	                	text : student[index].nend_day,
 	                }))
 	                
-	                $('tbody').append(row); 
-	                console.log(row); 
-                })
-                    
+	                $('tbody').append(row);
+	            })
+                $('tfoot').empty();
+	            $('tfoot').append($("<tr/>",{
+
+	                })).append($('<td/>',{
+	                	text : student.id_per,
+	                	colspan : 4,
+	                	style : ['background-color:#ccc;font-weight:bold;text-align:right;']
+	            	}))               
             }
         })
     }

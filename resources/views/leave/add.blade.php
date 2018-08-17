@@ -71,8 +71,19 @@
                     <label for="Seema2">พักร้อน</label>
                 </div>
             </div>
+            <div class="element">
+                <h2 class="underline">สิทธิการลา <span id="span-name"></span></h2>
+                <span class="black">รวม</span> <span class="badge badge-info">102</span>
+                <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-warning">20</span>
+                <span class="yellow">ลาคลอด</span> <span class="badge badge-success">3</span>
+                <span class="red">ลาป่วย</span> <span class="badge badge-success">90</span>
+                <span class="blue">ลากิจ</span> <span class="badge badge-warning">55</span>
+                <span class="black">พักร้อน</span> <span class="badge badge-warning">12</span>
+                <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
+
+            </div>
             <div class="element" id="e_textshow">
-                <table border="1" style="text-align:center;color: #b624da;">
+                <!-- <table border="1" style="text-align:center;color: #b624da;">
                     <thead>
                         <tr>
                             <th>รหัสพนักงาน</th>
@@ -84,19 +95,41 @@
                     <tbody>
 
                     </tbody>
-                </table>    
+                    <tfoot>
+                    </tfoot>
+                </table> -->  
+                <meta name="csrf-token" content="{{ csrf_token() }}">
+
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave2" value="0" required><span data-checked="&#10004;" />
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_0">
+                        <input type="radio" name="type_leave2" value="0" title="*ใช้สิทธิการลา" required id="radio-0"><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาบวช-ทำหมัน</label>
                 </div>
                 <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerred ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave2" value="1" required><span data-checked="&#10004;" />
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_1">
+                        <input type="radio" name="type_leave2" value="1" title="*ใช้สิทธิการลา" id="radio-1"><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาคลอด</label>
+                </div>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_2">
+                        <input type="radio" name="type_leave2" value="2" title="*ใช้สิทธิการลา" id="radio-2"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Ayaan2">ลาป่วย</label>
+                </div>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_3">
+                        <input type="radio" name="type_leave2" value="3" title="*ใช้สิทธิการลา" id="radio-3"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Zoya2">ลากิจ</label>
+                </div>
+                <div class="el-child-inline">
+                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_4">
+                        <input type="radio" name="type_leave2" value="4" title="*ใช้สิทธิการลา" id="radio-4"><span data-checked="&#10004;" />
+                    </div>
+                    <label for="Seema2">พักร้อน</label>
                 </div>
 
             </div>    
@@ -201,20 +234,58 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function(){
-        loadScore(72)
+        $('#id_per').on('change',function(){
+            var studentid = $(this).val();
+            $('h2 span').text($('#id_per option:selected').text());
+            console.log( $('#span-name').val());
+            loadScore(studentid);
+            
+        })
     });
 
     //function ajax
     function loadScore(studentid)
     {   
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            type :'get',
+            type :'POST',
             url : "{{ url('/getDataScore') }}",
-            data : {studentid:studentid},
+            data : {_token: CSRF_TOKEN,studentid:studentid},
             dataType : 'json',
-            success : function(data)
-            {
-                console.log(data);
+            success : function(student)
+            {    
+                // $('tbody').empty();
+                // $.each(student,function(index){
+                    
+                //     var row = $('<tr/>');
+                //     row.append($('<td/>',{
+                //         text : student[index].id_per,
+                //     })).append($('<td/>',{
+                //         text : student[index].type_leave,
+                //     })).append($('<td/>',{
+                //         text : student[index].nstart_day,
+                //     })).append($('<td/>',{
+                //         text : student[index].nend_day,
+                //     }))
+                    
+                //     $('tbody').append(row); 
+                // })
+                if (student != 0) {
+                    $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    // $('#radio_1').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    // $('#radio_2').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    // $('#radio_3').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    // $('#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    
+                } else {
+                    $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    // $('#radio_1').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    // $('#radio_2').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    // $('#radio_3').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    // $('#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-4,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                }
+                               
             }
         })
     }
