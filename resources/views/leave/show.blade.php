@@ -97,6 +97,13 @@
        $timeArr["s"]= substr($time,17,2);
       return $timeArr;
     }
+    function count_day($day1){
+      $date1=date_create($day1);
+      $date2=date_create(date("Y-m-d"));
+      $d=date_diff($date1,$date2);
+      $count = $d->format("%a");
+      return $count;
+    }
   @endphp
   
 
@@ -106,13 +113,23 @@
     <div class="span12">
       <div class="widget-box">
         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-          <h5 class="f_th1"><a href="{{ url('lib/'.$l['lib_id']) }}" target="_blank">{{ $l['surname'].'/'.$l['nickname']}}</a></h5>
+          <h5 class="f_th1">
+            <a href="{{ url('lib/'.$l['lib_id']) }}" target="_blank">{{ $l['surname'].'/'.$l['nickname']}}</a>
+            @php $day_pro=count_day($l['job_start']); @endphp
+            @if($day_pro >= '119')
+              <span class="label label-important2 show">ผ่านโปร</span>
+            @else
+              @php $total = $day_pro - 119; @endphp
+                <span class="label label-important show">ไม่ผ่านโปร {{$total}}</span>
+            @endif
+          </h5>
         </div>
         <div class="widget-content nopadding">
           <table class="table table-bordered table-striped">
             <tbody>              
-              <tr class="odd gradeX">
-                <td>ชื่อ-นามสกุล</td>
+              <tr class="odd gradeX">                
+                <td>ชื่อ-นามสกุล                    
+                </td>
                 <td><a href="{{ url('lib/'.$l['lib_id']) }}" target="_blank">{{ $l['surname'].'/'.$l['nickname']}}</a></td>
               </tr>
               <tr class="odd gradeX">
@@ -184,6 +201,18 @@
                       @endif              
                     @endif            
                   @endif
+                </td>
+              </tr>
+              <tr class="odd gradeX">
+                <td>สถานะ</td>
+                <td>
+                 @if($l['status_leave'] == 1)                           
+                  <span class="badge badge-success">ไม่หักเงิน(กำหนดเอง)</span>
+                @elseif($l['status_leave'] == 2)                           
+                  <span class="badge badge-important">หักเงิน(กำหนดเอง)</span>
+                @else                          
+                  <span class="badge badge-info">คิดตามระบบ</span>
+                @endif
                 </td>
               </tr>
               <tr class="odd gradeX">

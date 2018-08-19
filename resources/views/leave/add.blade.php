@@ -7,7 +7,7 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb">
-        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลการลางาน" class="tip-bottom">
             <i class="icon-book"></i> ข้อมูลการลางาน</a>
         <a href="#">แบบฟอร์มลางานของพนักงาน</a>
     </div>
@@ -28,6 +28,17 @@
                 </div>
             @endif
             <div class="element">
+                <h2>*วันที่ยื่น</h2>
+                <div class="form-group">
+                    <div class='input-group'>
+                        {{ form::date('date_leave','',array('required' => 'required','class' => 'form-control')) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="element">
                 <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" data-dependent="id_person" required>
@@ -37,8 +48,8 @@
                       @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="element">
+            </div>            
+            <!-- <div class="element">
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
@@ -70,7 +81,7 @@
                     </div>
                     <label for="Seema2">พักร้อน</label>
                 </div>
-            </div>
+            </div> -->
             <div class="element">
                 <h2 class="underline">สิทธิการลา <span id="span-name"></span></h2>
                 <span class="black">รวม</span> <span class="badge badge-info">102</span>
@@ -81,6 +92,31 @@
                 <span class="black">พักร้อน</span> <span class="badge badge-warning">12</span>
                 <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
 
+            </div>
+            
+            <div class="element">
+                <h2 class="h2">วันที่ลา</h2>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                       <strong class="font1">*เริ่มต้น</strong>
+                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{ $now1 }}T08:30" class="form-control" required>
+                        <strong>-  ถึง  -</strong>
+                        <strong class="font1">*สิ้นสุด</strong>
+                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
+                    </div>
+                </div>
+				<div class="alert alert-danger day">
+				  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
+				</div>
+            </div>
+             <div class="element">
+                <h2>สถานะ</h2>
+                <select name="status_leave" id="status_leave" class="selectpicker show-tick select">
+                    <option value="0" selected >คำนวณตามระบบ</option>
+                    <option value="1" >ไม่หักเงิน</option> 
+                    <option value="2" >หักเงิน</option>                  
+                </select>
             </div>
             <div class="element" id="e_textshow">
                 <!-- <table border="1" style="text-align:center;color: #b624da;">
@@ -103,67 +139,41 @@
                 <h2>*ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_0">
-                        <input type="radio" name="type_leave2" value="0" title="*ใช้สิทธิการลา" required id="radio-0"><span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="0" title="*ใช้สิทธิการลา" required id="radio-0"><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาบวช-ทำหมัน</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_1">
-                        <input type="radio" name="type_leave2" value="1" title="*ใช้สิทธิการลา" id="radio-1"><span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="1" title="*ใช้สิทธิการลา" id="radio-1"><span data-checked="&#10004;" />
                     </div>
                     <label for="Karim2">ลาคลอด</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_2">
-                        <input type="radio" name="type_leave2" value="2" title="*ใช้สิทธิการลา" id="radio-2"><span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="2" title="*ใช้สิทธิการลา" id="radio-2"><span data-checked="&#10004;" />
                     </div>
                     <label for="Ayaan2">ลาป่วย</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_3">
-                        <input type="radio" name="type_leave2" value="3" title="*ใช้สิทธิการลา" id="radio-3"><span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="3" title="*ใช้สิทธิการลา" id="radio-3"><span data-checked="&#10004;" />
                     </div>
                     <label for="Zoya2">ลากิจ</label>
                 </div>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_4">
-                        <input type="radio" name="type_leave2" value="4" title="*ใช้สิทธิการลา" id="radio-4"><span data-checked="&#10004;" />
+                        <input type="radio" name="type_leave" value="4" title="*ใช้สิทธิการลา" id="radio-4"><span data-checked="&#10004;" />
                     </div>
                     <label for="Seema2">พักร้อน</label>
                 </div>
 
             </div>    
-            <div class="element">
-                <h2>*วันที่ยื่น</h2>
-                <div class="form-group">
-                    <div class='input-group'>
-                        {{ form::date('date_leave','',array('required' => 'required','class' => 'form-control')) }}
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            
             <div class="element">
                 <h2>เหตุผลการลา</h2>
                 {{ form::textarea('reason_leave','', ['class' => 'form-control']) }}
-            </div>
-            <div class="element">
-                <h2 class="h2">วันที่ลา</h2>
-                <div class="row">
-
-                    <div class="col-xs-12">
-                       <strong class="font1">*เริ่มต้น</strong>
-                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{ $now1 }}T08:30" class="form-control" required>
-                        <strong>-  ถึง  -</strong>
-                        <strong class="font1">*สิ้นสุด</strong>
-                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
-                    </div>
-                </div>
-				<div class="alert alert-danger day">
-				  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
-				</div>
-            </div>
+            </div>    
             <div class="element">
                 <h2>หลักฐานการลา</h2>
                 <div class="el-child-inline">
@@ -241,6 +251,19 @@
             loadScore(studentid);
             
         })
+
+        $('#status_leave').on('change',function(){
+            var status_leave = $('#status_leave').val();
+            console.log( status_leave);
+            if(status_leave == 1){
+                $('#status_leave').css({'border-color': 'limegreen'});
+            }else if(status_leave == 2){
+                $('#status_leave').css({'border-color': '#fb0101'});
+            }else{
+                $('#status_leave').css({'border-color': 'dodgerblue'});
+            }
+            
+        })
     });
 
     //function ajax
@@ -276,14 +299,14 @@
                     // $('#radio_2').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
                     // $('#radio_3').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
                     // $('#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    
+                    $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', '*ใช้สิทธิการลา');
                 } else {
                     $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
                     // $('#radio_1').css({'border-color': '#ec0510','color' :'#ec0510'});
                     // $('#radio_2').css({'border-color': '#ec0510','color' :'#ec0510'});
                     // $('#radio_3').css({'border-color': '#ec0510','color' :'#ec0510'});
                     // $('#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    $('#radio-4,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                    $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
                 }
                                
             }

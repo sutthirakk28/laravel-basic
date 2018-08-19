@@ -102,6 +102,7 @@ class LeaveController extends Controller
             $checkBox ='';
         }
 
+
         $leave = new Leave;
         $leave->id_per = $request->id_per;
         $leave->type_leave = $request->type_leave;
@@ -113,6 +114,7 @@ class LeaveController extends Controller
         $leave->nend_day = $request->nend_day;
         $leave->proof_leave = $checkBox;
         $leave->approved = $request->approved;
+        $leave->status_leave = $request->status_leave;
         $leave->created_at = $now;
         $leave->save();
 
@@ -131,7 +133,7 @@ class LeaveController extends Controller
         $aScript=array('js/leave/main.js'); 
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
-            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id')
+            ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id','libs.job_start')
             ->orderBy('leaves.date_leave', 'DESC')
             ->where('leaves.id','=',$id)
             ->get();
@@ -278,6 +280,7 @@ class LeaveController extends Controller
             'nend_day' => $request->nend_day,
             'proof_leave' => $checkBox,
             'approved' => $request->approved,
+            'status_leave' => $request->status_leave,
             'updated_at' => $now,
         ]);
 

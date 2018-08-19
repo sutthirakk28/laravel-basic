@@ -9,7 +9,7 @@
 @section('content-header')
 <div id="content-header">
   <div id="breadcrumb">
-    <a href="{{ url('/lib/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+    <a href="{{ url('/lib/') }}" title="กลับไปข้อมูลพนักงาน" class="tip-bottom">
       <i class="icon-book"></i> ข้อมูลพนักงาน</a>
     <a href="#">แสดงข้อมูลพนักงาน</a>
   </div>

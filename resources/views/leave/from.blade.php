@@ -29,6 +29,17 @@
                 </div>
             @endif
             <div class="element">
+                <h2>*วันที่ยื่น</h2>
+                <div class="form-group">
+                    <div class='input-group'>
+                        {{ form::date('date_leave',$l['date_leave'],array('required' => 'required','class' => 'form-control')) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="element">
                 <h2>*เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>                
@@ -41,6 +52,41 @@
 					  	@endforeach
                     </select>
                 </div>
+            </div>
+            <div class="element">
+                <h2 class="h2">วันที่ลา</h2>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                       <strong class="font1">*เริ่มต้น</strong>
+                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{$l['nstart_day']}}" class="form-control" required>
+                        <strong>-  ถึง  -</strong>
+                        <strong class="font1">*สิ้นสุด</strong>
+                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{$l['nend_day']}}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="alert alert-danger day">
+                  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
+                </div>
+            </div>
+            <div class="element">
+                <h2>สถานะ</h2>
+                <select name="status_leave" id="status_leave" class="selectpicker show-tick select">
+                    @if($l['status_leave'] == 1)
+                        <option value="0"  >คำนวณตามระบบ</option>
+                        <option value="1" selected>ไม่หักเงิน</option> 
+                        <option value="2" >หักเงิน</option>
+                    @elseif($l['status_leave'] == 2)
+                        <option value="0" >คำนวณตามระบบ</option>
+                        <option value="1" >ไม่หักเงิน</option> 
+                        <option value="2" selected >หักเงิน</option>
+                    @else
+                        <option value="0" selected >คำนวณตามระบบ</option>
+                        <option value="1" >ไม่หักเงิน</option> 
+                        <option value="2" >หักเงิน</option>
+                    @endif
+                                      
+                </select>
             </div>
             <div class="element">
                 <h2>*ประเภทการลา</h2>
@@ -128,37 +174,12 @@
 	                </div>
                 @endif                       
             </div>
-            <div class="element">
-                <h2>*วันที่ยื่น</h2>
-                <div class="form-group">
-                    <div class='input-group'>
-                        {{ form::date('date_leave',$l['date_leave'],array('required' => 'required','class' => 'form-control')) }}
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            
             <div class="element">
                 <h2>เหตุผลการลา</h2>
                 {{ form::textarea('reason_leave',$l['reason_leave'], ['class' => 'form-control']) }}
             </div>
-            <div class="element">
-                <h2 class="h2">วันที่ลา</h2>
-                <div class="row">
-
-                    <div class="col-xs-12">
-                       <strong class="font1">*เริ่มต้น</strong>
-                        <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{$l['nstart_day']}}" class="form-control" required>
-                        <strong>-  ถึง  -</strong>
-                        <strong class="font1">*สิ้นสุด</strong>
-                        <input id="nend_day" type="datetime-local" name="nend_day" value="{{$l['nend_day']}}" class="form-control" required>
-                    </div>
-                </div>
-				<div class="alert alert-danger day">
-				  <strong>คำเตือน !</strong> ช่วงเวลาทำการของ บริษัท ทีพีเอ็ม(1980) จำกัด : <span class="day1">จันทร์-เสาร์ เวลา 08:30น. - 17:30น.</sapn>
-				</div>
-            </div>
+            
             <div class="element">
                 <h2>หลักฐานการลา</h2>
 	        @php

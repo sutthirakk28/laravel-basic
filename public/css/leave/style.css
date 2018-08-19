@@ -473,6 +473,11 @@ select#id_per {
     font-size: 14px;
     font-family: Maitree;
 }
+select#status_leave {
+    font-size: 14px;
+    font-family: Maitree;
+    border-color: dodgerblue;
+}
 input.form-control {
     font-family: maitree;
 }
@@ -501,15 +506,14 @@ span.label.label-important2 {
 span.label.label-important3 {
     background-color: green;
 }
+span.label.label-important2.show,span.label.label-important.show {
+    margin-top: -3px;
+    margin-left: 4px;
+}
+
 .alert.alert-error {
     margin-bottom: 5px;
     font-family: Taviraj;
-}
-.alert-num{
-    font-size: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    font-family: maitree;
 }
 i.icon-plus {
     margin-top: 8px;
@@ -530,4 +534,10 @@ span#span-name {
     color: dodgerblue;
     font-family: Kanit;
     font-style: normal;
+}
+.noti {
+    font-size: 11px;
+    padding: 0px;
+    font-style: italic;
+    font-family: maitree;
 }

@@ -8,7 +8,7 @@
 @section('content-header')
 <div id="content-header">
   <div id="breadcrumb">
-    <a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
+    <a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลตำแหน่ง" class="tip-bottom">
       <i class="icon-book"></i> ข้อมูลตำแหน่ง</a>
     <a href="#">แสดงข้อมูลตำแหน่ง</a>
   </div>

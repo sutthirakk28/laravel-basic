@@ -106,9 +106,9 @@
                 <th width="80">วันที่ยื่น</th>
                 <th >รูป</th>
                 <th >ชื่อ-นามสกุล</th>
-                <th width="90">ประเภท</th>
+                <th width="80">ประเภท</th>
                 <th >วันที่ลา</th>
-                <th width="50">จำนวน</th>
+                <th width="115">จำนวน</th>
                 <!-- <th >เหตุผล</th> -->
                 <th >หลักฐานการลา</th>
                 <th >อนุมัติโดย</th>
@@ -182,23 +182,72 @@
 
                 @if($start_day_times == '08:30' && $end_day_times == '17:30')
 
-                  {{ $num_day['D'].' วัน ' }}
+                  {{ $num_day['D'].' วัน ' }}<br />
+
+                  @if($l['status_leave'] == 1)                           
+                    <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                  @elseif($l['status_leave'] == 2)                           
+                    <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                  @else                          
+                    <div class="alert alert-info noti">คิดตามระบบ</div>
+                  @endif
                 @else
                   @if($time['D'] == '0')
                     @if($time['M'] == '0')
-                      {{  $time['H'].' ชั่วโมง ' }}
+                      {{  $time['H'].' ชั่วโมง ' }}<br />
+
+                      @if($l['status_leave'] == 1)                           
+                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                      @elseif($l['status_leave'] == 2)                           
+                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                      @else                          
+                        <div class="alert alert-info noti">คิดตามระบบ</div>
+                      @endif
                     @else
                       @if($time['H'] == '0')
-                        {{ $time['M'].' นาที' }}
+                        {{ $time['M'].' นาที' }}<br />
+
+                        @if($l['status_leave'] == 1)                           
+                          <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                        @elseif($l['status_leave'] == 2)                           
+                          <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                        @else                          
+                          <div class="alert alert-info noti">คิดตามระบบ</div>
+                        @endif
                       @else
-                        {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}
+                        {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}<br />
+
+                        @if($l['status_leave'] == 1)                           
+                          <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                        @elseif($l['status_leave'] == 2)                           
+                          <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                        @else                          
+                          <div class="alert alert-info noti">คิดตามระบบ</div>
+                        @endif
                       @endif 
                     @endif
                   @else
                     @if($time['M'] == '0')
-                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}
+                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}<br />
+
+                      @if($l['status_leave'] == 1)                           
+                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                      @elseif($l['status_leave'] == 2)                           
+                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                      @else                          
+                        <div class="alert alert-info noti">คิดตามระบบ</div>
+                      @endif
                     @else
-                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}
+                      {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}<br /> 
+
+                        @if($l['status_leave'] == 1)                           
+                          <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
+                        @elseif($l['status_leave'] == 2)                           
+                          <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
+                        @else                          
+                          <div class="alert alert-info noti">คิดตามระบบ</div>
+                        @endif
+
                     @endif              
                   @endif            
                 @endif         
