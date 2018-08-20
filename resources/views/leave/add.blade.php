@@ -48,50 +48,17 @@
                       @endforeach
                     </select>
                 </div>
-            </div>            
-            <!-- <div class="element">
-                <h2>*ประเภทการลา</h2>
-                <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave" value="0" required><span data-checked="&#10004;" />
-                    </div>
-                    <label for="Karim2">ลาบวช-ทำหมัน</label>
-                </div>
-                <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave" value="1" required><span data-checked="&#10004;" />
-                    </div>
-                    <label for="Karim2">ลาคลอด</label>
-                </div>
-                <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave" value="2" ><span data-checked="&#10004;" />
-                    </div>
-                    <label for="Ayaan2">ลาป่วย</label>
-                </div>
-                <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave" value="3" ><span data-checked="&#10004;" />
-                    </div>
-                    <label for="Zoya2">ลากิจ</label>
-                </div>
-                <div class="el-child-inline">
-                    <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
-                        <input type="radio" name="type_leave" value="4" ><span data-checked="&#10004;" />
-                    </div>
-                    <label for="Seema2">พักร้อน</label>
-                </div>
-            </div> -->
+            </div>
             <div class="element">
                 <h2 class="underline">สิทธิการลา <span id="span-name"></span></h2>
                 <span class="black">รวม</span> <span class="badge badge-info">102</span>
-                <span class="orange">ลาบวช-ทำหมัน</span> <span class="badge badge-warning">20</span>
-                <span class="yellow">ลาคลอด</span> <span class="badge badge-success">3</span>
-                <span class="red">ลาป่วย</span> <span class="badge badge-success">90</span>
-                <span class="blue">ลากิจ</span> <span class="badge badge-warning">55</span>
+                <span class="black">ลาบวช-ทำหมัน</span> <span class="badge badge-warning">20</span>
+                <span class="black">ลาคลอด</span> <span class="badge badge-success">3</span>
+                <span class="black">ลาป่วย</span> <span class="badge badge-success">90</span>
+                <span class="black">ลากิจ</span> <span class="badge badge-warning">55</span>
                 <span class="black">พักร้อน</span> <span class="badge badge-warning">12</span>
-                <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
-
+<!--                 <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
+ -->
             </div>
             
             <div class="element">
@@ -119,7 +86,7 @@
                 </select>
             </div>
             <div class="element" id="e_textshow">
-                <!-- <table border="1" style="text-align:center;color: #b624da;">
+                <table border="1" style="text-align:center;color: #b624da;">
                     <thead>
                         <tr>
                             <th>รหัสพนักงาน</th>
@@ -133,7 +100,8 @@
                     </tbody>
                     <tfoot>
                     </tfoot>
-                </table> -->  
+                </table>
+                <div class="showdata" id="showdata">dddd</div>  
                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
                 <h2>*ประเภทการลา</h2>
@@ -247,14 +215,12 @@
         $('#id_per').on('change',function(){
             var studentid = $(this).val();
             $('h2 span').text($('#id_per option:selected').text());
-            console.log( $('#span-name').val());
             loadScore(studentid);
             
         })
 
         $('#status_leave').on('change',function(){
             var status_leave = $('#status_leave').val();
-            console.log( status_leave);
             if(status_leave == 1){
                 $('#status_leave').css({'border-color': 'limegreen'});
             }else if(status_leave == 2){
@@ -276,23 +242,45 @@
             data : {_token: CSRF_TOKEN,studentid:studentid},
             dataType : 'json',
             success : function(student)
-            {    
-                // $('tbody').empty();
-                // $.each(student,function(index){
+            {    console.log(student);
+                $('#showdata').empty();
+                $('tbody').empty();
+                var data = student.leave;
+
+                $.each(data,function(i,item){
                     
-                //     var row = $('<tr/>');
-                //     row.append($('<td/>',{
-                //         text : student[index].id_per,
-                //     })).append($('<td/>',{
-                //         text : student[index].type_leave,
-                //     })).append($('<td/>',{
-                //         text : student[index].nstart_day,
-                //     })).append($('<td/>',{
-                //         text : student[index].nend_day,
-                //     }))
-                    
-                //     $('tbody').append(row); 
-                // })
+                    var row = $('<tr/>');
+                    row.append($('<td/>',{
+                        text : data[i].id_per,
+                    })).append($('<td/>',{
+                        text : data[i].type_leave,
+                    })).append($('<td/>',{
+                        text : data[i].nstart_day,
+                    })).append($('<td/>',{
+                        text : data[i].nend_day,
+                    }));                    
+                    $('tbody').append(row);
+
+                    var nstart_day = data[i].nstart_day.split('T');
+                    var start_day = start_day[0].split('-');
+                    var start_times = nstart_day[1].split(':');
+
+                    var nend_day = data[i].nend_day.split('T');
+                    var end_day = nend_day[0].split('-');
+                    var end_times = nend_day[1].split(':');
+
+                    console.log(nend_day);
+                //     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                //     var firstDate = new Date(2018,08,13);
+                //     var secondDate = new Date(2018,08,18);
+
+                //     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+
+                // $('#showdata').append(' เวลา: '+diffDays+'วัน   ');    
+                })
+                
+                
+
                 if (student != 0) {
                     $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
                     // $('#radio_1').css({'border-color': 'dodgerblue','color' :'dodgerblue'});

@@ -155,6 +155,7 @@ class LeaveController extends Controller
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->select('leaves.*','libs.surname','libs.nickname','libs.job_start')
             ->where('leaves.id_per','=',$id)
+            ->orderBy('leaves.nstart_day', 'ASC')
             ->get();        
         $lib2 = DB::table('libs')->select('id','surname','nickname  as i','job_start')->where('id', $id)->first();
         $result = json_decode($lib, true); 
@@ -182,20 +183,20 @@ class LeaveController extends Controller
                 ->select('id_per','type_leave','nstart_day','nend_day')
                 ->orderBy('type_leave', 'asc')
                 ->take(100)
-                ->get();
+                ->get();            
+
+
              //$student = Leave::where('id_per', $request->studentid)->first();
              // $student = Leave::find($request->studentid);
             //$student = leave::where('id_per', '=', $request->studentid)->get();
 
             // $student = DB::table('leaves')->where('id_per', '=', $request->studentid)->get();
-             // $response = array(
-             //      'id_per' => $student->id_per,
-             //      'type_leave' => $student->type_leave,
-             //      'nstart_day' => $student->nstart_day,
-             //      'nend_day' => $student->nend_day
-             //  );
-             $result = json_decode($student, true); 
-              return response()->json($result);
+             $result = json_decode($student, true);  
+             $response = array(
+                'leave' => $result
+              );
+              
+              return response()->json($response);
 
             // $id_per = $student->id_per;
             // $type_leave = $student->type_leave;

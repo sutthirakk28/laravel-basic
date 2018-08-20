@@ -132,18 +132,13 @@
             $leave_deliver = 0;
             $leave_sick = 0;
             $leave_Work = 0;
-            $leave_Government = 0;
-
-            $ordain_Deduc = 0; 
-            $ordain_Not_Deduc = 0; 
-            $deliver_Deduc = 0; 
-            $deliver_Not_Deduc = 0;
-            $sick_Deduc = 0; 
-            $sick_Not_Deduc = 0; 
-            $Work_Deduc = 0; 
-            $Work_Not_Deduc = 0;
-            $Government_Deduc = 0; 
-            $Government_Not_Deduc = 0;
+            $leave_Government = 0;           
+            
+            $sum_ordain_Not_Deduc_system = 0;            
+            $sum_deliver_Not_Deduc_system = 0;
+            $sum_sick_Not_Deduc_system = 0; 
+            $sum_Work_Not_Deduc_system = 0;
+            $sum_Government_Not_Deduc_system = 0;
           @endphp
 
           @foreach($lib as $proof)
@@ -192,6 +187,23 @@
             $start_day_times = $nstart_day[1];
             $end_day_year = $nend_day[0];
             $end_day_times = $nend_day[1];
+
+            $ordain_Deduc = 0; 
+            $ordain_Not_Deduc = 0; 
+            $deliver_Deduc = 0; 
+            $deliver_Not_Deduc = 0;
+            $sick_Deduc = 0; 
+            $sick_Not_Deduc = 0; 
+            $Work_Deduc = 0; 
+            $Work_Not_Deduc = 0;
+            $Government_Deduc = 0; 
+            $Government_Not_Deduc = 0;
+
+            $ordain_Not_Deduc_system = 0;
+            $deliver_Not_Deduc_system = 0;
+            $sick_Not_Deduc_system = 0; 
+            $Work_Not_Deduc_system = 0;
+            $Government_Not_Deduc_system = 0;
           @endphp
 
           @if ($start_day_year == $end_day_year)
@@ -234,8 +246,8 @@
             $PassJob = date('Y-m-d', strtotime("+119 day", strtotime($job_start)));
           @endphp
 
-          @if($start_day_times == '08:30' && $end_day_times == '17:30')
-            {{ $num_day['D'].' วัน ' }}<br />
+      @if($start_day_times == '08:30' && $end_day_times == '17:30')
+        {{ $num_day['D'].' วัน ' }}<br />
             
 
             @php 
@@ -252,292 +264,15 @@
                 @php $ordain_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $ordain_Not_Deduc = $d; @endphp
-                @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                  @php $ordain_Deduc = $d; @endphp
-                @endif
-              @endif
-              @php $ordain_day = $d; @endphp              
-            @elseif($l['type_leave'] == 1)
-              @if($l['status_leave'] == 1)
-                <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @php $deliver_Not_Deduc = $d; @endphp
-              @elseif($l['status_leave'] == 2)
-                <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @php $deliver_Deduc = $d; @endphp
-              @else 
-                @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $deliver_Not_Deduc = $d; @endphp
-                @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                  @php $deliver_Deduc = $d; @endphp
-                @endif
-              @endif
-              @php $deliver_day = $d; @endphp 
-            @elseif ($l['type_leave'] == 2)
-              @if($l['status_leave'] == 1)
-                <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @php $sick_Not_Deduc = $d; @endphp
-              @elseif($l['status_leave'] == 2)
-                <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @php $sick_Deduc = $d; @endphp
-              @else 
-                @if($start_day_year > $PassJob)
-                <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $sick_Not_Deduc = $d; @endphp
-                @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                  @php $sick_Deduc = $d; @endphp
-                @endif
-              @endif
-              @php $sick_day = $d; @endphp
-            @elseif ($l['type_leave'] == 3)
-              @if($l['status_leave'] == 1)
-                <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @php $Work_Not_Deduc = $d; @endphp
-              @elseif($l['status_leave'] == 2)
-                <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @php $Work_Deduc = $d; @endphp
-              @else 
-                @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Work_Not_Deduc = $d; @endphp
-                @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                  @php $Work_Deduc = $d; @endphp
-                @endif
-              @endif
-              @php $Work_day = $d; @endphp
-            @elseif ($l['type_leave'] == 4)
-              @if($l['status_leave'] == 1)
-                <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @php $Government_Not_Deduc = $d; @endphp
-              @elseif($l['status_leave'] == 2)
-                <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @php $Government_Deduc = $d; @endphp
-              @else 
-                @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Government_Not_Deduc = $d; @endphp
-                @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                  @php $Government_Deduc = $d; @endphp
-                @endif
-              @endif
-              @php $Government_day = $d; @endphp
-            @endif           
-            
-          @else
-            <!-- @if($time['D'] == '0')
-              @if($time['M'] == '0')
-                {{  $time['H'].' ชั่วโมง ' }}<br />
-               
-                @php
-                  $d = $time['H'] * 60;
-                  $sum = $d;
-                @endphp
-                  @if ($l['type_leave'] == 0)
-                    @if($l['status_leave'] == 1)
-                      <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                      @php $ordain_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                      @php $ordain_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                        @php $ordain_Not_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                        @php $ordain_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $ordain_day = $d; @endphp              
-                  @elseif($l['type_leave'] == 1)
-                    @if($l['status_leave'] == 1)
-                      <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                      @php $deliver_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                      @php $deliver_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                        @php $deliver_Not_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                        @php $deliver_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $deliver_day = $d; @endphp 
-                  @elseif ($l['type_leave'] == 2)
-                    @if($l['status_leave'] == 1)
-                      <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                      @php $sick_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                      @php $sick_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                      <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                        @php $sick_Not_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                        @php $sick_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $sick_day = $d; @endphp
-                  @elseif ($l['type_leave'] == 3)
-                    @if($l['status_leave'] == 1)
-                      <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                      @php $Work_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                      @php $Work_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                        @php $Work_Not_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                        @php $Work_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $Work_day = $d; @endphp
-                  @elseif ($l['type_leave'] == 4)
-                    @if($l['status_leave'] == 1)
-                      <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                      @php $Government_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                      @php $Government_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                        @php $Government_Not_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                        @php $Government_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $Government_day = $d; @endphp
+                  @if($sum_ordain_Not_Deduc_system < 21600)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $ordain_Not_Deduc = $d; $ordain_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $ordain_Deduc = $d; @endphp
                   @endif
-              @else                
-                @if($time['H'] == '0')
-                  {{ $time['M'].' นาที' }}<br />                
-                  @php
-                    $d = $time['M'];
-                    $sum = $d;
-                  @endphp
-                    @if ($l['type_leave'] == 0)
-                      @if($l['status_leave'] == 1)
-                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                        @php $ordain_Not_Deduc = $d; @endphp
-                      @elseif($l['status_leave'] == 2)
-                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                        @php $ordain_Deduc = $d; @endphp
-                      @else 
-                        @if($start_day_year > $PassJob)
-                          <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                          @php $ordain_Not_Deduc = $d; @endphp
-                        @else
-                          <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                          @php $ordain_Deduc = $d; @endphp
-                        @endif
-                      @endif
-                      @php $ordain_day = $d; @endphp              
-                    @elseif($l['type_leave'] == 1)
-                      @if($l['status_leave'] == 1)
-                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                        @php $deliver_Not_Deduc = $d; @endphp
-                      @elseif($l['status_leave'] == 2)
-                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                        @php $deliver_Deduc = $d; @endphp
-                      @else 
-                        @if($start_day_year > $PassJob)
-                          <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                          @php $deliver_Not_Deduc = $d; @endphp
-                        @else
-                          <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                          @php $deliver_Deduc = $d; @endphp
-                        @endif
-                      @endif
-                      @php $deliver_day = $d; @endphp 
-                    @elseif ($l['type_leave'] == 2)
-                      @if($l['status_leave'] == 1)
-                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                        @php $sick_Not_Deduc = $d; @endphp
-                      @elseif($l['status_leave'] == 2)
-                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                        @php $sick_Deduc = $d; @endphp
-                      @else 
-                        @if($start_day_year > $PassJob)
-                        <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                          @php $sick_Not_Deduc = $d; @endphp
-                        @else
-                          <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                          @php $sick_Deduc = $d; @endphp
-                        @endif
-                      @endif
-                      @php $sick_day = $d; @endphp
-                    @elseif ($l['type_leave'] == 3)
-                      @if($l['status_leave'] == 1)
-                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                        @php $Work_Not_Deduc = $d; @endphp
-                      @elseif($l['status_leave'] == 2)
-                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                        @php $Work_Deduc = $d; @endphp
-                      @else 
-                        @if($start_day_year > $PassJob)
-                          <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                          @php $Work_Not_Deduc = $d; @endphp
-                        @else
-                          <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                          @php $Work_Deduc = $d; @endphp
-                        @endif
-                      @endif
-                      @php $Work_day = $d; @endphp
-                    @elseif ($l['type_leave'] == 4)
-                      @if($l['status_leave'] == 1)
-                        <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                        @php $Government_Not_Deduc = $d; @endphp
-                      @elseif($l['status_leave'] == 2)
-                        <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                        @php $Government_Deduc = $d; @endphp
-                      @else 
-                        @if($start_day_year > $PassJob)
-                          <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                          @php $Government_Not_Deduc = $d; @endphp
-                        @else
-                          <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
-                          @php $Government_Deduc = $d; @endphp
-                        @endif
-                      @endif
-                      @php $Government_day = $d; @endphp
-                    @endif
-                @else -->
-                   <!--  {{ $time['H'].' ชั่วโมง '.$time['M'].' นาที' }}<br />                    
-                  @php 
-                    $m = $time['H'] * 60;
-                    $d = $time['M'] + $m;
-                    $sum = $d;
-                  @endphp
-                    @if ($l['type_leave'] == 0)
-            @if($l['status_leave'] == 1)
-                <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @php $ordain_Not_Deduc = $d; @endphp
-              @elseif($l['status_leave'] == 2)
-                <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @php $ordain_Deduc = $d; @endphp
-              @else 
-                @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $ordain_Not_Deduc = $d; @endphp
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $ordain_Deduc = $d; @endphp
                 @endif
               @endif
@@ -551,10 +286,15 @@
                 @php $deliver_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $deliver_Not_Deduc = $d; @endphp
+                  @if($sum_deliver_Not_Deduc_system < 129600)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $deliver_Not_Deduc = $d; $deliver_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $deliver_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $deliver_Deduc = $d; @endphp
                 @endif
               @endif
@@ -568,10 +308,15 @@
                 @php $sick_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $sick_Not_Deduc = $d; @endphp
+                  @if($sum_sick_Not_Deduc_system < 43200)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $sick_Not_Deduc = $d; $sick_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $sick_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $sick_Deduc = $d; @endphp
                 @endif
               @endif
@@ -585,10 +330,15 @@
                 @php $Work_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Work_Not_Deduc = $d; @endphp
+                  @if($sum_Work_Not_Deduc_system < 8640)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $Work_Not_Deduc = $d; $Work_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $Work_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $Work_Deduc = $d; @endphp
                 @endif
               @endif
@@ -602,108 +352,30 @@
                 @php $Government_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Government_Not_Deduc = $d; @endphp
+                  @if($sum_Government_Not_Deduc_system < 8640)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $Government_Not_Deduc = $d; $Government_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $Government_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $Government_Deduc = $d; @endphp
                 @endif
-            @endif
-              @php $Government_day = $d; @endphp
-        @endif
-                @endif                
               @endif
-            @else
-              @if($time['M'] == '0')
-                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '}}<br />
-                @if($l['status_leave'] == 1)                           
-                  <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
-                @elseif($l['status_leave'] == 2)                           
-                  <div class="alert alert-error noti">หักเงิน(กำหนดเอง)</div>
-                @else                          
-                  <div class="alert alert-info noti">คิดตามระบบ</div>
-                @endif 
-                @php 
-                  $h = $time['D'] * 24;
-                  $d = ($time['H'] + $h) * 60;
-                  $sum = $d;
-                @endphp
-                  @if ($l['type_leave'] == 0)
-                    @if($l['status_leave'] == 1)
-                      @php $ordain_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      @php $ordain_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        @php $ordain_Not_Deduc = $d; @endphp
-                      @else
-                        @php $ordain_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $ordain_day = $d; @endphp              
-                  @elseif($l['type_leave'] == 1)
-                    @if($l['status_leave'] == 1)
-                      @php $deliver_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      @php $deliver_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        @php $deliver_Not_Deduc = $d; @endphp
-                      @else
-                        @php $deliver_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $deliver_day = $d; @endphp 
-                  @elseif ($l['type_leave'] == 2)
-                    @if($l['status_leave'] == 1)
-                      @php $sick_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      @php $sick_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        @php $sick_Not_Deduc = $d; @endphp
-                      @else
-                        @php $sick_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $sick_day = $d; @endphp
-                  @elseif ($l['type_leave'] == 3)
-                    @if($l['status_leave'] == 1)
-                      @php $Work_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      @php $Work_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        @php $Work_Not_Deduc = $d; @endphp
-                      @else
-                        @php $Work_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $Work_day = $d; @endphp
-                  @elseif ($l['type_leave'] == 4)
-                    @if($l['status_leave'] == 1)
-                      @php $Government_Not_Deduc = $d; @endphp
-                    @elseif($l['status_leave'] == 2)
-                      @php $Government_Deduc = $d; @endphp
-                    @else 
-                      @if($start_day_year > $PassJob)
-                        @php $Government_Not_Deduc = $d; @endphp
-                      @else
-                        @php $Government_Deduc = $d; @endphp
-                      @endif
-                    @endif
-                    @php $Government_day = $d; @endphp
-                  @endif -->
+              @php $Government_day = $d; @endphp
+            @endif
           @else
-                {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}<br />
-                @php
-                  $h = $time['D'] * 24;
-                  $m = ($time['H'] + $h) * 60;
-                  $d = ($time['M'] + $m);
-                  $sum = $d;
-                @endphp
-                  @if ($l['type_leave'] == 0)
-            @if($l['status_leave'] == 1)
+            {{ $time['D'].' วัน '.$time['H'].' ชั่วโมง '.$time['M'].' นาที'}}<br />
+            @php
+              $h = $time['D'] * 24;
+              $m = ($time['H'] + $h) * 60;
+              $d = ($time['M'] + $m);
+              $sum = $d;
+            @endphp
+            @if ($l['type_leave'] == 0)
+              @if($l['status_leave'] == 1)
                 <div class="alert alert-success noti">ไม่หักเงิน(กำหนดเอง)</div>
                 @php $ordain_Not_Deduc = $d; @endphp
               @elseif($l['status_leave'] == 2)
@@ -711,10 +383,15 @@
                 @php $ordain_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $ordain_Not_Deduc = $d; @endphp
+                  @if($sum_ordain_Not_Deduc_system < 21600)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $ordain_Not_Deduc = $d; $ordain_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $ordain_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $ordain_Deduc = $d; @endphp
                 @endif
               @endif
@@ -728,10 +405,15 @@
                 @php $deliver_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $deliver_Not_Deduc = $d; @endphp
+                  @if($sum_deliver_Not_Deduc_system < 129600)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $deliver_Not_Deduc = $d; $deliver_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $deliver_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $deliver_Deduc = $d; @endphp
                 @endif
               @endif
@@ -745,10 +427,15 @@
                 @php $sick_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $sick_Not_Deduc = $d; @endphp
+                  @if($sum_sick_Not_Deduc_system < 43200)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $sick_Not_Deduc = $d; $sick_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $sick_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $sick_Deduc = $d; @endphp
                 @endif
               @endif
@@ -762,10 +449,15 @@
                 @php $Work_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Work_Not_Deduc = $d; @endphp
+                  @if($sum_Work_Not_Deduc_system < 8640)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $Work_Not_Deduc = $d; $Work_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $Work_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $Work_Deduc = $d; @endphp
                 @endif
               @endif
@@ -779,18 +471,21 @@
                 @php $Government_Deduc = $d; @endphp
               @else 
                 @if($start_day_year > $PassJob)
-                  <div class="alert alert-success noti">ไม่หักเงิน(ระบบ)</div>
-                  @php $Government_Not_Deduc = $d; @endphp
+                  @if($sum_Government_Not_Deduc_system < 8640)
+                    <div class="alert alert-success noti">ไม่หักเงิน(ใช้สิทธิลา)</div>
+                    @php $Government_Not_Deduc = $d; $Government_Not_Deduc_system = $d; @endphp
+                  @else
+                    <div class="alert alert-error noti">หักเงิน(ครบสิทธิการลา)</div>
+                    @php $Government_Deduc = $d; @endphp
+                  @endif
                 @else
-                  <div class="alert alert-error noti">หักเงิน(ระบบ)</div>
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
                   @php $Government_Deduc = $d; @endphp
                 @endif
               @endif
               @php $Government_day = $d; @endphp
             @endif
-        @endif              
-            <!-- @endif            
-          @endif  -->        
+        @endif      
                    
         </td>
         <td class="reason">
@@ -847,7 +542,7 @@
           $leave_Government = $leave_Government + $Government_day;
           $leave_sum = $leave_sum + $sum;
 
-          echo $sum_ordain_Deduc ;
+          
           $sum_ordain_Deduc = $sum_ordain_Deduc + $ordain_Deduc; 
           $sum_ordain_Not_Deduc = $sum_ordain_Not_Deduc + $ordain_Not_Deduc; 
           $sum_deliver_Deduc = $sum_deliver_Deduc + $deliver_Deduc; 
@@ -858,6 +553,12 @@
           $sum_Work_Not_Deduc = $sum_Work_Not_Deduc + $Work_Not_Deduc;
           $sum_Government_Deduc = $sum_Government_Deduc + $Government_Deduc; 
           $sum_Government_Not_Deduc = $sum_Government_Not_Deduc + $Government_Not_Deduc;
+
+          $sum_ordain_Not_Deduc_system = $sum_ordain_Not_Deduc_system + $ordain_Not_Deduc_system;
+          $sum_deliver_Not_Deduc_system = $sum_deliver_Not_Deduc_system + $deliver_Not_Deduc_system;
+          $sum_sick_Not_Deduc_system = $sum_sick_Not_Deduc_system + $sick_Not_Deduc_system;
+          $sum_Work_Not_Deduc_system = $sum_Work_Not_Deduc_system + $Work_Not_Deduc_system;
+          $sum_Government_Not_Deduc_system = $sum_Government_Not_Deduc_system + $Government_Not_Deduc_system;
         @endphp
         @endforeach
       </tbody>
@@ -918,14 +619,14 @@
           <tr class="odd gradeX">
             <td  class="center">ไม่หัก = {{ secondsToTime($sum_ordain_Not_Deduc*60) }}</td>
             <td  class="center">หัก = {{ secondsToTime($sum_ordain_Deduc*60) }} </td>
-            <td  class="center">ไม่หัก = {{ secondsToTime($deliver_Not_Deduc*60) }}</td>
-            <td  class="center">หัก = {{ secondsToTime($deliver_Deduc*60) }}</td>
-            <td class="center">ไม่หัก = {{ secondsToTime($sick_Not_Deduc*60) }}</td>
-            <td class="center">หัก = {{ secondsToTime($sick_Deduc*60) }}</td>
-            <td class="center">ไม่หัก = {{ secondsToTime($Work_Not_Deduc*60) }}</td>
-            <td class="center">หัก = {{ secondsToTime($Work_Deduc*60) }}</td>
-            <td class="center">ไม่หัก = {{ secondsToTime($Government_Not_Deduc*60) }}</td>
-            <td class="center">หัก = {{ secondsToTime($Government_Deduc*60) }}</td>
+            <td  class="center">ไม่หัก = {{ secondsToTime($sum_deliver_Not_Deduc*60) }}</td>
+            <td  class="center">หัก = {{ secondsToTime($sum_deliver_Deduc*60) }}</td>
+            <td class="center">ไม่หัก = {{ secondsToTime($sum_sick_Not_Deduc*60) }}</td>
+            <td class="center">หัก = {{ secondsToTime($sum_sick_Deduc*60) }}</td>
+            <td class="center">ไม่หัก = {{ secondsToTime($sum_Work_Not_Deduc*60) }}</td>
+            <td class="center">หัก = {{ secondsToTime($sum_Work_Deduc*60) }}</td>
+            <td class="center">ไม่หัก = {{ secondsToTime($sum_Government_Not_Deduc*60) }}</td>
+            <td class="center">หัก = {{ secondsToTime($sum_Government_Deduc*60) }}</td>
           </tr>
         </tbody>
       </table>
