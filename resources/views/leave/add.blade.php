@@ -1,7 +1,8 @@
 @extends('layouts.tpm')
 
 @section('css')
-
+<link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 @endsection
 
 @section('content-header')
@@ -260,23 +261,112 @@
                         text : data[i].nend_day,
                     }));                    
                     $('tbody').append(row);
-
-                    var nstart_day = data[i].nstart_day.split('T');
-                    var start_day = start_day[0].split('-');
+                    if(data[i].nstart_day == null){ 
+                        var str_start_day = '0000-00-00T00:00';
+                    }else{
+                        var str_start_day = data[i].nstart_day; 
+                    }
+                    if(data[i].nend_day == null){ 
+                        var str_end_day = '0000-00-00T00:00';
+                    }else{
+                        var str_end_day = data[i].nend_day; 
+                    }
+                    
+                    var nstart_day = str_start_day.split('T');
+                    var start_day = nstart_day[0].split('-');
                     var start_times = nstart_day[1].split(':');
 
-                    var nend_day = data[i].nend_day.split('T');
+                    var nend_day = str_end_day.split('T');
                     var end_day = nend_day[0].split('-');
                     var end_times = nend_day[1].split(':');
 
-                    console.log(nend_day);
-                //     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                //     var firstDate = new Date(2018,08,13);
-                //     var secondDate = new Date(2018,08,18);
+                    console.log(start_day[0]+'-'+start_day[1]+'-'+start_day[2]+' '+start_times[0]+':'+start_times[1]);
+                    console.log(end_day[0]+'-'+end_day[1]+'-'+end_day[2]+' '+end_times[0]+':'+end_times[1]);
+                    //-- หาวัน
+                    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                    var firstDate = new Date(start_day[0],start_day[1],start_day[2]);
+                    var secondDate = new Date(end_day[0],end_day[1],end_day[2]);
+                    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+                    //--หาเวลา
+                    var day = '1 1 1970 ',  // 1st January 1970
+                        start = $('#Report_startTime').val(),   //eg "09:20 PM"
+                        end = $('#Report_endTime').val(),   //eg "10:00 PM"
+                        diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60 /60;
+                    console.log(diff_in_min); 
 
-                //     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+                    if(data[i].type_leave == 0){
+                        if(start_day[0] != 0000){
+                            var day00 = diffDays + 1;
+                            if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
+                                var day00 = day00 + 1;
+                                var time00 = '0';
+                            }else{
+                               var time00 = diff_in_min; 
+                            }                              
+                                
+                        }else{
+                            console.log('ไม่มีข้อมูล');
+                        }                        
+                    }else if(data[i].type_leave == 1){
+                        if(start_day[0] != 0000){
+                            var day11 = diffDays + 1;
+                            if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
+                                var day11 = day11 + 1;
+                                var time11 ='0';
+                            }else{
+                               var time11 = diff_in_min; 
+                            }
+                               var day1 = day11+time11; 
+                        }else{
+                            console.log('ไม่มีข้อมูล');
+                        }
+                    }else if(data[i].type_leave == 2){
+                        if(start_day[0] != 0000){
+                            var day22 = diffDays + 1;
+                            if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
+                                var day22 = day22 + 1;
+                                var time22 = '0';
+                            }else{
+                               var time22 = diff_in_min; 
+                            }
+                               var day2 = day22+time22; 
+                        }else{
+                            console.log('ไม่มีข้อมูล');
+                        }
+                    }else if(data[i].type_leave == 3){
+                        if(start_day[0] != 0000){
+                            var day33 = diffDays + 1;
+                            if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
+                                var day33 = day33 + 1;
+                                var time33 ='0';
+                            }else{
+                               var time33 = diff_in_min;
+                            }
+                               var day3 = day33+time33; 
+                        }else{
+                            console.log('ไม่มีข้อมูล');
+                        }
+                    }else{
+                        if(start_day[0] != 0000){
+                            var day44 = diffDays + 1;
+                            if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
+                                var day44 = day44 + 1;
+                                var time44 = '0';
+                            }else{
+                               var time44 = diff_in_min; 
+                            }
+                               var day4 = day44+time44; 
+                        }else{
+                            console.log('ไม่มีข้อมูล');
+                        }
+                    }
+                    var day0 = day0 + day00;
+                    var day1 = day1 + day00;
+                    var day2 = day1 + day00;
+                    var day3 = day3 + day00;
+                    console.log(day0+day1+day2+day3+day4);                   
 
-                // $('#showdata').append(' เวลา: '+diffDays+'วัน   ');    
+                 $('#showdata').append(' เวลา: '+diffDays+'วัน   ');    
                 })
                 
                 
@@ -301,4 +391,6 @@
         })
     }
 </script>
+<script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
+<script src="{{ asset('js/main/select2.min.js') }}"></script>
 @endsection

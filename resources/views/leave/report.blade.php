@@ -330,28 +330,8 @@
                     @php $deliver_Deduc = $d; @endphp
                   @endif <!--จบ if ลาครบกำหนดหรือยัง--> 
                 @else <!-- ยังไม่ผ่านทดลองงาน  -->
-                  @if($end_day_year > $PassJob) <!--if ตรวจสอบว่าสิ้นสุดการลา ผ่านโปรหรือไม่-->
-                      @php
-                        $date1=date_create($PassJob);
-                        $date2=date_create($end_day_year);
-                        $diff=date_diff($date1,$date2);
-                        $end_day = $diff->format("%a");
-                        $end_day1 = ($end_day * 24) * 60;
-
-                        $sum_deliver_Not_Deduc_system1 = $sum_deliver_Not_Deduc_system + $end_day1;
-                      @endphp
-                      @if($sum_deliver_Not_Deduc_system1 < 129600) <!--if หาวันลาที่ผ่านโปรที่เหลือ-->
-                        <div class="alert noti">-ใช้สิทธิลา {{ secondsToTime($sum_deliver_Not_Deduc_system1*60) }}
-                        </div>
-                        @php $deliver_Deduc = $d; @endphp
-                      @else
-                        <div class="alert alert-error noti">หักเงิน<br>-ยังไม่ผ่านทดลองงาน<br> -และใช้สิทธิครบแล้ว</div>
-                        @php $deliver_Deduc = $d; @endphp
-                      @endif <!-- จบ if หาวันลาที่ผ่านโปรที่เหลือ-->                      
-                    @else                      
-                      <div class="alert alert-error noti">หักเงิน(ยังไม่ผ่านช่วงทดลองงาน)</div>
-                      @php $deliver_Deduc = $d; @endphp
-                    @endif <!--จบ if ตรวจสอบว่าสิ้นสุดการลา ผ่านโปรหรือไม่-->
+                  <div class="alert alert-error noti">หักเงิน(ช่วงทดลองงาน)</div>
+                  @php $deliver_Deduc = $d; @endphp
                 @endif <!--  จบ if ผ่านทดลองงาน  -->
               @endif <!--  จบ if สถานะ  -->
               @php $deliver_day = $d; @endphp 
