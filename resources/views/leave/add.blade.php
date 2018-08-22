@@ -52,12 +52,12 @@
             </div>
             <div class="element">
                 <h2 class="underline">สิทธิการลา <span id="span-name"></span></h2>
-                <span class="black">รวม</span> <span class="badge badge-info">102</span>
-                <span class="black">ลาบวช-ทำหมัน</span> <span class="badge badge-warning">20</span>
-                <span class="black">ลาคลอด</span> <span class="badge badge-success">3</span>
-                <span class="black">ลาป่วย</span> <span class="badge badge-success">90</span>
-                <span class="black">ลากิจ</span> <span class="badge badge-warning">55</span>
-                <span class="black">พักร้อน</span> <span class="badge badge-warning">12</span>
+                <span class="black">รวม</span> <span class="badge badge-info">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาบวช-ทำหมัน</span> <span class="badge badge-warning" id="time0">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาคลอด</span> <span class="badge badge-success" id="time1">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาป่วย</span> <span class="badge badge-success" id="time2">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลากิจ</span> <span class="badge badge-warning" id="time3">0 วัน 0 ช. 0 น.</span>
+                <span class="black">พักร้อน</span> <span class="badge badge-warning" id="time4">0 วัน 0 ช. 0 น.</span>
 <!--                 <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
  -->
             </div>
@@ -248,8 +248,20 @@
                 $('#showdata').empty();
                 $('tbody').empty();
                 var data = student.leave;
-                var day0 = 0;
+                var day0 = 0; 
                 var time0 = 0;
+
+                var day1 = 0;
+                var time1 = 0;
+
+                var day2 = 0;
+                var time2 = 0;
+
+                var day3 = 0;
+                var time3 = 0;
+
+                var day4 = 0;
+                var time4 = 0;
                 $.each(data,function(i,item){
                     
                     var row = $('<tr/>');
@@ -291,7 +303,7 @@
                     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
                     //--หาเวลา
                     var day = '1 1 1970 ',  // 1st January 1970
-                    diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60;
+                    diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60 ;
 
                     
 
@@ -300,7 +312,7 @@
                             var day00 = diffDays ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day00 = day00 + 1;
-                                var time00 = '0';
+                                var time00 = 0;
                                 // console.log(day00+' วัน');
                             }else{
                                var time00 = diff_in_min;
@@ -308,59 +320,64 @@
                             }
                             day0 += day00;
                             time0 += time00;
+                           // var time0 = Math.floor((time00 % 86400000) / 3600000); // hours
                             // console.log(day0+' วัน');                    
                         }else{
                            
                         }                        
                     }else if(data[i].type_leave == 1){
                         if(start_day[0] != 0000){
-                            var day11 = diffDays + 1;
+                            var day11 = diffDays;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day11 = day11 + 1;
-                                var time11 ='0';
+                                var time11 =0;
                             }else{
                                var time11 = diff_in_min; 
                             }
-                            console.log('หนึ่ง'); 
+                            day1 += day11;
+                            time1 += time11 ; 
                         }else{
                             
                         }
                     }else if(data[i].type_leave == 2){
                         if(start_day[0] != 0000){
-                            var day22 = diffDays + 1;
+                            var day22 = diffDays ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day22 = day22 + 1;
-                                var time22 = '0';
+                                var time22 =0;
                             }else{
                                var time22 = diff_in_min; 
                             }
-                            console.log('สอง'); 
+                            day2 += day22;
+                            time2 += time22 ;
                         }else{
                            
                         }
                     }else if(data[i].type_leave == 3){
                         if(start_day[0] != 0000){
-                            var day33 = diffDays + 1;
+                            var day33 = diffDays ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day33 = day33 + 1;
-                                var time33 ='0';
+                                var time33 =0;
                             }else{
                                var time33 = diff_in_min;
                             }
-                            console.log('สาม'); 
+                            day3 += day33;
+                            time3 += time33;
                         }else{
                             
                         }
                     }else{
                         if(start_day[0] != 0000){
-                            var day44 = diffDays + 1;
+                            var day44 = diffDays;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day44 = day44 + 1;
-                                var time44 = '0';
+                                var time44 = 0;
                             }else{
                                var time44 = diff_in_min; 
                             }
-                            console.log('สี่'); 
+                            day4 += day44;
+                            time4 += time44;
                         }else{
                             
                         }
@@ -374,20 +391,49 @@
 
                  $('#showdata').append();    
                 })
-                var diff = time0;
-                if (diff < 0) return false;
-                var objDate = isNaN(diff) ? NaN : {
-                    diff: diff,
-                    ms: Math.floor(diff % 1000),
-                    s: Math.floor(diff / 1000 % 60),
-                    m: Math.floor(diff / 60000 % 60),
-                    h: Math.floor(diff / 3600000 % 24),
-                    d: Math.floor(diff / 86400000)
-                };
-                return objDate;
+                 console.log(day1);
+                var [t_00,t_01,t_02] = [0,0,0];
+                var [t_10,t_11,t_12] = [0,0,0];
+                var [t_20,t_31,t_22] = [0,0,0];
+                var [t_30,t_01,t_32] = [0,0,0];
+                var [t_40,t_41,t_42] = [0,0,0];
 
-                console.log('เวลาทั้งหมด'+day0+'time = '+objDate);
+                var t_00 = Math.floor(time0/60/24);
+                var t_01 = ((((time0%86400)%3600)%60));
+                var t_02 = Math.floor((time0%86400)/3600);
+                day0 = day0 + t_00;
+
+                var t_10 = Math.floor(time1/60/24);
+                var t_11 = ((((time1%86400)%3600)%60));
+                var t_12 = Math.floor(((time1%86400)%3600)/60);
+                day1 = day1 + t_10;
+
+                var t_20 = Math.floor(time2/60/24);
+                var t_21 = ((((time2%86400)%3600)%60));
+                var t_22 = Math.floor(((time2%86400)%3600)/60);
+                day2 = day2 + t_20;
+
+                var t_30 = Math.floor(time3/60/24);
+                var t_31 = ((((time3%86400)%3600)%60));
+                var t_32 = Math.floor(((time3%86400)%3600)/60);
+                day3 = day3 + t_30;
+
+                var t_40 = Math.floor(time4/60/24);
+                var t_41 = ((((time4%86400)%3600)%60));
+                var t_42 = Math.floor(((time4%86400)%3600)/60);
+                day4 = day4 + t_40;
+
+                console.log('0=ชม'+day0+' วัน '+t_02+' ช. '+t_01+' น. ');
+                console.log('1=ชม'+day1+'-'+t_12+'-'+t_11);
+                console.log('2=ชม'+day2+'-'+t_22+'-'+t_21);
+                console.log('3=ชม'+day3+'-'+t_32+'-'+t_31);
+                console.log('4=ชม'+day4+'-'+t_42+'-'+t_41);
                 
+                $('#time0').text(day0+' วัน '+t_02+' ช. '+t_01+' น. ');
+                $('#time1').text(day1+' วัน '+t_12+' ช. '+t_11+' น. ');
+                $('#time2').text(day2+' วัน '+t_22+' ช. '+t_21+' น. ');
+                $('#time3').text(day3+' วัน '+t_32+' ช. '+t_31+' น. ');
+                $('#time4').text(day4+' วัน '+t_42+' ช. '+t_41+' น. ');
 
                 if (student != 0) {
                     $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
