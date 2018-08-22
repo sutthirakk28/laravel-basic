@@ -46,7 +46,7 @@
 		                    </div>
 		                </div>
 		                <div class="control-group">
-		                    <label class="control-label">ชื่อฝ่าย : </label>
+		                    <label class="control-label"><span class="request">*</span> ชื่อฝ่าย : </label>
 		                    <div class="controls"> 
 		                        {{ form::text('name_dep',$deps['name_dep'],array('required' => 'required')) }}	                        
 		                    </div>

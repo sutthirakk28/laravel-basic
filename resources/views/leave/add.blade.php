@@ -29,7 +29,7 @@
                 </div>
             @endif
             <div class="element">
-                <h2>*วันที่ยื่น</h2>
+                <h2><span class="request">*</span> วันที่ยื่น</h2>
                 <div class="form-group">
                     <div class='input-group'>
                         {{ form::date('date_leave','',array('required' => 'required','class' => 'form-control')) }}
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="element">
-                <h2>*เลือกชื่อพนักงาน</h2>
+                <h2><span class="request">*</span> เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" data-dependent="id_person" required>
                         <option value="" selected disabled>เลือกชื่อพนักงาน</option>
@@ -67,10 +67,10 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                       <strong class="font1">*เริ่มต้น</strong>
+                       <strong class="font1"><span class="request">*</span> เริ่มต้น</strong>
                         <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{ $now1 }}T08:30" class="form-control" required>
                         <strong>-  ถึง  -</strong>
-                        <strong class="font1">*สิ้นสุด</strong>
+                        <strong class="font1"><span class="request">*</span> สิ้นสุด</strong>
                         <input id="nend_day" type="datetime-local" name="nend_day" value="{{ $now1 }}T17:30" class="form-control" required>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                 <div class="showdata" id="showdata">dddd</div>  
                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <h2>*ประเภทการลา</h2>
+                <h2><span class="request">*</span> ประเภทการลา</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round" id="radio_0">
                         <input type="radio" name="type_leave" value="0" title="*ใช้สิทธิการลา" required id="radio-0"><span data-checked="&#10004;" />
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <div class="element">
-                <h2>*อนุมัติโดย</h2>
+                <h2><span class="request">*</span> อนุมัติโดย</h2>
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
                         <input type="radio" name="approved" value="1" required><span data-checked="&#10004;" />
@@ -215,7 +215,7 @@
     $(document).ready(function(){
         $('#id_per').on('change',function(){
             var studentid = $(this).val();
-            $('h2 span').text($('#id_per option:selected').text());
+            $('span#span-name ').text($('#id_per option:selected').text());
             loadScore(studentid);
             
         })
@@ -236,6 +236,7 @@
     //function ajax
     function loadScore(studentid)
     {   
+        
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type :'POST',
@@ -247,7 +248,8 @@
                 $('#showdata').empty();
                 $('tbody').empty();
                 var data = student.leave;
-
+                var day0 = 0;
+                var time0 = 0;
                 $.each(data,function(i,item){
                     
                     var row = $('<tr/>');
@@ -280,8 +282,8 @@
                     var end_day = nend_day[0].split('-');
                     var end_times = nend_day[1].split(':');
 
-                    console.log(start_day[0]+'-'+start_day[1]+'-'+start_day[2]+' '+start_times[0]+':'+start_times[1]);
-                    console.log(end_day[0]+'-'+end_day[1]+'-'+end_day[2]+' '+end_times[0]+':'+end_times[1]);
+                    // console.log(start_day[0]+'-'+start_day[1]+'-'+start_day[2]+' '+start_times[0]+':'+start_times[1]);
+                    // console.log(end_day[0]+'-'+end_day[1]+'-'+end_day[2]+' '+end_times[0]+':'+end_times[1]);
                     //-- หาวัน
                     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
                     var firstDate = new Date(start_day[0],start_day[1],start_day[2]);
@@ -289,23 +291,26 @@
                     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
                     //--หาเวลา
                     var day = '1 1 1970 ',  // 1st January 1970
-                        start = $('#Report_startTime').val(),   //eg "09:20 PM"
-                        end = $('#Report_endTime').val(),   //eg "10:00 PM"
-                        diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60 /60;
-                    console.log(diff_in_min); 
+                    diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60;
+
+                    
 
                     if(data[i].type_leave == 0){
                         if(start_day[0] != 0000){
-                            var day00 = diffDays + 1;
+                            var day00 = diffDays ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day00 = day00 + 1;
                                 var time00 = '0';
+                                // console.log(day00+' วัน');
                             }else{
-                               var time00 = diff_in_min; 
-                            }                              
-                                
+                               var time00 = diff_in_min;
+                               //console.log(time00+' ชม.'); 
+                            }
+                            day0 += day00;
+                            time0 += time00;
+                            // console.log(day0+' วัน');                    
                         }else{
-                            console.log('ไม่มีข้อมูล');
+                           
                         }                        
                     }else if(data[i].type_leave == 1){
                         if(start_day[0] != 0000){
@@ -316,9 +321,9 @@
                             }else{
                                var time11 = diff_in_min; 
                             }
-                               var day1 = day11+time11; 
+                            console.log('หนึ่ง'); 
                         }else{
-                            console.log('ไม่มีข้อมูล');
+                            
                         }
                     }else if(data[i].type_leave == 2){
                         if(start_day[0] != 0000){
@@ -329,9 +334,9 @@
                             }else{
                                var time22 = diff_in_min; 
                             }
-                               var day2 = day22+time22; 
+                            console.log('สอง'); 
                         }else{
-                            console.log('ไม่มีข้อมูล');
+                           
                         }
                     }else if(data[i].type_leave == 3){
                         if(start_day[0] != 0000){
@@ -342,9 +347,9 @@
                             }else{
                                var time33 = diff_in_min;
                             }
-                               var day3 = day33+time33; 
+                            console.log('สาม'); 
                         }else{
-                            console.log('ไม่มีข้อมูล');
+                            
                         }
                     }else{
                         if(start_day[0] != 0000){
@@ -355,20 +360,33 @@
                             }else{
                                var time44 = diff_in_min; 
                             }
-                               var day4 = day44+time44; 
+                            console.log('สี่'); 
                         }else{
-                            console.log('ไม่มีข้อมูล');
+                            
                         }
                     }
-                    var day0 = day0 + day00;
-                    var day1 = day1 + day00;
-                    var day2 = day1 + day00;
-                    var day3 = day3 + day00;
-                    console.log(day0+day1+day2+day3+day4);                   
+                    console.log(data[i].type_leave+' '+diffDays+'วัน'+diff_in_min+'ช');  
+                    
+                    // var day2 = day1 + day22;
+                    // var day3 = day3 + day33;
+                    // var day4 = day4 + day44;
+                    // console.log(day0+day1+day2+day3+day4);                   
 
-                 $('#showdata').append(' เวลา: '+diffDays+'วัน   ');    
+                 $('#showdata').append();    
                 })
-                
+                var diff = time0;
+                if (diff < 0) return false;
+                var objDate = isNaN(diff) ? NaN : {
+                    diff: diff,
+                    ms: Math.floor(diff % 1000),
+                    s: Math.floor(diff / 1000 % 60),
+                    m: Math.floor(diff / 60000 % 60),
+                    h: Math.floor(diff / 3600000 % 24),
+                    d: Math.floor(diff / 86400000)
+                };
+                return objDate;
+
+                console.log('เวลาทั้งหมด'+day0+'time = '+objDate);
                 
 
                 if (student != 0) {

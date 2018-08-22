@@ -29,7 +29,7 @@
                 </div>
             @endif
             <div class="element">
-                <h2>*วันที่ยื่น</h2>
+                <h2><span class="request">*</span> วันที่ยื่น</h2>
                 <div class="form-group">
                     <div class='input-group'>
                         {{ form::date('date_leave',$l['date_leave'],array('required' => 'required','class' => 'form-control')) }}
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="element">
-                <h2>*เลือกชื่อพนักงาน</h2>
+                <h2><span class="request">*</span> เลือกชื่อพนักงาน</h2>
                 <div class="el-child-inline width">
                     <select name="id_per" id="id_per" class="selectpicker show-tick select" data-live-search="true" required>                
 	                    @foreach($lib as $libs)
@@ -58,10 +58,10 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                       <strong class="font1">*เริ่มต้น</strong>
+                       <strong class="font1"><span class="request">*</span> เริ่มต้น</strong>
                         <input id="nstart_day" type="datetime-local" name="nstart_day" value="{{$l['nstart_day']}}" class="form-control" required>
                         <strong>-  ถึง  -</strong>
-                        <strong class="font1">*สิ้นสุด</strong>
+                        <strong class="font1"><span class="request">*</span> สิ้นสุด</strong>
                         <input id="nend_day" type="datetime-local" name="nend_day" value="{{$l['nend_day']}}" class="form-control" required>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                 </select>
             </div>
             <div class="element">
-                <h2>*ประเภทการลา</h2>
+                <h2><span class="request">*</span> ประเภทการลา</h2>
                 @if($l['type_leave'] == 0)
                     <div class="el-child-inline">
                         <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">
@@ -261,7 +261,7 @@
 		   </div>
 
             <div class="element">
-                <h2>*อนุมัติโดย</h2>
+                <h2><span class="request">*</span> อนุมัติโดย</h2>
                 @if($l['approved'] == '1')
                 <div class="el-child-inline">
                     <div class="ui-checkbox bg-dodgerblue ui-small ui-animation-zoom round">

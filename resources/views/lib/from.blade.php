@@ -45,38 +45,38 @@
 				                    </ul>
 				                </div>
 				            @endif
-		                    <label class="control-label">*รหัสพนักงาน : </label>
+		                    <label class="control-label"><span class="request">*</span> รหัสพนักงาน : </label>
 		                    <div class="controls">
 		                        {{ form::text('id_employ', $l['id_employ']) }}
 		                    </div>
 		                </div>
 		                <div class="control-group">
-			                <label class="control-label">*รูปภาพ : </label>
+			                <label class="control-label"><span class="request">*</span> รูปภาพ : </label>
 			                <div class="controls">
 			                  <input type="file" name="user_photo" id="user_photo" />
 			                  <input type="hidden" name="user_photoOld" value="{{ $l['user_photo'] }}"/>
 			                </div>
 			             </div>
 		                <div class="control-group">
-		                    <label class="control-label">*ชื่อ-นามสกุล : </label>
+		                    <label class="control-label"><span class="request">*</span> ชื่อ-นามสกุล : </label>
 		                    <div class="controls">
 		                        {{ form::text('surname',$l['surname'], array('required' => 'required')) }}                  
 		                    </div>
 		                </div>
 		                <div class="control-group">
-		                    <label class="control-label">*ชื่อเล่น : </label>
+		                    <label class="control-label"><span class="request">*</span> ชื่อเล่น : </label>
 		                    <div class="controls">
 		                        {{ form::text('nickname',$l['nickname'], array('required' => 'required')) }}                  
 		                    </div>
 		                </div>
 		                <div class="control-group">
-		                    <label class="control-label">*วันเกิด วัน/เดือน/ปี : </label>
+		                    <label class="control-label"><span class="request">*</span> วันเกิด วัน/เดือน/ปี : </label>
 		                    <div class="controls">
 		                        {{ form::date('age', $l['age'], array('required' => 'required')) }}                  
 		                    </div>
 		                </div>		                
 		                <div class="control-group">
-		                    <label class="control-label">*เลือกตำแหน่ง : </label>
+		                    <label class="control-label"><span class="request">*</span> เลือกตำแหน่ง : </label>
 		                    <div class="controls select2">
 								<select name="id_pos" id="id_pos" required>
 				                    @foreach($pos as $p)
@@ -90,13 +90,13 @@
 		                    </div>
 		                </div>
 		                <div class="control-group">
-		                    <label class="control-label">*วันเริ่มงาน วัน/เดือน/ปี : </label>
+		                    <label class="control-label"><span class="request">*</span> วันเริ่มงาน วัน/เดือน/ปี : </label>
 		                    <div class="controls">
 		                        {{ form::date('job_start', $l['job_start'], array('required' => 'required')) }}                  
 		                    </div>
 		                </div>		                
 		                <div class="control-group">
-		                    <label class="control-label">*เบอร์โทรศัพท์ : </label>
+		                    <label class="control-label"><span class="request">*</span> เบอร์โทรศัพท์ : </label>
 		                    <div class="controls">
 		                        {{ form::text('phone', '0'.$l['phone'], array('required' => 'required')) }}                  
 		                    </div>
