@@ -106,7 +106,7 @@
                 <th width="80">วันที่ยื่น</th>
                 <th >รูป</th>
                 <th >ชื่อ-นามสกุล</th>
-                <th width="80">ประเภท</th>
+                <th width="100">ประเภท</th>
                 <th >วันที่ลา</th>
                 <th width="115">จำนวน</th>
                 <!-- <th >เหตุผล</th> -->
@@ -150,7 +150,7 @@
                    อื่นๆ
                  @endif
                 </td>
-                <td class="center">
+                <td >
                 @php
                   $nstart_day = explode("T",$l['nstart_day']);
                   $nend_day = explode("T",$l['nend_day']);

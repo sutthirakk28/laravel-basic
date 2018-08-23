@@ -52,12 +52,12 @@
             </div>
             <div class="element">
                 <h2 class="underline">สิทธิการลา <span id="span-name"></span></h2>
-                <span class="black">รวม</span> <span class="badge badge-info">0 วัน 0 ช. 0 น.</span>
-                <span class="black">ลาบวช-ทำหมัน</span> <span class="badge badge-warning" id="time0">0 วัน 0 ช. 0 น.</span>
-                <span class="black">ลาคลอด</span> <span class="badge badge-success" id="time1">0 วัน 0 ช. 0 น.</span>
-                <span class="black">ลาป่วย</span> <span class="badge badge-success" id="time2">0 วัน 0 ช. 0 น.</span>
-                <span class="black">ลากิจ</span> <span class="badge badge-warning" id="time3">0 วัน 0 ช. 0 น.</span>
-                <span class="black">พักร้อน</span> <span class="badge badge-warning" id="time4">0 วัน 0 ช. 0 น.</span>
+                <span class="black">รวม</span> <span class="badge badge-info" id="sum">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาบวช-ทำหมัน</span> <span class="badge" id="time0">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาคลอด</span> <span class="badge" id="time1">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลาป่วย</span> <span class="badge" id="time2">0 วัน 0 ช. 0 น.</span>
+                <span class="black">ลากิจ</span> <span class="badge" id="time3">0 วัน 0 ช. 0 น.</span>
+                <span class="black">พักร้อน</span> <span class="badge" id="time4">0 วัน 0 ช. 0 น.</span>
 <!--                 <div class="alert alert-error leave"><strong>  ชี้แจง ! <span class="badge badge-success"> ? </span> = ใช้สิทธิลา <span class="badge badge-warning"> ? </span> = ครบสิทธิลา <span class="badge badge-important"> ? </span> = หักเงิน *(ลาบวช-ทำหมัน 15วัน,ลาคลอด 90วัน,ลาป่วย 30วัน,ลากิจ 6วัน,พักร้อน 6วัน)</strong></div>    
  -->
             </div>
@@ -87,7 +87,7 @@
                 </select>
             </div>
             <div class="element" id="e_textshow">
-                <table border="1" style="text-align:center;color: #b624da;">
+                <!-- <table border="1" style="text-align:center;color: #b624da;">
                     <thead>
                         <tr>
                             <th>รหัสพนักงาน</th>
@@ -101,8 +101,7 @@
                     </tbody>
                     <tfoot>
                     </tfoot>
-                </table>
-                <div class="showdata" id="showdata">dddd</div>  
+                </table> --> 
                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
                 <h2><span class="request">*</span> ประเภทการลา</h2>
@@ -244,37 +243,25 @@
             data : {_token: CSRF_TOKEN,studentid:studentid},
             dataType : 'json',
             success : function(student)
-            {    console.log(student);
+            {    
                 $('#showdata').empty();
                 $('tbody').empty();
                 var data = student.leave;
-                var day0 = 0; 
-                var time0 = 0;
+                var [day0,day1,day2,day3,day4] = [0,0,0,0,0];
+                var [time0,time1,time2,time3,time4] = [0,0,0,0,0];
 
-                var day1 = 0;
-                var time1 = 0;
-
-                var day2 = 0;
-                var time2 = 0;
-
-                var day3 = 0;
-                var time3 = 0;
-
-                var day4 = 0;
-                var time4 = 0;
-                $.each(data,function(i,item){
-                    
-                    var row = $('<tr/>');
-                    row.append($('<td/>',{
-                        text : data[i].id_per,
-                    })).append($('<td/>',{
-                        text : data[i].type_leave,
-                    })).append($('<td/>',{
-                        text : data[i].nstart_day,
-                    })).append($('<td/>',{
-                        text : data[i].nend_day,
-                    }));                    
-                    $('tbody').append(row);
+                $.each(data,function(i,item){                    
+                    // var row = $('<tr/>');
+                    // row.append($('<td/>',{
+                    //     text : data[i].id_per,
+                    // })).append($('<td/>',{
+                    //     text : data[i].type_leave,
+                    // })).append($('<td/>',{
+                    //     text : data[i].nstart_day,
+                    // })).append($('<td/>',{
+                    //     text : data[i].nend_day,
+                    // }));                    
+                    // $('tbody').append(row);
                     if(data[i].nstart_day == null){ 
                         var str_start_day = '0000-00-00T00:00';
                     }else{
@@ -294,40 +281,34 @@
                     var end_day = nend_day[0].split('-');
                     var end_times = nend_day[1].split(':');
 
-                    // console.log(start_day[0]+'-'+start_day[1]+'-'+start_day[2]+' '+start_times[0]+':'+start_times[1]);
-                    // console.log(end_day[0]+'-'+end_day[1]+'-'+end_day[2]+' '+end_times[0]+':'+end_times[1]);
-                    //-- หาวัน
-                    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                    var firstDate = new Date(start_day[0],start_day[1],start_day[2]);
-                    var secondDate = new Date(end_day[0],end_day[1],end_day[2]);
-                    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+                    var startDay = new Date(nend_day[0]);
+                    var endDay = new Date(nstart_day[0]);
+                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+                    var millisBetween = startDay.getTime() - endDay.getTime();
+                    var days = millisBetween / millisecondsPerDay;
                     //--หาเวลา
                     var day = '1 1 1970 ',  // 1st January 1970
                     diff_in_min = ( Date.parse(day + nend_day[1]) - Date.parse(day + nstart_day[1]) ) / 1000 / 60 ;
 
-                    
-
+                    // console.log( nstart_day[0]+' '+nend_day[0]+' = '+Math.floor(days));
                     if(data[i].type_leave == 0){
                         if(start_day[0] != 0000){
-                            var day00 = diffDays ;
+                            var day00 = Math.floor(days) ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day00 = day00 + 1;
                                 var time00 = 0;
-                                // console.log(day00+' วัน');
                             }else{
-                               var time00 = diff_in_min;
-                               //console.log(time00+' ชม.'); 
+                               var time00 = diff_in_min; 
                             }
                             day0 += day00;
-                            time0 += time00;
-                           // var time0 = Math.floor((time00 % 86400000) / 3600000); // hours
-                            // console.log(day0+' วัน');                    
+                            time0 += time00;                 
                         }else{
                            
                         }                        
                     }else if(data[i].type_leave == 1){
                         if(start_day[0] != 0000){
-                            var day11 = diffDays;
+                            var day11 = Math.floor(days);
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day11 = day11 + 1;
                                 var time11 =0;
@@ -341,7 +322,7 @@
                         }
                     }else if(data[i].type_leave == 2){
                         if(start_day[0] != 0000){
-                            var day22 = diffDays ;
+                            var day22 = Math.floor(days) ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day22 = day22 + 1;
                                 var time22 =0;
@@ -355,7 +336,7 @@
                         }
                     }else if(data[i].type_leave == 3){
                         if(start_day[0] != 0000){
-                            var day33 = diffDays ;
+                            var day33 = Math.floor(days) ;
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day33 = day33 + 1;
                                 var time33 =0;
@@ -369,7 +350,7 @@
                         }
                     }else{
                         if(start_day[0] != 0000){
-                            var day44 = diffDays;
+                            var day44 = Math.floor(days);
                             if(nend_day[1] == '17:30' && nstart_day[1] == '08:30'){
                                 var day44 = day44 + 1;
                                 var time44 = 0;
@@ -382,74 +363,152 @@
                             
                         }
                     }
-                    console.log(data[i].type_leave+' '+diffDays+'วัน'+diff_in_min+'ช');  
-                    
-                    // var day2 = day1 + day22;
-                    // var day3 = day3 + day33;
-                    // var day4 = day4 + day44;
-                    // console.log(day0+day1+day2+day3+day4);                   
-
-                 $('#showdata').append();    
+                    //console.log(data[i].type_leave+' '+ Math.floor(days)+'วัน'+diff_in_min+'ช');  
                 })
-                 console.log(day1);
+                
                 var [t_00,t_01,t_02] = [0,0,0];
                 var [t_10,t_11,t_12] = [0,0,0];
                 var [t_20,t_31,t_22] = [0,0,0];
                 var [t_30,t_01,t_32] = [0,0,0];
                 var [t_40,t_41,t_42] = [0,0,0];
+                var [sum_day,sum_day1,sum_time,sum_time1,sum_second,sum_second1] = [0,0,0,0,0,0];              
+                
+                sum_time = sum_second1 = time0+time1+time2+time3+time4;
+                sum_time = Math.floor(((sum_time%86400)%3600)/60);
+                sum_day = day0 + day1 + day2 + day3 + day4;
+
+                if(sum_time >= 24){
+                    sum_day1 =  Math.floor(sum_time / 24);
+                    sum_day += sum_day1;
+                    sum_time1 = sum_day1 * 24;
+                    sum_time = sum_time - sum_time1;
+                }
+                
+                sum_second = ((((sum_second1%86400)%3600)%60));
 
                 var t_00 = Math.floor(time0/60/24);
                 var t_01 = ((((time0%86400)%3600)%60));
-                var t_02 = Math.floor((time0%86400)/3600);
+                var t_02 = Math.floor(((time0%86400)%3600)/60);
                 day0 = day0 + t_00;
+                if(t_02 >= 24){ 
+                    var tim0  = t_00 * 24;  
+                    t_02 = t_02 - tim0; 
+                } 
 
                 var t_10 = Math.floor(time1/60/24);
                 var t_11 = ((((time1%86400)%3600)%60));
                 var t_12 = Math.floor(((time1%86400)%3600)/60);
                 day1 = day1 + t_10;
+                if(t_12 >= 24){ 
+                    var tim1  = t_10 * 24;  
+                    t_12 = t_12 - tim1; 
+                }
 
                 var t_20 = Math.floor(time2/60/24);
                 var t_21 = ((((time2%86400)%3600)%60));
                 var t_22 = Math.floor(((time2%86400)%3600)/60);
                 day2 = day2 + t_20;
+                if(t_22 >= 24){ 
+                    var tim2  = t_20 * 24;  
+                    t_22 = t_22 - tim2; 
+                }
 
                 var t_30 = Math.floor(time3/60/24);
                 var t_31 = ((((time3%86400)%3600)%60));
                 var t_32 = Math.floor(((time3%86400)%3600)/60);
                 day3 = day3 + t_30;
+                if(t_32 >= 24){ 
+                    var tim3  = t_30 * 24;  
+                    t_32 = t_32 - tim3; 
+                }
 
                 var t_40 = Math.floor(time4/60/24);
                 var t_41 = ((((time4%86400)%3600)%60));
                 var t_42 = Math.floor(((time4%86400)%3600)/60);
                 day4 = day4 + t_40;
-
-                console.log('0=ชม'+day0+' วัน '+t_02+' ช. '+t_01+' น. ');
-                console.log('1=ชม'+day1+'-'+t_12+'-'+t_11);
-                console.log('2=ชม'+day2+'-'+t_22+'-'+t_21);
-                console.log('3=ชม'+day3+'-'+t_32+'-'+t_31);
-                console.log('4=ชม'+day4+'-'+t_42+'-'+t_41);
-                
-                $('#time0').text(day0+' วัน '+t_02+' ช. '+t_01+' น. ');
-                $('#time1').text(day1+' วัน '+t_12+' ช. '+t_11+' น. ');
-                $('#time2').text(day2+' วัน '+t_22+' ช. '+t_21+' น. ');
-                $('#time3').text(day3+' วัน '+t_32+' ช. '+t_31+' น. ');
-                $('#time4').text(day4+' วัน '+t_42+' ช. '+t_41+' น. ');
-
-                if (student != 0) {
-                    $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    // $('#radio_1').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    // $('#radio_2').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    // $('#radio_3').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    // $('#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
-                    $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', '*ใช้สิทธิการลา');
-                } else {
-                    $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    // $('#radio_1').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    // $('#radio_2').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    // $('#radio_3').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    // $('#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
-                    $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                if(t_42 >= 24){ 
+                    var tim4  = t_40 * 24;  
+                    t_42 = t_42 - tim4; 
                 }
+                
+                $('#sum').text(sum_day+' วัน '+sum_time+' ช. '+sum_second+' น. ');             
+                
+                if (day0 >= 15) {
+                    $('#time0').text(day0+' วัน '+t_02+' ช. '+t_01+' น. ');
+                    $('#time0').css({'background-color': '#b94a48'});
+                    $('#radio_0').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-0').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                }else{
+                    $('#time0').text(day0+' วัน '+t_02+' ช. '+t_01+' น. ');
+                    $('#time0').css({'background-color': '#468847'});                    
+                    $('#radio_0').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    $('input#radio-0').attr('title', '*ใช้สิทธิการลา');
+                }
+
+                if (day1 >= 90) {
+                    $('#time1').text(day1+' วัน '+t_12+' ช. '+t_11+' น. ');
+                    $('#time1').css({'background-color': '#b94a48'});
+                    $('#radio_1').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-1').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                    
+                }else{
+                    $('#time1').text(day1+' วัน '+t_12+' ช. '+t_11+' น. ');
+                    $('#time1').css({'background-color': '#468847'});                    
+                    $('#radio_1').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    $('input#radio-1').attr('title', '*ใช้สิทธิการลา');
+                }
+
+                if (day2 >= 30) {
+                    $('#time2').text(day2+' วัน '+t_22+' ช. '+t_21+' น. ');
+                    $('#time2').css({'background-color': '#b94a48'});
+                    $('#radio_2').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-2').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                }else{
+                    $('#time2').text(day2+' วัน '+t_22+' ช. '+t_21+' น. ');
+                    $('#time2').css({'background-color': '#468847'});                    
+                    $('#radio_2').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    $('input#radio-2').attr('title', '*ใช้สิทธิการลา');
+                }
+
+                if (day3 >= 6) {
+                    $('#time3').text(day3+' วัน '+t_32+' ช. '+t_31+' น. ');
+                    $('#time3').css({'background-color': '#b94a48'});
+                    $('#radio_3').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-3').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                }else{
+                    $('#time3').text(day3+' วัน '+t_32+' ช. '+t_31+' น. ');
+                    $('#time3').css({'background-color': '#468847'});                    
+                    $('#radio_3').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    $('input#radio-3').attr('title', '*ใช้สิทธิการลา');
+                }
+
+                if (day4 >= 6) {
+                    $('#time4').text(day4+' วัน '+t_42+' ช. '+t_41+' น. ');
+                    $('#time4').css({'background-color': '#b94a48'});
+                    $('#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
+                    $('#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                }else{
+                    $('#time4').text(day4+' วัน '+t_42+' ช. '+t_41+' น. ');
+                    $('#time4').css({'background-color': '#468847'});                    
+                    $('#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                    $('input#radio-4').attr('title', '*ใช้สิทธิการลา');
+                }
+
+                // if (student != 0) {
+                //     $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                //     // $('#radio_1').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                //     // $('#radio_2').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                //     // $('#radio_3').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                //     // $('#radio_4').css({'border-color': 'dodgerblue','color' :'dodgerblue'});
+                //     $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', '*ใช้สิทธิการลา');
+                // } else {
+                //     $('#radio_0,#radio_1,#radio_2,#radio_3,#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
+                //     // $('#radio_1').css({'border-color': '#ec0510','color' :'#ec0510'});
+                //     // $('#radio_2').css({'border-color': '#ec0510','color' :'#ec0510'});
+                //     // $('#radio_3').css({'border-color': '#ec0510','color' :'#ec0510'});
+                //     // $('#radio_4').css({'border-color': '#ec0510','color' :'#ec0510'});
+                //     $('#radio-0,#radio-1,#radio-2,#radio-3,#radio-4').attr('title', 'ครบสิทธิการลา(หักเงิน)');
+                // }
                                
             }
         })
