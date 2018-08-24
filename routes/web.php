@@ -65,10 +65,9 @@ Route::resource('dep','DepController');
 Route::resource('pos','PosController');
 Route::resource('leave','LeaveController');
 Route::get('leave/report/{id}', 'LeaveController@report');
-
 Route::get('/getFormScore', 'LeaveController@getFormScore');
 Route::post('/getDataScore', 'LeaveController@getDataScore');
-
+Route::get('addon/gallery','AddonController@gallery');
 
 Auth::routes();
 

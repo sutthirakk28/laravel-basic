@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-actions">
                     <span class="pull-left">
-                        <a href="{{ route('password.request') }}" class="flip-link btn btn-inverse" id="to-recover">Lost password?</a>
+                        <a href="{{ route('password.request') }}" class="flip-link btn btn-inverse" id="to-recover">&laquo; Lost password?</a>
                     </span>
                     <span class="pull-right">
                         <input type="submit" class="btn btn-success" value="Login" />

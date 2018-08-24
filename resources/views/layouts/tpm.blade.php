@@ -38,8 +38,8 @@
     <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">ข้อมูลผู้ดูแล</span></a></li>
     <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon-plus-sign"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#">เพิ่มผู้ดูแล</a></li>
-        <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มประวัติการลา</a></li>
+        <li><a class="sAdd" title="" href="{{ url('register') }}">เพิ่มผู้ดูแล</a></li>
+        <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มข้อมูลการลา</a></li>
         <li><a class="sOutbox" title="" href="{{ url('/lib/create') }}">เพิ่มพนักงาน</a></li>
         <li><a class="sTrash" title="" href="{{ url('/dep/create') }}">เพิ่มฝ่าย</a></li>
         <li><a class="sTrash" title="" href="{{ url('/pos/create') }}">เพิ่มตำแหน่ง</a></li>
@@ -64,11 +64,18 @@
     <li class="active"><a href="{{ url('/home') }}"><i class="icon icon-home"></i> <span>Home</span></a> </li>
     <li> <a href="#"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
-    <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a><span class="label label-important">3</span></li>
+    <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a></li>
     <li><a href="{{ url('/lib') }}"><i class="icon-book"></i> <span>ข้อมูลพนักงาน</span></a></li>
     
     <li><a href="{{ url('/dep') }}"><i class="icon-book"></i> <span>ข้อมูลฝ่าย</span></a></li>
     <li><a href="{{ url('/pos') }}"><i class="icon-book"></i> <span>ข้อมูลตำแหน่ง</span></a></li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">3</span></a>
+      <ul>
+        <li><a href="{{ url('addon/gallery') }}">Gallery</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="chat.html">Chat option</a></li>
+      </ul>
+    </li>
   </ul>    
 </div>
 
