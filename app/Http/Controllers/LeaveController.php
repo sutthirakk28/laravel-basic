@@ -167,9 +167,8 @@ class LeaveController extends Controller
             'script'=> $aScript,
         );
         return view('leave.report',$data);
-    }    
-
-    
+    }
+        
     public function getFormScore()
     {     
         $IDs = lib::select('id','surname')->get();

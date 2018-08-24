@@ -59,8 +59,8 @@
 </div>
 <!--close-top-Header-menu-->
 
-    <div id="sidebar">
-      <a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Menu</a><ul>
+  <div id="sidebar">
+    <a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Menu</a><ul>
     <li class="active"><a href="{{ url('/home') }}"><i class="icon icon-home"></i> <span>Home</span></a> </li>
     <li> <a href="#"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>

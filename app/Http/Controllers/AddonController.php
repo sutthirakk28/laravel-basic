@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lib;
 
 class AddonController extends Controller
 {
@@ -54,7 +55,14 @@ class AddonController extends Controller
 
     public function gallery()
     {
-        return view('addon.gallery');
+        $aCss=array('css/addon/style.css');
+        $lib = Lib::all();
+        $result = json_decode($lib, true);
+        $data = array(
+            'lib' => $result,
+            'style' => $aCss
+        );
+        return view('addon.gallery',$data);
     }
 
     /**

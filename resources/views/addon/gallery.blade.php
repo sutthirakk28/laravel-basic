@@ -34,333 +34,38 @@
                     <h5>Gallery</h5>
                 </div>
                 <div class="widget-content">
+                @php
+                    $count = 0;
+                @endphp
                 <ul class="thumbnails">
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            
-                        
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                               
-                        
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span2">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>                        
-                    </ul>
-                    <ul class="thumbnails">
-                        
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                                <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                                <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                                <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox3.jpg">
-                                <img src="../images/images/gallery/imgbox3.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox4.jpg">
-                                <img src="../images/images/gallery/imgbox4.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                            <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox5.jpg">
-                                <img src="../images/images/gallery/imgbox5.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                                <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox1.jpg">
-                                <img src="../images/images/gallery/imgbox1.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        
-                        <li class="span1">
-                            <a class="thumbnail lightbox_trigger" href="../images/images/gallery/imgbox2.jpg">
-                                <img src="../images/images/gallery/imgbox2.jpg" alt="" >
-                            </a>
-                            <div class="actions">
-                                <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-                                <a title="" href="#"><i class="icon-remove icon-white"></i></a>
-                            </div>
-                        </li>
-                        </ul>
+                @foreach($lib as $l)
+                    @php $name = explode(" ",$l['surname']); @endphp
+                    @if($count <= 5)
+                    <li class="span2">
+                        <a class="thumbnail lightbox_trigger" href="{{URL::asset('../public/images/'.$l['user_photo'])}}">
+                            {{ Html::image('../public/images/'.$l['user_photo'], '') }}
+                            {{ $l['surname'] }}
+                        </a>
+                        <div class="actions">
+                            <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
+                            <a title="" href="#"><i class="icon-remove icon-white"></i></a>
+                        </div>
+                    </li>                    
+                    @php $count += 1; @endphp
+                    @else
+                    <li class="span1">
+                        <a class="thumbnail lightbox_trigger" href="{{URL::asset('../public/images/'.$l['user_photo'])}}">
+                             {{ Html::image('../public/images/'.$l['user_photo'], '') }}
+                            <span class="show_name">{{ $name[0] }}</span>
+                        </a>
+                        <div class="actions">
+                            <a title="" href="#"><i class="icon-pencil icon-white"></i></a>
+                            <a title="" href="#"><i class="icon-remove icon-white"></i></a>
+                        </div>
+                    </li>
+                    @endif
+                @endforeach
+                </ul>   
                 </div>
             </div>
         </div>
