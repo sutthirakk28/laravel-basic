@@ -68,6 +68,7 @@ Route::get('leave/report/{id}', 'LeaveController@report');
 Route::get('/getFormScore', 'LeaveController@getFormScore');
 Route::post('/getDataScore', 'LeaveController@getDataScore');
 Route::get('addon/gallery','AddonController@gallery');
+Route::get('addon/calendar','AddonController@calendar');
 
 Auth::routes();
 

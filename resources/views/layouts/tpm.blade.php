@@ -38,7 +38,7 @@
     <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">ข้อมูลผู้ดูแล</span></a></li>
     <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon-plus-sign"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="{{ url('register') }}">เพิ่มผู้ดูแล</a></li>
+        <li><a class="sAdd" title="" href="{{ url('register') }}">เพิ่มข้อมูลผู้ดูแล</a></li>
         <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มข้อมูลการลา</a></li>
         <li><a class="sOutbox" title="" href="{{ url('/lib/create') }}">เพิ่มพนักงาน</a></li>
         <li><a class="sTrash" title="" href="{{ url('/dep/create') }}">เพิ่มฝ่าย</a></li>
@@ -72,7 +72,7 @@
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="{{ url('addon/gallery') }}">Gallery</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="{{ url('addon/calendar') }}">Calendar</a></li>
         <li><a href="chat.html">Chat option</a></li>
       </ul>
     </li>

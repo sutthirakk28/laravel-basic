@@ -1,3 +1,10 @@
 span.show_name {
     font-size: 10px;
 }
+.widget-box.widget-calendar {
+    font-family: Maitree;
+}
+span.request{
+  font-size :14px;
+  color: crimson;
+}

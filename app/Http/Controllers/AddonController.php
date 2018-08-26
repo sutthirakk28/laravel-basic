@@ -65,6 +65,18 @@ class AddonController extends Controller
         return view('addon.gallery',$data);
     }
 
+    public function calendar()
+    {
+        $aCss=array('css/addon/style.css');
+        $lib = Lib::all();
+        $result = json_decode($lib, true);
+        $data = array(
+            'lib' => $result,
+            'style' => $aCss
+        );
+        return view('addon.calendar',$data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
