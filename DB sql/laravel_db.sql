@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2018 at 09:36 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Generation Time: Aug 27, 2018 at 12:49 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -293,7 +293,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2018_07_30_114434_add_phone_to_libs_table', 19),
 (26, '2018_07_31_171201_add_nstart_day_to_leaves_table', 20),
 (27, '2018_07_31_171244_add_nend_day_to_leaves_table', 20),
-(28, '2018_08_19_160602_add_status_leave_to_leaves_table', 21);
+(28, '2018_08_19_160602_add_status_leave_to_leaves_table', 21),
+(29, '2018_08_27_145844_create_tasks_table', 22),
+(30, '2018_08_27_151701_create_task_table', 22);
 
 -- --------------------------------------------------------
 
@@ -364,6 +366,48 @@ INSERT INTO `pos` (`id_pos`, `created_at`, `updated_at`, `name_pos`, `id_dep`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `task_date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `name`, `description`, `task_date`, `created_at`, `updated_at`) VALUES
+(1, 'tuy1111', NULL, '2018-08-27', '2018-08-27 08:43:52', '2018-08-27 08:43:52'),
+(2, 'tuy1111', NULL, '2018-08-28', '2018-08-27 08:44:29', '2018-08-27 08:44:29'),
+(3, 'tuy3333', NULL, '2018-08-29', '2018-08-27 08:44:40', '2018-08-27 08:44:40'),
+(4, 'tuy444', 'yhkulljbh;hk;l', '2018-08-31', '2018-08-27 08:44:54', '2018-08-27 08:44:54'),
+(5, 'dsgdh', 'gfmjdghj', '2018-09-01', '2018-08-27 08:47:28', '2018-08-27 08:47:28'),
+(6, 'hdfghdfh', 'xfghfxdgh', '2018-08-27', '2018-08-27 09:08:47', '2018-08-27 09:08:47'),
+(7, 'admin', 'dhdfgh', '2018-08-01', '2018-08-27 10:04:38', '2018-08-27 10:04:38'),
+(8, 'dfhgdfgh', 'fdghdfh', '2018-08-03', '2018-08-27 10:04:47', '2018-08-27 10:04:47'),
+(9, 'dhjgfhh', 'hgfdhjdfj', '2018-08-01', '2018-08-27 10:04:56', '2018-08-27 10:04:56'),
+(10, 'tuy3333', 'ghmgfkfkj', '2018-08-08', '2018-08-27 10:06:38', '2018-08-27 10:06:38'),
+(11, 'กิจกรรม', 'คำอธิบาย', '2018-08-05', '2018-08-27 10:08:03', '2018-08-27 10:08:03'),
+(12, 'sdgfg', 'dfsh', '2018-08-13', '2018-08-27 10:12:04', '2018-08-27 10:12:04'),
+(13, 'sdfs', 'sDAff', '2018-08-16', '2018-08-27 10:13:26', '2018-08-27 10:13:26'),
+(14, 'admin', 'fghfgh', '2018-08-07', '2018-08-27 10:29:38', '2018-08-27 10:29:38'),
+(15, 'gfdhdf', 'fgdshgd', '2018-08-02', '2018-08-27 10:31:10', '2018-08-27 10:31:10'),
+(16, 'dfgdg', 'dgdgf', '2018-08-16', '2018-08-27 10:32:53', '2018-08-27 10:32:53'),
+(17, 'dfgdg', 'dgdgf', '2018-08-16', '2018-08-27 10:33:14', '2018-08-27 10:33:14'),
+(18, 'dfgdg', 'dgdgf', '2018-08-16', '2018-08-27 10:33:15', '2018-08-27 10:33:15'),
+(19, 'gfgdfh', 'dfghdgh', '2018-08-12', '2018-08-27 10:33:44', '2018-08-27 10:33:44'),
+(20, 'gfgdfh', 'dfghdgh', '2018-08-12', '2018-08-27 10:36:09', '2018-08-27 10:36:09'),
+(21, 'ghffdh', 'dfghfdh', '2018-08-01', '2018-08-27 10:36:17', '2018-08-27 10:36:17');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -382,7 +426,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'mzWfcpLNdrHAJooq6eOOgZwxhocOLxrg8sMwOjeHlkAkxcNMV4S55wPKBfVr', '2018-07-08 21:55:56', '2018-07-08 21:55:56');
+(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'zxKXGXLKF5tizermTcGTcECAiQFqw78ZU61IqKxEnq2VsgdTIyzSLx5V49eY', '2018-07-08 21:55:56', '2018-07-08 21:55:56');
 
 --
 -- Indexes for dumped tables
@@ -443,6 +487,12 @@ ALTER TABLE `pos`
   ADD PRIMARY KEY (`id_pos`);
 
 --
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -493,13 +543,19 @@ ALTER TABLE `libs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
   MODIFY `id_pos` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

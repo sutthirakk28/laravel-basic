@@ -72,7 +72,7 @@
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="{{ url('addon/gallery') }}">Gallery</a></li>
-        <li><a href="{{ url('addon/calendar') }}">Calendar</a></li>
+        <li><a href="{{ url('tasks') }}">Calendar</a></li>
         <li><a href="chat.html">Chat option</a></li>
       </ul>
     </li>

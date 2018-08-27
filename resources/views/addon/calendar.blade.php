@@ -182,8 +182,8 @@ maruti = {
 			console.log(eventObject);	
 			// store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
-            $('p.z1').text(' Suthirak ');
-				
+            $('p.z1').html('<div style="position:absolute;z-index:8;top:0;left:0"><div class="fc-event fc-event-skin fc-event-hori fc-event-draggable fc-corner-left fc-corner-right ui-draggable" unselectable="on" style="position: absolute; z-index: 8;"><div class="fc-event-inner fc-event-skin"><span class="fc-event-title">Suthirak</span></div><div class="ui-resizable-handle ui-resizable-e">&nbsp;&nbsp;&nbsp;</div></div><div class="fc-cell-overlay" style="position: absolute; z-index: 3; top: 352px; left: 768px; width: 192px; height: 165px; display: none;"></div></div>');
+			//$('#external-events .panel-content').append('<div class="external-event ui-draggable label label-inverse">Suthirak</div>');	
 			// make the event draggable using jQuery UI
 			$(this).draggable({
 				zIndex: 999,
