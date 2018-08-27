@@ -9,3 +9,20 @@ span.request{
     font-size :20px;
     color: crimson;
   }
+  .modal-backdrop1 {
+    z-index: 999 !important;
+    display: none;
+}
+.modal-backdrop1, .modal-backdrop.fade.in {
+    opacity: .8;
+    filter: alpha(opacity=80);
+}
+.modal-backdrop1 {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}

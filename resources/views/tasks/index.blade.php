@@ -1,6 +1,8 @@
 @extends('layouts.tpm')
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
@@ -35,6 +37,17 @@
 @endsection
 
 @section('content')
+@if(Session::has('masupdate'))
+    <div id="gritter-notify">
+    <div class="normal"></div>
+  </div>
+
+  @endif
+  @if(Session::has('masdelete'))    
+  <div id="gritter-notify">
+    <div class="sticky"></div>
+  </div>
+  @endif
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">            
@@ -43,25 +56,46 @@
                     <span class="icon"><i class="icon-calendar"></i></span>
                     <h5>ปฎิทินบันทึกกิจกรรม</h5>                    
                     <div class="buttons">
-                        <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> เพิ่มกิจกรรม</a>
-                        <div class="modal hide" id="modal-add-event">
-                                <div class="modal-header">
+                        <a id="add-event" data-toggle="modal" href="#myModal" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> เพิ่มกิจกรรม</a>
+                        <div class="modal hide" id="myModal">
+                            <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">×</button>
                                 <h2>เพิ่มกิจกรรม</h2>
                             </div>
-                            <form action="" method="">
-                            <div class="modal-body">                                
-                                {{ csrf_field() }}
+                            <form id="myForm">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
                                 <span class="request">*</span><span>กิจกรรม :  </span><input type="text" id="name" name="name" required/><br />
                                 <span>คำอธิบาย :  </span><textarea id="description" name="description"></textarea><br />
                                 <span class="request">*</span><span>      วันที่ทำ :   </span><input id="task_date" type="date" name="task_date" class="date" required/>
                             </div>
                             <div class="modal-footer">
                                 <a href="#" class="btn" data-dismiss="modal">ยกเลิก</a>
-                                <input type="submit" id="save" value="Save" />
+                                <button class="btn btn-primary" id="save">บันทึก</button>
                             </div>
                             </form>
                         </div>
+
+                        <div class="modal hide in" id="myModal2">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" id="close">×</button>
+                                <h2>แก้ไขกิจกรรม</h2>
+                            </div>
+                            <form id="myForm2">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <span class="request">*</span><span>กิจกรรม :  </span><input type="text" id="name2" name="name2" required/><br />
+                                <span>คำอธิบาย :  </span><textarea id="description2" name="description2"></textarea><br />
+                                <span class="request">*</span><span>      วันที่ทำ :   </span><input id="task_date2" type="date" name="task_date2" class="date2" required/>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn" data-dismiss="modal" id="close2">ยกเลิก</a>
+                                <button class="btn btn-primary" id="save2">แก้ไข</button>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-backdrop1"></div>
+
                     </div>
                 </div>
                 <div id='calendar'></div>
@@ -72,10 +106,13 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('js/main/select2.min.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.popover.js') }}"></script>
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
 <script>
+
     $(document).ready(function() {
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
@@ -85,30 +122,52 @@
                 {
                     title : '{{ $task['name'] }}',
                     start : '{{ $task['task_date'] }}',
-                    url : '{{ route('tasks.edit', $task['id']) }}'
+                    url : '{{ route('tasks.edit', $task['id']) }}',
+                    
                 },
                 @endforeach
             ]
-        })
+        });
 
-        $('#save').on('click',function(){
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            var name = $('input#name').val();
-            var description = $('textarea#description').val();
-            var task_date = $('input#task_date').val();
+        $('#save').click(function(e){
+            e.preventDefault();
+            var _token = $("input[name='_token']").val();
+            
+            var name = $("input[name='name']").val();
+            var task_date = $("input[name='task_date']").val();
+            var description = $("textarea[name='description']").val();
+            $('#myModal').css({'display':'none'});
+            $('.modal-backdrop.in').hide();
             
             $.ajax({
                 type :'POST',
-                url : "{{ url('/tasks/store') }}",
-                data : {_token: CSRF_TOKEN,name:name,description:description,task_date:task_date},
-                dataType : 'json',
+                url : "<?php echo url('/tasks/store');?>",
+                data : {_token:_token,name:name,description:description,task_date:task_date},
                 success : function(data)
                 {
-                    console.log(data);
-                }
-            })
-        })
+                    location.reload();
+                }                
+            });
+        });
 
+        $('.fc-content').click(function(e){
+            e.preventDefault();
+            
+            $('#myModal2').css({'display':'block'});
+            //$('#myModal2').setAttribute("aria-hidden", "false");
+            $('.modal-backdrop1').css({'display':'block'});
+
+        });
+        $('#close,#close2').click(function(e){
+            e.preventDefault();
+            $('#myModal2').css({'display':'none'});
+            $('.modal-backdrop1').css({'display':'none'});
+        });
+        $('.modal-backdrop1').click(function(e){
+            e.preventDefault();
+            $('#myModal2').css({'display':'none'});
+            $('.modal-backdrop1').css({'display':'none'});
+        });
         
     });
 </script>

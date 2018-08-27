@@ -6,9 +6,24 @@ use Illuminate\Http\Request;
 use DB;
 use App\Task;
 use Carbon\Carbon;
+use Response;
+use Session;
+use Validator;
+use Redirect;
 
 class TasksController extends Controller
 {
+    public function __construct()
+    {
+        //All below Auth normal
+        $this->middleware('auth');
+
+        //Only Function
+        //$this->middleware('auth',['only' => ['index','form'] ]);
+
+        //Except Function
+        //$this->middleware('auth',['except' => ['index'] ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,24 +60,26 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //Task::create($request->all());
-        // $now = new Carbon();
-
-        // $Tasks = new Task;
-        // $Tasks->name = $request->name;
-        // $Tasks->description = $request->description;
-        // $Tasks->task_date = $request->task_date;
-        // $Tasks->created_at = $now;
-        // $Tasks->save();
-
         
-        $student = 'เพิ่มสำเร็จ';
-        // $result = json_decode($student, true);
-        // $response = array(
-        //     'leave' => $result
-        // );
+            $now = new Carbon();
 
-        return response()->json($student);
+            $Tasks = new Task();
+            $Tasks->name = $request->name;
+            $Tasks->description = $request->description;
+            $Tasks->task_date = $request->task_date;
+            $Tasks->created_at = $now;
+
+            $Tasks->save();
+
+            $tasks_show = Task::all();
+            $result = json_decode($tasks_show, true);
+            $data = array(
+                'tasks' => $result
+            );
+        Session::flash('masupdate','บันทึกข้อมูลเรียบร้อยแล้ว');
+        return response()->json($data);
+         
+        //return response()->json(['success'=>'Data is successfully added']);
     }
 
     /**
