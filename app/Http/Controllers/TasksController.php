@@ -71,12 +71,14 @@ class TasksController extends Controller
 
             $Tasks->save();
 
-            $tasks_show = Task::all();
+            $tasks_show = Task::all();            
             $result = json_decode($tasks_show, true);
             $data = array(
-                'tasks' => $result
+                'id' => $Tasks->id,
+                'name' => $Tasks->name,
+                'description' => $Tasks->description,
+                'task_date' => $Tasks->task_date,
             );
-        Session::flash('masupdate','บันทึกข้อมูลเรียบร้อยแล้ว');
         return response()->json($data);
          
         //return response()->json(['success'=>'Data is successfully added']);

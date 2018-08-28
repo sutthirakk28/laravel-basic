@@ -122,8 +122,11 @@
                 {
                     title : '{{ $task['name'] }}',
                     start : '{{ $task['task_date'] }}',
-                    url : '{{ route('tasks.edit', $task['id']) }}',
-                    
+                    url : '{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}',
+                    data : {
+                            description : '{{ $task['name'] }}', 
+                            location: '{{ $task['name'] }}'
+                            }
                 },
                 @endforeach
             ]
@@ -146,6 +149,10 @@
                 success : function(data)
                 {
                     location.reload();
+                // var data = data.tasks;
+                // var event = {id:data.id , title: data.name, start: data.task_date,url :data.id};
+                // $('#calendar').fullCalendar( 'renderEvent', event, true);
+                // $('#myForm').closest('form').find("input[type=text], textarea,input[type=date]").val("");   
                 }                
             });
         });
@@ -156,7 +163,7 @@
             $('#myModal2').css({'display':'block'});
             //$('#myModal2').setAttribute("aria-hidden", "false");
             $('.modal-backdrop1').css({'display':'block'});
-
+            
         });
         $('#close,#close2').click(function(e){
             e.preventDefault();
