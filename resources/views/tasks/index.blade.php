@@ -120,16 +120,18 @@
             events : [
                 @foreach($tasks as $task)
                 {
-                    title : '{{ $task['name'] }}',
+                    title : '{{ $task['name']  }}<input type="hidden" value="{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}" >',
                     start : '{{ $task['task_date'] }}',
-                    url : '{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}',
-                    data : {
-                            description : '{{ $task['name'] }}', 
-                            location: '{{ $task['name'] }}'
-                            }
+                    // url : '{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}',
+                    //description: '{{ $task['description'] }}',
+                    
                 },
                 @endforeach
-            ]
+            ],
+            eventRender: function( event, element, view ) {
+                var title = element.find('.fc-title, .fc-list-item-title');          
+                title.html(title.text());
+            },
         });
 
         $('#save').click(function(e){
@@ -157,9 +159,9 @@
             });
         });
 
-        $('.fc-content').click(function(e){
+        $('.fc-title').click(function(e){
             e.preventDefault();
-            
+            //$('a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end').attr("disabled","disabled");
             $('#myModal2').css({'display':'block'});
             //$('#myModal2').setAttribute("aria-hidden", "false");
             $('.modal-backdrop1').css({'display':'block'});
