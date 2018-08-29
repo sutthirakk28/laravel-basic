@@ -59,29 +59,26 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
-            $now = new Carbon();
+    {        
+        $now = new Carbon();
 
-            $Tasks = new Task();
-            $Tasks->name = $request->name;
-            $Tasks->description = $request->description;
-            $Tasks->task_date = $request->task_date;
-            $Tasks->created_at = $now;
+        $Tasks = new Task();
+        $Tasks->name = $request->name;
+        $Tasks->description = $request->description;
+        $Tasks->task_date = $request->task_date;
+        $Tasks->created_at = $now;
 
-            $Tasks->save();
+        $Tasks->save();
 
-            $tasks_show = Task::all();            
-            $result = json_decode($tasks_show, true);
-            $data = array(
-                'id' => $Tasks->id,
-                'name' => $Tasks->name,
-                'description' => $Tasks->description,
-                'task_date' => $Tasks->task_date,
-            );
+        // $tasks_show = Task::all();            
+        // $result = json_decode($tasks_show, true);
+        $data = array(
+            'id' => $Tasks->id,
+            'success' => 'เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว',
+        );
         return response()->json($data);
          
-        //return response()->json(['success'=>'Data is successfully added']);
+        //return response()->json(['success'=>'เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว']);
     }
 
     /**
@@ -118,6 +115,24 @@ class TasksController extends Controller
         //
     }
 
+    public function edit_task(Request $request)
+    {
+        $now = new Carbon();
+        $tasksUpdate = Task::where('id',$request->id)
+        ->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'task_date' => $request->task_date,
+            'updated_at' => $now,
+        ]);
+        // $success1 = 'Data is successfully Edit';
+        // $data = array(
+        //     'success' => $success1,
+        // );
+        // return response()->json($data);
+        return response()->json(['success'=>'แก้ไขข้อมูลเรียบร้อยแล้ว']);
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

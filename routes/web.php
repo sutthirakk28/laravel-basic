@@ -71,6 +71,7 @@ Route::get('addon/gallery','AddonController@gallery');
 // Route::get('addon/calendar','AddonController@calendar');
 Route::resource('tasks', 'TasksController');
 Route::post('/tasks/store', 'TasksController@store');
+Route::post('/tasks/edit_task', 'TasksController@edit_task');
 
 Auth::routes();
 

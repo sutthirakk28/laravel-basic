@@ -1,8 +1,6 @@
 @extends('layouts.tpm')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
@@ -29,9 +27,9 @@
 @section('content-header')
 <div id="content-header">
 	<div id="breadcrumb">
-		<a href="{{ url('/pos/') }}" title="กลับไปจัดการข้อมูลตำแหน่ง" class="tip-bottom">
-			<i class="icon-book"></i> ข้อมูลตำแหน่ง</a>
-		<a href="#">เพิ่มข้อมูลตำแหน่ง</a>
+		<a href="{{ url('/home') }}" title="กลับไปจัดการข้อมูลตำแหน่ง" class="tip-bottom">
+			<i class="icon-book"></i> Home</a>
+		<a href="#">ปฎิทินบันทึกกิจกรรม</a>
 	</div>
 </div> 
 @endsection
@@ -54,7 +52,7 @@
             <div class="widget-box widget-calendar">                
                 <div class="widget-title">
                     <span class="icon"><i class="icon-calendar"></i></span>
-                    <h5>ปฎิทินบันทึกกิจกรรม</h5>                    
+                    <h5>ปฎิทินบันทึกกิจกรรม</h5>                 
                     <div class="buttons">
                         <a id="add-event" data-toggle="modal" href="#myModal" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> เพิ่มกิจกรรม</a>
                         <div class="modal hide" id="myModal">
@@ -84,13 +82,15 @@
                             <form id="myForm2">
                             {{ csrf_field() }}
                             <div class="modal-body">
+                                <input type="hidden" id="id" name="id" required/>
                                 <span class="request">*</span><span>กิจกรรม :  </span><input type="text" id="name2" name="name2" required/><br />
                                 <span>คำอธิบาย :  </span><textarea id="description2" name="description2"></textarea><br />
                                 <span class="request">*</span><span>      วันที่ทำ :   </span><input id="task_date2" type="date" name="task_date2" class="date2" required/>
                             </div>
                             <div class="modal-footer">
+                                <button class="btn btn-danger" id="delete">ลบกิจกรรม</button>
                                 <a href="#" class="btn" data-dismiss="modal" id="close2">ยกเลิก</a>
-                                <button class="btn btn-primary" id="save2">แก้ไข</button>
+                                <button class="btn btn-primary" id="edit">แก้ไข</button>
                             </div>
                             </form>
                         </div>
@@ -106,31 +106,51 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('js/main/select2.min.js') }}"></script> 
-<script src="{{ asset('js/main/maruti.popover.js') }}"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
 <script>
 
     $(document).ready(function() {
-        // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
-            // put your options and callbacks here
             events : [
                 @foreach($tasks as $task)
                 {
-                    title : '{{ $task['name']  }}<input type="hidden" value="{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}" >',
+                    id : '{{ $task['id'] }}',
+                    title : '{{ $task['name']  }}',
                     start : '{{ $task['task_date'] }}',
-                    // url : '{{ $task['id'].'/'.$task['task_date'].'/'.$task['description'] }}',
-                    //description: '{{ $task['description'] }}',
-                    
+                    description: '{{ $task['description'] }}',                    
                 },
                 @endforeach
             ],
-            eventRender: function( event, element, view ) {
-                var title = element.find('.fc-title, .fc-list-item-title');          
-                title.html(title.text());
+            // eventRender: function( event, element, view ) {
+            //     var title = element.find('.fc-title, .fc-list-item-title');          
+            //     title.html(title.text());
+            // },
+            viewRender: function (view, element) {
+                $('.fc-content').click(function(e){
+                    e.preventDefault();
+                    $('#myModal2').css({'display':'block'});
+                    $('.modal-backdrop1').css({'display':'block'});
+                });
+                $('#close,#close2').click(function(e){
+                    e.preventDefault();
+                    $('#myModal2').css({'display':'none'});
+                    $('.modal-backdrop1').css({'display':'none'});
+                });
+                $('.modal-backdrop1').click(function(e){
+                    e.preventDefault();
+                    $('#myModal2').css({'display':'none'});
+                    $('.modal-backdrop1').css({'display':'none'});
+                });
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                $("input[name='id']").val(calEvent.id);
+                $("input[name='name2']").val(calEvent.title);
+                $("input[name='task_date2']").val(calEvent.start.format('YYYY-MM-DD'));
+                $("textarea[name='description2']").val(calEvent.description);
+                $(this).css('border-color', 'red');
+                
             },
         });
 
@@ -150,33 +170,37 @@
                 data : {_token:_token,name:name,description:description,task_date:task_date},
                 success : function(data)
                 {
+                    
+                    alert(data.success); 
                     location.reload();
-                // var data = data.tasks;
-                // var event = {id:data.id , title: data.name, start: data.task_date,url :data.id};
+                // var data = data.id;
+                // var event = {id:data.id , title: name, start: task_date};
                 // $('#calendar').fullCalendar( 'renderEvent', event, true);
                 // $('#myForm').closest('form').find("input[type=text], textarea,input[type=date]").val("");   
                 }                
             });
         });
-
-        $('.fc-title').click(function(e){
+       
+        $('#edit').click(function(e){
             e.preventDefault();
-            //$('a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end').attr("disabled","disabled");
-            $('#myModal2').css({'display':'block'});
-            //$('#myModal2').setAttribute("aria-hidden", "false");
-            $('.modal-backdrop1').css({'display':'block'});
-            
-        });
-        $('#close,#close2').click(function(e){
-            e.preventDefault();
+            var _token = $("input[name='_token']").val();
+            var id = $("input[name='id']").val();
+            var name2 = $("input[name='name2']").val();
+            var task_date2 = $("input[name='task_date2']").val();
+            var description2 = $("textarea[name='description2']").val();                          
+           $.ajax({
+                type :'POST',
+                url : "{{ url('/tasks/edit_task') }}",
+                data : {_token:_token,id:id,name:name2,task_date:task_date2,description:description2},
+                success : function(data)
+                {
+                    alert(data.success); 
+                    location.reload();  
+                }                
+            });
             $('#myModal2').css({'display':'none'});
             $('.modal-backdrop1').css({'display':'none'});
-        });
-        $('.modal-backdrop1').click(function(e){
-            e.preventDefault();
-            $('#myModal2').css({'display':'none'});
-            $('.modal-backdrop1').css({'display':'none'});
-        });
+        });       
         
     });
 </script>

@@ -270,7 +270,7 @@ button.toggle:hover {
         <a href="{{ url('/home') }}" title="กลับไปหน้าแรก" class="tip-bottom">
             <i class="icon-home"></i> Home
         </a>
-        <a href="#">gallery</a>
+        <a href="#">รูปพนักงาน</a>
     </div>
 </div>
 @endsection
@@ -299,7 +299,7 @@ button.toggle:hover {
                     <span class="icon">
                         <i class="icon-picture"></i>
                     </span>
-                    <h5>Gallery</h5>
+                    <h5>รูปพนักงาน</h5>
                 </div>
                 <div class="widget-content">
                 @php

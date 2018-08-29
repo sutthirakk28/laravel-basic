@@ -71,9 +71,9 @@
     <li><a href="{{ url('/pos') }}"><i class="icon-book"></i> <span>ข้อมูลตำแหน่ง</span></a></li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">3</span></a>
       <ul>
-        <li><a href="{{ url('addon/gallery') }}">Gallery</a></li>
-        <li><a href="{{ url('tasks') }}">Calendar</a></li>
-        <li><a href="chat.html">Chat option</a></li>
+        <li><a href="{{ url('addon/gallery') }}">รูปพนักงาน</a></li>
+        <li><a href="{{ url('tasks') }}">ปฎิทินบันทึกกิจกรรม</a></li>
+        <li><a href="chat.html">ห้องแชท Chatroom</a></li>
       </ul>
     </li>
   </ul>    
