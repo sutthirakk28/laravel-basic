@@ -48,9 +48,13 @@ class AddonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function chat()
+    {   
+        $aCss=array('css/addon/style.css');
+        $data = array(
+            'style' => $aCss
+        );
+        return view('addon.chat',$data);
     }
 
     public function gallery()

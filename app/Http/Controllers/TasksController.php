@@ -139,8 +139,9 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Task::destroy($request->id);
+        return response()->json(['success'=>'ลบข้อมูลเรียบร้อยแล้ว']);
     }
 }

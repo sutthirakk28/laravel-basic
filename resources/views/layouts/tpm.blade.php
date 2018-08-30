@@ -73,7 +73,7 @@
       <ul>
         <li><a href="{{ url('addon/gallery') }}">รูปพนักงาน</a></li>
         <li><a href="{{ url('tasks') }}">ปฎิทินบันทึกกิจกรรม</a></li>
-        <li><a href="chat.html">ห้องแชท Chatroom</a></li>
+        <li><a href="{{ url('addon/chat') }}">ห้องแชท Chatroom</a></li>
       </ul>
     </li>
   </ul>    

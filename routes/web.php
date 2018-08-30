@@ -68,10 +68,11 @@ Route::get('leave/report/{id}', 'LeaveController@report');
 Route::get('/getFormScore', 'LeaveController@getFormScore');
 Route::post('/getDataScore', 'LeaveController@getDataScore');
 Route::get('addon/gallery','AddonController@gallery');
-// Route::get('addon/calendar','AddonController@calendar');
+Route::get('addon/chat','AddonController@chat');
 Route::resource('tasks', 'TasksController');
 Route::post('/tasks/store', 'TasksController@store');
 Route::post('/tasks/edit_task', 'TasksController@edit_task');
+Route::post('/tasks/destroy', 'TasksController@destroy');
 
 Auth::routes();
 

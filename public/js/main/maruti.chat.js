@@ -6,32 +6,32 @@ $(document).ready(function(){
 	$('.chat-message button').click(function(){
 		var input = $(this).siblings('span').children('input[type=text]');		
 		if(input.val() != ''){
-			add_message('You','../../laravel-basic/public/images/img/demo/av1.jpg',input.val(),true);
+			add_message('You','../images/img/demo/av1.jpg',input.val(),true);
 		}		
 	});
 	
 	$('.chat-message input').keypress(function(e){
 		if(e.which == 13) {	
 			if($(this).val() != ''){
-				add_message('You','../../laravel-basic/public/images/img/demo/av1.jpg',$(this).val(),true);
+				add_message('You','../images/img/demo/av1.jpg',$(this).val(),true);
 			}		
 		}
 	});
 	
 	setTimeout(function(){
-			add_message('Laukik','../../laravel-basic/public/images/img/demo/av2.jpg','Hello Every one do u want to freindship with me?')
+		add_message('นายสุชิน  บุญคำ', '../images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
 		},'1000');
 	setTimeout(function(){
-			add_message('Vijay','../../laravel-basic/public/images/img/demo/av3.jpg','Yuppi! why not sirji!!.')
+		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', '../images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
 		},'4000');
 	setTimeout(function(){
-			add_message('Laukik','../../laravel-basic/public/images/img/demo/av2.jpg','Thanks!!! See you soon than')
+		add_message('นางสาวพิมพ์พิไล  งามแสง', '../images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
 		},'8000');
 	setTimeout(function(){
-			add_message('Vijay','../../laravel-basic/public/images/img/demo/av3.jpg','ok Bye than!!!.')
+		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','../images/img/demo/av3.jpg','ok Bye than!!!.')
 		},'12000');	
 	setTimeout(function(){
-            remove_user('Laukik','Laukik')
+		remove_user('นายสมชัย  ทองหล่อ','นายสมชัย  ทองหล่อ')
         },'16000');
    	var i = 0;
 	function add_message(name,img,msg,clear) {
@@ -60,7 +60,7 @@ $(document).ready(function(){
         });
         var  inner = $('#chat-messages-inner');
         var id = 'msg-'+i;
-        inner.append('<p class="offline" id="'+id+'"><span>User '+name+' left the chat</span></p>');
+        inner.append('<p class="offline" id="'+id+'"><span>User '+name+' ออกจากแชท</span></p>');
         $('#'+id).hide().fadeIn(800);
     }
 });

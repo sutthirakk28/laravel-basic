@@ -21,6 +21,9 @@
     /* background: url("../../public/images/images/backgrounds/calActiveBg.html") repeat-x scroll 0 0 #eae5da; */
     background-color :#c9eaf3 ;
 }
+.btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
+    margin-top: 1px;
+}
 </style>
 @endsection
 
@@ -55,6 +58,7 @@
                     <h5>ปฎิทินบันทึกกิจกรรม</h5>                 
                     <div class="buttons">
                         <a id="add-event" data-toggle="modal" href="#myModal" class="btn btn-inverse btn-mini"><i class="icon-plus icon-white"></i> เพิ่มกิจกรรม</a>
+                        <a href="#" onClick="window.location.reload()" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Refresh</a>
                         <div class="modal hide" id="myModal">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">×</button>
@@ -200,7 +204,25 @@
             });
             $('#myModal2').css({'display':'none'});
             $('.modal-backdrop1').css({'display':'none'});
-        });       
+        });  
+
+        $('#delete').click(function(e){
+            e.preventDefault();
+            var _token = $("input[name='_token']").val();
+            var id = $("input[name='id']").val();
+           $.ajax({
+                type :'POST',
+                url : "{{ url('/tasks/destroy') }}",
+                data : {_token:_token,id:id},
+                success : function(data)
+                {
+                    alert(data.success); 
+                    location.reload();  
+                }                
+            });
+            $('#myModal2').css({'display':'none'});
+            $('.modal-backdrop1').css({'display':'none'});
+        });         
         
     });
 </script>
