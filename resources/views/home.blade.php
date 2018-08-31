@@ -1,7 +1,8 @@
 @extends('layouts.tpm')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" />
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
+<!-- <link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" /> -->
 <style type="text/css">  
   [class^="icon-"], [class*=" icon-"] {
     background-image: url('images/img/glyphicons-halflings.png');
@@ -24,6 +25,17 @@
   .select2-container .select2-choice div b {
     background: url('images/img/select2.png') no-repeat 0 1px;
   }
+  span#sum_admin,span#sum_per,span#sum_task,span#sum_leave {
+    margin-left: 35px;
+  }
+  .container-fluid {
+    font-family: Maitree;
+  } 
+  .quick-actions li {
+    min-width: 120px;
+    max-width: 150px;
+    
+  } 
 </style>
 @endsection
 
@@ -37,13 +49,58 @@
 <div class="container-fluid">
     <div class="quick-actions_homepage">
     <ul class="quick-actions">
-          <li> <a href="#"> <i class="icon-people"></i>จัดการข้อมูลผู้ดูแล</a> </li>
-          <li> <a href="#"> <i class="icon-client"></i>จัดการข้อมูลพนักงาน</a> </li>
-          <li> <a href="#"> <i class="icon-calendar"></i> จัดการกิจกรรม </a> </li>
-          <li> <a href="#"> <i class="icon-lock"></i>ล็อคหน้าจอ</a></li>
+          <li> <a href="{{ url('/leave') }}"> <i class="icon-book"><span class="badge badge-success" id="sum_leave">0</i>ประวัติลา</a> </li> 
+          <li> <a href="#"> <i class="icon-people"><span class="badge badge-success" id="sum_admin">0</i>ผู้ดูแล</a> </li>          
+          <li> <a href="{{ url('/lib') }}"> <i class="icon-client"><span class="badge badge-success" id="sum_per">0</i></i>พนักงาน</a> </li>
+          <li> <a href="{{ url('/tasks') }}"> <i class="icon-calendar"><span class="badge badge-success" id="sum_task">0</i></i>กิจกรรม </a> </li>
+          
         </ul>
    </div>
    
+   <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
+          <h5>Site Analytics</h5>
+          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
+        </div>
+        <div class="widget-content">
+          <div class="row-fluid">
+            <div class="span10">
+              <div id='calendar'></div>
+            </div>
+            <div class="span2">
+              <ul class="stat-boxes2">
+                <li>
+                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+10%</div>
+                  <div class="right"> <strong>15598</strong> Visits </div>
+                </li>
+                <li>
+                  <div class="left peity_line_neutral"><span><span style="display: none;">10,15,8,14,13,10,10,15</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>10%</div>
+                  <div class="right"> <strong>150</strong> New Users </div>
+                </li>
+                <li>
+                  <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>-40%</div>
+                  <div class="right"> <strong>4560</strong> Orders</div>
+                </li>
+                <li>
+                  <div class="left peity_line_good"><span><span style="display: none;">12,6,9,13,14,10,17</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+60%</div>
+                  <div class="right"> <strong>936</strong> Register </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="row-fluid">
       <div class="widget-box">
         <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
@@ -291,32 +348,103 @@
 <script src="{{ asset('js/main/jquery.flot.min.js') }}"></script> 
 <script src="{{ asset('js/main/jquery.flot.resize.min.js') }}"></script> 
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
-<script src="{{ asset('js/main/fullcalendar.min.js') }}"></script>
+<!-- <script src="{{ asset('js/main/fullcalendar.min.js') }}"></script> -->
 <script src="{{ asset('js/main/maruti.dashboard.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.chat.js') }}"></script> 
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+
 <script type="text/javascript">
-  // This function is called from the pop-up menus to transfer to
-  // a different page. Ignore if the value returned is a null string:
-  function goPage (newURL) {
+$(document).ready(function() {
 
-      // if url is empty, skip the menu dividers and reset the menu selection to default
-      if (newURL != "") {
-      
-          // if url is "-", it is this page -- reset the menu:
-          if (newURL == "-" ) {
-              resetMenu();            
-          } 
-          // else, send page to designated URL            
-          else {  
-            document.location.href = newURL;
-          }
+  $('#calendar').fullCalendar({
+    height: 650,
+    events: [
+      {
+        title  : 'event1',
+        start  : '2018-08-22'
+      },
+      {
+        title  : 'event2',
+        start  : '2018-08-10',
+        end    : '2018-08-11'
+      },
+      {
+        title  : 'นายสุทธิรักษ์ ลาป่วย',
+        start  : '2018-08-24T12:30:00',
+        allDay : false // will make the time show
+      },
+      {
+        title  : 'นายสุทธิรักษ์ ',
+        start  : '2018-08-28T08:30',
+        end    : '2018-08-31T12:00',
+        allDay : false // will make the time show
+      },
+      {
+        title  : 'นายสุทธิรักษ์ ',
+        start  : '2018-09-05T08:30',
+        end    : '2018-09-30T12:00',
+        allDay : false // will make the time show
+      },
+      {
+        title  : 'นายสุทธิรักษ์ ',
+        start  : '2018-08-29T08:30',
+        end    : '2018-09-10T12:00',
+        allDay : false // will make the time show
       }
-  }
+  ]
+  });
+  //sum leave
+  $.ajax({
+    type :'GET',
+    url : "{{ url('/home/sum_leave') }}",
+    success : function(data)
+    {
+       $('span#sum_leave').text(data.sum_leave);
+    }                
+  });
+  //sum admin
+  $.ajax({
+    type :'GET',
+    url : "{{ url('/home/sum_admin') }}",
+    success : function(data)
+    {
+       $('span#sum_admin').text(data.sum_admin);
+    }                
+  });
+  //sum persion
+  $.ajax({
+    type :'GET',
+    url : "{{ url('/home/sum_per') }}",
+    success : function(data)
+    {     
+      $('span#sum_per').text(data.sum_per);
+    }                
+  });
+  //sum task
+  $.ajax({
+    type :'GET',
+    url : "{{ url('/home/sum_task') }}",
+    success : function(data)
+    {     
+      $('span#sum_task').text(data.sum_task);
+    }                
+  });
 
-// resets the menu selection upon entry to this page:
-function resetMenu() {
-   document.gomenu.selector.selectedIndex = 2;
-}
+});
+
+  function goPage (newURL) {
+    if (newURL != "") {
+      if (newURL == "-" ) {
+          resetMenu();            
+      } else {  
+      document.location.href = newURL;
+      }
+    }
+  }
+  function resetMenu() {
+    document.gomenu.selector.selectedIndex = 2;
+  }
 </script>
 @endsection

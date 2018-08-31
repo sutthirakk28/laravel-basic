@@ -6,29 +6,29 @@ $(document).ready(function(){
 	$('.chat-message button').click(function(){
 		var input = $(this).siblings('span').children('input[type=text]');		
 		if(input.val() != ''){
-			add_message('You','../images/img/demo/av1.jpg',input.val(),true);
+			add_message('You','images/img/demo/av1.jpg',input.val(),true);
 		}		
 	});
 	
 	$('.chat-message input').keypress(function(e){
 		if(e.which == 13) {	
 			if($(this).val() != ''){
-				add_message('You','../images/img/demo/av1.jpg',$(this).val(),true);
+				add_message('You','images/img/demo/av1.jpg',$(this).val(),true);
 			}		
 		}
 	});
 	
 	setTimeout(function(){
-		add_message('นายสุชิน  บุญคำ', '../images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
+		add_message('นายสุชิน  บุญคำ', 'images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
 		},'1000');
 	setTimeout(function(){
-		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', '../images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
+		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', 'images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
 		},'4000');
 	setTimeout(function(){
-		add_message('นางสาวพิมพ์พิไล  งามแสง', '../images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
+		add_message('นางสาวพิมพ์พิไล  งามแสง', 'images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
 		},'8000');
 	setTimeout(function(){
-		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','../images/img/demo/av3.jpg','ok Bye than!!!.')
+		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','images/img/demo/av3.jpg','ok Bye than!!!.')
 		},'12000');	
 	setTimeout(function(){
 		remove_user('นายสมชัย  ทองหล่อ','นายสมชัย  ทองหล่อ')

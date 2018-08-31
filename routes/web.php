@@ -77,6 +77,10 @@ Route::post('/tasks/destroy', 'TasksController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/sum_leave', 'HomeController@sum_leave');
+Route::get('/home/sum_admin', 'HomeController@sum_admin');
+Route::get('/home/sum_per', 'HomeController@sum_per');
+Route::get('/home/sum_task', 'HomeController@sum_task');
 
 Route::get('/news','NewsController@index');
 Route::get('/news/form','NewsController@form');
