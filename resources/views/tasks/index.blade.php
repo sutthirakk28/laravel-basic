@@ -123,7 +123,8 @@
                     id : '{{ $task['id'] }}',
                     title : '{{ $task['name']  }}',
                     start : '{{ $task['task_date'] }}',
-                    description: '{{ $task['description'] }}',                    
+                    description: '{{ $task['description'] }}',
+                    allDay: false,                    
                 },
                 @endforeach
             ],

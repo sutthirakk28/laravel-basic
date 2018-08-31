@@ -33,9 +33,11 @@
   } 
   .quick-actions li {
     min-width: 120px;
-    max-width: 150px;
-    
+    max-width: 150px;    
   } 
+  .btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
+    margin-top: 1px;
+  }
 </style>
 @endsection
 
@@ -53,14 +55,14 @@
           <li> <a href="#"> <i class="icon-people"><span class="badge badge-success" id="sum_admin">0</i>ผู้ดูแล</a> </li>          
           <li> <a href="{{ url('/lib') }}"> <i class="icon-client"><span class="badge badge-success" id="sum_per">0</i></i>พนักงาน</a> </li>
           <li> <a href="{{ url('/tasks') }}"> <i class="icon-calendar"><span class="badge badge-success" id="sum_task">0</i></i>กิจกรรม </a> </li>
-          
+          <li> <a href="#"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
         </ul>
    </div>
    
    <div class="row-fluid">
       <div class="widget-box">
         <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
-          <h5>Site Analytics</h5>
+          <h5>ประวัติการลา</h5>
           <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
         </div>
         <div class="widget-content">
@@ -358,43 +360,27 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+ //list_leave
   $('#calendar').fullCalendar({
-    height: 650,
-    events: [
-      {
-        title  : 'event1',
-        start  : '2018-08-22'
-      },
-      {
-        title  : 'event2',
-        start  : '2018-08-10',
-        end    : '2018-08-11'
-      },
-      {
-        title  : 'นายสุทธิรักษ์ ลาป่วย',
-        start  : '2018-08-24T12:30:00',
-        allDay : false // will make the time show
-      },
-      {
-        title  : 'นายสุทธิรักษ์ ',
-        start  : '2018-08-28T08:30',
-        end    : '2018-08-31T12:00',
-        allDay : false // will make the time show
-      },
-      {
-        title  : 'นายสุทธิรักษ์ ',
-        start  : '2018-09-05T08:30',
-        end    : '2018-09-30T12:00',
-        allDay : false // will make the time show
-      },
-      {
-        title  : 'นายสุทธิรักษ์ ',
-        start  : '2018-08-29T08:30',
-        end    : '2018-09-10T12:00',
-        allDay : false // will make the time show
-      }
-  ]
-  });
+    
+    events : [
+        @foreach($leave as $l)
+        {
+          
+            id    : '{{ $l['id'] }}',
+            title : '{{ $l['nickname'].' : '}}@if($l['type_leave']==0)ลาบวช-ทำหมัน@elseif($l['type_leave']==1)ลาคลอด @elseif($l['type_leave']==2)ลาป่วย @elseif($l['type_leave']==3)ลากิจ @else พักร้อน @endif',
+            start : '{{ $l['nstart_day'] }}',
+            end   : '{{ $l['nend_day'] }}',
+            allDay: false,                    
+        },
+        @endforeach
+    ],
+    // eventRender: function( event, element, view ) {
+    //     var title = element.find('.fc-title, .fc-list-item-title');          
+    //     title.html(title.text());
+    // },
+  });  
+  
   //sum leave
   $.ajax({
     type :'GET',

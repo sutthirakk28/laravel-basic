@@ -8,6 +8,7 @@ use App\User;
 use App\Lib;
 use App\Task;
 use App\Leave;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $leave = DB::table('leaves')
+            ->join('libs', 'leaves.id_per', '=', 'libs.id')
+            ->select('leaves.id','leaves.nstart_day','leaves.nend_day','leaves.type_leave', 'libs.surname','libs.nickname')
+            ->get();
+        $result = json_decode($leave, true);
+        $data = array(
+            'leave' => $result,
+        );
+        return view('home', $data);
+    }
+
+    public function list_leave()
+    {
+        $leave = Leave::all();
+        return response()->json(['leave'=>$leave]);
     }
 
     public function sum_leave()
