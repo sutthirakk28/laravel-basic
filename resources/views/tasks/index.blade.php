@@ -1,7 +1,7 @@
 @extends('layouts.tpm')
 
 @section('css')
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
+<link rel="stylesheet" href="{{ asset('css/main/fullcalendar/fullcalendar.min.css') }}" />
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
     background-image: url("../public/images/img/glyphicons-halflings.png");
@@ -23,6 +23,9 @@
 }
 .btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
     margin-top: 1px;
+}
+div#calendar {
+    margin: 10px;
 }
 </style>
 @endsection
@@ -110,13 +113,20 @@
 @endsection
 
 @section('js')
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+<script src="{{ asset('js/main/fullcalendar/jquery-1.11.3.min.js') }}"></script>
+<script src="{{ asset('js/main/fullcalendar/moment.min.js') }}"></script>
+<script src="{{ asset('js/main/fullcalendar/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('js/main/fullcalendar/th.js') }}"></script>
 <script>
 
     $(document).ready(function() {
         $('#calendar').fullCalendar({
+            
+            header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+            },
             events : [
                 @foreach($tasks as $task)
                 {
@@ -124,10 +134,12 @@
                     title : '{{ $task['name']  }}',
                     start : '{{ $task['task_date'] }}',
                     description: '{{ $task['description'] }}',
-                    allDay: false,                    
+                    allDay: true,                    
                 },
                 @endforeach
             ],
+            eventLimit: true, // allow "more" link when too many events
+            lang: 'th',
             // eventRender: function( event, element, view ) {
             //     var title = element.find('.fc-title, .fc-list-item-title');          
             //     title.html(title.text());

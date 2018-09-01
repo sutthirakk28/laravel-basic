@@ -74,7 +74,6 @@ Route::post('/tasks/store', 'TasksController@store');
 Route::post('/tasks/edit_task', 'TasksController@edit_task');
 Route::post('/tasks/destroy', 'TasksController@destroy');
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,8 +1,7 @@
 @extends('layouts.tpm')
 
 @section('css')
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
-<!-- <link rel="stylesheet" href="{{ asset('css/main/fullcalendar.css') }}" /> -->
+<link rel="stylesheet" href="{{ asset('css/main/fullcalendar/fullcalendar.min.css') }}" />
 <style type="text/css">  
   [class^="icon-"], [class*=" icon-"] {
     background-image: url('images/img/glyphicons-halflings.png');
@@ -37,6 +36,20 @@
   } 
   .btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
     margin-top: 1px;
+  }  
+  .iTooltip{  
+    position:absolute;  
+    border:1px solid #FFCC66;  
+    background-color:#FFFFCC;  
+    color:#000000;  
+    display:none;  
+    padding:5px;  
+    font-size:12px;  
+    z-index:90000;
+  }  
+  
+  .span2 {
+    margin-top: 60px;
   }
 </style>
 @endsection
@@ -63,38 +76,45 @@
       <div class="widget-box">
         <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
           <h5>ประวัติการลา</h5>
-          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
+          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Refresh</a></div>
         </div>
         <div class="widget-content">
           <div class="row-fluid">
             <div class="span10">
               <div id='calendar'></div>
+              <span class='iTooltip' id="infotooltip"></span>
             </div>
             <div class="span2">
               <ul class="stat-boxes2">
                 <li>
-                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
-                    <canvas width="50" height="24"></canvas>
-                    </span>+10%</div>
-                  <div class="right"> <strong>15598</strong> Visits </div>
-                </li>
-                <li>
-                  <div class="left peity_line_neutral"><span><span style="display: none;">10,15,8,14,13,10,10,15</span>
+                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4</span>
                     <canvas width="50" height="24"></canvas>
                     </span>10%</div>
-                  <div class="right"> <strong>150</strong> New Users </div>
+                  <div class="right">ลาบวชฯ <strong>23</strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                  <div class="left peity_bar_bad"><span><span style="display: none;">2,4,9,7,12,10,12,19,3,12,10,12,19,3</span>
                     <canvas width="50" height="24"></canvas>
-                    </span>-40%</div>
-                  <div class="right"> <strong>4560</strong> Orders</div>
+                    </span>-10%</div>
+                  <div class="right">ลาคลอด <strong>23</strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_line_good"><span><span style="display: none;">12,6,9,13,14,10,17</span>
+                  <div class="left peity_bar_good"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
                     <canvas width="50" height="24"></canvas>
-                    </span>+60%</div>
-                  <div class="right"> <strong>936</strong> Register </div>
+                    </span>+10%</div>
+                  <div class="right">ลาป่วย <strong>23</strong>   เดือนล่าสุด </div>
+                </li>
+                <li>
+                  <div class="left peity_bar_bad"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>-10%</div>
+                  <div class="right">ลากิจ <strong>23</strong>   เดือนล่าสุด </div>
+                </li>
+                <li>
+                  <div class="left peity_bar_good"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
+                    <canvas width="50" height="24"></canvas>
+                    </span>+10%</div>
+                  <div class="right">พักร้อน <strong>23</strong>   เดือนล่าสุด </div>
                 </li>
               </ul>
             </div>
@@ -104,105 +124,10 @@
     </div>
     
     <div class="row-fluid">
-      <div class="widget-box">
-        <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
-          <h5>Site Analytics</h5>
-          <div class="buttons"><a href="#" class="btn btn-mini btn-success"><i class="icon-refresh"></i> Update stats</a></div>
-        </div>
-        <div class="widget-content">
-          <div class="row-fluid">
-            <div class="span8">
-              <div class="chart"></div>
-            </div>
-            <div class="span4">
-              <ul class="stat-boxes2">
-                <li>
-                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
-                    <canvas width="50" height="24"></canvas>
-                    </span>+10%</div>
-                  <div class="right"> <strong>15598</strong> Visits </div>
-                </li>
-                <li>
-                  <div class="left peity_line_neutral"><span><span style="display: none;">10,15,8,14,13,10,10,15</span>
-                    <canvas width="50" height="24"></canvas>
-                    </span>10%</div>
-                  <div class="right"> <strong>150</strong> New Users </div>
-                </li>
-                <li>
-                  <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
-                    <canvas width="50" height="24"></canvas>
-                    </span>-40%</div>
-                  <div class="right"> <strong>4560</strong> Orders</div>
-                </li>
-                <li>
-                  <div class="left peity_line_good"><span><span style="display: none;">12,6,9,13,14,10,17</span>
-                    <canvas width="50" height="24"></canvas>
-                    </span>+60%</div>
-                  <div class="right"> <strong>936</strong> Register </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
-            <h5>Latest Posts</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <ul class="recent-posts">
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
-                </div>
-              <li>
-                <button class="btn btn-warning btn-mini">View All</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
-            <h5>News updates</h5>
-          </div>
-          <div class="widget-content nopadding updates">
-            <div class="new-update clearfix"><i class="icon-ok-sign"></i>
-              <div class="update-done"><a title="" href="#"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></a> <span>dolor sit amet, consectetur adipiscing eli</span> </div>
-              <div class="update-date"><span class="update-day">20</span>jan</div>
-            </div>
-            <div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a title="" href="#"><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a title="" href="#"><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a title="" href="#"><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a title="" href="#"><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row-fluid">
       <div class="span6">
         <div class="widget-box widget-chat">
           <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
-            <h5>Chat Option</h5>
+            <h5>มาคุยกันเถอะ!</h5>
           </div>
           <div class="widget-content nopadding">
             <div class="chat-users panel-right2">
@@ -211,11 +136,11 @@
               </div>
               <div class="panel-content nopadding">
                 <ul class="contact-list">
-                  <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>Sunil</span></a></li>
-                  <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>Laukik</span></a></li>
-                  <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>Vijay</span></a><span class="msg-count badge badge-info">3</span></li>
-                  <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>Jignesh</span></a></li>
-                  <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>Malay</span></a></li>
+                  <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
+                  <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
+                  <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
+                  <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
+                  <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
                 </ul>
               </div>
             </div>
@@ -286,6 +211,59 @@
     <hr>
     <div class="row-fluid">
       <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
+            <h5>Latest Posts</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <ul class="recent-posts">
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
+                </div>
+              </li>
+              <li>
+                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
+                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
+                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
+                </div>
+              <li>
+                <button class="btn btn-warning btn-mini">View All</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
+            <h5>News updates</h5>
+          </div>
+          <div class="widget-content nopadding updates">
+            <div class="new-update clearfix"><i class="icon-ok-sign"></i>
+              <div class="update-done"><a title="" href="#"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></a> <span>dolor sit amet, consectetur adipiscing eli</span> </div>
+              <div class="update-date"><span class="update-day">20</span>jan</div>
+            </div>
+            <div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a title="" href="#"><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a title="" href="#"><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a title="" href="#"><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
+            <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a title="" href="#"><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
         <div class="accordion" id="collapse-group">
           <div class="accordion-group widget-box">
             <div class="accordion-heading">
@@ -349,38 +327,66 @@
 <script src="{{ asset('js/main/excanvas.min.js') }}"></script>
 <script src="{{ asset('js/main/jquery.flot.min.js') }}"></script> 
 <script src="{{ asset('js/main/jquery.flot.resize.min.js') }}"></script> 
-<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
-<!-- <script src="{{ asset('js/main/fullcalendar.min.js') }}"></script> -->
+<script src="{{ asset('js/main/jquery.peity.min.js') }}"></script>
 <script src="{{ asset('js/main/maruti.dashboard.js') }}"></script> 
-<script src="{{ asset('js/main/maruti.chat.js') }}"></script> 
+<script src="{{ asset('js/main/maruti.chat.js') }}"></script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
-
+<script src="{{ asset('js/main/fullcalendar/moment.min.js') }}"></script>
+<script src="{{ asset('js/main/fullcalendar/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('js/main/fullcalendar/th.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
  //list_leave
   $('#calendar').fullCalendar({
-    
+    height: 514,
+    // dayClick: function() {
+    //   alert('a day has been clicked!');
+    // },
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    buttonIcons:{
+      prev: 'left-single-arrow',
+      next: 'right-single-arrow',
+      prevYear: 'left-double-arrow',
+      nextYear: 'right-double-arrow'        
+    },
+    firstDay:1,
     events : [
         @foreach($leave as $l)
-        {
-          
-            id    : '{{ $l['id'] }}',
-            title : '{{ $l['nickname'].' : '}}@if($l['type_leave']==0)ลาบวช-ทำหมัน@elseif($l['type_leave']==1)ลาคลอด @elseif($l['type_leave']==2)ลาป่วย @elseif($l['type_leave']==3)ลากิจ @else พักร้อน @endif',
-            start : '{{ $l['nstart_day'] }}',
-            end   : '{{ $l['nend_day'] }}',
-            allDay: false,                    
+        {          
+          id    : '{{ $l['id'] }}',
+          title : '{{ $l['nickname'].' : '}}@if($l['type_leave']==0)ลาบวช-ทำหมัน@elseif($l['type_leave']==1)ลาคลอด @elseif($l['type_leave']==2)ลาป่วย @elseif($l['type_leave']==3)ลากิจ @else พักร้อน @endif',
+          start : '{{ $l['nstart_day'] }}',
+          end   : '{{ $l['nend_day'] }}',
+          allDay: false,
+          error : function() {}                    
         },
         @endforeach
     ],
-    // eventRender: function( event, element, view ) {
-    //     var title = element.find('.fc-title, .fc-list-item-title');          
-    //     title.html(title.text());
-    // },
-  });  
-  
+    // editable: true,
+    eventLimit: true,
+    lang: 'th',
+    eventMouseover: function( event, jsEvent, view ){
+    callTooltip("#infotooltip",jsEvent,event.title);   
+    },
+    eventMouseout: function( event, jsEvent, view ){
+        $("#infotooltip").hide();  
+    }  
+  });
+
+  var callTooltip = function (obj,jsEvent,strText){ // ฟังก์ชั่นแสดงกล่องข้อความ Tooltip  
+    var locateX=jsEvent.pageX;     
+    var locateY=jsEvent.pageY;   
+    locateX-=0;  
+    locateY-=300;  
+    $(obj).show().css({  
+        left:locateX,  
+        top:locateY  
+    }).html(strText);                 
+  }    
   //sum leave
   $.ajax({
     type :'GET',
