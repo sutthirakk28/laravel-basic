@@ -22,13 +22,13 @@ $(document).ready(function(){
 		add_message('นายสุชิน  บุญคำ', 'images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
 		},'1000');
 	setTimeout(function(){
-		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', 'images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
+		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', 'images/img/demo/av3.jpg','สวัสดีครับ')
 		},'4000');
 	setTimeout(function(){
 		add_message('นางสาวพิมพ์พิไล  งามแสง', 'images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
 		},'8000');
 	setTimeout(function(){
-		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','images/img/demo/av3.jpg','ok Bye than!!!.')
+		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','images/img/demo/av3.jpg','ok ได้เรย!!!.')
 		},'12000');	
 	setTimeout(function(){
 		remove_user('นายสมชัย  ทองหล่อ','นายสมชัย  ทองหล่อ')

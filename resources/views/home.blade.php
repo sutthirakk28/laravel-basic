@@ -51,6 +51,9 @@
   .span2 {
     margin-top: 60px;
   }
+  strong.sum_month {
+    color: #468847;
+  }
 </style>
 @endsection
 
@@ -87,34 +90,120 @@
             <div class="span2">
               <ul class="stat-boxes2">
                 <li>
-                  <div class="left peity_bar_neutral"><span><span style="display: none;">2,4</span>
+                  <div class="left peity_bar_neutral"><span>
+                    <span style="display: none;">
+                    @foreach($ctl as $sum_l)
+                      @if($sum_l['type_leave'] == 0)
+                        {{$sum_l['count_leave']}},
+                      @endif
+                    @endforeach
+                    </span>
                     <canvas width="50" height="24"></canvas>
                     </span>10%</div>
-                  <div class="right">ลาบวชฯ <strong>23</strong>   เดือนล่าสุด </div>
+                  <div class="right">ลาบวชฯ 
+                    <strong class="sum_month">
+                      @foreach($ctl_month as $sum_month)
+                        @if($sum_month['type_leave'] == 0)
+                          @if (is_null($sum_month['type_leave']))
+                            0
+                          @else                            
+                            {{$sum_month['count_leave']}}
+                          @endif
+                        @endif
+                      @endforeach
+                    </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_bad"><span><span style="display: none;">2,4,9,7,12,10,12,19,3,12,10,12,19,3</span>
+                  <div class="left peity_bar_bad"><span>
+                    <span style="display: none;">
+                    @foreach($ctl as $sum_l)
+                      @if($sum_l['type_leave'] == 1)
+                        {{$sum_l['count_leave']}},
+                      @endif
+                    @endforeach
+                    </span>
                     <canvas width="50" height="24"></canvas>
                     </span>-10%</div>
-                  <div class="right">ลาคลอด <strong>23</strong>   เดือนล่าสุด </div>
+                  <div class="right">ลาคลอด <strong class="sum_month">
+                      @foreach($ctl_month as $sum_month)
+                        @if($sum_month['type_leave'] == 1)
+                          @if (is_null($sum_month['type_leave']))
+                            0
+                          @else                            
+                            {{$sum_month['count_leave']}}
+                          @endif
+                        @endif
+                      @endforeach
+                    </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_good"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
+                  <div class="left peity_bar_good"><span>
+                    <span style="display: none;">
+                      @foreach($ctl as $sum_l)
+                        @if($sum_l['type_leave'] == 2)
+                          {{$sum_l['count_leave']}},
+                        @endif
+                      @endforeach
+                      </span>
                     <canvas width="50" height="24"></canvas>
                     </span>+10%</div>
-                  <div class="right">ลาป่วย <strong>23</strong>   เดือนล่าสุด </div>
+                  <div class="right">ลาป่วย <strong class="sum_month">
+                      @foreach($ctl_month as $sum_month)
+                        @if($sum_month['type_leave'] == 2)
+                          @if (is_null($sum_month['type_leave']))
+                            0
+                          @else                            
+                            {{$sum_month['count_leave']}}
+                          @endif
+                        @endif
+                      @endforeach
+                    </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_bad"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
+                  <div class="left peity_bar_bad"><span>
+                    <span style="display: none;">
+                      @foreach($ctl as $sum_l)
+                        @if($sum_l['type_leave'] == 3)
+                          {{$sum_l['count_leave']}},
+                        @endif
+                      @endforeach
+                      </span>
                     <canvas width="50" height="24"></canvas>
                     </span>-10%</div>
-                  <div class="right">ลากิจ <strong>23</strong>   เดือนล่าสุด </div>
+                  <div class="right">ลากิจ <strong class="sum_month">
+                      @foreach($ctl_month as $sum_month)
+                        @if($sum_month['type_leave'] == 3)
+                          @if (is_null($sum_month['type_leave']))
+                            0
+                          @else                            
+                            {{$sum_month['count_leave']}}
+                          @endif
+                        @endif
+                      @endforeach
+                    </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_good"><span><span style="display: none;">2,4,9,7,12,10,12,19,3</span>
+                  <div class="left peity_bar_good"><span>
+                    <span style="display: none;">
+                      @foreach($ctl as $sum_l)
+                        @if($sum_l['type_leave'] == 4)
+                          {{$sum_l['count_leave']}},
+                        @endif
+                      @endforeach
+                      </span>
                     <canvas width="50" height="24"></canvas>
                     </span>+10%</div>
-                  <div class="right">พักร้อน <strong>23</strong>   เดือนล่าสุด </div>
+                  <div class="right">พักร้อน <strong class="sum_month">
+                      @foreach($ctl_month as $sum_month)
+                        @if($sum_month['type_leave'] == 4)
+                          @if (is_null($sum_month['type_leave']))
+                            0
+                          @else                            
+                            {{$sum_month['count_leave']}}
+                          @endif
+                        @endif
+                      @endforeach
+                    </strong>   เดือนล่าสุด </div>
                 </li>
               </ul>
             </div>
