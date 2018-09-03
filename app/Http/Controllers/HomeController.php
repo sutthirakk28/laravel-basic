@@ -38,18 +38,25 @@ class HomeController extends Controller
             ->select(DB::raw('count(nstart_day) as count_leave, type_leave'))
             ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
             ->get();
-         $ctl_month = DB::table('leaves')
+        $ctl_month = DB::table('leaves')
             ->select(DB::raw('count(nstart_day) as count_leave, type_leave'))
             ->whereRaw('extract(month from nstart_day) = ?', [Carbon::today()->month])
+            ->groupBy(DB::raw("type_leave"))
+            ->get();
+        $ctl_month2 = DB::table('leaves')
+            ->select(DB::raw('count(nstart_day) as count_leave, type_leave'))
+            ->whereRaw('extract(month from nstart_day) = ?', [Carbon::today()->month-1])
             ->groupBy(DB::raw("type_leave"))
             ->get();
         $result = json_decode($leave, true);
         $result2 = json_decode($ctl, true);
         $result3 = json_decode($ctl_month, true);
+        $result4 = json_decode($ctl_month2, true);
         $data = array(
             'leave' => $result,
             'ctl' => $result2,
             'ctl_month' => $result3,
+            'ctl_month2' => $result4,
         );
         return view('home', $data);
     }

@@ -54,6 +54,24 @@
   strong.sum_month {
     color: #468847;
   }
+  .stat-boxes2 .left {
+    padding: 15px 0px;
+    text-align: center;
+    width: auto;
+    float: left;
+}
+.stat-boxes2 .left {
+  padding: 15px 0px;
+  text-align: center;
+  width: auto;
+  float: left;
+  border-bottom: 2px solid #dadada;
+  padding: 5px;
+}
+.stat-boxes2 .left span {
+    border-bottom: 0px solid #dadada;
+    padding: 5px;
+}
 </style>
 @endsection
 
@@ -74,7 +92,36 @@
           <li> <a href="#"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
         </ul>
    </div>
-   
+   @php 
+    $leave0 = $leave1 = $leave2 = $leave3 = $leave4 = 0; 
+    $leave01 = $leave11 = $leave21 = $leave31 = $leave41 = 0; 
+  @endphp
+  @foreach($ctl_month as $sum_month)
+    @if($sum_month['type_leave'] == 0) 
+      @php $leave0 = $sum_month['count_leave']; @endphp
+    @elseif($sum_month['type_leave'] == 1) 
+      @php $leave1 = $sum_month['count_leave']; @endphp
+    @elseif($sum_month['type_leave'] == 2) 
+      @php $leave2 = $sum_month['count_leave']; @endphp
+    @elseif($sum_month['type_leave'] == 3) 
+      @php $leave3 = $sum_month['count_leave']; @endphp
+    @elseif($sum_month['type_leave'] == 4)
+      @php $leave4 = $sum_month['count_leave']; @endphp
+    @endif 
+  @endforeach
+  @foreach($ctl_month2 as $sum_month1)
+    @if($sum_month1['type_leave'] == 0) 
+      @php $leave01 = $sum_month1['count_leave']; @endphp
+    @elseif($sum_month1['type_leave'] == 1) 
+      @php $leave11 = $sum_month1['count_leave']; @endphp
+    @elseif($sum_month1['type_leave'] == 2) 
+      @php $leave21 = $sum_month1['count_leave']; @endphp
+    @elseif($sum_month1['type_leave'] == 3) 
+      @php $leave31 = $sum_month1['count_leave']; @endphp
+    @elseif($sum_month1['type_leave'] == 4)
+      @php $leave41 = $sum_month1['count_leave']; @endphp
+    @endif 
+  @endforeach
    <div class="row-fluid">
       <div class="widget-box">
         <div class="widget-title"><span class="icon"><i class="icon-tasks"></i></span>
@@ -99,18 +146,23 @@
                     @endforeach
                     </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>10%</div>
-                  <div class="right">ลาบวชฯ 
-                    <strong class="sum_month">
-                      @foreach($ctl_month as $sum_month)
-                        @if($sum_month['type_leave'] == 0)
-                          @if (is_null($sum_month['type_leave']))
-                            0
-                          @else                            
-                            {{$sum_month['count_leave']}}
-                          @endif
+                    </span>
+                      @if($leave0 == 0 OR $leave01 == 0)
+                        @if($leave0 == 0)
+                          @php $leave_ordain = -1 * abs(100) @endphp
+                          {{ $leave_ordain }}%
+                        @elseif($leave01 == 0)
+                          @php $leave_ordain = $leave0 *100; @endphp
+                          {{ $leave_ordain }}%
                         @endif
-                      @endforeach
+                      @else
+                          @php $leave_ordain = (($leave0 / $leave01) * 100) - 100; @endphp
+                          {{ number_format(ceil($leave_ordain)) }}%
+                      @endif                      
+                    </div>
+                  <div class="right">ลาบวชฯ 
+                    <strong class="sum_month">                      
+                    {{ $leave0 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
@@ -123,17 +175,22 @@
                     @endforeach
                     </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>-10%</div>
-                  <div class="right">ลาคลอด <strong class="sum_month">
-                      @foreach($ctl_month as $sum_month)
-                        @if($sum_month['type_leave'] == 1)
-                          @if (is_null($sum_month['type_leave']))
-                            0
-                          @else                            
-                            {{$sum_month['count_leave']}}
-                          @endif
+                    </span>
+                    @if($leave1 == 0 OR $leave11 == 0)
+                        @if($leave1 == 0)
+                          @php $leave_deliver = -1 * abs(100);  @endphp
+                          {{ $leave_deliver }}%
+                        @else
+                          @php $leave_deliver = $leave1 *100; @endphp
+                          {{ $leave_deliver }}% 
                         @endif
-                      @endforeach
+                      @else
+                          @php $leave_deliver = (($leave1 / $leave11) * 100) - 100; @endphp
+                          {{ number_format(ceil($leave_deliver)) }}% 
+                      @endif                                        
+                    </div>
+                  <div class="right">ลาคลอด <strong class="sum_month">
+                    {{ $leave1 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
@@ -146,17 +203,22 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>+10%</div>
+                    </span>
+                    @if($leave2 == 0 OR $leave21 == 0)
+                        @if($leave2 == 0)
+                          @php $leave_sick = -1 * abs(100) @endphp
+                          {{ $leave_sick }}%
+                        @else
+                          @php $leave_sick = 100; @endphp
+                          {{ $leave_sick }}%
+                        @endif                          
+                      @else
+                          @php $leave_sick = (($leave2 / $leave21) * 100) - 100; @endphp
+                          {{ number_format(ceil($leave_sick)) }}% 
+                      @endif                      
+                    </div>
                   <div class="right">ลาป่วย <strong class="sum_month">
-                      @foreach($ctl_month as $sum_month)
-                        @if($sum_month['type_leave'] == 2)
-                          @if (is_null($sum_month['type_leave']))
-                            0
-                          @else                            
-                            {{$sum_month['count_leave']}}
-                          @endif
-                        @endif
-                      @endforeach
+                    {{ $leave2 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
@@ -169,17 +231,22 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>-10%</div>
-                  <div class="right">ลากิจ <strong class="sum_month">
-                      @foreach($ctl_month as $sum_month)
-                        @if($sum_month['type_leave'] == 3)
-                          @if (is_null($sum_month['type_leave']))
-                            0
-                          @else                            
-                            {{$sum_month['count_leave']}}
-                          @endif
+                    </span>
+                    @if($leave3 == 0 OR $leave31 == 0)
+                        @if($leave3 == 0)
+                          @php $leave_Work = -1 * abs(100) @endphp
+                          {{ $leave_Work }}%
+                        @else
+                          @php  $leave_Work = 100; @endphp
+                          {{ $leave_Work }}%
                         @endif
-                      @endforeach
+                      @else
+                        @php $leave_Work = (($leave3 / $leave31) * 100) - 100; @endphp
+                        {{ number_format(ceil($leave_Work)) }}% 
+                      @endif
+                    </div>
+                  <div class="right">ลากิจ <strong class="sum_month">
+                    {{ $leave3 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
@@ -192,17 +259,22 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>+10%</div>
-                  <div class="right">พักร้อน <strong class="sum_month">
-                      @foreach($ctl_month as $sum_month)
-                        @if($sum_month['type_leave'] == 4)
-                          @if (is_null($sum_month['type_leave']))
-                            0
-                          @else                            
-                            {{$sum_month['count_leave']}}
-                          @endif
+                    </span>
+                    @if($leave4 == 0 OR $leave41 == 0)
+                        @if($leave4 == 0)
+                          @php  $leave_Government = -1 * abs(100) @endphp
+                          {{ $leave_Government }}%
+                        @else
+                          @php  $leave_Government = 100; @endphp
+                          {{ $leave_Government }}%
                         @endif
-                      @endforeach
+                      @else
+                        @php $leave_Government = (($leave4 / $leave41) * 100) - 100; @endphp
+                        {{ number_format(ceil($leave_Government)) }}%                         
+                      @endif                      
+                    </div>
+                  <div class="right">พักร้อน <strong class="sum_month">
+                    {{ $leave4 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
               </ul>
