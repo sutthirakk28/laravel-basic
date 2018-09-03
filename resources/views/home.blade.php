@@ -72,6 +72,14 @@
     border-bottom: 0px solid #dadada;
     padding: 5px;
 }
+.stat-boxes2 .right {
+    color: #666666;
+    font-size: 12px;
+    padding: 5px 5px 5px 5px;
+    border-left: 1px solid #dadada;
+    text-align: left;
+    float: left;
+}
 </style>
 @endsection
 
@@ -92,6 +100,7 @@
           <li> <a href="#"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
         </ul>
    </div>
+   
    @php 
     $leave0 = $leave1 = $leave2 = $leave3 = $leave4 = 0; 
     $leave01 = $leave11 = $leave21 = $leave31 = $leave41 = 0; 
@@ -137,7 +146,23 @@
             <div class="span2">
               <ul class="stat-boxes2">
                 <li>
-                  <div class="left peity_bar_neutral"><span>
+                  @if($leave0 == 0 OR $leave01 == 0)
+                    @if($leave0 == 0)
+                      @php $leave_ordain = -1 * abs(100) @endphp
+                    @elseif($leave01 == 0)
+                      @php $leave_ordain = $leave0 *100; @endphp
+                    @endif
+                  @else
+                      @php $leave_ordain = (($leave0 / $leave01) * 100) - 100; @endphp                      
+                  @endif
+
+                  @if($leave_ordain > 0)
+                    <div class="left peity_bar_good"><span>
+                  @elseif($leave_ordain < 0)
+                    <div class="left peity_bar_bad"><span>
+                  @else
+                    <div class="left peity_bar_neutral"><span>
+                  @endif
                     <span style="display: none;">
                     @foreach($ctl as $sum_l)
                       @if($sum_l['type_leave'] == 0)
@@ -147,18 +172,7 @@
                     </span>
                     <canvas width="50" height="24"></canvas>
                     </span>
-                      @if($leave0 == 0 OR $leave01 == 0)
-                        @if($leave0 == 0)
-                          @php $leave_ordain = -1 * abs(100) @endphp
-                          {{ $leave_ordain }}%
-                        @elseif($leave01 == 0)
-                          @php $leave_ordain = $leave0 *100; @endphp
-                          {{ $leave_ordain }}%
-                        @endif
-                      @else
-                          @php $leave_ordain = (($leave0 / $leave01) * 100) - 100; @endphp
-                          {{ number_format(ceil($leave_ordain)) }}%
-                      @endif                      
+                     {{ number_format(ceil($leave_ordain)) }}%                     
                     </div>
                   <div class="right">ลาบวชฯ 
                     <strong class="sum_month">                      
@@ -166,7 +180,22 @@
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_bad"><span>
+                  @if($leave1 == 0 OR $leave11 == 0)
+                    @if($leave1 == 0)
+                      @php $leave_deliver = -1 * abs(100);  @endphp
+                    @else
+                      @php $leave_deliver = $leave1 *100; @endphp
+                    @endif
+                  @else
+                      @php $leave_deliver = (($leave1 / $leave11) * 100) - 100; @endphp 
+                  @endif 
+                  @if($leave_deliver > 0)
+                    <div class="left peity_bar_good"><span>
+                  @elseif($leave_deliver < 0)
+                    <div class="left peity_bar_bad"><span>
+                  @else
+                    <div class="left peity_bar_neutral"><span>
+                  @endif
                     <span style="display: none;">
                     @foreach($ctl as $sum_l)
                       @if($sum_l['type_leave'] == 1)
@@ -175,26 +204,30 @@
                     @endforeach
                     </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>
-                    @if($leave1 == 0 OR $leave11 == 0)
-                        @if($leave1 == 0)
-                          @php $leave_deliver = -1 * abs(100);  @endphp
-                          {{ $leave_deliver }}%
-                        @else
-                          @php $leave_deliver = $leave1 *100; @endphp
-                          {{ $leave_deliver }}% 
-                        @endif
-                      @else
-                          @php $leave_deliver = (($leave1 / $leave11) * 100) - 100; @endphp
-                          {{ number_format(ceil($leave_deliver)) }}% 
-                      @endif                                        
+                    </span>                      
+                      {{ number_format(ceil($leave_deliver)) }}%
                     </div>
                   <div class="right">ลาคลอด <strong class="sum_month">
                     {{ $leave1 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_good"><span>
+                  @if($leave2 == 0 OR $leave21 == 0)
+                    @if($leave2 == 0)
+                      @php $leave_sick = -1 * abs(100) @endphp
+                    @else
+                      @php $leave_sick = 100; @endphp
+                    @endif                          
+                  @else
+                      @php $leave_sick = (($leave2 / $leave21) * 100) - 100; @endphp
+                  @endif 
+                   @if($leave_sick > 0)
+                    <div class="left peity_bar_good"><span>
+                  @elseif($leave_sick < 0)
+                    <div class="left peity_bar_bad"><span>
+                  @else
+                    <div class="left peity_bar_neutral"><span>
+                  @endif
                     <span style="display: none;">
                       @foreach($ctl as $sum_l)
                         @if($sum_l['type_leave'] == 2)
@@ -203,26 +236,30 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>
-                    @if($leave2 == 0 OR $leave21 == 0)
-                        @if($leave2 == 0)
-                          @php $leave_sick = -1 * abs(100) @endphp
-                          {{ $leave_sick }}%
-                        @else
-                          @php $leave_sick = 100; @endphp
-                          {{ $leave_sick }}%
-                        @endif                          
-                      @else
-                          @php $leave_sick = (($leave2 / $leave21) * 100) - 100; @endphp
-                          {{ number_format(ceil($leave_sick)) }}% 
-                      @endif                      
+                    </span>                     
+                    {{ number_format(ceil($leave_sick)) }}%                       
                     </div>
                   <div class="right">ลาป่วย <strong class="sum_month">
                     {{ $leave2 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_bad"><span>
+                  @if($leave3 == 0 OR $leave31 == 0)
+                    @if($leave3 == 0)
+                      @php $leave_Work = -1 * abs(100) @endphp
+                    @else
+                      @php  $leave_Work = 100; @endphp
+                    @endif
+                  @else
+                    @php $leave_Work = (($leave3 / $leave31) * 100) - 100; @endphp
+                  @endif
+                   @if($leave_Work > 0)
+                    <div class="left peity_bar_good"><span>
+                  @elseif($leave_Work < 0)
+                    <div class="left peity_bar_bad"><span>
+                  @else
+                    <div class="left peity_bar_neutral"><span>
+                  @endif
                     <span style="display: none;">
                       @foreach($ctl as $sum_l)
                         @if($sum_l['type_leave'] == 3)
@@ -231,26 +268,30 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>
-                    @if($leave3 == 0 OR $leave31 == 0)
-                        @if($leave3 == 0)
-                          @php $leave_Work = -1 * abs(100) @endphp
-                          {{ $leave_Work }}%
-                        @else
-                          @php  $leave_Work = 100; @endphp
-                          {{ $leave_Work }}%
-                        @endif
-                      @else
-                        @php $leave_Work = (($leave3 / $leave31) * 100) - 100; @endphp
-                        {{ number_format(ceil($leave_Work)) }}% 
-                      @endif
+                    </span>                      
+                      {{ number_format(ceil($leave_Work)) }}% 
                     </div>
                   <div class="right">ลากิจ <strong class="sum_month">
                     {{ $leave3 }}
                     </strong>   เดือนล่าสุด </div>
                 </li>
                 <li>
-                  <div class="left peity_bar_good"><span>
+                  @if($leave4 == 0 OR $leave41 == 0)
+                    @if($leave4 == 0)
+                      @php  $leave_Government = -1 * abs(100) @endphp
+                    @else
+                      @php  $leave_Government = 100; @endphp
+                    @endif
+                  @else
+                    @php $leave_Government = (($leave4 / $leave41) * 100) - 100; @endphp   
+                  @endif    
+                  @if($leave_Government > 0)
+                    <div class="left peity_bar_good"><span>
+                  @elseif($leave_Government < 0)
+                    <div class="left peity_bar_bad"><span>
+                  @else
+                    <div class="left peity_bar_neutral"><span>
+                  @endif
                     <span style="display: none;">
                       @foreach($ctl as $sum_l)
                         @if($sum_l['type_leave'] == 4)
@@ -259,19 +300,8 @@
                       @endforeach
                       </span>
                     <canvas width="50" height="24"></canvas>
-                    </span>
-                    @if($leave4 == 0 OR $leave41 == 0)
-                        @if($leave4 == 0)
-                          @php  $leave_Government = -1 * abs(100) @endphp
-                          {{ $leave_Government }}%
-                        @else
-                          @php  $leave_Government = 100; @endphp
-                          {{ $leave_Government }}%
-                        @endif
-                      @else
-                        @php $leave_Government = (($leave4 / $leave41) * 100) - 100; @endphp
-                        {{ number_format(ceil($leave_Government)) }}%                         
-                      @endif                      
+                    </span>                     
+                     {{ number_format(ceil($leave_Government)) }}%                                       
                     </div>
                   <div class="right">พักร้อน <strong class="sum_month">
                     {{ $leave4 }}
@@ -283,204 +313,98 @@
         </div>
       </div>
     </div>
+  <hr>
+  <div class="row-fluid">
+    <div class="span8">
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon">
+            <i class="icon-th-list"></i>
+          </span>
+          <h5>Two third width  <code>class=Span7</code></h5>
+        </div>
+        <div class="widget-content">
+          <canvas id="line-chart" width="800" height="490"></canvas>        </div>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon">
+            <i class="icon-th-list"></i>
+          </span>
+          <h5>One third width <code>class=Span4</code></h5>
+        </div>
+        <div class="widget-content">
+          <canvas id="pie-chart" width="800" height="450"></canvas>
+        </div>
+      </div>
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon">
+            <i class="icon-th-list"></i>
+          </span>
+          <h5>One third width <code>class=Span4</code></h5>
+        </div>
+        <div class="widget-content">
+          <canvas id="bar-chart" width="800" height="450"></canvas>
+        </div>
+      </div>
+    </div>					
+  </div>
+  <hr>
+  <div class="row-fluid">    
+    <div class="span6">
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon">
+            <i class="icon-th-list"></i>
+          </span>
+          <h5>Half Width <code>class=Span6</code></h5>
+        </div>
+        <div class="widget-content">
+          <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="widget-box widget-chat">
+        <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
+          <h5>มาคุยกันเถอะ!</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <div class="chat-users panel-right2">
+            <div class="panel-title">
+              <h5>Online Users</h5>
+            </div>
+            <div class="panel-content nopadding">
+              <ul class="contact-list">
+                <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
+                <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
+                <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
+                <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
+                <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="chat-content panel-left2">
+            <div class="chat-messages" id="chat-messages">
+              <div id="chat-messages-inner"></div>
+            </div>
+            <div class="chat-message well">
+              <button class="btn btn-success">Send</button>
+              <span class="input-box">
+              <input type="text" name="msg-box" id="msg-box" />
+              </span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
     
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="widget-box widget-chat">
-          <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
-            <h5>มาคุยกันเถอะ!</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <div class="chat-users panel-right2">
-              <div class="panel-title">
-                <h5>Online Users</h5>
-              </div>
-              <div class="panel-content nopadding">
-                <ul class="contact-list">
-                  <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
-                  <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
-                  <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
-                  <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
-                  <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="chat-content panel-left2">
-              <div class="chat-messages" id="chat-messages">
-                <div id="chat-messages-inner"></div>
-              </div>
-              <div class="chat-message well">
-                <button class="btn btn-success">Send</button>
-                <span class="input-box">
-                <input type="text" name="msg-box" id="msg-box" />
-                </span> </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title">
-            <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1">Tab1</a></li>
-              <li><a data-toggle="tab" href="#tab2">Tab2</a></li>
-              <li><a data-toggle="tab" href="#tab3">Tab3</a></li>
-            </ul>
-          </div>
-          <div class="widget-content tab-content">
-            <div id="tab1" class="tab-pane active">
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
-              <img src="images/img/demo/demo-image1.jpg" alt="demo-image"/></div>
-            <div id="tab2" class="tab-pane"> <img src="images/img/demo/demo-image2.jpg" alt="demo-image"/>
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
-            </div>
-            <div id="tab3" class="tab-pane">
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. </p>
-              <img src="images/img/demo/demo-image3.jpg" alt="demo-image"/></div>
-          </div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"><span class="icon"><i class="icon-user"></i></span>
-            <h5>Our Partner (Box with Fix height)</h5>
-          </div>
-          <div class="widget-content nopadding fix_hgt">
-            <ul class="recent-posts">
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
-                <div class="article-post"> <span class="user-info">John Deo</span>
-                  <p>Web Desginer &amp; creative Front end developer</p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
-                <div class="article-post"> <span class="user-info">John Deo</span>
-                  <p>Web Desginer &amp; creative Front end developer</p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
-                <div class="article-post"> <span class="user-info">John Deo</span>
-                  <p>Web Desginer &amp; creative Front end developer</p>
-                </div>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
-            <h5>Latest Posts</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <ul class="recent-posts">
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av2.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av4.jpg"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
-                </div>
-              <li>
-                <button class="btn btn-warning btn-mini">View All</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-refresh"></i> </span>
-            <h5>News updates</h5>
-          </div>
-          <div class="widget-content nopadding updates">
-            <div class="new-update clearfix"><i class="icon-ok-sign"></i>
-              <div class="update-done"><a title="" href="#"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></a> <span>dolor sit amet, consectetur adipiscing eli</span> </div>
-              <div class="update-date"><span class="update-day">20</span>jan</div>
-            </div>
-            <div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a title="" href="#"><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a title="" href="#"><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a title="" href="#"><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
-            <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a title="" href="#"><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
     
-    <hr>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="accordion" id="collapse-group">
-          <div class="accordion-group widget-box">
-            <div class="accordion-heading">
-              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
-                <h5>Accordion Example 1</h5>
-                </a> </div>
-            </div>
-            <div class="collapse in accordion-body" id="collapseGOne">
-              <div class="widget-content"> It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
-            </div>
-          </div>
-          <div class="accordion-group widget-box">
-            <div class="accordion-heading">
-              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGTwo" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
-                <h5>Accordion Example 2</h5>
-                </a> </div>
-            </div>
-            <div class="collapse accordion-body" id="collapseGTwo">
-              <div class="widget-content">And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.</div>
-            </div>
-          </div>
-          <div class="accordion-group widget-box">
-            <div class="accordion-heading">
-              <div class="widget-title"> <a data-parent="#collapse-group" href="#collapseGThree" data-toggle="collapse"> <span class="icon"><i class="icon-magnet"></i></span>
-                <h5>Accordion Example 3</h5>
-                </a> </div>
-            </div>
-            <div class="collapse accordion-body" id="collapseGThree">
-              <div class="widget-content"> Waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="widget-box collapsible">
-          <div class="widget-title"> <a data-toggle="collapse" href="#collapseOne"> <span class="icon"><i class="icon-arrow-right"></i></span>
-            <h5>Toggle, Open by default, </h5>
-            </a> </div>
-          <div id="collapseOne" class="collapse in">
-            <div class="widget-content"> This box is opened by default, paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </div>
-          </div>
-          <div class="widget-title"> <a data-toggle="collapse" href="#collapseTwo"> <span class="icon"><i class="icon-remove"></i></span>
-            <h5>Toggle, closed by default</h5>
-            </a> </div>
-          <div id="collapseTwo" class="collapse">
-            <div class="widget-content"> This box is now open </div>
-          </div>
-          <div class="widget-title"> <a data-toggle="collapse" href="#collapseThree"> <span class="icon"><i class="icon-remove"></i></span>
-            <h5>Toggle, closed by default</h5>
-            </a> </div>
-          <div id="collapseThree" class="collapse">
-            <div class="widget-content"> This box is now open </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 @endsection
 
@@ -495,6 +419,10 @@
 <script src="{{ asset('js/main/fullcalendar/moment.min.js') }}"></script>
 <script src="{{ asset('js/main/fullcalendar/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('js/main/fullcalendar/th.js') }}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
  //list_leave
@@ -586,18 +514,109 @@ $(document).ready(function() {
   });
 
 });
-
-  function goPage (newURL) {
-    if (newURL != "") {
-      if (newURL == "-" ) {
-          resetMenu();            
-      } else {  
-      document.location.href = newURL;
+//chart.js
+  //line-chart
+  new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Asia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Europe",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Latin America",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "North America",
+        borderColor: "#c45850",
+        fill: false
       }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
     }
   }
-  function resetMenu() {
-    document.gomenu.selector.selectedIndex = 2;
-  }
+});
+ // Bar chart
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+//pie-chart
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: [2478,5267,734,784,433]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+//bar-chart-grouped
+new Chart(document.getElementById("bar-chart-grouped"), {
+    type: 'bar',
+    data: {
+      labels: ["1900", "1950", "1999", "2050"],
+      datasets: [
+        {
+          label: "Africa",
+          backgroundColor: "#3e95cd",
+          data: [133,221,783,2478]
+        }, {
+          label: "Europe",
+          backgroundColor: "#8e5ea2",
+          data: [408,547,675,734]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Population growth (millions)'
+      }
+    }
+});
 </script>
 @endsection
