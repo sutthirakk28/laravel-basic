@@ -20,6 +20,10 @@ class AddonController extends Controller
     {
         //
     }
+    public function graph()
+    {
+        return view('addon.graph');
+    }
 
     /**
      * Show the form for creating a new resource.

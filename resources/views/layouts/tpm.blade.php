@@ -62,7 +62,7 @@
   <div id="sidebar">
     <a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Menu</a><ul>
     <li class="active"><a href="{{ url('/home') }}"><i class="icon icon-home"></i> <span>Home</span></a> </li>
-    <li> <a href="#"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
+    <li> <a href="{{ url('addon/graph') }}"><i class="icon icon-signal"></i> <span>แผนภูมิ &amp; กราฟ</span></a> </li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
     <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a></li>
     <li><a href="{{ url('/lib') }}"><i class="icon-book"></i> <span>ข้อมูลพนักงาน</span></a></li>

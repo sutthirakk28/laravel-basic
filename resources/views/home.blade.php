@@ -3,62 +3,62 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main/fullcalendar/fullcalendar.min.css') }}" />
 <style type="text/css">  
-  [class^="icon-"], [class*=" icon-"] {
-    background-image: url('images/img/glyphicons-halflings.png');
-  }
-  #sidebar > ul li a i {
-    background-image: url('images/img/glyphicons-halflings-white.png');
-  }
-  #user-nav > ul > li > a > i, #sidebar li a i {
-    background-image: url('images/img/glyphicons-halflings-white.png');
-  }
-  #breadcrumb a {
-    background-image: url('images/img/breadcrumb.png');
-  }
-  .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-    background-image: url('images/img/glyphicons-halflings-white.png');
-  }
-  #header h1 {
-    background: url('images/img/logo.png') no-repeat scroll 0 0 transparent;
-  }
-  .select2-container .select2-choice div b {
-    background: url('images/img/select2.png') no-repeat 0 1px;
-  }
-  span#sum_admin,span#sum_per,span#sum_task,span#sum_leave {
-    margin-left: 35px;
-  }
-  .container-fluid {
-    font-family: Maitree;
-  } 
-  .quick-actions li {
-    min-width: 120px;
-    max-width: 150px;    
-  } 
-  .btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
-    margin-top: 1px;
-  }  
-  .iTooltip{  
-    position:absolute;  
-    border:1px solid #FFCC66;  
-    background-color:#FFFFCC;  
-    color:#000000;  
-    display:none;  
-    padding:5px;  
-    font-size:12px;  
-    z-index:90000;
-  }  
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url('images/img/glyphicons-halflings.png');
+}
+#sidebar > ul li a i {
+  background-image: url('images/img/glyphicons-halflings-white.png');
+}
+#user-nav > ul > li > a > i, #sidebar li a i {
+  background-image: url('images/img/glyphicons-halflings-white.png');
+}
+#breadcrumb a {
+  background-image: url('images/img/breadcrumb.png');
+}
+.icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
+  background-image: url('images/img/glyphicons-halflings-white.png');
+}
+#header h1 {
+  background: url('images/img/logo.png') no-repeat scroll 0 0 transparent;
+}
+.select2-container .select2-choice div b {
+  background: url('images/img/select2.png') no-repeat 0 1px;
+}
+span#sum_admin,span#sum_per,span#sum_task,span#sum_leave {
+  margin-left: 35px;
+}
+.container-fluid {
+  font-family: Maitree;
+} 
+.quick-actions li {
+  min-width: 120px;
+  max-width: 150px;    
+} 
+.btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
+  margin-top: 1px;
+}  
+.iTooltip{  
+  position:absolute;  
+  border:1px solid #FFCC66;  
+  background-color:#FFFFCC;  
+  color:#000000;  
+  display:none;  
+  padding:5px;  
+  font-size:12px;  
+  z-index:90000;
+}  
   
-  .span2 {
-    margin-top: 60px;
-  }
-  strong.sum_month {
-    color: #468847;
-  }
-  .stat-boxes2 .left {
-    padding: 15px 0px;
-    text-align: center;
-    width: auto;
-    float: left;
+.span2 {
+  margin-top: 5px;
+}
+strong.sum_month {
+  color: #468847;
+}
+.stat-boxes2 .left {
+  padding: 15px 0px;
+  text-align: center;
+  width: auto;
+  float: left;
 }
 .stat-boxes2 .left {
   padding: 15px 0px;
@@ -69,24 +69,28 @@
   padding: 5px;
 }
 .stat-boxes2 .left span {
-    border-bottom: 0px solid #dadada;
-    padding: 5px;
+  border-bottom: 0px solid #dadada;
+  padding: 5px;
 }
 .stat-boxes2 .right {
-    color: #666666;
-    font-size: 12px;
-    padding: 5px 5px 5px 5px;
-    border-left: 1px solid #dadada;
-    text-align: left;
-    float: left;
+  color: #666666;
+  font-size: 12px;
+  padding: 5px 5px 5px 5px;
+  border-left: 1px solid #dadada;
+  text-align: left;
+  float: left;
+}
+.widget-box {
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 </style>
 @endsection
 
 @section('content-header')
 <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
-  </div>  
+  <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+</div>  
 @endsection
 
 @section('content')
@@ -99,8 +103,7 @@
           <li> <a href="{{ url('/tasks') }}"> <i class="icon-calendar"><span class="badge badge-success" id="sum_task">0</i></i>กิจกรรม </a> </li>
           <li> <a href="#"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
         </ul>
-   </div>
-   
+   </div>   
    @php 
     $leave0 = $leave1 = $leave2 = $leave3 = $leave4 = 0; 
     $leave01 = $leave11 = $leave21 = $leave31 = $leave41 = 0; 
@@ -319,21 +322,21 @@
       <div class="widget-box">
         <div class="widget-title">
           <span class="icon">
-            <i class="icon-th-list"></i>
+            <i class="icon-signal"></i>
           </span>
           <h5>Two third width  <code>class=Span7</code></h5>
         </div>
         <div class="widget-content">
-          <canvas id="line-chart" width="800" height="490"></canvas>        </div>
+          <canvas id="line-chart" width="800" height="463"></canvas>        </div>
       </div>
     </div>
     <div class="span4">
       <div class="widget-box">
         <div class="widget-title">
           <span class="icon">
-            <i class="icon-th-list"></i>
+            <i class="icon-signal"></i>
           </span>
-          <h5>One third width <code>class=Span4</code></h5>
+          <h5>pie-chart <code>สรุปประเภทการลา/ร้อยละ</code></h5>
         </div>
         <div class="widget-content">
           <canvas id="pie-chart" width="800" height="450"></canvas>
@@ -342,9 +345,9 @@
       <div class="widget-box">
         <div class="widget-title">
           <span class="icon">
-            <i class="icon-th-list"></i>
+            <i class="icon-signal"></i>
           </span>
-          <h5>One third width <code>class=Span4</code></h5>
+          <h5>bar-chart <code>สรุปยอดการลา/เดือน</code></h5>
         </div>
         <div class="widget-content">
           <canvas id="bar-chart" width="800" height="450"></canvas>
@@ -358,12 +361,12 @@
       <div class="widget-box">
         <div class="widget-title">
           <span class="icon">
-            <i class="icon-th-list"></i>
+            <i class="icon-signal"></i>
           </span>
-          <h5>Half Width <code>class=Span6</code></h5>
+          <h5>bar-chart-grouped <code>สรุปการลาแยกตามประเภท และเดือน</code></h5>
         </div>
         <div class="widget-content">
-          <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+          <canvas id="bar-chart-grouped" width="800" height="435"></canvas>
         </div>
       </div>
     </div>
@@ -402,10 +405,7 @@
     </div>
   </div>
   <hr>
-    
-    
-    
-  </div>
+</div>
 @endsection
 
 @section('js')
@@ -556,15 +556,24 @@ $(document).ready(function() {
   }
 });
  // Bar chart
+ 
 new Chart(document.getElementById("bar-chart"), {
     type: 'bar',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: [
+        @foreach($barchart as $barcharts)
+          '{{ $barcharts['months'] }}',
+        @endforeach
+      ],
       datasets: [
         {
-          label: "Population (millions)",
+          label: "จำนวน (ครั้ง)",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+          data: [
+            @foreach($barchart as $barcharts)
+              '{{ $barcharts['count_leave'] }}',
+            @endforeach
+            ]
         }
       ]
     },
@@ -572,7 +581,7 @@ new Chart(document.getElementById("bar-chart"), {
       legend: { display: false },
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'รายงานการลาแยกตามเดือนของปี พ.ศ.{{date("Y")+543}}'
       }
     }
 });
@@ -580,17 +589,25 @@ new Chart(document.getElementById("bar-chart"), {
 new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: [
+        @foreach($piechart as $piecharts)
+          '{{$piecharts['type_leave']}}',
+        @endforeach
+      ],
       datasets: [{
-        label: "Population (millions)",
+        label: "จำนวน (%)",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
+        data: [
+          @foreach($piechart as $piecharts)
+          Number('{{ $piecharts['count_leave'] }}' / 71 * 100).toFixed(2),
+          @endforeach
+        ]
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'รายงานการลาแยกตามประเภทของปี พ.ศ.{{date("Y")+543}}'
       }
     }
 });
@@ -603,7 +620,7 @@ new Chart(document.getElementById("bar-chart-grouped"), {
         {
           label: "Africa",
           backgroundColor: "#3e95cd",
-          data: [133,221,783,2478]
+          data: [133,2478,0,547]
         }, {
           label: "Europe",
           backgroundColor: "#8e5ea2",
@@ -614,7 +631,7 @@ new Chart(document.getElementById("bar-chart-grouped"), {
     options: {
       title: {
         display: true,
-        text: 'Population growth (millions)'
+        text: 'รายงานการลาแยกตามประเภท และเดือนของปี พ.ศ.{{date("Y")+543}}'
       }
     }
 });

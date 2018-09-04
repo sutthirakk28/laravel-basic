@@ -24,5 +24,14 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 5.create Contoller : php artisan make:controller PhotoController --resource
 
 
+SELECT
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(type_leave, '0', 'ลาบวช-ทำหมัน') , '1', 'ลาคลอด') , '2', 'ลาป่วย'), '3', 'ลากิจ'), '4', 'พักร้อน') AS type_leave, 
+DATE_FORMAT(nstart_day,'%m') AS months,
+COUNT(nstart_day) AS count_leave 
+FROM
+`leaves`
+GROUP BY type_leave,DATE_FORMAT(nstart_day,'%Y-%m')
+
+
 
 

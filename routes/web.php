@@ -69,10 +69,13 @@ Route::get('/getFormScore', 'LeaveController@getFormScore');
 Route::post('/getDataScore', 'LeaveController@getDataScore');
 Route::get('addon/gallery','AddonController@gallery');
 Route::get('addon/chat','AddonController@chat');
+Route::get('addon/graph','AddonController@graph');
+
 Route::resource('tasks', 'TasksController');
 Route::post('/tasks/store', 'TasksController@store');
 Route::post('/tasks/edit_task', 'TasksController@edit_task');
 Route::post('/tasks/destroy', 'TasksController@destroy');
+
 
 Auth::routes();
 
