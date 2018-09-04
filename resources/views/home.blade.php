@@ -406,6 +406,15 @@ strong.sum_month {
   </div>
   <hr>
 </div>
+  @foreach($max_min as $max_mins)
+    @php 
+      $total = $max_mins['max'] - $max_mins['min'];
+      $maxs = $max_mins['max'];
+      $mins = $max_mins['min'];    
+    @endphp
+    {{$mins}}
+  @endforeach
+
 @endsection
 
 @section('js')
@@ -615,16 +624,34 @@ new Chart(document.getElementById("pie-chart"), {
 new Chart(document.getElementById("bar-chart-grouped"), {
     type: 'bar',
     data: {
-      labels: ["1900", "1950", "1999", "2050"],
+      labels: [
+        @foreach($barchart as $barcharts)
+          '{{ $barcharts['months'] }}',
+        @endforeach
+      ],
       datasets: [
         {
-          label: "Africa",
+          label: "ลาบวช-ทำหมัน",
           backgroundColor: "#3e95cd",
-          data: [133,2478,0,547]
+          data: [133,478,0,547,264,564]
         }, {
-          label: "Europe",
+          label: "ลาคลอด",
           backgroundColor: "#8e5ea2",
-          data: [408,547,675,734]
+          data: [408,547,675,734,123,746]
+        },
+        {
+          label: "ลาป่วย",
+          backgroundColor: "#3cba9f",
+          data: [133,278,0,547,445,258]
+        }, {
+          label: "ลากิจ",
+          backgroundColor: "#e8c3b9",
+          data: [408,547,675,734,456,123]
+        },
+        {
+          label: "พักร้อน",
+          backgroundColor: "#c45850",
+          data: [133,218,0,547,453,455]
         }
       ]
     },

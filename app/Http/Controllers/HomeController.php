@@ -59,6 +59,11 @@ class HomeController extends Controller
         $max_min = DB::table('leaves')
             ->selectRaw("DATE_FORMAT(max(nstart_day),'%m') as max,DATE_FORMAT(min(nstart_day),'%m') as min")
             ->get();
+        $barchartgrouped = DB::table('leaves')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
+            ->WHERE('leaves.type_leave','=',0)
+            ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
         $result = json_decode($leave, true);
         $result2 = json_decode($ctl, true);
         $result3 = json_decode($ctl_month, true);
@@ -66,6 +71,7 @@ class HomeController extends Controller
         $result5 = json_decode($barchart, true);
         $result6 = json_decode($piechart, true);
         $result7 = json_decode($max_min, true);
+        $result8 = json_decode($barchartgrouped, true);
         $data = array(
             'leave' => $result,
             'ctl' => $result2,
@@ -74,6 +80,7 @@ class HomeController extends Controller
             'barchart' => $result5,
             'piechart' => $result6,
             'max_min' => $result7,
+            'barchartgrouped' => $result8,
         );
         //dd($data);
         return view('home', $data);
