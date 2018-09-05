@@ -90,6 +90,12 @@ class HomeController extends Controller
             ->whereRaw("leaves.type_leave = 4 AND leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
             ->get();
+        $linechart = DB::table('leaves')
+            ->join('libs', 'libs.id', '=', 'leaves.id_per')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months,leaves.id_per, libs.surname")
+            ->whereRaw("leaves.nstart_day = $now->year")
+            ->groupBy(DB::raw("id_per,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
         $result = json_decode($leave, true);
         $result2 = json_decode($ctl, true);
         $result3 = json_decode($ctl_month, true);
@@ -102,6 +108,7 @@ class HomeController extends Controller
         $result10 = json_decode($barchartgrouped2, true);
         $result11 = json_decode($barchartgrouped3, true);
         $result12 = json_decode($barchartgrouped4, true);
+        $result13 = json_decode($linechart, true);
         $data = array(
             'leave' => $result,
             'ctl' => $result2,
@@ -115,6 +122,7 @@ class HomeController extends Controller
             'barchartgrouped2' => $result10,
             'barchartgrouped3' => $result11,
             'barchartgrouped4' => $result12,
+            'linechart' => $result13,
         );
         //dd($data);
         return view('home', $data);

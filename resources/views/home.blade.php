@@ -324,7 +324,7 @@ strong.sum_month {
           <span class="icon">
             <i class="icon-signal"></i>
           </span>
-          <h5>line-chart  <code>สรุปประเภทการลา/ร้อยละ</code></h5>
+          <h5>line-chart  <code>สรุปยอดการลา/รายบุคคล</code></h5>
         </div>
         <div class="widget-content">
           <canvas id="line-chart" width="800" height="463"></canvas>        </div>
@@ -363,7 +363,7 @@ strong.sum_month {
           <span class="icon">
             <i class="icon-signal"></i>
           </span>
-          <h5>bar-chart-grouped <code>สรุปการลาแยกตามประเภท และเดือน</code></h5>
+          <h5>bar-chart-grouped <code>สรุปการลาแยกตามประเภท แต่ละเดือน</code></h5>
         </div>
         <div class="widget-content">
           <canvas id="bar-chart-grouped" width="800" height="435"></canvas>
@@ -406,6 +406,7 @@ strong.sum_month {
   </div>
   <hr>
 </div>
+<!--bar-chart-grouped  -->
   @foreach($max_min as $max_mins)
     @php 
       $total = (int)$max_mins['max'] - (int)$max_mins['min'];
@@ -505,7 +506,28 @@ strong.sum_month {
         $tomins++;
       @endphp
     @endfor
-    
+<!-- line-chart  -->  
+    @php $names = array(); $datas = array(); $name =''; $count_row = 0; @endphp
+    @foreach($linechart as $linecharts)      
+      
+      @if($linecharts['surname'] != $name)
+        @php  
+              $names[] = $linecharts['surname'];
+              $datas[] = $linecharts['count_leave'];
+              $name = $linecharts['surname'];
+              $count_row++;  
+        @endphp
+      @else
+         @php $datas[] = ','.$linecharts['count_leave']; @endphp
+      @endif
+      
+    @endforeach
+    @foreach($names as $n)
+      {{$n}}{{$count_row}}<br>
+    @endforeach
+    @foreach($datas as $d)
+      {{$d}}<br>
+    @endforeach
 @endsection
 
 @section('js')
@@ -619,9 +641,9 @@ $(document).ready(function() {
   new Chart(document.getElementById("line-chart"), {
   type: 'line',
   data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    labels: ['ม.ค.','ก.พ.' ,'มี.ค.','เม.ย.','พ.ค. ','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
     datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478],
+        data: [86,114,106,106,107,111,133,221,783,2478,0,258],
         label: "Africa",
         borderColor: "#3e95cd",
         fill: false
@@ -651,7 +673,7 @@ $(document).ready(function() {
   options: {
     title: {
       display: true,
-      text: 'World population per region (in millions)'
+      text: 'รายงานการลาแยกตามบุคคลของปี พ.ศ.{{date("Y")+543}}'
     }
   }
 });
