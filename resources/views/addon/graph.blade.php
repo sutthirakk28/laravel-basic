@@ -178,7 +178,7 @@ new Chart(document.getElementById("bubble-chart"), {
           data: [{
             x: 258702,
             y: 7.526,
-            r: 10
+            r: 101
           }]
         }, {
           label: ["Germany"],
@@ -284,6 +284,15 @@ new Chart(document.getElementById("radar-chart"), {
           pointBackgroundColor: "rgba(255,99,132,1)",
           pointBorderColor: "#fff",
           data: [25.48,54.16,7.61,8.06,4.45]
+        }, {
+          label: "1992",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "#8e5ea2",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "#8e5ea2",
+          pointBorderColor: "#fff",
+          data: [30.48,14.16,30,40,0]
         }
       ]
     },

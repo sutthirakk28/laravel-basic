@@ -30,12 +30,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $now = new Carbon();
+
         $leave = DB::table('leaves')
             ->join('libs', 'leaves.id_per', '=', 'libs.id')
             ->select('leaves.id','leaves.nstart_day','leaves.nend_day','leaves.type_leave', 'libs.surname','libs.nickname')
             ->get();
         $ctl = DB::table('leaves')
             ->selectRaw('count(nstart_day) as count_leave, type_leave')
+            ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
             ->get();
         $ctl_month = DB::table('leaves')
@@ -50,18 +53,41 @@ class HomeController extends Controller
             ->get();
         $barchart = DB::table('leaves')
             ->selectRaw("DATE_FORMAT(nstart_day,'%M') as months,count(nstart_day) as count_leave")
+            ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("DATE_FORMAT(nstart_day,'%Y-%m')"))
             ->get();
         $piechart = DB::table('leaves')
             ->selectRaw("REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(type_leave, '0', 'ลาบวชฯ') , '1', 'ลาคลอด') , '2', 'ลาป่วย'), '3', 'ลากิจ'), '4', 'พักร้อน') AS type_leave,COUNT(nstart_day) AS count_leave ")
+            ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("type_leave"))
             ->get();
         $max_min = DB::table('leaves')
             ->selectRaw("DATE_FORMAT(max(nstart_day),'%m') as max,DATE_FORMAT(min(nstart_day),'%m') as min")
+            ->whereRaw("leaves.nstart_day = $now->year")
             ->get();
         $barchartgrouped = DB::table('leaves')
             ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
-            ->WHERE('leaves.type_leave','=',0)
+            ->whereRaw("leaves.type_leave = 0 AND leaves.nstart_day = $now->year")
+            ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
+        $barchartgrouped1 = DB::table('leaves')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
+            ->whereRaw("leaves.type_leave = 1 AND leaves.nstart_day = $now->year")
+            ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
+        $barchartgrouped2 = DB::table('leaves')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
+            ->whereRaw("leaves.type_leave = 2 AND leaves.nstart_day = $now->year")
+            ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
+        $barchartgrouped3 = DB::table('leaves')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
+            ->whereRaw("leaves.type_leave = 3 AND leaves.nstart_day = $now->year")
+            ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
+            ->get();
+        $barchartgrouped4 = DB::table('leaves')
+            ->selectRaw("type_leave,COUNT(nstart_day) AS count_leave,DATE_FORMAT(nstart_day,'%m') AS months ")
+            ->whereRaw("leaves.type_leave = 4 AND leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("type_leave,DATE_FORMAT(nstart_day,'%Y-%m')"))
             ->get();
         $result = json_decode($leave, true);
@@ -72,6 +98,10 @@ class HomeController extends Controller
         $result6 = json_decode($piechart, true);
         $result7 = json_decode($max_min, true);
         $result8 = json_decode($barchartgrouped, true);
+        $result9 = json_decode($barchartgrouped1, true);
+        $result10 = json_decode($barchartgrouped2, true);
+        $result11 = json_decode($barchartgrouped3, true);
+        $result12 = json_decode($barchartgrouped4, true);
         $data = array(
             'leave' => $result,
             'ctl' => $result2,
@@ -81,6 +111,10 @@ class HomeController extends Controller
             'piechart' => $result6,
             'max_min' => $result7,
             'barchartgrouped' => $result8,
+            'barchartgrouped1' => $result9,
+            'barchartgrouped2' => $result10,
+            'barchartgrouped3' => $result11,
+            'barchartgrouped4' => $result12,
         );
         //dd($data);
         return view('home', $data);

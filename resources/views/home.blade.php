@@ -324,7 +324,7 @@ strong.sum_month {
           <span class="icon">
             <i class="icon-signal"></i>
           </span>
-          <h5>Two third width  <code>class=Span7</code></h5>
+          <h5>line-chart  <code>สรุปประเภทการลา/ร้อยละ</code></h5>
         </div>
         <div class="widget-content">
           <canvas id="line-chart" width="800" height="463"></canvas>        </div>
@@ -408,13 +408,104 @@ strong.sum_month {
 </div>
   @foreach($max_min as $max_mins)
     @php 
-      $total = $max_mins['max'] - $max_mins['min'];
-      $maxs = $max_mins['max'];
-      $mins = $max_mins['min'];    
+      $total = (int)$max_mins['max'] - (int)$max_mins['min'];
+      $maxs = $maxs1 =  $maxs2 = $maxs3 = $maxs4 = (int)$max_mins['max'];
+      $mins = $mins1 = $mins2 = $mins3 = $mins4 = (int)$max_mins['min'];
+      $array = $array1 = $array2 = $array3 = $array4 = array(); 
+      $toshow = array();
+      $tomins = (int)$max_mins['min'];  
     @endphp
-    {{$mins}}
   @endforeach
 
+  @for($mins; $mins <= $maxs; $mins++)
+    @php $nn = ''; @endphp
+    @foreach($barchartgrouped as $bar)
+      @php $mon = (int)$bar['months']; $n = $bar['count_leave']; @endphp        
+      @if($mon == $mins)
+      @php $nn = 1; $array[] = $n.','; @endphp 
+      @endif
+    @endforeach
+    @if($nn=='')
+      @php $array[] = '0'.','; @endphp
+    @endif
+  @endfor
+ <br>
+  @for($mins1; $mins1 <= $maxs1; $mins1++)
+    @php $nn = ''; @endphp
+    @foreach($barchartgrouped1 as $bar1)
+      @php $mon = (int)$bar1['months']; $n = $bar1['count_leave']; @endphp        
+      @if($mon == $mins1)
+      @php $nn = 1; $array1[] = $n.','; @endphp 
+      @endif
+    @endforeach
+    @if($nn=='')
+      @php $array1[] = '0'.','; @endphp
+    @endif 
+  @endfor 
+  <br>
+  @for($mins2; $mins2 <= $maxs2; $mins2++)
+    @php $nn = ''; @endphp    
+    @foreach($barchartgrouped2 as $bar2)
+      @php $mon = (int)$bar2['months']; $n = $bar2['count_leave']; @endphp        
+      @if($mon == $mins2) 
+      @php $nn = 1; $array2[] = $n.','; @endphp 
+      @endif
+    @endforeach
+    @if($nn=='')
+      @php $array2[] = '0'.','; @endphp
+    @endif 
+  @endfor
+  <br>
+  @for($mins3; $mins3 <= $maxs3; $mins3++)
+    @php $nn = ''; @endphp
+    @foreach($barchartgrouped3 as $bar3)
+      @php $mon = (int)$bar3['months']; $n = $bar3['count_leave']; @endphp        
+      @if($mon == $mins3)
+      @php $nn = 1; $array3[] = $n.','; @endphp 
+      @endif
+    @endforeach
+    @if($nn=='')
+      @php $array3[] = '0'.','; @endphp
+    @endif    
+  @endfor
+  <br>
+  @for($mins4; $mins4 <= $maxs4; $mins4++)
+    @php $nn = ''; @endphp
+    @foreach($barchartgrouped4 as $bar4)
+      @php $mon = (int)$bar4['months']; $n = $bar4['count_leave']; @endphp        
+      @if($mon == $mins4) 
+      @php $nn = 1; $array4[] = $n.','; @endphp 
+      @endif
+    @endforeach
+    @if($nn=='')
+      @php $array4[] = '0'.','; @endphp
+    @endif 
+  @endfor 
+  <br>
+  @php
+  $months = array(
+    'มกราคม',
+    'กุมภาพันธ์',
+    'มีนาคม',
+    'เมษายน',
+    'พฤษภาคม',
+    'มิถุนายน',
+    'กรกฎาคม',
+    'สิงหาคม',
+    'กันยายน',
+    'ตุลาคม',
+    'พฤศจิกายน',
+    'ธันวาคม',
+    );
+    @endphp    
+    @php $tomins = $tomins - 1; @endphp
+    @for($t = 0; $t <= $total; $t++)
+      @php 
+        $toshow[] = $months[$tomins];
+        $tomins++;
+      @endphp
+    @endfor
+    
 @endsection
 
 @section('js')
@@ -545,7 +636,7 @@ $(document).ready(function() {
         borderColor: "#3cba9f",
         fill: false
       }, { 
-        data: [40,20,10,16,24,38,74,167,508,784],
+        data: [40,5000,10,16,24,38,74,167,508,784],
         label: "Latin America",
         borderColor: "#e8c3b9",
         fill: false
@@ -625,33 +716,53 @@ new Chart(document.getElementById("bar-chart-grouped"), {
     type: 'bar',
     data: {
       labels: [
-        @foreach($barchart as $barcharts)
-          '{{ $barcharts['months'] }}',
+        @foreach($toshow as $toshows)
+          '{{ $toshows}}',
         @endforeach
       ],
       datasets: [
         {
           label: "ลาบวช-ทำหมัน",
           backgroundColor: "#3e95cd",
-          data: [133,478,0,547,264,564]
+          data: [            
+            @foreach($array as $a)
+            {{$a}}
+            @endforeach
+          ]
         }, {
           label: "ลาคลอด",
           backgroundColor: "#8e5ea2",
-          data: [408,547,675,734,123,746]
+          data: [            
+            @foreach($array1 as $a1)
+              {{$a1}}
+            @endforeach
+          ]
         },
         {
           label: "ลาป่วย",
           backgroundColor: "#3cba9f",
-          data: [133,278,0,547,445,258]
+          data: [            
+            @foreach($array2 as $a2)
+              {{$a2}}
+            @endforeach 
+          ]
         }, {
           label: "ลากิจ",
           backgroundColor: "#e8c3b9",
-          data: [408,547,675,734,456,123]
+          data: [            
+            @foreach($array3 as $a3)
+              {{$a3}}
+            @endforeach 
+          ]
         },
         {
           label: "พักร้อน",
           backgroundColor: "#c45850",
-          data: [133,218,0,547,453,455]
+          data: [
+            @foreach($array4 as $a4)
+              {{$a4}}
+            @endforeach 
+          ]
         }
       ]
     },
