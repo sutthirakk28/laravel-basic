@@ -101,7 +101,7 @@ strong.sum_month {
           <li> <a href="#"> <i class="icon-people"><span class="badge badge-success" id="sum_admin">0</i>ผู้ดูแล</a> </li>          
           <li> <a href="{{ url('/lib') }}"> <i class="icon-client"><span class="badge badge-success" id="sum_per">0</i></i>พนักงาน</a> </li>
           <li> <a href="{{ url('/tasks') }}"> <i class="icon-calendar"><span class="badge badge-success" id="sum_task">0</i></i>กิจกรรม </a> </li>
-          <li> <a href="#"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
+          <li> <a href="{{ url('/addon/graph') }}"> <i class="icon-graph"></i>แผนภูมิ</a> </li>
         </ul>
    </div>   
    @php 
@@ -323,11 +323,12 @@ strong.sum_month {
         <div class="widget-title">
           <span class="icon">
             <i class="icon-signal"></i>
-          </span>
-          <h5>line-chart  <code>สรุปยอดการลา/รายบุคคล</code></h5>
+          </span>          
+          <h5>bar-chart-grouped <code>สรุปการลาแยกตามประเภท แต่ละเดือน</code></h5>
         </div>
-        <div class="widget-content">
-          <canvas id="line-chart" width="800" height="463"></canvas>        </div>
+        <div class="widget-content">          
+          <canvas id="bar-chart-grouped" width="800" height="463"></canvas>
+        </div>
       </div>
     </div>
     <div class="span4">
@@ -363,10 +364,10 @@ strong.sum_month {
           <span class="icon">
             <i class="icon-signal"></i>
           </span>
-          <h5>bar-chart-grouped <code>สรุปการลาแยกตามประเภท แต่ละเดือน</code></h5>
+          <h5>polar-chart  <code>สรุปยอดการลา/รายบุคคล</code></h5>
         </div>
         <div class="widget-content">
-          <canvas id="bar-chart-grouped" width="800" height="435"></canvas>
+          <canvas id="polar-chart" width="800" height="500"></canvas>
         </div>
       </div>
     </div>
@@ -507,27 +508,11 @@ strong.sum_month {
       @endphp
     @endfor
 <!-- line-chart  -->  
-    @php $names = array(); $datas = array(); $name =''; $count_row = 0; @endphp
-    @foreach($linechart as $linecharts)      
-      
-      @if($linecharts['surname'] != $name)
-        @php  
-              $names[] = $linecharts['surname'];
-              $datas[] = $linecharts['count_leave'];
-              $name = $linecharts['surname'];
-              $count_row++;  
-        @endphp
-      @else
-         @php $datas[] = ','.$linecharts['count_leave']; @endphp
-      @endif
-      
-    @endforeach
-    @foreach($names as $n)
-      {{$n}}{{$count_row}}<br>
-    @endforeach
-    @foreach($datas as $d)
-      {{$d}}<br>
-    @endforeach
+@php 
+$colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#fb06fd","#fd0654","#d4ea25","#9E9E9E"];
+@endphp
+
+
 @endsection
 
 @section('js')
@@ -638,44 +623,37 @@ $(document).ready(function() {
 });
 //chart.js
   //line-chart
-  new Chart(document.getElementById("line-chart"), {
-  type: 'line',
-  data: {
-    labels: ['ม.ค.','ก.พ.' ,'มี.ค.','เม.ย.','พ.ค. ','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
-    datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478,0,258],
-        label: "Africa",
-        borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
-        borderColor: "#8e5ea2",
-        fill: false
-      }, { 
-        data: [168,170,178,190,203,276,408,547,675,734],
-        label: "Europe",
-        borderColor: "#3cba9f",
-        fill: false
-      }, { 
-        data: [40,5000,10,16,24,38,74,167,508,784],
-        label: "Latin America",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, { 
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "North America",
-        borderColor: "#c45850",
-        fill: false
+  
+  new Chart(document.getElementById("polar-chart"), {
+    type: 'polarArea',
+    data: {
+      labels: [
+        @foreach($polarchart as $polarcharts)
+          '{{ $polarcharts['surname'] }}',
+        @endforeach
+      ],
+      datasets: [
+        {
+          label: "จำนวน (ครั้ง)",
+          backgroundColor: [
+            @foreach($colors as $color)
+              '{{ $color }}',
+            @endforeach
+          ],
+          data: [
+            @foreach($polarchart as $polarcharts)
+              '{{ $polarcharts['count_leave'] }}',
+            @endforeach
+          ]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'รายงานการลาแยกตามรายบุคคลของปี พ.ศ.{{date("Y")+543}}'
       }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'รายงานการลาแยกตามบุคคลของปี พ.ศ.{{date("Y")+543}}'
     }
-  }
 });
  // Bar chart
  
@@ -690,7 +668,7 @@ new Chart(document.getElementById("bar-chart"), {
       datasets: [
         {
           label: "จำนวน (ครั้ง)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3a87ad"],
           data: [
             @foreach($barchart as $barcharts)
               '{{ $barcharts['count_leave'] }}',

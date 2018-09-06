@@ -51,7 +51,7 @@
                     <h5>Half Width <code>class=Span6</code></h5>
                 </div>
                 <div class="widget-content">
-                    <canvas id="polar-chart" width="800" height="450"></canvas> 		    					
+                    <canvas id="line-chart" width="800" height="450"></canvas> 		    					
                 </div>
             </div>
         </div>
@@ -59,9 +59,9 @@
             <div class="widget-box">
                 <div class="widget-title">
                     <span class="icon">
-                        <i class="icon-th-list"></i>
+                        <i class="icon-signal"></i>
                     </span>
-                    <h5>Half Width <code>class=Span6</code></h5>
+                    <h5>doughnut-chart <code>สรุปจำนวนแยกตามฝ่าย</code></h5>
                 </div>
                 <div class="widget-content">
                     <canvas id="doughnut-chart" width="800" height="450"></canvas>
@@ -76,7 +76,7 @@
                     <span class="icon">
                         <i class="icon-th-list"></i>
                     </span>
-                    <h5>Full Width <code>class=Span12</code></h5>
+                    <h5>bar-chart-horizontal <code>สรุปช่วงอายุของพนักงาน</code></h5>
                 </div>
                 <div class="widget-content">
                     <canvas id="bar-chart-horizontal" width="800" height="180"></canvas>						
@@ -113,6 +113,33 @@
         </div>        
     </div>        
 </div>
+@php 
+  $colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#fb06fd","#fd0654","#d4ea25","#9E9E9E"];
+@endphp
+<!-- bar-chart-horizontal -->
+  @php 
+    $arr_age = array(); 
+    $age18 = $age25 = $age35 = $age45 = $age55 = $age65 = 0; 
+  @endphp
+
+  @foreach($thorizontal as $thorizontals)    
+    @if($thorizontals['age'] <= 24)
+      @php $age18 += 1; @endphp
+    @elseif($thorizontals['age'] <= 34)
+      @php $age25 += 1; @endphp
+    @elseif($thorizontals['age'] <= 44)
+      @php $age35 += 1; @endphp
+    @elseif($thorizontals['age'] <= 54)
+      @php $age45 += 1; @endphp
+    @elseif($thorizontals['age'] <= 64)
+      @php $age55 += 1; @endphp
+    @else
+      @php $age65 += 1; @endphp
+    @endif
+  @endforeach
+
+  @php $arr_age[] = $age18.','.$age25.','.$age35.','.$age45.','.$age55.','.$age65; @endphp
+  
 @endsection
 
 @section('js')
@@ -225,41 +252,73 @@ new Chart(document.getElementById("bubble-chart"), {
 new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: [
+        @foreach($pos as $poss)
+          '{{ $poss['name_dep'] }}',
+        @endforeach
+      ],
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+          backgroundColor: [
+            @foreach($colors as $color)
+              '{{ $color}}',
+            @endforeach
+          ],
+          data: [
+            @foreach($pos as $poss)
+              '{{ $poss['count_person'] }}',
+            @endforeach
+          ]
         }
       ]
     },
     options: {
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'รายงานจำนวนพนักงานแยกตามฝ่าย'
       }
     }
 });
 
-new Chart(document.getElementById("polar-chart"), {
-    type: 'polarArea',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Asia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Europe",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Latin America",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "North America",
+        borderColor: "#c45850",
+        fill: false
       }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
     }
+  }
 });
 
 new Chart(document.getElementById("radar-chart"), {
@@ -307,12 +366,16 @@ new Chart(document.getElementById("radar-chart"), {
 new Chart(document.getElementById("bar-chart-horizontal"), {
     type: 'horizontalBar',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["ช่วงอายุ 15-24", "ช่วงอายุ 25-34", "ช่วงอายุ 35-44", "ช่วงอายุ 45-54", "ช่วงอายุ 55-64", "ช่วงอายุ 65+"],
       datasets: [
         {
-          label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+          label: "จำนวน (คน)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#f9be3e"],
+          data: [
+            @foreach($arr_age as $arr_ages)
+              {{ $arr_ages }}
+            @endforeach
+          ]
         }
       ]
     },
@@ -320,7 +383,7 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
       legend: { display: false },
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'รายงานช่วงอายุของพนักงาน'
       }
     }
 });

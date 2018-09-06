@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Lib;
+use DB;
+use Carbon\Carbon;
 
 class AddonController extends Controller
 {
@@ -22,7 +23,27 @@ class AddonController extends Controller
     }
     public function graph()
     {
-        return view('addon.graph');
+        $pos = DB::table('pos')
+            ->join('deps', 'pos.id_dep', '=', 'deps.id_dep')
+            ->join('libs', 'libs.position', '=', 'pos.id_pos')
+            ->selectRaw("deps.id_dep,deps.name_dep,count(libs.id) as count_person")
+            ->groupBy(DB::raw("deps.id_dep"))
+            ->get();
+
+        $barcharthorizontal = DB::table('libs')
+            ->selectRaw("libs.id,libs.surname,libs.nickname,TIMESTAMPDIFF(YEAR, libs.age, CURDATE()) AS age")
+            ->groupBy(DB::raw("age"))
+            ->get();
+
+        $result = json_decode($pos, true);
+        $result1 = json_decode($barcharthorizontal, true);
+
+        $data = array(
+            'pos' => $result,
+            'thorizontal' => $result1,
+        );
+        //dd($data);
+        return view('addon.graph',$data);
     }
 
     /**
