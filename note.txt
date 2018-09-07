@@ -33,5 +33,16 @@ FROM
 GROUP BY type_leave,DATE_FORMAT(nstart_day,'%Y-%m')
 
 
+SELECT
+`leaves`.id_per,
+libs.surname,DATE_FORMAT(nstart_day,'%m') AS months,
+Count(`leaves`.nstart_day) AS count_leave
+FROM
+`leaves`
+INNER JOIN libs ON libs.id = `leaves`.id_per
+GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
+
+
+
 
 
