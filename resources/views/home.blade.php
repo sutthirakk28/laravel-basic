@@ -67,6 +67,8 @@ strong.sum_month {
   float: left;
   border-bottom: 2px solid #dadada;
   padding: 5px;
+  font-style: italic;
+  font-weight: bold;
 }
 .stat-boxes2 .left span {
   border-bottom: 0px solid #dadada;
@@ -83,6 +85,15 @@ strong.sum_month {
 .widget-box {
   margin-top: 1px;
   margin-bottom: 1px;
+}
+.left.peity_bar_bad {
+  color: #ba1e20;
+}
+.left.peity_bar_good {
+  color: #459d1c;
+}
+.left.peity_bar_neutral {
+  color: #4fb9f0;
 }
 </style>
 @endsection
@@ -175,7 +186,7 @@ strong.sum_month {
                     </span>
                     <canvas width="50" height="24"></canvas>
                     </span>
-                     {{ number_format(ceil($leave_ordain)) }}%                     
+                      {{ number_format(ceil($leave_ordain)) }}%               
                     </div>
                   <div class="right">ลาบวชฯ 
                     <strong class="sum_month">                      
@@ -527,8 +538,7 @@ $colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac4
 <script src="{{ asset('js/main/fullcalendar/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('js/main/fullcalendar/th.js') }}"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="{{ asset('js/main/chart/chart.js/Chart.min.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

@@ -32,6 +32,17 @@ FROM
 `leaves`
 GROUP BY type_leave,DATE_FORMAT(nstart_day,'%Y-%m')
 
+SELECT
+`leaves`.id_per,
+libs.surname,
+`leaves`.type_leave,
+Count(`leaves`.nstart_day) AS count_person
+FROM
+libs
+INNER JOIN `leaves` ON `leaves`.id_per = libs.id
+GROUP BY leaves.id_per,type_leave
+
+
 
 
 

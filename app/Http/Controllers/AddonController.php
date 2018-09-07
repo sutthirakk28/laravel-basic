@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Leave;
+use App\Lib;
 use Carbon\Carbon;
 
 class AddonController extends Controller
@@ -34,13 +36,40 @@ class AddonController extends Controller
             ->selectRaw("libs.id,libs.surname,libs.nickname,TIMESTAMPDIFF(YEAR, libs.age, CURDATE()) AS age")
             ->groupBy(DB::raw("age"))
             ->get();
+        
+        $piechart = DB::table('libs')
+            ->selectRaw("COUNT(surname) AS woman,(SELECT COUNT(surname) FROM libs WHERE surname LIKE ('นาย%')) AS man")
+            ->whereRaw("surname LIKE ('นาง%')")
+            ->get();
+        
+        $wordcloud = Leave::selectRaw("GROUP_CONCAT(reason_leave) as text")
+            ->whereRaw("reason_leave != '' ")
+            ->get();
+
+        $piechart2 = Lib::selectRaw("libs.position, pos.name_pos, COUNT(libs.id) as person")
+            ->join('pos', 'pos.id_pos', '=', 'libs.position')
+            ->groupBy(DB::raw("libs.position"))
+            ->get();
+
+        $barchart = Lib::selectRaw("leaves.id_per, libs.surname, leaves.type_leave, COUNT(leaves.nstart_day) as count_person")
+            ->join('leaves', 'leaves.id_per', '=', 'libs.id')
+            ->groupBy(DB::raw("leaves.id_per,type_leave"))
+            ->get();
 
         $result = json_decode($pos, true);
         $result1 = json_decode($barcharthorizontal, true);
+        $result2 = json_decode($piechart, true);
+        $result3 = json_decode($wordcloud, true);
+        $result4 = json_decode($piechart2, true);
+        $result5 = json_decode($barchart, true);
 
         $data = array(
             'pos' => $result,
             'thorizontal' => $result1,
+            'piechart' => $result2,
+            'wordcloud' => $result3,
+            'piechart2' => $result4,
+            'barchart' => $result5,
         );
         //dd($data);
         return view('addon.graph',$data);
