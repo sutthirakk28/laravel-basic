@@ -25,6 +25,8 @@ class AddonController extends Controller
     }
     public function graph()
     {
+        $now = new Carbon();
+
         $pos = DB::table('pos')
             ->join('deps', 'pos.id_dep', '=', 'deps.id_dep')
             ->join('libs', 'libs.position', '=', 'pos.id_pos')
@@ -49,10 +51,12 @@ class AddonController extends Controller
         $piechart2 = Lib::selectRaw("libs.position, pos.name_pos, COUNT(libs.id) as person")
             ->join('pos', 'pos.id_pos', '=', 'libs.position')
             ->groupBy(DB::raw("libs.position"))
-            ->get();
+            ->get();        
 
-        $barchart = Lib::selectRaw("leaves.id_per, libs.surname, leaves.type_leave, COUNT(leaves.nstart_day) as count_person")
-            ->join('leaves', 'leaves.id_per', '=', 'libs.id')
+        $barchart2 = DB::table('leaves')
+            ->join('libs', 'libs.id', '=', 'leaves.id_per')
+            ->selectRaw("id_per,type_leave,COUNT(leaves.nstart_day) counts,libs.surname")
+            ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("leaves.id_per,type_leave"))
             ->get();
 
@@ -61,7 +65,7 @@ class AddonController extends Controller
         $result2 = json_decode($piechart, true);
         $result3 = json_decode($wordcloud, true);
         $result4 = json_decode($piechart2, true);
-        $result5 = json_decode($barchart, true);
+        $result6 = json_decode($barchart2, true);
 
         $data = array(
             'pos' => $result,
@@ -69,7 +73,7 @@ class AddonController extends Controller
             'piechart' => $result2,
             'wordcloud' => $result3,
             'piechart2' => $result4,
-            'barchart' => $result5,
+            'barchart2' => $result6,
         );
         //dd($data);
         return view('addon.graph',$data);

@@ -154,33 +154,38 @@
   @endforeach 
   
   <!-- wordcloud -->
-<table style="width:30%;border: 1px solid black;">
-@php $n_id = ''; $n_count = array(); @endphp
-  @foreach($barchart as $barcharts)
-  
-  <tr>
-    
-    
-    @if($n_id !=$barcharts['id_per'])
-    <td>{{$names = $barcharts['id_per']}}  {{$names = $barcharts['surname']}}</td>
-      @php $n_count[] = $barcharts['count_person']; @endphp
-    <td>{{$names = $barcharts['type_leave']}}====={{$n_count}}</td>
-        @php $n_id = $barcharts['id_per']; @endphp
-    @else
-
+@php $id_pers = ''; $output=array(); $output1=array(); @endphp
+  @foreach($barchart2 as $barname)        
+    @if($barname['id_per'] != $id_pers)
+        @php $id_pers = $barname['id_per']; @endphp @php $c = 0;  @endphp
+        @php $emtry=$emtry1=$emtry2=$emtry3=$emtry4=0; @endphp
+      @foreach($barchart2 as $bartype)
+        @if($bartype['id_per'] == $barname['id_per'])
+            @for($i=0;$i<=4;$i++)            
+               @if($bartype['type_leave'] == 0) 
+                @php $emtry = $bartype['counts'] @endphp
+              @elseif($bartype['type_leave'] == 1)
+                @php $emtry1 = $bartype['counts'] @endphp
+              @elseif($bartype['type_leave'] == 2)
+                @php $emtry2 = $bartype['counts'] @endphp
+              @elseif($bartype['type_leave'] == 3)
+                @php $emtry3 = $bartype['counts'] @endphp
+              @elseif($bartype['type_leave'] == 4)
+                @php $emtry4 = $bartype['counts'] @endphp
+              @endif              
+            @endfor
+        @endif
+      @endforeach     
+      @php $output[] = $barname['surname'].'-'.$emtry.','.$emtry1.','.$emtry2.','.$emtry3.','.$emtry4; $output1[] = $barname['id_per']; @endphp
     @endif
-  </tr>
-  @endforeach 
-</table>
+  @endforeach
 
- 
-  
 @endsection
 
 @section('js')
 <script src="{{ asset('js/main/chart/chart.js/Chart.min.js') }}"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<script src="{{ asset('js/main/chart/hightchart.js/highcharts.js') }}"></script>
+<script src="{{ asset('js/main/chart/hightchart.js/wordcloud.js') }}"></script>
 <script type="text/javascript">
 // Build the chart wordcloud
 var text = '{{$w_cloud}}';
@@ -236,16 +241,18 @@ Highcharts.chart('container2', {
       stacking: 'normal'
     }
   },
-  series: [{
-    name: 'John',
-    data: [5, 3, 4, 7, 2]
-  }, {
-    name: 'Jane',
-    data: [2, 2, 3, 2, 1]
-  }, {
-    name: 'Joe',
-    data: [3, 4, 4, 2, 5]
-  }]
+  series: [
+      @foreach($output as $outputs)
+        {
+          @php $e = explode("-", $outputs); @endphp
+          name: '{{$e[0]}}',
+          data: [
+            {{$e[1]}}
+          ]
+        },        
+      @endforeach
+  
+  ]
 });
 
 

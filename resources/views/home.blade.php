@@ -520,7 +520,7 @@ strong.sum_month {
     @endfor
 <!-- line-chart  -->  
 @php 
-$colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#fb06fd","#fd0654","#d4ea25","#9E9E9E"];
+$colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#e148e2","#fd0654","#d4ea25","#9E9E9E"];
 @endphp
 
 
