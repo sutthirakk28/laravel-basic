@@ -678,7 +678,11 @@ new Chart(document.getElementById("bar-chart"), {
       datasets: [
         {
           label: "จำนวน (ครั้ง)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3a87ad"],
+          backgroundColor: [
+            @foreach($colors as $color)
+              '{{ $color }}',
+            @endforeach
+          ],
           data: [
             @foreach($barchart as $barcharts)
               '{{ $barcharts['count_leave'] }}',
