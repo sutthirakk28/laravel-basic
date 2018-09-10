@@ -150,7 +150,7 @@
   
   <!-- wordcloud -->
   @foreach($wordcloud as $wordclouds) 
-    @php  $w_cloud = $wordclouds['text'];  @endphp    
+    @php  $w_cloud = $wordclouds['text'];  @endphp  
   @endforeach 
   
   <!-- wordcloud -->
@@ -255,9 +255,6 @@ Highcharts.chart('container2', {
   ]
 });
 
-
-
-// Radialize the colors
 Highcharts.setOptions({
   colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
     return {
@@ -274,7 +271,7 @@ Highcharts.setOptions({
   })
 });
 
-// Build the chart pie
+
 Highcharts.chart('container3', {
   chart: {
     plotBackgroundColor: null,

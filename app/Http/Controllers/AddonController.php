@@ -43,10 +43,14 @@ class AddonController extends Controller
             ->selectRaw("COUNT(surname) AS woman,(SELECT COUNT(surname) FROM libs WHERE surname LIKE ('นาย%')) AS man")
             ->whereRaw("surname LIKE ('นาง%')")
             ->get();
-        
+            
+        DB::statement('SET GLOBAL group_concat_max_len = 1000000');
         $wordcloud = Leave::selectRaw("GROUP_CONCAT(reason_leave) as text")
             ->whereRaw("reason_leave != '' ")
             ->get();
+        // $wordcloud = Leave::selectRaw("reason_leave")
+        //     ->whereRaw("reason_leave != '' ")
+        //     ->get();
 
         $piechart2 = Lib::selectRaw("libs.position, pos.name_pos, COUNT(libs.id) as person")
             ->join('pos', 'pos.id_pos', '=', 'libs.position')
@@ -99,7 +103,14 @@ class AddonController extends Controller
     {
         //
     }
-
+    public function organiz()
+    {   
+        $aCss=array('css/addon/style.css');
+        $data = array(
+            'style' => $aCss
+        );
+        return view('addon.organiz',$data);
+    }
     /**
      * Display the specified resource.
      *

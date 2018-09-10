@@ -70,6 +70,7 @@ Route::post('/getDataScore', 'LeaveController@getDataScore');
 Route::get('addon/gallery','AddonController@gallery');
 Route::get('addon/chat','AddonController@chat');
 Route::get('addon/graph','AddonController@graph');
+Route::get('addon/organiz','AddonController@organiz');
 
 Route::resource('tasks', 'TasksController');
 Route::post('/tasks/store', 'TasksController@store');

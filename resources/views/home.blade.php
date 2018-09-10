@@ -520,9 +520,18 @@ strong.sum_month {
     @endfor
 <!-- line-chart  -->  
 @php 
-$colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#e148e2","#fd0654","#d4ea25","#9E9E9E"];
+$colors = ["#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","#468847","#ffac49","#0e6ee8","#fd7a06","#e148e2","#fd0654","#d4ea25","#A878CC","#F4ED61","#2ACD1A","#DF6385","#D77C69","#97FCD0","#D2F43B","#4153A7","#F2DFB4","#E79D9C","#E829B5","#2455CE","#8C67C6","#F7A2E3","#7EF5EF","#E85728","#7AF78F","#D7DD19","#97FCD0"];
 @endphp
 
+@php
+function random_color_part() {
+    return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+}
+
+function random_color() {
+    return random_color_part() . random_color_part() . random_color_part();
+}
+@endphp
 
 @endsection
 
