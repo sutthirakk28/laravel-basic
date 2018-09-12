@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2018 at 05:58 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Sep 12, 2018 at 06:53 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -362,7 +362,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2018_07_31_171244_add_nend_day_to_leaves_table', 20),
 (28, '2018_08_19_160602_add_status_leave_to_leaves_table', 21),
 (29, '2018_08_27_145844_create_tasks_table', 22),
-(30, '2018_08_27_151701_create_task_table', 22);
+(30, '2018_08_27_151701_create_task_table', 22),
+(31, '2018_09_12_153036_create_products_table', 23);
 
 -- --------------------------------------------------------
 
@@ -421,6 +422,28 @@ INSERT INTO `pos` (`id_pos`, `created_at`, `updated_at`, `name_pos`, `id_dep`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `created_at`, `updated_at`) VALUES
+(1, 'tuy', 555, '2018-09-11 17:00:00', '2018-09-12 17:00:00'),
+(2, 'job', 1234, '2018-09-12 01:32:22', '2018-09-11 22:12:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tasks`
 --
 
@@ -468,7 +491,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'OaYqjYIoxJTJPtjjXEbFnO2S1709k71sU3fLz0atW2NDz3bX50xOmnn7v4Og', '2018-07-08 21:55:56', '2018-07-08 21:55:56');
+(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'wBHUJrHlWPkmK7hu0NOdbP47Ww48JecMh5iuWKTbKOyRk0tqq8lgPhV2Bs8U', '2018-07-08 21:55:56', '2018-07-08 21:55:56'),
+(2, 'สุทธิรักษ์', 'sutthirak.k28@hotmail.com', '$2y$10$8lhzR4qqQBi3.bllIizv1OZanC2NDVAndsece/Vn0bRc.dUsJyTUS', 'BOIIQVyNEHce9o4oQCUeOqR6rHOxMlQm0ah8GXfGDotOiZAIpMTz0xjlSZC4', '2018-09-12 14:35:11', '2018-09-12 14:35:11');
 
 --
 -- Indexes for dumped tables
@@ -529,6 +553,12 @@ ALTER TABLE `pos`
   ADD PRIMARY KEY (`id_pos`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tasks`
 --
 ALTER TABLE `tasks`
@@ -585,13 +615,19 @@ ALTER TABLE `libs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
   MODIFY `id_pos` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -603,7 +639,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

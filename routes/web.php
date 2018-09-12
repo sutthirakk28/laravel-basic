@@ -1,5 +1,8 @@
 <?php
 
+use App\Lib;
+use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserCollection;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,7 +80,6 @@ Route::post('/tasks/store', 'TasksController@store');
 Route::post('/tasks/edit_task', 'TasksController@edit_task');
 Route::post('/tasks/destroy', 'TasksController@destroy');
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -90,3 +92,11 @@ Route::get('/home/list_leave', 'HomeController@list_leave');
 Route::get('/news','NewsController@index');
 Route::get('/news/form','NewsController@form');
 //Route::get('/news/form','NewsController@form')->middleware('auth');
+
+Route::get('/json',function(){
+	//$user = Lib::paginate(10);
+	$user = Lib::all();
+	return new UserCollection($user);
+	//return new UserResource($user);
+	//return new UserResource(User::find(2)); 
+});

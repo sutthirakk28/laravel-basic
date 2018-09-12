@@ -18,8 +18,12 @@ class Lib extends Model
     'n_education',
     'phone'];
     //protected $guarded = ['id'];
-   public function libs()
-    {
-        return $this->belongsToMany('App\Libss');
+//    public function libs()
+//     {
+//         return $this->belongsToMany('App\Libss');
+//     }
+
+    public function leaves(){
+        return $this->hasMany('App\Leave');
     }
 }
