@@ -43,7 +43,7 @@
         <div class="span12">            
             <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-signal"></i> </span>
-            <h5>รายงาน สรุปผลการลา</h5><span class="label">เดือนที่แล้ว</span><span class="label label-info">เดือนนี้</span> 
+            <h5>รายงาน สรุปผลการลา</h5><span class="label">เดือนที่แล้ว</span><span class="label label-success">เดือนนี้</span> 
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -88,113 +88,126 @@
                     function secondsToTime($seconds) {
                     $dtF = new \DateTime('@0');
                     $dtT = new \DateTime("@$seconds");
-                    return $dtF->diff($dtT)->format('%a วัน %h ช. %i น.');
+                    return $dtF->diff($dtT)->format('%a วัน %h:%i น.');
                     }
 
-                    $name=''; 
-                    $leave_ordain = $leave_deliver = $leave_sick = $leave_Work = $leave_Government = 0; 
+                    $name='';                      
                 @endphp
 
                 @foreach($leave as $leaves)
-
-                    @php
-                        $nstart_day = explode("T",$leaves['nstart_day']);
-                        $nend_day = explode("T",$leaves['nend_day']);
-                        $start_day_year = $nstart_day[0];
-                        $start_day_times = $nstart_day[1];
-                        $end_day_year = $nend_day[0];
-                        $end_day_times = $nend_day[1];
-
-                        $a1=$start_day_year.' '.$start_day_times;
-                        $a2=$end_day_year.' '.$end_day_times;
-
-                        $stop_date = date('Y-m-d', strtotime($end_day_year . ' +1 day'));
-                        $num_day = dateDiv($start_day_year,$stop_date);
-
-                        $time=dateDiv($a1,$a2);
-                        $ordain_day = 0; $deliver_day = 0; $sick_day = 0; $Work_day = 0; $Government_day = 0;
-                    @endphp
-
+                <tr class="odd gradeX">        
+                @php 
+                $leave_ordain = $leave_deliver = $leave_sick = $leave_Work = $leave_Government = 0; 
+                $sum = 0;
+                @endphp                         
                     @if($leaves['id_per'] != $name)
-
+                    <td>{{$leaves['surname'].' ('.$leaves['nickname'].')' }}</td>
                         @php $name=$leaves['id_per']; @endphp
 
-                            @if($leaves['type_leave'] == 0)
-                                @if($start_day_times == '08:30' && $end_day_times == '17:30')
-                                    @php 
-                                        $ordain_day = ($num_day['D'] * 24) * 60;           
-                                    @endphp
-                                @else
-                                    @php
-                                        $h = $time['D'] * 24;
-                                        $m = ($time['H'] + $h) * 60;
-                                        $d = ($time['M'] + $m);
-                                        $ordain_day = $d;
-                                    @endphp
-                                @endif
-                            @elseif($leaves['type_leave'] == 1)
-                                @if($start_day_times == '08:30' && $end_day_times == '17:30')
-                                    @php 
-                                        $deliver_day = ($num_day['D'] * 24) * 60;           
-                                    @endphp
-                                @else
-                                    @php
-                                        $h = $time['D'] * 24;
-                                        $m = ($time['H'] + $h) * 60;
-                                        $d = ($time['M'] + $m);
-                                        $deliver_day = $d;
-                                    @endphp
-                                @endif
-                            @elseif($leaves['type_leave'] == 2)
-                                @if($start_day_times == '08:30' && $end_day_times == '17:30')
-                                    @php 
-                                        $sick_day = ($num_day['D'] * 24) * 60;           
-                                    @endphp
-                                @else
-                                    @php
-                                        $h = $time['D'] * 24;
-                                        $m = ($time['H'] + $h) * 60;
-                                        $d = ($time['M'] + $m);
-                                        $sick_day = $d;
-                                    @endphp
-                                @endif
-                            @elseif($leaves['type_leave'] == 3)
-                                @if($start_day_times == '08:30' && $end_day_times == '17:30')
-                                    @php 
-                                        $Work_day = ($num_day['D'] * 24) * 60;           
-                                    @endphp
-                                @else
-                                    @php
-                                        $h = $time['D'] * 24;
-                                        $m = ($time['H'] + $h) * 60;
-                                        $d = ($time['M'] + $m);
-                                        $Work_day = $d;
-                                    @endphp
-                                @endif
-                            @elseif($leaves['type_leave'] == 4)
-                                @if($start_day_times == '08:30' && $end_day_times == '17:30')
-                                    @php 
-                                        $Government_day = ($num_day['D'] * 24) * 60;           
-                                    @endphp
-                                @else
-                                    @php
-                                        $h = $time['D'] * 24;
-                                        $m = ($time['H'] + $h) * 60;
-                                        $d = ($time['M'] + $m);
-                                        $Government_day = $d;
-                                    @endphp
-                                @endif
-                            @endif
+                        @foreach($leave as $l)
+                        @php
+                            $nstart_day = explode("T",$l['nstart_day']);
+                            $nend_day = explode("T",$l['nend_day']);
+                            $start_day_year = $nstart_day[0];
+                            $start_day_times = $nstart_day[1];
+                            $end_day_year = $nend_day[0];
+                            $end_day_times = $nend_day[1];
 
-                        <tr class="odd gradeX">
-                        <td>{{$leaves['surname'].' ('.$leaves['nickname'].')' }}</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="sum">0</td>
-                        </tr>
+                            $a1=$start_day_year.' '.$start_day_times;
+                            $a2=$end_day_year.' '.$end_day_times;
+
+                            $stop_date = date('Y-m-d', strtotime($end_day_year . ' +1 day'));
+                            $num_day = dateDiv($start_day_year,$stop_date);
+
+                            $time=dateDiv($a1,$a2);
+                            $ordain_day = 0; $deliver_day = 0; $sick_day = 0; $Work_day = 0; $Government_day = 0;
+                        @endphp
+
+                            @if($l['id_per'] == $leaves['id_per'])
+
+                                @if($l['type_leave'] == 0)
+                                    @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                                        @php 
+                                            $ordain_day = ($num_day['D'] * 24) * 60;           
+                                        @endphp
+                                    @else
+                                        @php
+                                            $h = $time['D'] * 24;
+                                            $m = ($time['H'] + $h) * 60;
+                                            $d = ($time['M'] + $m);
+                                            $ordain_day = $d;
+                                        @endphp
+                                    @endif
+                                @elseif($l['type_leave'] == 1)
+                                    @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                                        @php 
+                                            $deliver_day = ($num_day['D'] * 24) * 60;           
+                                        @endphp
+                                    @else
+                                        @php
+                                            $h = $time['D'] * 24;
+                                            $m = ($time['H'] + $h) * 60;
+                                            $d = ($time['M'] + $m);
+                                            $deliver_day = $d;
+                                        @endphp
+                                    @endif
+                                @elseif($l['type_leave'] == 2)
+                                    @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                                        @php 
+                                            $sick_day = ($num_day['D'] * 24) * 60;           
+                                        @endphp
+                                    @else
+                                        @php
+                                            $h = $time['D'] * 24;
+                                            $m = ($time['H'] + $h) * 60;
+                                            $d = ($time['M'] + $m);
+                                            $sick_day = $d;
+                                        @endphp
+                                    @endif
+                                @elseif($l['type_leave'] == 3)
+                                    @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                                        @php 
+                                            $Work_day = ($num_day['D'] * 24) * 60;           
+                                        @endphp
+                                    @else
+                                        @php
+                                            $h = $time['D'] * 24;
+                                            $m = ($time['H'] + $h) * 60;
+                                            $d = ($time['M'] + $m);
+                                            $Work_day = $d;
+                                        @endphp
+                                    @endif
+                                @elseif($l['type_leave'] == 4)
+                                    @if($start_day_times == '08:30' && $end_day_times == '17:30')
+                                        @php 
+                                            $Government_day = ($num_day['D'] * 24) * 60;           
+                                        @endphp
+                                    @else
+                                        @php
+                                            $h = $time['D'] * 24;
+                                            $m = ($time['H'] + $h) * 60;
+                                            $d = ($time['M'] + $m);
+                                            $Government_day = $d;
+                                        @endphp
+                                    @endif
+                                @endif
+                            
+                            @endif
+                        @php        
+                            $leave_ordain = $leave_ordain + $ordain_day;
+                            $leave_deliver = $leave_deliver + $deliver_day;
+                            $leave_sick = $leave_sick + $sick_day;
+                            $leave_Work = $leave_Work + $Work_day;
+                            $leave_Government = $leave_Government + $Government_day;
+                            $sum = $leave_ordain + $leave_deliver + $leave_sick + $leave_Work + $leave_Government;
+                        @endphp
+                        @endforeach        
+                    <td>{{secondsToTime($leave_ordain*60)}}</td>
+                    <td>{{secondsToTime($leave_deliver*60)}}</td>
+                    <td class="center">{{secondsToTime($leave_sick*60)}}</td>
+                    <td class="center">{{secondsToTime($leave_Work*60)}}</td>
+                    <td class="center">{{secondsToTime($leave_Government*60)}}</td>
+                    <td class="sum">{{secondsToTime($sum*60)}}</td>       
                         
                     @else
                         @if($leaves['type_leave'] == 0)
@@ -265,18 +278,14 @@
                         @endif
                     @endif
 
-                    @php        
-                        $leave_ordain = $leave_ordain + $ordain_day;
-                        $leave_deliver = $leave_deliver + $deliver_day;
-                        $leave_sick = $leave_sick + $sick_day;
-                        $leave_Work = $leave_Work + $Work_day;
-                        $leave_Government = $leave_Government + $Government_day;
-                    @endphp
+                    
+                    
+                </tr>
                 @endforeach
               </tbody>
             </table>
             
-          </div>{{secondsToTime($leave_Work*60)}}
+          </div>
         </div>
         </div>
     </div>

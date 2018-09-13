@@ -19,7 +19,7 @@ class ProductController extends Controller
             ->selectRaw("leaves.id_per, libs.surname, libs.nickname, leaves.type_leave, leaves.nstart_day, leaves.nend_day")
             ->whereRaw('extract(month from nstart_day) = ?', [Carbon::today()->month])
             ->orwhereRaw('extract(month from nend_day) = ?', [Carbon::today()->month])
-            ->orderBy(DB::raw("leaves.id_per"))
+            ->orderBy(DB::raw("leaves.id_per,leaves.type_leave,nstart_day"))
             ->get();
         return new ProductCollection($leave);
     }
