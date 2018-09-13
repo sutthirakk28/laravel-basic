@@ -57,6 +57,7 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 1. multiple authen(admin vs user) * gen token
 2. forgot password
 3. Blog posts* chat = websockets
+4. change Apache to Nginx
 
 
 

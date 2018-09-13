@@ -7,6 +7,7 @@ use DB;
 use App\Leave;
 use App\Lib;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class AddonController extends Controller
 {
@@ -21,8 +22,22 @@ class AddonController extends Controller
      */
     public function index()
     {
-        //
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'http://localhost/laravel-basic/public/api/products');
+        $status = $res->getStatusCode();        
+        $Header = $res->getHeaderLine('content-type');
+        $body = $res->getBody();
+
+        $result = json_decode($body, true);
+        //$json = json_decode(file_get_contents('http://localhost/laravel-basic/public/api/products'), true);
+        
+        $data = array(
+            'leave' => $result,
+        );
+        //dd($data);
+        return view('addon.apiFetchdata',$data);
     }
+
     public function graph()
     {
         $now = new Carbon();
@@ -48,9 +63,6 @@ class AddonController extends Controller
         $wordcloud = Leave::selectRaw("GROUP_CONCAT(reason_leave) as text")
             ->whereRaw("reason_leave != '' ")
             ->get();
-        // $wordcloud = Leave::selectRaw("reason_leave")
-        //     ->whereRaw("reason_leave != '' ")
-        //     ->get();
 
         $piechart2 = Lib::selectRaw("libs.position, pos.name_pos, COUNT(libs.id) as person")
             ->join('pos', 'pos.id_pos', '=', 'libs.position')

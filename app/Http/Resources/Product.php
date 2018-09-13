@@ -14,15 +14,14 @@ class Product extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-        'id' => $this->id,
-        'surname' => $this->surname,
-        'id_employ' => $this->id_employ,
-        'test' => 'This is just a test',
-        // 'created_at' => $this->created_at,
-        // 'updated_at' => $this->updated_at,
-        'created_at' => (string)$this->created_at,
-        'updated_at' => (string)$this->updated_at,
-    ];
-    }
+        return [        
+            'id_per' => $this->id_per,
+            'surname' => $this->surname,        
+            'nickname' => $this->nickname,
+            'type_leave' => $this->type_leave,
+            'nstart_day' => $this->nstart_day,
+            'nend_day' => $this->nend_day,
+        ];    
+        //return parent::toArray($request);
+    }    
 }
