@@ -37,11 +37,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         return redirect('/home');
     }
-    public function form1()
-    {
-        return 'wellcome to from';
-    }
-    public function poll(){
-        return "wellcom to poll";
-    }
+    // public function form1()
+    // {
+    //     return 'wellcome to from';
+    // }
+    // public function poll(){
+    //     return "wellcom to poll";
+    // }
 }

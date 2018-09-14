@@ -100,9 +100,9 @@ class AddonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function admin()
     {
-        //
+        return view('admin.manage_Users');
     }
 
     /**

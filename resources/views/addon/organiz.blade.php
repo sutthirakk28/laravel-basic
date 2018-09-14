@@ -25,10 +25,6 @@
     padding: 0;
 }
 
-body {
-    background-color: #1d1f20;
-    
-}
 
 #wrapper {
     margin-left: auto;

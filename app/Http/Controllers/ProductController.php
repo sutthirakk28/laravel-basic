@@ -10,6 +10,7 @@ use App\Http\Resources\ProductCollection;
 
 class ProductController extends Controller
 {
+    
     public function show ()
     {
         // $lib = DB::table('libs')
