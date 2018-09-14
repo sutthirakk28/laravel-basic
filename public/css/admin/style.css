@@ -1,0 +1,16 @@
+h5.f_th1 {
+	font-family: Taviraj;
+	font-size: 17px;
+}
+.DataTables_sort_wrapper {
+    font-family: Maitree;
+    font-size: 15px;
+}
+.container-fluid,#content-header{
+   font-family: Maitree;
+}
+
+td.f_th2 {
+	font-family: Maitree;
+    text-align: center;
+}

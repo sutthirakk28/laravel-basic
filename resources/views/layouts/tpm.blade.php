@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Taviraj:100,600" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Kanit:100,600" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Maitree:100,600" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Maitree:100,600" rel="stylesheet" type="text/css">
 
     @yield('css')
   
@@ -35,10 +34,10 @@
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
-    <li class="" ><a title="" href="{{ url('admin/manage_Users') }}"><i class="icon icon-user"></i> <span class="text">ข้อมูลส่วนตัว({{ Auth::user()->name }})</span></a></li>
+    <li class="" ><a title="" href="{{ url('/profile') }}"><i class="icon icon-user"></i> <span class="text">ข้อมูลส่วนตัว({{ Auth::user()->name }})</span></a></li>
     <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon-plus-sign"></i> <span class="text">การเพิ่ม</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="{{ url('register') }}">เพิ่มข้อมูลผู้ดูแล</a></li>
+        <li><a class="sAdd" title="" href="{{ url('/manage_Users/create') }}">เพิ่มข้อมูลผู้ดูแล</a></li>
         <li><a class="sInbox" title="" href="{{ url('/leave/create') }}">เพิ่มข้อมูลการลา</a></li>
         <li><a class="sOutbox" title="" href="{{ url('/lib/create') }}">เพิ่มพนักงาน</a></li>
         <li><a class="sTrash" title="" href="{{ url('/dep/create') }}">เพิ่มฝ่าย</a></li>
@@ -69,7 +68,7 @@
     <li><a href="{{ url('/lib') }}"><i class="icon-book"></i> <span>ข้อมูลพนักงาน</span></a></li>
     <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a></li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
-    <li><a href="{{ url('addon/apiFetchdata') }}"><i class="icon-book"></i> <span>สรุปผลการลา(รายเดือน)</span></a></li>
+    <li><a href="{{ url('addon/apiFetchdata') }}"><i class="icon-tags"></i> <span>สรุปผลการลา(รายเดือน)</span></a></li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">4</span></a>
       <ul>
         <li><a href="{{ url('addon/gallery') }}">รูปพนักงาน</a></li>

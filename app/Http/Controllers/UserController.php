@@ -20,6 +20,19 @@ class UserController extends Controller
      */
     public function index()
     {
+        $aCss=array('css/admin/style.css');
+        $user = User::all();
+
+        $result = json_decode($user, true);
+        $data = array(
+            'user' => $result,
+            'style' => $aCss,
+        );
+        return view('admin.index',$data);
+    }
+
+    public function profile()
+    {
         
         $id = Auth::id();
         
@@ -33,18 +46,10 @@ class UserController extends Controller
             'profile' => $result,
         );
        //dd($data);
-        return view('admin.manage_Users',$data);
+        return view('admin.profile',$data);
     }
-    public function user()
-    {
-        $user = User::all();
 
-        $result = json_decode($user, true);
-        $data = array(
-            'user' => $result,
-        );
-        return view('admin.user',$data);
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +58,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**

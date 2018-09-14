@@ -20,8 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 //admin
-Route::resource('admin/manage_Users', 'UserController');
-Route::get('/manage_Users', 'UserController@user');
+Route::resource('manage_Users', 'UserController');
+Route::get('/profile', 'UserController@profile');
+
 
 //home
 Route::get('/home', 'HomeController@index')->name('home');

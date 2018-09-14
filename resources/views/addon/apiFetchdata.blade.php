@@ -28,8 +28,8 @@
 @section('content-header')
 <div id="content-header">
     <div id="breadcrumb"> 
-        <a href="{{ url('/home') }}" title="กลับไปหน้าแรก" class="tip-bottom">
-            <i class="icon-home"></i> Home
+        <a href="{{ url('/leave') }}" title="กลับไปข้อมูลการลางาน" class="tip-bottom">
+            <i class="icon-book"></i> ข้อมูลการลางาน
         </a>
         <a href="#">สรุปผลการลา</a>
     </div>
