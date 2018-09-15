@@ -3,14 +3,30 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
+<style type="text/css">
+[class^="icon-"], [class*=" icon-"] {    
+    background-image: url("../../public/images/img/glyphicons-halflings.png");
+}
+.icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
+    background-image: url("../../public/images/img/glyphicons-halflings-white.png")
+}
+.fc-button-next .fc-button-content {
+    background: url("../../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
+    width: 10px;
+}
+.fc-button-prev .fc-button-content {
+    background: url("../../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
+    width: 10px;
+}
+</style>
 @endsection
 
 @section('content-header')
 <div id="content-header">
   <div id="breadcrumb">
-    <a href="{{ url('/dep/') }}" title="กลับไปจัดการข้อมูลฝ่าย" class="tip-bottom">
-      <i class="icon-book"></i> ข้อมูลฝ่าย</a>
-    <a href="#">แสดงข้อมูลฝ่าย</a>
+    <a href="{{ url('/manage_Users') }}" title="กลับไปหน้าข้อมูลผู้ดูแล" class="tip-bottom">
+      <i class="icon-book"></i> ข้อมูลผู้ดูแล</a>
+    <a href="#">แสดงข้อมูลผู้ดูแล</a>
   </div>
 </div> 
 @endsection
@@ -43,44 +59,34 @@
     }
   @endphp
 
-  @foreach ($dep as $d)
+  @foreach ($user as $users)
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5 class="f_th1">{{ $d['name_dep'] }}</h5>
+            <h5 class="f_th1">{{ $users['name'] }}</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <tbody>
                 <tr class="odd gradeX">
-                  <td>รหัสฝ่าย</td>
-                  <td>{{ $d['id_dep'] }}</td>
+                  <td>ชื่อ</td>
+                  <td>{{ $users['name'] }}</td>
                 </tr>
                   <tr class="odd gradeX">
-                  <td>ชื่อฝ่าย</td>
+                  <td>E-mail</td>
                   <td>
-                    {{ $d['name_dep'] }}
-                    @foreach ($pos as $p)
-                        @if($p['id_dep'] == $d['id_dep'])
-                          <span class="label label-important3"> {{ $p['count_id'] }} ตำแหน่ง </span>                       
-                        @endif
-                      @endforeach
-                      @foreach ($lib as $l)
-                        @if($l['id_dep'] == $d['id_dep'])
-                          <span class="label label-important2"> {{ $l['count_id'] }} คน </span>                         
-                        @endif
-                      @endforeach
+                  {{ $users['email'] }}
                   </td>
                 </tr>
                   <tr class="odd gradeX">
                   <td>สร้างเมื่อ</td>
-                  <td>{{ thai_date(strtotime($d['created_at'])) }}</td>
+                  <td>{{ thai_date(strtotime($users['created_at'])) }}</td>
                 </tr>
                   <tr class="odd gradeX">
                   <td>แก้ไขเมื่อ</td>
-                  <td>{{ thai_date(strtotime($d['updated_at'])) }}</td>
+                  <td>{{ thai_date(strtotime($users['updated_at'])) }}</td>
                 </tr>
               </tbody>
             </table>

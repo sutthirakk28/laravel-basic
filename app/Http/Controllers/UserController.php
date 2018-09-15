@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -58,7 +59,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $aCss=array('css/admin/style.css');
+        $data = array(
+            'style' => $aCss,
+        );
+        return view('admin.create',$data);
     }
 
     /**
@@ -69,7 +74,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $now = new Carbon();
+
+        $this->validate($request,[
+            'username' => 'required|max:100',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        $user =  User::create([
+            'name' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'created_at' => $now,
+        ]);
+
+        //dd($a);
+        if($user){
+            return view('admin.index');
+        }
     }
 
     /**
@@ -80,7 +102,20 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $aCss=array('css/admin/style.css');
+
+        $user = DB::table('users')
+            ->select('id','name','email','created_at', 'updated_at')
+            ->whereRaw("id = $id")
+            ->get();
+
+        $result = json_decode($user, true);
+
+        $data = array(
+            'user' => $result,
+            'style' => $aCss
+        );
+        return view('admin.show',$data);
     }
 
     /**

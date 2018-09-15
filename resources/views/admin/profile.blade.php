@@ -20,9 +20,7 @@
 .container-fluid,#content-header{
    font-family: Maitree;
 }
-.help-block{
-    color:red;
-}
+
 </style>
 @endsection
 
@@ -70,13 +68,13 @@
                     <div class="control-group">
                         <label class="control-label">New Password :</label>
                         <div class="controls">
-                        <input type="password" placeholder="Password" id="password" disabled>
+                        <input type="password" placeholder="Password" id="password" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Confirm Password :</label>
                         <div class="controls">    
-                        <input type="password" placeholder="Confirm Password" id="confirm_password" disabled>
+                        <input type="password" placeholder="Confirm Password" id="confirm_password" required>
                         <span class="help-block">*ต้องใส่รหัสให้ตรงกันทั้ง 2 ช่อง</span> </div>
                     </div>
                     <div class="control-group">

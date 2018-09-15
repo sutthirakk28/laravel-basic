@@ -54,7 +54,7 @@
               <thead>
                 <tr>
                   <th width="100">รหัส</th>
-                  <th >ชื่อฝ่าย</th>
+                  <th >ชื่อผู้ดูแล</th>
                   <th >E-mail</th>
                   <th width="300">Action</th>
                 </tr>
