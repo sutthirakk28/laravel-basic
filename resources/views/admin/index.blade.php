@@ -19,6 +19,9 @@
     background: url("../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
     width: 10px;
 }
+.table th, .table td {
+    text-align: center;
+}
 </style>
 @endsection
 
@@ -81,7 +84,7 @@
                         <h3><i class="material-icons" style="font-size:15px;color:red">error_outline</i> คำเตือน! </h3>
                       </div>
                       <div class="modal-body">
-                        <p>เมื่อลบฝ่ายข้อมูลอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
+                        <p>เมื่อลบข้อมูลผู้ดูแลอาจเกิดข้อมผิดพลาดได้ <strong><var>คุณต้องการลบจริงไหม ?</var></strong></p>
                       </div>
                       <div class="modal-footer">
                         {{ Form::open(['route' => ['manage_Users.destroy',$users['id'], 'method' => 'DELETE'] ]) }}
@@ -123,4 +126,10 @@
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
+<script>
+$(document).on("click", ".addDialog", function () {
+     var myBookId = $(this).data('id');
+     $(".modal-footer #depId").val( myBookId );
+});
+</script>
 @endsection

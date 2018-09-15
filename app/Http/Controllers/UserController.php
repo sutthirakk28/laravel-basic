@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use App\User;
 use Carbon\Carbon;
+use Session;
 
 class UserController extends Controller
 {
@@ -36,7 +37,8 @@ class UserController extends Controller
     {
         
         $id = Auth::id();
-        
+
+        $aCss=array('css/admin/style.css');
         $user = DB::table('users')
             ->select('id','name','email','created_at', 'updated_at')
             ->whereRaw("id = $id")
@@ -45,8 +47,8 @@ class UserController extends Controller
         $result = json_decode($user, true);
         $data = array(
             'profile' => $result,
+            'style' => $aCss,
         );
-       //dd($data);
         return view('admin.profile',$data);
     }
 
@@ -81,17 +83,14 @@ class UserController extends Controller
             'email' => 'required|email|max:100|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-        $user =  User::create([
+         User::create([
             'name' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'created_at' => $now,
-        ]);
-
-        //dd($a);
-        if($user){
-            return view('admin.index');
-        }
+        ]);        
+            return redirect('/manage_Users');
+        
     }
 
     /**
@@ -126,7 +125,19 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if($id !== ''){
+            $aCss=array('css/admin/style.css');       
+            $user = DB::table('users')
+                ->select('id','name','email','created_at', 'updated_at')
+                ->whereRaw("id = $id")
+                ->get();
+            $result = json_decode($user, true);
+            $data = array(
+                'user' => $result,
+                'style' => $aCss
+            );
+            return view('admin.edit',$data);
+        }
     }
 
     /**
@@ -138,7 +149,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'username' => 'required|max:100',
+            'email' => 'required|email|max:100',
+            'password' => 'confirmed',
+        ]);
+        $now = new Carbon();
+
+        if($request->password === NULL){
+            $adminUpdate = User::where('id',$id)
+            ->update([
+                'name' => $request->username,
+                'email' => $request->email,
+                'updated_at' => $now,
+            ]);
+        }else{
+            $adminUpdate = User::where('id',$id)
+            ->update([
+                'name' => $request->username,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'updated_at' => $now,
+            ]);
+        } 
+
+        if($adminUpdate){
+            Session::flash('masupdate','แก้ไขข้อมูลผู้ดูแลเรียบร้อยแล้ว');
+            return redirect('/manage_Users');
+        }
+        return back()->withInput();
     }
 
     /**
@@ -147,8 +186,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $user = User::find($request->depId);
+        $user->delete();
+        if($user){
+            Session::flash('masdelete','ลบข้อมูลผู้ดูแลเรียบร้อยแล้ว');
+            return redirect('/manage_Users');
+        }
     }
 }
