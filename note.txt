@@ -58,6 +58,7 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 2. forgot password
 3. Blog posts* chat = websockets
 4. change Apache to Nginx
+5. log
 
 
 

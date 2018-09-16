@@ -41,40 +41,40 @@
         <div class="span12">
             <div class="widget-box">
                 <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                    <h5>ข้อมูลส่วนตัว</h5>
+                    @if(Auth::user()->type == 1 )
+                    <span class="label label-success"> Director </span>
+                    @else
+                    <span class="label label-info">Administrator</span>
+                    @endif
+                    <h5>ข้อมูลส่วนตัว</h5>                    
                 </div>
                 @foreach($profile as $profiles)
                 <div class="widget-content nopadding f_th3">
-                    <form action="#" method="get" class="form-horizontal">
+					{{ Form::open(['method' => 'put','route' =>['manage_Users.update', $profiles['id'] ],'class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate']) }}
+                    <input type="hidden" name="id_user" id="id_user" value="profile"/>
 
                     <div class="control-group">
                         <label class="control-label">ชื่อ :</label>
                         <div class="controls">
-                        <input type="text" placeholder="First name" value="{{$profiles['name']}}" disabled/>
+                        <input type="text" placeholder="username" name="username" id="username" value="{{$profiles['name']}}" disabled/>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">E-mail :</label>
                         <div class="controls">
-                        <input type="text" placeholder="Company name" value="{{$profiles['email']}}" disabled/>
+                        <input type="text" placeholder="E-mail" name="email" id="email" value="{{$profiles['email']}}" disabled/>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">รูปภาพ :</label>
-                        <div class="controls">
-                        <input type="file" disabled/>
-                        </div>
-                    </div>                     
+                    </div>                    
                     <div class="control-group">
                         <label class="control-label">New Password :</label>
                         <div class="controls">
-                        <input type="password" placeholder="Password" id="password" required>
+                        <input type="password" placeholder="Password" id="password" name="password" disabled>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Confirm Password :</label>
                         <div class="controls">    
-                        <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+                        <input type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation" disabled>
                         <span class="help-block">*ต้องใส่รหัสให้ตรงกันทั้ง 2 ช่อง</span> </div>
                     </div>
                     <div class="control-group">
@@ -90,9 +90,10 @@
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" class="pure-button btn btn-success">แก้ไข</button>
-                    </div>
-                    
+                        <button type="submit" class="btn btn-success" id="submit">Save</button>
+                        <button type="cancel" class="btn btn-danger" id="cancel">Cancel</button>                        
+                        <button type="button" class="pure-button btn btn-info " id="edit">แก้ไข</button>
+                    </div>                    
                     </form>
                 </div>
                 @endforeach     
@@ -104,16 +105,33 @@
 
 @section('js')
 <script>
-    var password = document.getElementById("password"),confirm_password = document.getElementById("confirm_password");
+$(document).ready(function(){
+    $("#submit,#cancel").hide();
+
+    $('#edit').click(function(event){
+        event.preventDefault();
+        $("#edit").hide();
+        $("#submit,#cancel").fadeIn();
+        
+        $("#username, #email, #password, #password_confirmation").prop('disabled', false);
+        console.log(35453);
+    });
+    $('#cancel').click(function(e){
+        e.preventDefault();
+        window.location.reload(true);
+    });
+});
+
+    var password = document.getElementById("password"),password_confirmation = document.getElementById("password_confirmation");
 
     function validatePassword(){
-        if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords Don't Match");
+        if(password.value != password_confirmation.value) {
+            password_confirmation.setCustomValidity("รหัสไม่ตรงกัน");
         } else {
-            confirm_password.setCustomValidity('');
+            password_confirmation.setCustomValidity('');
         }
     }
     password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
+    password_confirmation.onkeyup = validatePassword;
 </script>
 @endsection

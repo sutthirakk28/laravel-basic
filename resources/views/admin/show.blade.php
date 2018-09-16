@@ -81,6 +81,17 @@
                   </td>
                 </tr>
                   <tr class="odd gradeX">
+                  <td>ระดับ</td>
+                  <td>
+                     @if($users['type'] == 1)
+                      <span class="label label-success"> Director </span>
+                      @else
+                      <span class="label label-info">Administrator</span>
+                      @endif
+                  </td>
+                </tr>
+                </tr>
+                  <tr class="odd gradeX">
                   <td>สร้างเมื่อ</td>
                   <td>{{ thai_date(strtotime($users['created_at'])) }}</td>
                 </tr>

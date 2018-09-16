@@ -40,7 +40,7 @@ class UserController extends Controller
 
         $aCss=array('css/admin/style.css');
         $user = DB::table('users')
-            ->select('id','name','email','created_at', 'updated_at')
+            ->select('id','name','email','created_at', 'updated_at','type')
             ->whereRaw("id = $id")
             ->get();
 
@@ -87,6 +87,7 @@ class UserController extends Controller
             'name' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'type' => 2,
             'created_at' => $now,
         ]);        
             return redirect('/manage_Users');
@@ -104,7 +105,7 @@ class UserController extends Controller
         $aCss=array('css/admin/style.css');
 
         $user = DB::table('users')
-            ->select('id','name','email','created_at', 'updated_at')
+            ->select('id','name','email','created_at', 'updated_at','type')
             ->whereRaw("id = $id")
             ->get();
 
@@ -173,10 +174,13 @@ class UserController extends Controller
             ]);
         } 
 
-        if($adminUpdate){
+        if($request->id_user == 'profile'){
+            return redirect('/profile');
+        }else{
             Session::flash('masupdate','แก้ไขข้อมูลผู้ดูแลเรียบร้อยแล้ว');
             return redirect('/manage_Users');
         }
+
         return back()->withInput();
     }
 

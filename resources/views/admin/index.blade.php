@@ -6,21 +6,18 @@
 <link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
-    background-image: url("../public/images/img/glyphicons-halflings.png");
+  background-image: url("../public/images/img/glyphicons-halflings.png");
 }
 .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-    background-image: url("../public/images/img/glyphicons-halflings-white.png")
+  background-image: url("../public/images/img/glyphicons-halflings-white.png")
 }
 .fc-button-next .fc-button-content {
-    background: url("../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
-    width: 10px;
+  background: url("../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
+  width: 10px;
 }
 .fc-button-prev .fc-button-content {
-    background: url("../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
-    width: 10px;
-}
-.table th, .table td {
-    text-align: center;
+  background: url("../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
+  width: 10px;
 }
 </style>
 @endsection
@@ -59,7 +56,11 @@
                   <th width="100">รหัส</th>
                   <th >ชื่อผู้ดูแล</th>
                   <th >E-mail</th>
-                  <th width="300">Action</th>
+                  <th >ระดับ</th>
+                  @if(Auth::user()->type === 1 )
+                    <th width="300">Action</th>
+                  @endif
+                  
                 </tr>
               </thead>
               <tbody>
@@ -72,7 +73,15 @@
                   <td class="f_th2">
                       {{ $users['email'] }}
                   </td>
-                  <td class="center">                                        
+                  <td class="f_th2">
+                      @if($users['type'] == 1)
+                      <span class="label label-success"> Director </span>
+                      @else
+                      <span class="label label-info">Administrator</span>
+                      @endif
+                  </td>
+                  @if(Auth::user()->type === 1 )
+                    <td class="center">                                        
                     {{ Html::link('manage_Users/'.$users['id'], 'View', array('class' => 'btn btn-success')) }}
                     {{ Html::link('manage_Users/'.$users['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
                     <a href="#myAlert" data-toggle="modal" data-id="{{$users['id']}}" class="addDialog btn btn-danger">Delete</a>
@@ -98,6 +107,8 @@
                     </div>
                     <!--end modal delete -->
                   </td>
+                  @endif
+                  
                 </tr>
                 @endforeach
               </tbody>
@@ -109,8 +120,10 @@
   </div>
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span12">
-        {{ Html::link('manage_Users/create','Add', array(  'class' => 'btn btn-primary thead')) }}
+      <div class="span12">        
+        @if(Auth::user()->type === 1 )
+          {{ Html::link('manage_Users/create','Add', array(  'class' => 'btn btn-primary thead')) }}
+        @endif
       </div>
     </div>
   </div>

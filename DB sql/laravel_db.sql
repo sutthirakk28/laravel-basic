@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2018 at 12:48 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Sep 16, 2018 at 08:08 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -259,7 +259,16 @@ INSERT INTO `leaves` (`id`, `id_per`, `type_leave`, `date_leave`, `reason_leave`
 (117, 12, 1, '2018-09-14', NULL, '2018-09-13', '2018-09-13', '1', 3, '2018-09-13 03:55:22', '2018-09-13 03:55:22', '2018-09-10T08:30', '2018-09-15T17:30', 0),
 (118, 26, 0, '2018-09-13', 'ชวช 7 วัน', '2018-09-13', '2018-09-13', '', 3, '2018-09-13 09:54:33', '2018-09-13 09:54:33', '2018-09-17T08:30', '2018-09-22T17:30', 0),
 (119, 13, 2, '2018-09-06', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 09:58:48', '2018-09-13 09:58:48', '2018-08-31T08:30', '2018-09-01T17:30', 0),
-(120, 24, 3, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 10:46:42', '2018-09-13 10:46:42', '2018-09-14T08:30', '2018-09-15T12:00', 0);
+(120, 24, 3, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 10:46:42', '2018-09-13 10:46:42', '2018-09-14T08:30', '2018-09-15T12:00', 0),
+(121, 26, 3, '2018-09-14', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:40:56', '2018-09-13 13:40:56', '2018-09-08T13:00', '2018-09-08T17:30', 0),
+(122, 13, 2, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '1', 3, '2018-09-13 13:42:15', '2018-09-13 13:42:15', '2018-09-14T08:30', '2018-09-14T17:30', 0),
+(123, 13, 3, '2018-09-15', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:43:28', '2018-09-13 13:43:35', '2018-09-20T15:30', '2018-09-20T17:30', 0),
+(124, 13, 4, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:44:33', '2018-09-13 13:44:33', '2018-09-18T08:30', '2018-09-18T17:30', 0),
+(125, 5, 3, '2018-09-20', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:45:40', '2018-09-13 13:45:40', '2018-09-22T08:30', '2018-09-22T17:30', 0),
+(126, 5, 2, '2018-09-06', NULL, '2018-09-13', '2018-09-13', '1', 3, '2018-09-13 13:46:16', '2018-09-13 13:46:16', '2018-09-08T08:30', '2018-09-08T12:00', 0),
+(127, 5, 2, '2018-09-12', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:46:42', '2018-09-13 13:46:42', '2018-09-15T08:30', '2018-09-15T17:30', 0),
+(128, 5, 2, '2018-09-17', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:47:13', '2018-09-13 13:47:13', '2018-09-17T08:30', '2018-09-17T17:30', 0),
+(129, 22, 2, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:47:28', '2018-09-13 13:47:28', '2018-09-13T08:30', '2018-09-13T17:30', 0);
 
 -- --------------------------------------------------------
 
@@ -367,7 +376,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2018_08_19_160602_add_status_leave_to_leaves_table', 21),
 (29, '2018_08_27_145844_create_tasks_table', 22),
 (30, '2018_08_27_151701_create_task_table', 22),
-(31, '2018_09_12_153036_create_products_table', 23);
+(31, '2018_09_12_153036_create_products_table', 23),
+(32, '2018_09_16_180404_add_type_to_users_table', 24);
 
 -- --------------------------------------------------------
 
@@ -437,14 +447,6 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'tuy', 555, '2018-09-11 17:00:00', '2018-09-12 17:00:00'),
-(2, 'job', 1234, '2018-09-12 01:32:22', '2018-09-11 22:12:07');
-
 -- --------------------------------------------------------
 
 --
@@ -486,6 +488,7 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` smallint(6) NOT NULL COMMENT '1=master 2=admin',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -494,9 +497,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak', 'sutthirak.k28@gmail.com', '$2y$10$aq87USmNDMWuP0LZR4unXuYegO4XzYxRB5KvffEZflhy7bw37oitW', 'wBHUJrHlWPkmK7hu0NOdbP47Ww48JecMh5iuWKTbKOyRk0tqq8lgPhV2Bs8U', '2018-07-08 21:55:56', '2018-07-08 21:55:56'),
-(2, 'สุทธิรักษ์', 'sutthirak.k28@hotmail.com', '$2y$10$8lhzR4qqQBi3.bllIizv1OZanC2NDVAndsece/Vn0bRc.dUsJyTUS', 'BOIIQVyNEHce9o4oQCUeOqR6rHOxMlQm0ah8GXfGDotOiZAIpMTz0xjlSZC4', '2018-09-12 14:35:11', '2018-09-12 14:35:11');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 's1njQlbWGCZ0PGOveusK46rCPHonK8QhxUi5uai2iFTyLvJDyR1FOqgubCMG', 1, '2018-09-16 11:37:17', '2018-09-16 18:03:29'),
+(2, 'สุทธิรักษ์ tuy', 'sutthirak.k28@hotmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', 1, '2018-09-16 11:38:32', '2018-09-16 18:02:32'),
+(3, 'tpm1980_1', 'tpm1980_1@tpm1980.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, 2, '2018-09-16 11:40:04', '2018-09-16 11:46:21'),
+(4, 'tpm1980_2', 'tpm1980_2@tpm1980.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', NULL, 2, '2018-09-16 11:45:18', '2018-09-16 11:45:52'),
+(5, 'tpm1980_3', 'tpm1980_3@tpm1980.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', 2, '2018-09-16 11:46:55', '2018-09-16 18:03:17'),
+(6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$mWv6ySDLYX6YLhThCxyGzupgEdL2vLVZoZ2e8iWvlWqm/b0EzdLQ2', NULL, 2, '2018-09-16 12:07:30', '2018-09-16 12:07:30');
 
 --
 -- Indexes for dumped tables
@@ -607,7 +614,7 @@ ALTER TABLE `deps`
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `libs`
@@ -619,7 +626,7 @@ ALTER TABLE `libs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `pos`
@@ -643,7 +650,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
