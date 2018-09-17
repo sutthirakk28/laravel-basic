@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 12:33 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Sep 17, 2018 at 08:44 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -268,7 +268,8 @@ INSERT INTO `leaves` (`id`, `id_per`, `type_leave`, `date_leave`, `reason_leave`
 (126, 5, 2, '2018-09-06', NULL, '2018-09-13', '2018-09-13', '1', 3, '2018-09-13 13:46:16', '2018-09-13 13:46:16', '2018-09-08T08:30', '2018-09-08T12:00', 0),
 (127, 5, 2, '2018-09-12', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:46:42', '2018-09-13 13:46:42', '2018-09-15T08:30', '2018-09-15T17:30', 0),
 (128, 5, 2, '2018-09-17', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:47:13', '2018-09-13 13:47:13', '2018-09-17T08:30', '2018-09-17T17:30', 0),
-(129, 22, 2, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:47:28', '2018-09-13 13:47:28', '2018-09-13T08:30', '2018-09-13T17:30', 0);
+(129, 22, 2, '2018-09-13', NULL, '2018-09-13', '2018-09-13', '', 3, '2018-09-13 13:47:28', '2018-09-13 13:47:28', '2018-09-13T08:30', '2018-09-13T17:30', 0),
+(130, 8, 2, '2018-09-17', 'ป่วย', '2018-09-17', '2018-09-17', '', 3, '2018-09-17 14:56:55', '2018-09-17 14:56:55', '2018-09-17T08:30', '2018-09-17T17:30', 0);
 
 -- --------------------------------------------------------
 
@@ -504,15 +505,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `phone`, `active`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 'Zfwj3PBmhLAXVEuCgxlAZNOMsESWwm8ENFlkj8N8pmgPX8XDBfeI8Yteyrdg', '0896901953', NULL, 1, '2018-09-16 11:37:17', '2018-09-17 10:23:58'),
-(2, 'สุทธิรักษ์', 'sutthirak.k28@hotmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', '0896901952', NULL, 1, '2018-09-16 11:38:32', '2018-09-17 09:50:11'),
-(3, 'tpm1980_1', 'tpm1980_1@tpm1980.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, '0896326599', NULL, 2, '2018-09-16 11:40:04', '2018-09-17 09:49:38'),
-(4, 'tpm1980_2', 'tpm1980_2@tpm1980.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', 'wyPvnaBVymZkSK25RKczjvGjZVwSIR49evbG5YWDULnxLlYDZFMu81bTw40q', '0851510182', NULL, 2, '2018-09-16 11:45:18', '2018-09-17 10:13:05'),
+(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 'Zfwj3PBmhLAXVEuCgxlAZNOMsESWwm8ENFlkj8N8pmgPX8XDBfeI8Yteyrdg', '66927360907', NULL, 1, '2018-09-16 11:37:17', '2018-09-17 17:30:50'),
+(2, 'สุทธิรักษ์', 'sutthirak.k28@hotmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', '66896901952', NULL, 1, '2018-09-16 11:38:32', '2018-09-17 17:33:11'),
+(3, 'tpm1980_1', 'tpm1980_1@tpm1980.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, '66927360907', NULL, 2, '2018-09-16 11:40:04', '2018-09-17 17:32:10'),
+(4, 'tpm1980_2', 'tpm1980_2@tpm1980.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', 'wyPvnaBVymZkSK25RKczjvGjZVwSIR49evbG5YWDULnxLlYDZFMu81bTw40q', '66896901952', NULL, 2, '2018-09-16 11:45:18', '2018-09-17 17:33:24'),
 (5, 'tpm1980_3', 'tpm1980_3@tpm1980.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', NULL, NULL, 2, '2018-09-16 11:46:55', '2018-09-16 18:03:17'),
 (6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$73SjzQPN52xkVFexsRfEXuki3YnWl21ILVgmGeukFaDhj9J0SU/6e', NULL, '021571250', NULL, 2, '2018-09-16 12:07:30', '2018-09-17 10:24:21'),
-(8, 'sutthirak_nara', 'sutthirak.k28@gmail.comd', '$2y$10$n4/fFC1km2JOT6qGf44QAuvx1D45.N1C1rDIeTwPSIJ69l3dzlRse', NULL, '0896901952', NULL, 2, '2018-09-17 07:55:57', '2018-09-17 09:50:56'),
+(8, 'sutthirak_nara', 'sutthirak.k28@gmail.comd', '$2y$10$n4/fFC1km2JOT6qGf44QAuvx1D45.N1C1rDIeTwPSIJ69l3dzlRse', NULL, '66927360907', NULL, 2, '2018-09-17 07:55:57', '2018-09-17 17:32:26'),
 (9, 'sutthirak', 'sutthirak.k28@ttmail.com', '$2y$10$g/UDPHNheIV.5ledbBj5vetYANjQAhH1fDckkXfZfkdUlqBlTt3zq', NULL, NULL, NULL, 2, '2018-09-17 09:52:00', '2018-09-17 10:12:18'),
-(15, 'ตุ่ย', 'sutthirak.k28@tpm1980.com', '$2y$10$BwxQxCQcsksqxPyU0Goc0ezWuaSc68h8KaqjZXJ6zEg43QHhGyNoC', NULL, '0851510182', NULL, 2, '2018-09-17 10:11:21', '2018-09-17 10:11:57');
+(15, 'ตุ่ย', 'sutthirak.k28@tpm1980.com', '$2y$10$BwxQxCQcsksqxPyU0Goc0ezWuaSc68h8KaqjZXJ6zEg43QHhGyNoC', NULL, '66927360907', NULL, 2, '2018-09-17 10:11:21', '2018-09-17 17:32:46');
 
 --
 -- Indexes for dumped tables
@@ -623,7 +624,7 @@ ALTER TABLE `deps`
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `libs`
