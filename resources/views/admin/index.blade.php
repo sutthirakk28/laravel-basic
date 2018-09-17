@@ -85,7 +85,10 @@
                   <td class="f_th2">
                       @if($users['phone'] != '')                        
                         {{ $users['phone'] }}
-                        <button type="button" class="btn btn-primary btn-mini" id="submit">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
+                        <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_sms">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
+                        <input type="hidden" name="username{{ $users['id'] }}" id="username{{ $users['id'] }}" value="{{ $users['name'] }}">
+                        <input type="hidden" name="email{{ $users['id'] }}" id="email{{ $users['id'] }}" value="{{ $users['email'] }}">
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                       @else
 
                       @endif                      
@@ -150,9 +153,32 @@
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
 <script>
+$(document).ready(function(){
+
+  $('#send_sms').live('click', function(event){
+    event.preventDefault();
+    var id = $(this).val();
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    
+    $.ajax({
+      type :'POST',
+      url : "{{ url('/nexmo') }}",
+      data : {_token: CSRF_TOKEN,id:id},
+      dataType : 'json',
+      success : function(student)
+      {
+        var data = student.nexmo;
+        console.log(data);
+      } 
+    }); 
+  });
+  
+});
+
 $(document).on("click", ".addDialog", function () {
      var myBookId = $(this).data('id');
-     $(".modal-footer #depId").val( myBookId );
+     $(".modal-footer #depId").val( myBookId );       
 });
+
 </script>
 @endsection

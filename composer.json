@@ -12,7 +12,8 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.0",
-        "nesbot/carbon": "^1.32"
+        "nesbot/carbon": "^1.32",
+        "nexmo/laravel": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

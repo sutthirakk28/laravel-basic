@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -9,6 +10,9 @@ use App\User;
 use Carbon\Carbon;
 use Session;
 use GuzzleHttp\Client;
+use App\Sendcode;
+use Nexmo\Laravel\Facade\Nexmo;
+use Response;
 
 class UserController extends Controller
 {
@@ -99,7 +103,7 @@ class UserController extends Controller
                 'username' => 'required|max:100',
                 'email' => 'required|email|max:100|unique:users',
                 'password' => 'required|string|min:6|confirmed',
-                'phone' => 'max:10',
+                'phone' => 'max:15',
             ]);
             
             User::create([
@@ -159,11 +163,32 @@ class UserController extends Controller
             $data = array(
                 'user' => $result,
                 'style' => $aCss
-            );
+            ); 
             return view('admin.edit',$data);
         }
     }
 
+    public function nexmo(Request $request)
+    {
+        $user = User::find($request->id);
+
+        if($request->ajax())
+        {   
+            $basic  = new \Nexmo\Client\Credentials\Basic('ae2c69eb', '4SXJVnnhqka0kK5g');
+            $client = new \Nexmo\Client($basic);
+            $message = $client->message()->send([
+                'to' => $user->phone,
+                'from' => 'TPM(1980)_HR',
+                'text' => $user->name.' Login BY '.$user->email,
+            ]);
+             
+            $result = $user->phone;
+            $response = array(
+            'nexmo' => $result
+            );
+            return response()->json($response);
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -177,7 +202,7 @@ class UserController extends Controller
             'username' => 'required|max:100',
             'email' => 'required|email|max:100',
             'password' => 'confirmed',
-            'phone' => 'max:10',
+            'phone' => 'max:15',
         ]);
         $now = new Carbon();
 

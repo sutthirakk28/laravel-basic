@@ -22,7 +22,7 @@ Auth::routes();
 //admin
 Route::resource('manage_Users', 'UserController');
 Route::get('/profile', 'UserController@profile');
-
+Route::post('/nexmo', 'UserController@nexmo');
 
 //home
 Route::get('/home', 'HomeController@index')->name('home');

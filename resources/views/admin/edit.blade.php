@@ -94,4 +94,5 @@
 <script src="{{ asset('js/main/select2.min.js') }}"></script>
 <script src="{{ asset('js/main/jquery.validate.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
+
 @endsection
