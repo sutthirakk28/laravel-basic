@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{ asset('css/main/maruti-login.css') }}" />
         <style type="text/css">
             [class^="icon-"], [class*=" icon-"] {
-                background-image: url("../../public/images/img/glyphicons-halflings.png")
+                background-image: url("../images/img/glyphicons-halflings.png")
             }
         </style>
     </head>

@@ -6,14 +6,14 @@
     background-image: url("../../public/images/img/glyphicons-halflings.png");
 }
 .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-  background-image: url("../../public/images/img/glyphicons-halflings-white.png")
+  background-image: url("../images/img/glyphicons-halflings-white.png")
 }
 .fc-button-next .fc-button-content {
-  background: url("../../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
+  background: url("../images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
   width: 10px;
 }
 .fc-button-prev .fc-button-content {
-  background: url("../../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
+  background: url("../images/img/larrow.png") no-repeat scroll 15px 13px transparent;
   width: 10px;
 }
 
@@ -375,12 +375,12 @@ h4 {
                 <div>
                 
                     <h1> ประธานบริหาร </h1>
-                    {{ Html::image('../public/images/org_man1.png', 'alt', array( 'width' => 40, 'height' => 40 )) }}
+                    {{ Html::image('../images/org_man1.png', 'alt', array( 'width' => 40, 'height' => 40 )) }}
                     WEI BIN
                 </div>
                 <div>
                     <h1>กรรมการบริหาร </h1>
-                    {{ Html::image('../public/images/org_man1.png', 'alt', array( 'width' => 40, 'height' => 40 )) }}
+                    {{ Html::image('../images/org_man1.png', 'alt', array( 'width' => 40, 'height' => 40 )) }}
                     WEI BO   
                 </div>
                 <ol>
@@ -397,28 +397,28 @@ h4 {
                                 <li>
                                     <div>
                                         <h4>เจ้าหน้าที่ฝ่ายบุคคล</h4> 
-                                        {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                        {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                         เกศสุดา  อาสสุวรรณ์   
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <h4>ล่ามภาษาจีน  </h4>
-                                        {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                        {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                         ณิชยา ดีศิริ     
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <h4>เจ้าหน้าที่รักษาความปลอดภัย  </h4>
-                                        {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                        {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                         สายันห์  แซ่หยาง      
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <h4>เจ้าหน้าที่ทำความสะอาด  </h4>
-                                        {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                        {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                         จำเรียง  เจกะเกตุ    
                                     </div>
                                 </li>
@@ -434,28 +434,28 @@ h4 {
                             <li>
                                 <div>
                                     <h3>หัวหน้าฝ่ายการเงิน</h3>
-                                    {{ Html::image('../public/images/org_wow1.png', 'alt', array( 'width' => 33, 'height' => 33 )) }}
+                                    {{ Html::image('../images/org_wow1.png', 'alt', array( 'width' => 33, 'height' => 33 )) }}
                                     สุพัตรา ผิวอ่อน 
                                 </div>
                                 <ol>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการเงิน </h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ธนัช  จินตนาวิลาศ  
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการเงิน</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ภรมล  งามฉวี
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการเงิน</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             แพรวพรรณ บุญนุกุล
                                         </div>
                                     </li>
@@ -471,42 +471,42 @@ h4 {
                             <li>
                                 <div>
                                     <h3>หัวหน้าฝ่ายหลังการขาย </h3>
-                                    {{ Html::image('../public/images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                    {{ Html::image('../images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                     พิชิต วงศ์ศรีเทพ
                                 </div>
                                 <ol>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายหลังการขาย</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             พิมพ์พิไล งามแสง
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายหลังการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('./images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สมชัย ทองหล่อ 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายหลังการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สมชัย บุตรใส 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายหลังการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ณดล แดงบรรจง 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายหลังการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ชาย กาลพฤกษ์ 
                                         </div>
                                     </li>
@@ -522,49 +522,49 @@ h4 {
                             <li>
                                 <div>
                                     <h3>หัวหน้าฝ่ายติดตั้ง</h3>
-                                    {{ Html::image('../public/images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                    {{ Html::image('../images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                     วิทวัส  บุญยงค์ 
                                 </div>
                                 <ol>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             วันชัย คุชิตา
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             มงคล ใจสุข
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สุชิน บุญคำ
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ไพรวัลย์ ชัยพร
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สรศักดิ์ แซ่ตั้ง
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายติดตั้ง</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สิงห์นาท บัวกลาง
                                         </div>
                                     </li>
@@ -580,49 +580,49 @@ h4 {
                             <li>
                                 <div>
                                     <h3>หัวหน้าฝ่ายคลังสินค้า</h3>
-                                    {{ Html::image('../public/images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                    {{ Html::image('../images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                     อับดุลเลาะ  วาโร๊ะ
                                 </div>
                                 <ol>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             แพรวรุ่ง  เลื้อยไธสง 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             วีระพล  นาระถี
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             ประวิทย์  บุญวงค์ 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             บรรลังฤทธิ์ วงค์เหมาะ
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             กิตติศักดิ์ กันทะวงศ์
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่คลังสินค้า</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             เต๋อหัว แซ่สิ่ว
                                         </div>
                                     </li>
@@ -638,49 +638,49 @@ h4 {
                             <li>
                                 <div>
                                     <h3>หัวหน้าฝ่ายการขาย</h3>
-                                    {{ Html::image('../public/images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                    {{ Html::image('../images/org_man3.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                     WEI BO
                                 </div>
                                 <ol>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการขาย</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             อ้อมขวัญ  เพตรา 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการขาย</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             วรรณภา  สุทธารัตน์ 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการขาย</h4>
-                                            {{ Html::image('../public/images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_wow2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สุทธิสา แก่นใจ 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             พรเจริญ ชัยหาญ 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่ายการขาย</h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สุรเชษฐ์  ทองไชย 
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <h4>เจ้าหน้าที่ฝ่าย IT </h4>
-                                            {{ Html::image('../public/images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
+                                            {{ Html::image('../images/org_man2.png', 'alt', array( 'width' => 30, 'height' => 30 )) }}
                                             สุทธิรักษ์  นาระถี  
                                         </div>
                                     </li>

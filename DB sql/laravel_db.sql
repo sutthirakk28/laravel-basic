@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 08:08 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Generation Time: Sep 17, 2018 at 12:33 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -108,7 +108,7 @@ CREATE TABLE `deps` (
 INSERT INTO `deps` (`id_dep`, `created_at`, `updated_at`, `name_dep`) VALUES
 (1, '2018-09-08 03:38:41', '2018-09-08 03:38:41', 'ฝ่ายบุคคล'),
 (2, '2018-09-08 03:38:55', '2018-09-08 03:38:55', 'ฝ่ายการเงิน'),
-(3, '2018-09-08 03:39:33', '2018-09-08 03:39:33', 'ฝ่ายการขาย'),
+(3, '2018-09-08 03:39:33', '2018-09-17 03:47:52', 'ฝ่ายการขาย'),
 (4, '2018-09-08 03:39:49', '2018-09-08 03:39:49', 'ฝ่ายบริการหลังการขาย'),
 (5, '2018-09-08 03:42:54', '2018-09-08 06:53:31', 'ฝ่ายติดตั้ง'),
 (6, '2018-09-08 03:43:45', '2018-09-08 03:43:45', 'ฝ่ายคลังสินค้า');
@@ -377,7 +377,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2018_08_27_145844_create_tasks_table', 22),
 (30, '2018_08_27_151701_create_task_table', 22),
 (31, '2018_09_12_153036_create_products_table', 23),
-(32, '2018_09_16_180404_add_type_to_users_table', 24);
+(32, '2018_09_16_180404_add_type_to_users_table', 24),
+(33, '2018_09_17_163052_add_phone_to_users_table', 25),
+(34, '2018_09_17_163144_add_active_to_users_table', 25),
+(35, '2018_09_17_164736_change_phone_type_in_users_table', 26);
 
 -- --------------------------------------------------------
 
@@ -396,7 +399,7 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('sutthirak.k28@gmail.com', '$2y$10$mFl7fPIJVWnj8Nbpkwl8veixmLT0NhAMhtYSD9YSZx6Fbi5doVPeK', '2018-07-09 01:34:05');
+('sutthirak.k28@gmail.com', '$2y$10$6u3mXKjSchD98lHJsX//c.3qtDEPHP6cgmmDLh7g0xO6INebyPX5u', '2018-09-17 06:46:41');
 
 -- --------------------------------------------------------
 
@@ -474,7 +477,8 @@ INSERT INTO `tasks` (`id`, `name`, `description`, `task_date`, `created_at`, `up
 (6, 'ประชุมประจำสัปดาห์', NULL, '2018-09-29', '2018-09-11 02:59:37', '2018-09-11 02:59:37'),
 (7, 'หยุดวันแม่', NULL, '2018-08-12', '2018-09-11 03:00:56', '2018-09-11 03:00:56'),
 (8, 'หยุดวันแม่', NULL, '2018-08-11', '2018-09-11 03:01:12', '2018-09-11 03:01:12'),
-(9, 'พนักงานใหม่เริ่มงาน 2 คน', NULL, '2018-09-03', '2018-09-11 03:02:02', '2018-09-11 03:02:02');
+(9, 'พนักงานใหม่เริ่มงาน 2 คน', NULL, '2018-09-03', '2018-09-11 03:02:02', '2018-09-11 03:02:02'),
+(10, 'ฟังบรรยาย Tb-40D', NULL, '2018-09-12', '2018-09-17 03:54:09', '2018-09-17 03:54:24');
 
 -- --------------------------------------------------------
 
@@ -488,6 +492,8 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` int(11) DEFAULT NULL,
   `type` smallint(6) NOT NULL COMMENT '1=master 2=admin',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -497,13 +503,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 's1njQlbWGCZ0PGOveusK46rCPHonK8QhxUi5uai2iFTyLvJDyR1FOqgubCMG', 1, '2018-09-16 11:37:17', '2018-09-16 18:03:29'),
-(2, 'สุทธิรักษ์ tuy', 'sutthirak.k28@hotmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', 1, '2018-09-16 11:38:32', '2018-09-16 18:02:32'),
-(3, 'tpm1980_1', 'tpm1980_1@tpm1980.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, 2, '2018-09-16 11:40:04', '2018-09-16 11:46:21'),
-(4, 'tpm1980_2', 'tpm1980_2@tpm1980.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', NULL, 2, '2018-09-16 11:45:18', '2018-09-16 11:45:52'),
-(5, 'tpm1980_3', 'tpm1980_3@tpm1980.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', 2, '2018-09-16 11:46:55', '2018-09-16 18:03:17'),
-(6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$mWv6ySDLYX6YLhThCxyGzupgEdL2vLVZoZ2e8iWvlWqm/b0EzdLQ2', NULL, 2, '2018-09-16 12:07:30', '2018-09-16 12:07:30');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `phone`, `active`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 'Zfwj3PBmhLAXVEuCgxlAZNOMsESWwm8ENFlkj8N8pmgPX8XDBfeI8Yteyrdg', '0896901953', NULL, 1, '2018-09-16 11:37:17', '2018-09-17 10:23:58'),
+(2, 'สุทธิรักษ์', 'sutthirak.k28@hotmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', '0896901952', NULL, 1, '2018-09-16 11:38:32', '2018-09-17 09:50:11'),
+(3, 'tpm1980_1', 'tpm1980_1@tpm1980.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, '0896326599', NULL, 2, '2018-09-16 11:40:04', '2018-09-17 09:49:38'),
+(4, 'tpm1980_2', 'tpm1980_2@tpm1980.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', 'wyPvnaBVymZkSK25RKczjvGjZVwSIR49evbG5YWDULnxLlYDZFMu81bTw40q', '0851510182', NULL, 2, '2018-09-16 11:45:18', '2018-09-17 10:13:05'),
+(5, 'tpm1980_3', 'tpm1980_3@tpm1980.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', NULL, NULL, 2, '2018-09-16 11:46:55', '2018-09-16 18:03:17'),
+(6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$73SjzQPN52xkVFexsRfEXuki3YnWl21ILVgmGeukFaDhj9J0SU/6e', NULL, '021571250', NULL, 2, '2018-09-16 12:07:30', '2018-09-17 10:24:21'),
+(8, 'sutthirak_nara', 'sutthirak.k28@gmail.comd', '$2y$10$n4/fFC1km2JOT6qGf44QAuvx1D45.N1C1rDIeTwPSIJ69l3dzlRse', NULL, '0896901952', NULL, 2, '2018-09-17 07:55:57', '2018-09-17 09:50:56'),
+(9, 'sutthirak', 'sutthirak.k28@ttmail.com', '$2y$10$g/UDPHNheIV.5ledbBj5vetYANjQAhH1fDckkXfZfkdUlqBlTt3zq', NULL, NULL, NULL, 2, '2018-09-17 09:52:00', '2018-09-17 10:12:18'),
+(15, 'ตุ่ย', 'sutthirak.k28@tpm1980.com', '$2y$10$BwxQxCQcsksqxPyU0Goc0ezWuaSc68h8KaqjZXJ6zEg43QHhGyNoC', NULL, '0851510182', NULL, 2, '2018-09-17 10:11:21', '2018-09-17 10:11:57');
 
 --
 -- Indexes for dumped tables
@@ -626,7 +635,7 @@ ALTER TABLE `libs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `pos`
@@ -644,13 +653,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

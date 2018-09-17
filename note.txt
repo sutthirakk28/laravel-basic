@@ -53,12 +53,16 @@ FROM
 INNER JOIN libs ON libs.id = `leaves`.id_per
 GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 
-0. api basic
-1. multiple authen(admin vs user) * gen token
-2. forgot password
+---0. api basic
+--1. multiple authen(admin vs user) * gen token
+*2. forgot password
 3. Blog posts* chat = websockets
 4. change Apache to Nginx
 5. log
+6. send data to...sms,email,line
+--7. google reCAPTCHA
+8. facebook login
+
 
 
 

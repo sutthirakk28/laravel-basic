@@ -8,6 +8,7 @@ use DB;
 use App\User;
 use Carbon\Carbon;
 use Session;
+use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
@@ -40,7 +41,7 @@ class UserController extends Controller
 
         $aCss=array('css/admin/style.css');
         $user = DB::table('users')
-            ->select('id','name','email','created_at', 'updated_at','type')
+            ->select('id','name','email','created_at', 'updated_at','type','phone')
             ->whereRaw("id = $id")
             ->get();
 
@@ -76,22 +77,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $now = new Carbon();
+        $token2 = $request->input('g-recaptcha-response');
+        if(strlen($token2) >= 0){
+            $now = new Carbon();
+            /* $client = new Client();
+            $reponse = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+                'form_params' => array(
+                    'secret' => '6Levm3AUAAAAAOm1FFyN3OCKOl8Ksw46XJfn9S3t',
+                    'response' => $token2
+                )
+            ]);
+            $results = json_decode($reponse->getBody()->getContents());
+            if($results->success){
+                dd($results);
+                Session::flash('success','You we know you are human');
+            }else{
+                Session::flash('erroe','You are probably a robot!');
+            }*/
 
-        $this->validate($request,[
-            'username' => 'required|max:100',
-            'email' => 'required|email|max:100|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-         User::create([
-            'name' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'type' => 2,
-            'created_at' => $now,
-        ]);        
+            $this->validate($request,[
+                'username' => 'required|max:100',
+                'email' => 'required|email|max:100|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'phone' => 'max:10',
+            ]);
+            
+            User::create([
+                'name' => $request->username,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'type' => 2,
+                'phone' => $request->phone,
+                'created_at' => $now,
+                
+            ]);  
             return redirect('/manage_Users');
-        
+        }else{
+            return view('admin.create');
+        }        
     }
 
     /**
@@ -105,7 +128,7 @@ class UserController extends Controller
         $aCss=array('css/admin/style.css');
 
         $user = DB::table('users')
-            ->select('id','name','email','created_at', 'updated_at','type')
+            ->select('id','name','email','created_at', 'updated_at','type','phone')
             ->whereRaw("id = $id")
             ->get();
 
@@ -129,7 +152,7 @@ class UserController extends Controller
         if($id !== ''){
             $aCss=array('css/admin/style.css');       
             $user = DB::table('users')
-                ->select('id','name','email','created_at', 'updated_at')
+                ->select('id','name','email','created_at', 'updated_at','phone')
                 ->whereRaw("id = $id")
                 ->get();
             $result = json_decode($user, true);
@@ -154,6 +177,7 @@ class UserController extends Controller
             'username' => 'required|max:100',
             'email' => 'required|email|max:100',
             'password' => 'confirmed',
+            'phone' => 'max:10',
         ]);
         $now = new Carbon();
 
@@ -163,6 +187,7 @@ class UserController extends Controller
                 'name' => $request->username,
                 'email' => $request->email,
                 'updated_at' => $now,
+                'phone' => $request->phone,
             ]);
         }else{
             $adminUpdate = User::where('id',$id)
@@ -171,6 +196,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'updated_at' => $now,
+                'phone' => $request->phone,
             ]);
         } 
 

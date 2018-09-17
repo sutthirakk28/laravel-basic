@@ -3,10 +3,10 @@
 @section('css')
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
-    background-image: url("../../public/images/img/glyphicons-halflings.png");
+    background-image: url("../images/img/glyphicons-halflings.png");
 }
 .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-    background-image: url("../../public/images/img/glyphicons-halflings-white.png")
+    background-image: url("../images/img/glyphicons-halflings-white.png")
 }
 #login-cloak {
   position: absolute;
@@ -311,7 +311,7 @@ button.toggle:hover {
                     @if($count <= 5)
                     <li class="span2">
                         <a class="thumbnail lightbox_trigger" href="{{URL::asset('../public/images/'.$l['user_photo'])}}">
-                            {{ Html::image('../public/images/'.$l['user_photo'], '') }}
+                            {{ Html::image('../images/'.$l['user_photo'], '') }}
                             {{ $l['surname'] }}
                         </a>
                         <div class="actions">
@@ -323,7 +323,7 @@ button.toggle:hover {
                     @else
                     <li class="span1">
                         <a class="thumbnail lightbox_trigger" href="{{URL::asset('../public/images/'.$l['user_photo'])}}">
-                             {{ Html::image('../public/images/'.$l['user_photo'], '') }}
+                             {{ Html::image('../images/'.$l['user_photo'], '') }}
                             <span class="show_name">{{ $name[0] }}</span>
                         </a>
                         <div class="actions">

@@ -3,26 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
-<style type="text/css">
-[class^="icon-"], [class*=" icon-"] {    
-    background-image: url("../../public/images/img/glyphicons-halflings.png");
-}
-.icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-    background-image: url("../../public/images/img/glyphicons-halflings-white.png")
-}
-.fc-button-next .fc-button-content {
-    background: url("../../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
-    width: 10px;
-}
-.fc-button-prev .fc-button-content {
-    background: url("../../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
-    width: 10px;
-}
-.container-fluid,#content-header{
-   font-family: Maitree;
-}
-
-</style>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @endsection
 
 @section('content-header')
@@ -90,7 +71,19 @@
 							<input id="password-confirm" type="text" class="form-control" name="password_confirmation" placeholder="รหัสผ่าน" minlength="6" required>  	                        
                             <span class="help-block">*ต้องใส่รหัสอย่างน้อย 6 ตัว</span>    
                             </div>
-		                </div>
+						</div>
+						<div class="control-group">
+		                    <label class="control-label"> เบอร์โทรศัพท์ : </label>
+		                    <div class="controls">	                        
+							{{ form::text('phone','',array('placeholder' => 'เบอร์โทรศัพท์')) }}  	                        
+		                    </div>
+						</div>
+						<div class="control-group">
+		                    <div class="controls">
+							<div class="g-recaptcha" data-sitekey="6Levm3AUAAAAANy9lY37DKWcLtTuV3cO32oWs_YX"></div>    
+                            </div>
+						</div>
+						
 		                <div class="form-actions">
 		                    {{ form::submit('Save',['class' => 'btn btn-primary'] ) }}
 		                </div>
@@ -107,4 +100,14 @@
 <script src="{{ asset('js/main/select2.min.js') }}"></script>
 <script src="{{ asset('js/main/jquery.validate.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
+<script>
+$(function(){
+	$('#basic_validate').submit(function(event){
+		var verified = grecaptcha.getResponse();
+		if(verified.lenght === 0){
+			even.preventDefault();
+		}
+	});
+});
+</script>
 @endsection

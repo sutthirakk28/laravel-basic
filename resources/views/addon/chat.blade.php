@@ -3,17 +3,17 @@
 @section('css')
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
-    background-image: url("../../public/images/img/glyphicons-halflings.png");
+    background-image: url("../images/img/glyphicons-halflings.png");
 }
 .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-    background-image: url("../../public/images/img/glyphicons-halflings-white.png")
+    background-image: url("../images/img/glyphicons-halflings-white.png")
 }
 .fc-button-next .fc-button-content {
-    background: url("../../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
+    background: url("../images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
     width: 10px;
 }
 .fc-button-prev .fc-button-content {
-    background: url("../../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
+    background: url("../images/img/larrow.png") no-repeat scroll 15px 13px transparent;
     width: 10px;
 }
 </style>
@@ -49,11 +49,11 @@
                         </div>
                         <div class="panel-content nopadding">
                             <ul class="contact-list">
-                                <li id="user-Sunil" class="online"><a href=""><img alt="" src="../../public/images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
-                                <li id="user-Laukik"><a href=""><img alt="" src="../../public/images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
-                                <li id="user-vijay" class="online new"><a href=""><img alt="" src="../../public/images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
-                                <li id="user-Jignesh" class="online"><a href=""><img alt="" src="../../public/images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
-                                <li id="user-Malay" class="online"><a href=""><img alt="" src="../../public/images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
+                                <li id="user-Sunil" class="online"><a href=""><img alt="" src="../images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
+                                <li id="user-Laukik"><a href=""><img alt="" src="../images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
+                                <li id="user-vijay" class="online new"><a href=""><img alt="" src="../images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
+                                <li id="user-Jignesh" class="online"><a href=""><img alt="" src="../images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
+                                <li id="user-Malay" class="online"><a href=""><img alt="" src="../images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
                             </ul>
                         </div>
                     </div>

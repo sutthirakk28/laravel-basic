@@ -4,27 +4,23 @@
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
-[class^="icon-"], [class*=" icon-"] {    
-  background-image: url("../public/images/img/glyphicons-halflings.png");
-}
-.icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
-  background-image: url("../public/images/img/glyphicons-halflings-white.png")
-}
-.fc-button-next .fc-button-content {
-  background: url("../public/images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
-  width: 10px;
-}
-.fc-button-prev .fc-button-content {
-  background: url("../public/images/img/larrow.png") no-repeat scroll 15px 13px transparent;
-  width: 10px;
+  tr.focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
+  button#submit {
+    /* font-size: 10px;
+    padding: 1px; */
+    border-radius: 4px;
 }
 </style>
 @endsection
 
 @section('content-header')
 <div id="content-header">
-  <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon icon-user"></i> ข้อมูลผู้ดูแล</a></div>
+  <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon icon-user" ></i> ข้อมูลผู้ดูแล</a></div>
 </div>  
 @endsection
 
@@ -46,7 +42,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title">
-             <span class="icon"><i class="icon-th"></i></span> 
+             <span class="icon"><i class="fa fa-address-book-o" style="font-size:18px"></i></span> 
             <h5 class="f_th1">จัดการข้อมูลผู้ดูแล</h5>
           </div>
           <div class="widget-content nopadding">
@@ -57,15 +53,21 @@
                   <th >ชื่อผู้ดูแล</th>
                   <th >E-mail</th>
                   <th >ระดับ</th>
+                  <th >เบอร์โทรศัพท์</th>
                   @if(Auth::user()->type === 1 )
                     <th width="300">Action</th>
                   @endif
                   
                 </tr>
+                
               </thead>
               <tbody>
                 @foreach ($user as $users)
-                <tr >
+                @if($users['id'] == Auth::id())
+                <tr class="focus">
+                @else
+                <tr>
+                @endif
                   <td class="f_th2">{{ $users['id'] }}</td>
                   <td class="f_th2">
                       {{ $users['name'] }}
@@ -79,6 +81,14 @@
                       @else
                       <span class="label label-info">Administrator</span>
                       @endif
+                  </td>
+                  <td class="f_th2">
+                      @if($users['phone'] != '')                        
+                        {{ $users['phone'] }}
+                        <button type="button" class="btn btn-primary btn-mini" id="submit">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
+                      @else
+
+                      @endif                      
                   </td>
                   @if(Auth::user()->type === 1 )
                     <td class="center">                                        
