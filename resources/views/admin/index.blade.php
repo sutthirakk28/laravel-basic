@@ -74,8 +74,9 @@
                   </td>
                   <td class="f_th2">
                       {{ $users['email'] }}
+                      @if(Auth::user()->type === 1)
                       <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_mail">ส่ง E-mail  <i class="fa fa-paper-plane-o" style="font-size:14px;color:white"></i></button>
-
+                      @endif
                   </td>
                   <td class="f_th2">
                       @if($users['type'] == 1)
@@ -87,9 +88,10 @@
                   <td class="f_th2">
                       @if($users['phone'] != '')                        
                         {{ $users['phone'] }}
+                        @if(Auth::user()->type === 1)                        
                         <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_sms">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
-                        
                         <meta name="csrf-token" content="{{ csrf_token() }}">
+                        @endif
                       @else
 
                       @endif                      
@@ -168,8 +170,9 @@ $(document).ready(function(){
       dataType : 'json',
       success : function(student)
       {
-        var data = student.nexmo;
+        var data = student.nexmo;        
         console.log(data);
+        alert(data);
       } 
     });
   });
@@ -186,8 +189,10 @@ $(document).ready(function(){
       dataType : 'json',
       success : function(student)
       {
-        var data = student.nexmo;
+        var data = student.email;        
         console.log(data);
+        alert(data);        
+        
       } 
     });
   });

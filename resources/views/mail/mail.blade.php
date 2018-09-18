@@ -1,8 +1,8 @@
 <h2>สวัสดีครับ คุณ{{ $name }}</h2>
 <p class='colored'>
 E-mail ที่ใช้ในการล็อคอินของคุณคือ {{ $email }}
-</p>
-<table data-mysignature-version="2018-09-18T10:37:34.818Z | 0" width="500" cellspacing="0" cellpadding="0" border="0">
+</p><br><br><br><br><br><br><br><br><br><br>
+<table data-mysignature-version="2018-09-18T10:37:34.818Z | 0" width="500" cellspacing="0" cellpadding="0" border="0" style="float: right;">
    <tr>
       <td>
          <table cellspacing="0" cellpadding="0" border="0">

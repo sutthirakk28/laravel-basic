@@ -7,7 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use Response;
+use Session;
 use Mail;
+use DB;
 
 class MailController extends Controller
 {
@@ -35,21 +37,22 @@ class MailController extends Controller
      public function attachment_email(Request $request){
 
         $user = User::find($request->id);
+
         $mail_send = $user->email;
         $name_send = $user->name;
         
-        $data = array('name'=>$user->name,'email'=>$user->email);
+        $data = array('name'=>$name_send,'email'=>$mail_send);
 
         Mail::send('mail.mail', $data, function($message) use ($mail_send, $name_send) {
            $message->to($mail_send, 'คุณ '.$name_send)->subject
               ('แจ้งเตือนการใช้งานอีเมล');
-           $message->attach('D:\xampp\htdocs\laravel-basic\public\images\org_wow2.png');
-           $message->attach('D:\xampp\htdocs\laravel-basic\public\images\1536389392.jpg');
+           $message->attach('C:\xampp\htdocs\laravel-basic\public\images\admin\admin.jpg');
            $message->from('info.tpm1980@tpm1980.com','ทีมดูแลระบบ');
         });
-        $result = "E-mail ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";
+            
+            $result = "E-mail ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";        
             $response = array(
-            'nexmo' => $result
+            'email' => $result
             );
         return response()->json($response);
      }
