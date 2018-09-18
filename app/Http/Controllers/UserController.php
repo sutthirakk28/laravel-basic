@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
-use App\User;
-use Carbon\Carbon;
-use Session;
 use GuzzleHttp\Client;
-use App\Sendcode;
-use Nexmo\Laravel\Facade\Nexmo;
+use Carbon\Carbon;
+use App\User;
 use Response;
+use Session;
+use DB;
 
 class UserController extends Controller
 {
@@ -182,7 +179,7 @@ class UserController extends Controller
                 'text' => $user->name.' Login BY '.$user->email,
             ]);
              
-            $result = $user->phone;
+            $result = "SMS ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";
             $response = array(
             'nexmo' => $result
             );

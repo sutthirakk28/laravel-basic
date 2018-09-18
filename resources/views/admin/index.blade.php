@@ -10,7 +10,7 @@
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
   }
-  button#submit {
+  button#send_sms,button#send_mail {
     /* font-size: 10px;
     padding: 1px; */
     border-radius: 4px;
@@ -74,6 +74,8 @@
                   </td>
                   <td class="f_th2">
                       {{ $users['email'] }}
+                      <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_mail">ส่ง E-mail  <i class="fa fa-paper-plane-o" style="font-size:14px;color:white"></i></button>
+
                   </td>
                   <td class="f_th2">
                       @if($users['type'] == 1)
@@ -86,8 +88,7 @@
                       @if($users['phone'] != '')                        
                         {{ $users['phone'] }}
                         <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_sms">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
-                        <input type="hidden" name="username{{ $users['id'] }}" id="username{{ $users['id'] }}" value="{{ $users['name'] }}">
-                        <input type="hidden" name="email{{ $users['id'] }}" id="email{{ $users['id'] }}" value="{{ $users['email'] }}">
+                        
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                       @else
 
@@ -170,7 +171,25 @@ $(document).ready(function(){
         var data = student.nexmo;
         console.log(data);
       } 
-    }); 
+    });
+  });
+
+  $('#send_mail').live('click', function(event){
+    event.preventDefault();
+    var id = $(this).val();
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    console.log(id);
+    $.ajax({
+      type :'GET',
+      url : "{{ url('/sendattachmentemail') }}",
+      data : {_token: CSRF_TOKEN,id:id},
+      dataType : 'json',
+      success : function(student)
+      {
+        var data = student.nexmo;
+        console.log(data);
+      } 
+    });
   });
   
 });

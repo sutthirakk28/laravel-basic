@@ -27,7 +27,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 #header h1 {
-    background: url("../../images/img/logo.png") no-repeat scroll 0 0 transparent;
+    background: url("../../../images/img/logo.png") no-repeat scroll 0 0 transparent;
     height: 31px;
     left: 15px;
     line-height: 600px;
@@ -430,7 +430,7 @@ ul.stat-boxes2 li:hover{  background:#f6f6f6}
 	background-image: url('../../images/img/icons/16/database.png');
 }
 .quick-actions-horizontal i.icon-download {
-	background-image: url('../../images/img/icons/16/download.png');
+	background-image: url('vimages/img/icons/16/download.png');
 }
 .quick-actions-horizontal i.icon-graph {
 	background-image: url('../../images/img/icons/16/graph.png');

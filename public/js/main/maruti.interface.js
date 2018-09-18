@@ -50,7 +50,7 @@ $(document).ready(function(){
 		$.gritter.add({
 			title:	'แจ้งเตือน',
 			text:	'แก้ไขข้อมูลเรียบร้อยแล้ว',
-			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
+			image: 	'../images/img/demo/envelope2.png',
 			sticky: false
 		});		
 	});
@@ -59,7 +59,7 @@ $(document).ready(function(){
 		$.gritter.add({
 			title:	'แจ้งเตือน',
 			text:	'ลบข้อมูลเรียบร้อยแล้ว',
-			image: 	'../../laravel-basic/public/images/img/demo/envelope2.png',
+			image: 	'../images/img/demo/envelope2.png',
 			sticky: true
 		});		
 	});

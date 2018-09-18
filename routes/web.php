@@ -22,7 +22,14 @@ Auth::routes();
 //admin
 Route::resource('manage_Users', 'UserController');
 Route::get('/profile', 'UserController@profile');
+
+//sms
 Route::post('/nexmo', 'UserController@nexmo');
+
+//mail
+Route::get('/sendbasicemail','MailController@basic_email');
+Route::get('/sendhtmlemail','MailController@html_email');
+Route::get('/sendattachmentemail/{id?}','MailController@attachment_email');
 
 //home
 Route::get('/home', 'HomeController@index')->name('home');

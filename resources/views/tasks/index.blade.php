@@ -183,7 +183,7 @@ div#calendar {
             
             $.ajax({
                 type :'POST',
-                url : "<?php echo url('/tasks/store');?>",
+                url : "{{ url('/tasks/store') }}",
                 data : {_token:_token,name:name,description:description,task_date:task_date},
                 success : function(data)
                 {

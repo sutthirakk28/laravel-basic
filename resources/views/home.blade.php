@@ -722,7 +722,7 @@ new Chart(document.getElementById("pie-chart"), {
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
         data: [
           @foreach($piechart as $piecharts)
-          Number('{{ $piecharts['count_leave'] }}' / 71 * 100).toFixed(2),
+         '{{ $piecharts['count_leave'] }}',
           @endforeach
         ]
       }]
