@@ -1,0 +1,34 @@
+h5.f_th1 {
+	font-family: Taviraj;
+	font-size: 17px;
+}
+.DataTables_sort_wrapper {
+    font-family: Maitree;
+    font-size: 15px;
+}
+.container-fluid,#content-header{
+    font-family: Maitree;
+ }
+
+td.f_th2 {
+	font-family: Maitree;
+    text-align: center;
+}
+span.request{
+    font-size :20px;
+    color: crimson;
+}
+[class^="icon-"], [class*=" icon-"] {    
+    background-image: url("../../images/img/glyphicons-halflings.png");
+  }
+  .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
+    background-image: url("../../images/img/glyphicons-halflings-white.png")
+  }
+  .fc-button-next .fc-button-content {
+    background: url("../images/img/rarrow.png") no-repeat scroll 15px 13px transparent;
+    width: 10px;
+  }
+  .fc-button-prev .fc-button-content {
+    background: url("../images/img/larrow.png") no-repeat scroll 15px 13px transparent;
+    width: 10px;
+  }

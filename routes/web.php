@@ -26,6 +26,10 @@ Route::get('/profile', 'UserController@profile');
 //sms
 Route::post('/nexmo', 'UserController@nexmo');
 
+//line
+Route::get('/line', 'LineController@line');
+Route::get('/line2', 'LineController@index');
+
 //mail
 Route::get('/sendbasicemail','MailController@basic_email');
 Route::get('/sendhtmlemail','MailController@html_email');

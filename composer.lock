@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3489bbcb3565f29e9525c77dad749295",
+    "content-hash": "10f0422fcdd5cb4ac4dcc8b5549e5676",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -774,6 +774,44 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "hinaloe/laravel-line-notify",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hinaloe/laravel-line-notify.git",
+                "reference": "b8b517bcb93182917654e85c064ac70c505837de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hinaloe/laravel-line-notify/zipball/b8b517bcb93182917654e85c064ac70c505837de",
+                "reference": "b8b517bcb93182917654e85c064ac70c505837de",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/notifications": "^5.3",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hinaloe\\LineNotify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hinaloe",
+                    "email": "hina@hinaloe.net"
+                }
+            ],
+            "description": "LINE Notify Provider for Laravel 5 notification",
+            "time": "2017-05-02T19:39:06+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
