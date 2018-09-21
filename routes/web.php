@@ -27,8 +27,8 @@ Route::get('/profile', 'UserController@profile');
 Route::post('/nexmo', 'UserController@nexmo');
 
 //line
-Route::get('/line', 'LineController@line');
-Route::get('/line2', 'LineController@index');
+Route::get('/line/line/{id?}', 'LineController@line');
+Route::get('/line/index/{id?}', 'LineController@create');
 
 //mail
 Route::get('/sendbasicemail','MailController@basic_email');

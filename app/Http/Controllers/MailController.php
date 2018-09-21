@@ -46,7 +46,7 @@ class MailController extends Controller
         Mail::send('mail.mail', $data, function($message) use ($mail_send, $name_send) {
            $message->to($mail_send, 'คุณ '.$name_send)->subject
               ('แจ้งเตือนการใช้งานอีเมล');
-           $message->attach('C:\xampp\htdocs\laravel-basic\public\images\admin\admin.jpg');
+        //    $message->attach('C:\xampp\htdocs\laravel-basic\public\images\admin\admin.jpg');
            $message->from('info.tpm1980@tpm1980.com','ทีมดูแลระบบ');
         });
             
