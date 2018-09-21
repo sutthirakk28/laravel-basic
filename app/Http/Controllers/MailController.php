@@ -52,7 +52,7 @@ class MailController extends Controller
             
             $result = "E-mail ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";        
             $response = array(
-            'email' => $result
+                'email' => $result
             );
         return response()->json($response);
      }

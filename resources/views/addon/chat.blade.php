@@ -1,6 +1,7 @@
 @extends('layouts.tpm')
 
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
     background-image: url("../images/img/glyphicons-halflings.png");
@@ -16,6 +17,15 @@
     background: url("../images/img/larrow.png") no-repeat scroll 15px 13px transparent;
     width: 10px;
 }
+.image{
+    width: 36px;
+    float: left;
+    padding-right: 7px;
+}
+.alert-block {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 </style>
 @endsection
 
@@ -25,9 +35,14 @@
         <a href="{{ url('/home') }}" title="กลับไปหน้าแรก" class="tip-bottom">
             <i class="icon-home"></i> Home
         </a>
-        <a href="#">ห้องแชท Chatroom</a>
+        <a href="#">แจ้งเตือน LINE Notify</a>
     </div>
-    <h1>Chatroom</h1>  
+    <p></p>
+    <div class="alert alert-success alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
+        <img src="{{asset('images/admin/icon-linenotify.png')}}" class="image" alt="linenotify">
+        <h4 class="alert-heading">LINE Notify</h4>
+        ส่งข้อความ และแจ้งเตือนด้วย Line Notify
+    </div>  
 </div>
 @endsection
 
@@ -38,14 +53,14 @@
             <div class="widget-box widget-chat">
                 <div class="widget-title">
                     <span class="icon">
-                        <i class="icon-comment"></i>
+                        <i class="fa fa-commenting" aria-hidden="true"></i>
                     </span>
                     <h5>มาคุยกันเถอะ</h5>
                 </div>
                 <div class="widget-content nopadding">
                     <div class="chat-users panel-right2">
                         <div class="panel-title">
-                            <h5>Online Users</h5>
+                            <h5>Administrator</h5>
                         </div>
                         <div class="panel-content nopadding">
                             <ul class="contact-list">
@@ -62,9 +77,10 @@
                             <div id="chat-messages-inner"></div>
                         </div>
                         <div class="chat-message well">
-                            <button class="btn btn-success">Send</button>
+                            <button class="btn btn-info"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                             <span class="input-box">
                                 <input type="text" name="msg-box" id="msg-box" />
+                                <meta name="csrf-token" content="{{ csrf_token() }}">
                             </span> 
                         </div>
                     </div>
@@ -86,6 +102,7 @@ $(document).ready(function(){
 		var input = $(this).siblings('span').children('input[type=text]');		
 		if(input.val() != ''){
 			add_message('You','../images/img/demo/av1.jpg',input.val(),true);
+            
 		}		
 	});
 	
@@ -93,39 +110,61 @@ $(document).ready(function(){
 		if(e.which == 13) {	
 			if($(this).val() != ''){
 				add_message('You','../images/img/demo/av1.jpg',$(this).val(),true);
+                
 			}		
 		}
 	});
 	
-	setTimeout(function(){
-		add_message('นายสุชิน  บุญคำ', '../images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
-		},'1000');
-	setTimeout(function(){
-		add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', '../images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
-		},'4000');
-	setTimeout(function(){
-		add_message('นางสาวพิมพ์พิไล  งามแสง', '../images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
-		},'8000');
-	setTimeout(function(){
-		add_message('นางสาวเกศสุดา  อาสสุวรรณ์','../images/img/demo/av3.jpg','ok Bye than!!!.')
-		},'12000');	
-	setTimeout(function(){
-		remove_user('นายสมชัย  ทองหล่อ','นายสมชัย  ทองหล่อ')
-        },'16000');
+	// setTimeout(function(){
+	// 	add_message('นายสุชิน  บุญคำ', '../images/img/demo/av2.jpg','สวัสดีทุกคนที่คุณต้องการมิตรภาพกับฉัน?')
+	// 	},'1000');
+	// setTimeout(function(){
+	// 	add_message('นายบรรลังฤทธิ์  วงค์เหมาะ', '../images/img/demo/av3.jpg','ゆうぴ！ どうしてそりゃ！')
+	// 	},'4000');
+	// setTimeout(function(){
+	// 	add_message('นางสาวพิมพ์พิไล  งามแสง', '../images/img/demo/av2.jpg','ขอบคุณ !!! เห็นคุณเร็ว ๆ นี้')
+	// 	},'8000');
+	// setTimeout(function(){
+	// 	add_message('นางสาวเกศสุดา  อาสสุวรรณ์','../images/img/demo/av3.jpg','ok Bye than!!!.')
+	// 	},'12000');	
+	// setTimeout(function(){
+	// 	remove_user('นายสมชัย  ทองหล่อ','นายสมชัย  ทองหล่อ')
+    //     },'16000');
    	var i = 0;
 	function add_message(name,img,msg,clear) {
-		i = i + 1;
-		var  inner = $('#chat-messages-inner');
-		var time = new Date();
-		var hours = time.getHours();
-		var minutes = time.getMinutes();
-		if(hours < 10) hours = '0' + hours;
-		if(minutes < 10) minutes = '0' + minutes;
-		var id = 'msg-'+i;
+        i = i + 1;
+        var  inner = $('#chat-messages-inner');
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        if(hours < 10) hours = '0' + hours;
+        if(minutes < 10) minutes = '0' + minutes;
+        var id = 'msg-'+i;
         var idname = name.replace(' ','-').toLowerCase();
-		inner.append('<p id="'+id+'" class="user-'+idname+'">'
-										+'<span class="msg-block"><img src="'+img+'" alt="" /><strong>'+name+'</strong> <span class="time">- '+hours+':'+minutes+'</span>'
-										+'<span class="msg">'+msg+'</span></span></p>');
+
+        /*start ajax */
+        if(msg != ''){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');            
+            $.ajax({
+                type :'GET',
+                url : "{{ url('/line/index/') }}",
+                data : {_token: CSRF_TOKEN,id:msg},
+                dataType : 'json',
+                success : function(result)
+                {
+                    var data = result.line;
+                    var data2 = result.status;        
+                    console.log(data);
+                    
+                    inner.append('<p id="'+id+'" class="user-'+idname+'">'
+                        +'<span class="msg-block"><img src="'+img+'" alt="" /><strong>'+name+'</strong> <span class="time"> '+data+' '+hours+':'+minutes+' น.</span>'
+					    +'<span class="msg">'+msg+'</span></span></p>');        
+                    
+                } 
+            });
+        }
+        /* End ajax*/
+
 		$('#'+id).hide().fadeIn(800);
 		if(clear) {
 			$('.chat-message input').val('').focus();
