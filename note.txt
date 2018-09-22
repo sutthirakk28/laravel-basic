@@ -59,9 +59,10 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 3. Blog posts* chat = websockets
 4. change Apache to Nginx
 5. log
--6. send data to...sms,email,line
+---6. send data to...sms,email,line
 --7. google reCAPTCHA
 8. facebook login
+9. export pdf/excel/print 
 
 
 

@@ -26,6 +26,28 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+.indicator.online {
+    background: #28B62C;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    -webkit-animation: pulse-animation 2s infinite linear;
+}
+@-webkit-keyframes pulse-animation {
+	0% { -webkit-transform: scale(1); }
+	25% { -webkit-transform: scale(1); }
+    50% { -webkit-transform: scale(1.2) }
+    75% { -webkit-transform: scale(1); }
+    100% { -webkit-transform: scale(1); }
+}
+.indicator.offline {
+    background: #FF4136;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    
+}
 </style>
 @endsection
 
@@ -60,15 +82,19 @@
                 <div class="widget-content nopadding">
                     <div class="chat-users panel-right2">
                         <div class="panel-title">
-                            <h5>Administrator</h5>
+                            <h5>Administrator Online
+                            </h5>
                         </div>
                         <div class="panel-content nopadding">
                             <ul class="contact-list">
-                                <li id="user-Sunil" class="online"><a href=""><img alt="" src="../images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
-                                <li id="user-Laukik"><a href=""><img alt="" src="../images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
-                                <li id="user-vijay" class="online new"><a href=""><img alt="" src="../images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
-                                <li id="user-Jignesh" class="online"><a href=""><img alt="" src="../images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
-                                <li id="user-Malay" class="online"><a href=""><img alt="" src="../images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
+                                @foreach($user as $users)
+                                    @if($users['id'] != Auth::id())
+                                        <li id="user-Sunil" class="online"><a href=""><img alt="" src="{{asset('../images/org_man2.png')}}" /> <span>{{$users['name']}}</span>       <span class="indicator online"></span></a></li>
+                                    @else
+                                        <li id="user-vijay" class="online new"><a href=""><img alt="" src="{{asset('../images/org_man1.png')}}" /> <span>{{$users['name']}}</span>       <span class="indicator online"></span></a><span class="msg-count badge badge-info">3</span></li>
+                                    @endif                                
+                                @endforeach
+                                
                             </ul>
                         </div>
                     </div>

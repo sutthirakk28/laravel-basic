@@ -8,6 +8,7 @@ use App\Leave;
 use App\Lib;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use App\User;
 
 class AddonController extends Controller
 {
@@ -132,8 +133,11 @@ class AddonController extends Controller
     public function chat()
     {   
         $aCss=array('css/addon/style.css');
+        $users = User::where('active', 1)->orderBy('id', 'ASC')->get();
+        $result = json_decode($users, true);
         $data = array(
-            'style' => $aCss
+            'style' => $aCss,
+            'user' => $result
         );
         return view('addon.chat',$data);
     }

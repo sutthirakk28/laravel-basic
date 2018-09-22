@@ -109,6 +109,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
                 'type' => 2,
                 'phone' => $request->phone,
+                'active' => 0,
                 'created_at' => $now,
                 
             ]);  

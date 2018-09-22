@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2018 at 09:11 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Generation Time: Sep 22, 2018 at 12:33 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -481,10 +481,7 @@ INSERT INTO `tasks` (`id`, `name`, `description`, `task_date`, `created_at`, `up
 (9, 'พนักงานใหม่เริ่มงาน 2 คน', NULL, '2018-09-03', '2018-09-11 03:02:02', '2018-09-11 03:02:02'),
 (10, 'ฟังบรรยาย Tb-40D', NULL, '2018-09-12', '2018-09-17 03:54:09', '2018-09-17 03:54:24'),
 (11, 'ทดสอบ SMS', NULL, '2018-09-17', '2018-09-18 02:35:15', '2018-09-18 02:35:15'),
-(12, 'ส่งข้อมูลทาง E-mail', NULL, '2018-09-18', '2018-09-18 02:46:43', '2018-09-18 02:46:43'),
-(13, 'ส่งข้อมูลทาง line', NULL, '2018-09-20', '2018-09-21 17:26:59', '2018-09-21 17:26:59'),
-(14, 'ส่งข้อมูลทาง line', NULL, '2018-09-21', '2018-09-21 17:27:16', '2018-09-21 17:27:16'),
-(15, 'ส่งข้อมูลทาง line', NULL, '2018-09-22', '2018-09-21 17:27:42', '2018-09-21 17:27:42');
+(12, 'ส่งข้อมูลทาง E-mail', NULL, '2018-09-18', '2018-09-18 02:46:43', '2018-09-18 02:46:43');
 
 -- --------------------------------------------------------
 
@@ -510,15 +507,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `phone`, `active`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 'Zfwj3PBmhLAXVEuCgxlAZNOMsESWwm8ENFlkj8N8pmgPX8XDBfeI8Yteyrdg', '66927360907', NULL, 1, '2018-09-16 11:37:17', '2018-09-17 17:30:50'),
-(2, 'สุทธิรักษ์', 'dekdee.k28@gmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', 'jOOB9pw2Ye3Sqho445fnRguZK9UeUG4STG57TCSA6GQEjbeYAkrafcquD2yt', '66896901952', NULL, 1, '2018-09-16 11:38:32', '2018-09-18 08:14:39'),
-(3, 'เมล ทีพีเอ็ม', 'tpm.tpm1980@gmail.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, '66927360907', NULL, 2, '2018-09-16 11:40:04', '2018-09-18 08:12:20'),
-(4, 'ทดสอบส่งเมล', 'dekdoik028@gmail.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', 'wyPvnaBVymZkSK25RKczjvGjZVwSIR49evbG5YWDULnxLlYDZFMu81bTw40q', '66896901952', NULL, 2, '2018-09-16 11:45:18', '2018-09-18 08:13:59'),
-(5, 'HR', 'tpm1980.hr@gmail.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', NULL, NULL, 2, '2018-09-16 11:46:55', '2018-09-18 19:03:09'),
-(6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$73SjzQPN52xkVFexsRfEXuki3YnWl21ILVgmGeukFaDhj9J0SU/6e', NULL, '021571250', NULL, 2, '2018-09-16 12:07:30', '2018-09-17 10:24:21'),
-(8, 'sutthirak_nara', 'sutthirak.k28@gmail.comd', '$2y$10$n4/fFC1km2JOT6qGf44QAuvx1D45.N1C1rDIeTwPSIJ69l3dzlRse', NULL, '66896901952', NULL, 2, '2018-09-17 07:55:57', '2018-09-18 08:21:16'),
-(9, 'sutthirak', 'sutthirak.k28@ttmail.com', '$2y$10$g/UDPHNheIV.5ledbBj5vetYANjQAhH1fDckkXfZfkdUlqBlTt3zq', NULL, NULL, NULL, 2, '2018-09-17 09:52:00', '2018-09-17 10:12:18'),
-(15, 'ตุ่ย', 'sutthirak.k28@tpm1980.com', '$2y$10$BwxQxCQcsksqxPyU0Goc0ezWuaSc68h8KaqjZXJ6zEg43QHhGyNoC', NULL, '66896901952', NULL, 2, '2018-09-17 10:11:21', '2018-09-18 08:17:33');
+(1, 'sutthirak narathi', 'sutthirak.k28@gmail.com', '$2y$10$aWBVDexZeGnqMB8O5rXUQOk9fXJJUDVgBYW3SedG2Ba3dhzuv/4Ly', 'YTjNI77GxxO6gJSAAAU0D6Cc4JYxzuL2sCUwwsE0YPiShtupY4XTLVvtxSua', '66927360907', 1, 1, '2018-09-16 11:37:17', '2018-09-22 10:07:55'),
+(2, 'สุทธิรักษ์', 'dekdee.k28@gmail.com', '$2y$10$/t.fZNPW63ateQm01fL3gezi97R2ZXi/2Y.MLLM71b3sEcy.BKUC.', '0l67VAjKhNVzXltAOfhwW9di2laRcfX0B3phwCr09cobOjnG4g6Il6BOvegD', '66896901952', 0, 1, '2018-09-16 11:38:32', '2018-09-22 10:05:37'),
+(3, 'เมล ทีพีเอ็ม', 'tpm.tpm1980@gmail.com', '$2y$10$3cvadgNLd5tz4r/cnCUj9.Tdlgtec/6qssXU75AhInG..J0eRm.ua', NULL, '66927360907', 0, 2, '2018-09-16 11:40:04', '2018-09-18 08:12:20'),
+(4, 'ทดสอบส่งเมล', 'dekdoik028@gmail.com', '$2y$10$yqvpm1V3JEJTKEf9TKRCIuyDbqnsVUuWxU3jAz.r2tVQTDyRCeIZ6', 'wyPvnaBVymZkSK25RKczjvGjZVwSIR49evbG5YWDULnxLlYDZFMu81bTw40q', '66896901952', 0, 2, '2018-09-16 11:45:18', '2018-09-22 10:04:53'),
+(5, 'HR', 'tpm1980.hr@gmail.com', '$2y$10$GC4Jtuv8KisPBFSn4V3XH.nocRfRITTQwrLSo0eLVdhSDIatCOWue', 'niqCDHBuRTJtkjksDeCx1JIFiZDa8uwZMeO1DwCRujXrU6nhzKYUzkUoPj2C', NULL, 0, 2, '2018-09-16 11:46:55', '2018-09-18 08:12:44'),
+(6, 'tpm1980_4', 'tpm1980_4@tpm1980.com', '$2y$10$73SjzQPN52xkVFexsRfEXuki3YnWl21ILVgmGeukFaDhj9J0SU/6e', NULL, '021571250', 0, 2, '2018-09-16 12:07:30', '2018-09-17 10:24:21'),
+(8, 'sutthirak_nara', 'sutthirak.k28@gmail.comd', '$2y$10$n4/fFC1km2JOT6qGf44QAuvx1D45.N1C1rDIeTwPSIJ69l3dzlRse', NULL, '66896901952', 0, 2, '2018-09-17 07:55:57', '2018-09-18 08:21:16'),
+(15, 'ตุ่ย', 'sutthirak.k28@tpm1980.com', '$2y$10$BwxQxCQcsksqxPyU0Goc0ezWuaSc68h8KaqjZXJ6zEg43QHhGyNoC', NULL, '66896901952', 0, 2, '2018-09-17 10:11:21', '2018-09-18 08:17:33'),
+(16, 'tuy admin', 'hamnoi_k28@hotmail.com', '$2y$10$fpa6P4cyJiHUxKojzu0amOXWpNS6wSpsDSKSkAe6NTo2yKL7I7V4u', NULL, '0896901952', 0, 2, '2018-09-22 07:30:05', '2018-09-22 07:32:06'),
+(17, 'tuy', 'tpm_hr@tpm1980.com', '$2y$10$tj.Rf00QNT7grJtPvYnPjed8rgEED.wVBghKPb5ak6EeNDWicEnti', NULL, '0896901952', 0, 2, '2018-09-22 07:34:17', '2018-09-22 07:34:17'),
+(18, 'tpm1980_66', 'tpm1980_6@gmail.com', '$2y$10$qB0iS9fIVJagvNhYuY4wCuzCty2.W/0DufHvXtVmEZrUlF0A3TDia', 'L3XouZlV9HOfmmeRTEUC7iDGGpbSAjopIsbGdXI45jOdl3R0xDg6HIWHWdIr', '0896901952', 0, 2, '2018-09-22 07:36:03', '2018-09-22 10:04:44');
 
 --
 -- Indexes for dumped tables
@@ -659,13 +658,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
