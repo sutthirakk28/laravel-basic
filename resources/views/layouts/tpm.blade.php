@@ -74,7 +74,8 @@
         <li><a href="{{ url('addon/gallery') }}">รูปพนักงาน</a></li>
         <li><a href="{{ url('tasks') }}">ปฎิทินบันทึกกิจกรรม</a></li>
         <li><a href="{{ url('addon/chat') }}">แจ้งเตือน LINE Notify</a></li>
-        <li><a href="{{ url('addon/organiz') }}">แผนผังบริษัท</a></li>        
+        <li><a href="{{ url('addon/organiz') }}">แผนผังบริษัท</a></li>
+        <li><a href="{{ url('/log-viewer') }}" target="_blank">Log File</a></li>         
       </ul>
 
     </li>
