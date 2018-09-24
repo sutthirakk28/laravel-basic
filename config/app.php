@@ -171,6 +171,11 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
+         * Application Error Log Views...
+         */
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
