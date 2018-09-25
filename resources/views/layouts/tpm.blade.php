@@ -69,7 +69,7 @@
     <li><a href="{{ url('/leave/') }}"><i class="icon-book"></i> <span>ข้อมูลการลางาน</span></a></li>
     <li> <a href="{{ url('/leave/create') }}"><i class="icon icon-pencil"></i> <span>เขียนใบลา</span></a> </li>
     <li><a href="{{ url('addon/apiFetchdata') }}"><i class="icon-tags"></i> <span>สรุปผลการลา(รายเดือน)</span></a></li>
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">4</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Addons</span> <span class="label label-important">5</span></a>
       <ul>
         <li><a href="{{ url('addon/gallery') }}">รูปพนักงาน</a></li>
         <li><a href="{{ url('tasks') }}">ปฎิทินบันทึกกิจกรรม</a></li>

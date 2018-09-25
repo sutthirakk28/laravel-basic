@@ -176,6 +176,11 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
         /*
+         * Application Excel File Excel...
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -235,6 +240,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

@@ -1,6 +1,7 @@
 @extends('layouts.tpm')
 
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 [class^="icon-"], [class*=" icon-"] {    
     background-image: url("../images/img/glyphicons-halflings.png");
@@ -40,7 +41,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span12">            
+        <div class="span12">
+            <a href="{{ route('export.exceltomonth') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
+            <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
+            <a href="{{ url('manage_Users/print') }}" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>            
             <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-align-left"></i> </span>
             <h5>รายงาน สรุปผลการลา</h5><span class="label">เดือนที่แล้ว</span><span class="label label-success">เดือนนี้</span> 

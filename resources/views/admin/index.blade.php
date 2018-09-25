@@ -36,10 +36,15 @@
       <div class="sticky"></div>
     </div>
 	@endif
-
+  
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
+      @if(Auth::user()->type === 1 )
+      <a href="{{ route('export.exceladmin') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
+      <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
+      <a href="{{ url('manage_Users/print') }}" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
+      @endif
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="fa fa-address-book-o" style="font-size:18px"></i></span> 

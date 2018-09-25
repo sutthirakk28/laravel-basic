@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endsection
 
 @section('content-header')
@@ -52,6 +53,9 @@ function count_day($day1){
 <div class="container-fluid">
 	<div class="row-fluid">
 	  <div class="span12">
+			<a href="{{ route('export.excellib') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
+      <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
+      <a href="{{ url('manage_Users/print') }}" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
 	    <div class="widget-box">
 	      <div class="widget-title">
 	         <span class="icon"><i class="icon-th"></i></span> 

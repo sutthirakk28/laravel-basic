@@ -20,6 +20,13 @@ Route::get('/', function () {
 Route::post('logout', '/Auth/LoginController@logout')->name('logout');
 Auth::routes();
 
+//Export excel
+Route::get('export-excel-admin', 'ExportController@exportExcelAdmin')->name('export.exceladmin');
+Route::get('export-excel-depar', 'ExportController@exportExcelDep')->name('export.exceldep');
+Route::get('export-excel-posi', 'ExportController@exportExcelPos')->name('export.excelpos');
+Route::get('export-excel-emplo', 'ExportController@exportExcelLib')->name('export.excellib');
+Route::get('export-excel-tomonth', 'ExportController@exportExcelTomonth')->name('export.exceltomonth');
+
 //admin
 Route::resource('manage_Users', 'UserController');
 Route::get('/profile', 'UserController@profile');
