@@ -15,6 +15,9 @@
     padding: 1px; */
     border-radius: 4px;
 }
+td.buttonhide2{
+  text-align: center;
+}
 </style>
 @endsection
 
@@ -43,7 +46,7 @@
       @if(Auth::user()->type === 1 )
       <a href="{{ route('export.exceladmin') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
       <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
-      <a href="{{ url('manage_Users/print') }}" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
+      <a id="print" href="#" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
       @endif
         <div class="widget-box">
           <div class="widget-title">
@@ -102,7 +105,7 @@
                       @endif                      
                   </td>
                   @if(Auth::user()->type === 1 )
-                    <td class="center">                                        
+                    <td class="buttonhide2">
                     {{ Html::link('manage_Users/'.$users['id'], 'View', array('class' => 'btn btn-success')) }}
                     {{ Html::link('manage_Users/'.$users['id'].'/edit','Edit', array('class' => 'btn btn-warning')) }}                   
                     <a href="#myAlert" data-toggle="modal" data-id="{{$users['id']}}" class="addDialog btn btn-danger">Delete</a>
@@ -160,6 +163,7 @@
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
+<script src="{{ asset('js/main/print/printThis.js') }}"></script>
 <script>
 $(document).ready(function(){
 
@@ -202,6 +206,12 @@ $(document).ready(function(){
     });
   });
   
+});
+
+$('#print').on("click", function () {
+  $('.table').printThis({
+    header: "<h1>ข้อมูลผู้ดูแล</h1>"   
+  });
 });
 
 $(document).on("click", ".addDialog", function () {

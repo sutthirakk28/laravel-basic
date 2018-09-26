@@ -55,7 +55,7 @@ function count_day($day1){
 	  <div class="span12">
 			<a href="{{ route('export.excellib') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
       <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
-      <a href="{{ url('manage_Users/print') }}" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
+      <a id="print" href="#" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
 	    <div class="widget-box">
 	      <div class="widget-title">
 	         <span class="icon"><i class="icon-th"></i></span> 
@@ -155,4 +155,13 @@ function count_day($day1){
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
+<script src="{{ asset('js/main/print/printThis.js') }}"></script>
+<script>
+$('#print').on("click", function () {
+  $('.table').printThis({
+    header: "<h1>ข้อมูลฝ่าย</h1>"   
+  });
+});
+
+</script>
 @endsection
