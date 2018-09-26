@@ -4,6 +4,9 @@
 
 2.composer update --no-scripts
 -composer dump-autoload
+-composer install
+-php artisan cache:clear
+-php artisan clear-compiled
 
 
 3.php artisan serve //--port=80
@@ -64,9 +67,10 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 ---6. send data to...sms,email,line
 --7. google reCAPTCHA
 8. facebook login
-9. export pdf/excel/print 
+--9. export pdf/excel/print 
 Create an export class in app/Exports
 php artisan make:export UsersExport --model=User
+10. deploy
 
 
 
