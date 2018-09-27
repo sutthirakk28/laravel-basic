@@ -79,9 +79,7 @@ Route::get('addon/graph','AddonController@graph');
 Route::get('addon/organiz','AddonController@organiz');
 Route::get('addon/apiFetchdata','AddonController@index');
 
-Route::get('hello',function(){
-	return "hello laravel  5.3";
-});
+
 /*
 //test
 Route::get('hello',function(){

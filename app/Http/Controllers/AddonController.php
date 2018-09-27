@@ -24,7 +24,7 @@ class AddonController extends Controller
     public function index()
     {
         $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', 'http://localhost/laravel-basic/public/api/products');
+        $res = $client->request('GET', 'http://localhost:81/api/products');
         $status = $res->getStatusCode();        
         $Header = $res->getHeaderLine('content-type');
         $body = $res->getBody();
