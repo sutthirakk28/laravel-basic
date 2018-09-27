@@ -71,6 +71,7 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 Create an export class in app/Exports
 php artisan make:export UsersExport --model=User
 10. deploy
+composer install --optimize-autoloader --no-dev
 
 
 
