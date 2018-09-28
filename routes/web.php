@@ -27,6 +27,10 @@ Route::get('export-excel-posi', 'ExportController@exportExcelPos')->name('export
 Route::get('export-excel-emplo', 'ExportController@exportExcelLib')->name('export.excellib');
 Route::get('export-excel-tomonth', 'ExportController@exportExcelTomonth')->name('export.exceltomonth');
 
+//Export PDF
+Route::get('pdf', 'PDFController@pdf');
+
+
 //admin
 Route::resource('manage_Users', 'UserController');
 Route::get('/profile', 'UserController@profile');

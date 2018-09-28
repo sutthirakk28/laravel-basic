@@ -176,9 +176,19 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
         /*
-         * Application Excel File Excel...
+         * Application Export File Excel...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        /*
+         * Application Export File PDF...
+         */
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+        /*
+         * Application SMS...
+         */
+        Nexmo\Laravel\NexmoServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -187,8 +197,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Nexmo\Laravel\NexmoServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,        
 
     ],
 
@@ -241,6 +250,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

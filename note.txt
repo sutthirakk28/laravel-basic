@@ -29,35 +29,6 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 5.create Contoller : php artisan make:controller PhotoController --resource
 6.php artisan config:cache
 
-SELECT
-REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(type_leave, '0', 'ลาบวช-ทำหมัน') , '1', 'ลาคลอด') , '2', 'ลาป่วย'), '3', 'ลากิจ'), '4', 'พักร้อน') AS type_leave, 
-DATE_FORMAT(nstart_day,'%m') AS months,
-COUNT(nstart_day) AS count_leave 
-FROM
-`leaves`
-GROUP BY type_leave,DATE_FORMAT(nstart_day,'%Y-%m')
-
-SELECT
-`leaves`.id_per,
-libs.surname,
-`leaves`.type_leave,
-Count(`leaves`.nstart_day) AS count_person
-FROM
-libs
-INNER JOIN `leaves` ON `leaves`.id_per = libs.id
-GROUP BY leaves.id_per,type_leave
-
-
-
-SELECT
-`leaves`.id_per,
-libs.surname,DATE_FORMAT(nstart_day,'%m') AS months,
-Count(`leaves`.nstart_day) AS count_leave
-FROM
-`leaves`
-INNER JOIN libs ON libs.id = `leaves`.id_per
-GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
-
 ---0. api basic
 --1. multiple authen(admin vs user) * gen token
 *2. forgot password
@@ -73,6 +44,23 @@ GROUP BY id_per,DATE_FORMAT(nstart_day,'%Y-%m')
 ---10. deploy
 	composer install --optimize-autoloader --no-dev
 11. cloudflare
+
+//Config caching
+php artisan config:cache
+php artisan config:clear
+//Routes caching
+php artisan route:cache
+php artisan route:clear
+//Classmap optimization
+php artisan optimize --force
+//Optimizing the composer autoload
+composer dumpautoload -o
+//php artisan clear:data
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+php artisan clear-compiled
+php artisan config:cache
 
 
 
