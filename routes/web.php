@@ -29,6 +29,13 @@ Route::get('export-excel-tomonth', 'ExportController@exportExcelTomonth')->name(
 
 //Export PDF
 Route::get('pdf', 'PDFController@pdf');
+Route::get('/pdf/gg', function () {
+    $data = [
+        'name'=>'อะไรสักอย่าง ไม่รู้นามสกุลอะไร'
+    ];
+    $pdf = PDF::loadView('pdf.pdf', $data);
+    return @$pdf->stream();
+});
 
 
 //admin
