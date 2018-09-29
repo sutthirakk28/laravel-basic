@@ -28,14 +28,8 @@ Route::get('export-excel-emplo', 'ExportController@exportExcelLib')->name('expor
 Route::get('export-excel-tomonth', 'ExportController@exportExcelTomonth')->name('export.exceltomonth');
 
 //Export PDF
-Route::get('pdf', 'PDFController@pdf');
-Route::get('/pdf/gg', function () {
-    $data = [
-        'name'=>'อะไรสักอย่าง ไม่รู้นามสกุลอะไร'
-    ];
-    $pdf = PDF::loadView('pdf.pdf', $data);
-    return @$pdf->stream();
-});
+Route::get('/pdf', 'PDFController@pdf');
+Route::get('/pdf/pdf_user', 'PDFController@pdf_user');
 
 
 //admin
