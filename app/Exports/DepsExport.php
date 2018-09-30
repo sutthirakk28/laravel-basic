@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Dep;
+use DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class DepsExport implements FromCollection
@@ -12,6 +12,8 @@ class DepsExport implements FromCollection
     */
     public function collection()
     {
-        return Dep::select('id_dep','name_dep','created_at', 'updated_at')->get();
+    	return DB::table('deps')
+        	->select('id_dep','name_dep','created_at', 'updated_at')
+        	->get();
     }
 }

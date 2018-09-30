@@ -59,20 +59,24 @@
 </style>
 </head>
 <body>
-<h2>ข้อมูลผู้ดูแล</h2>
+<h2>ข้อมูลการลาเดือนนี้</h2>
 <table id="customers">
   <tr>
-    <th>id</th>
-    <th>ชื่อ</th>
-    <th>อีเมล</th>
-    <th>เบอร์โทรศัพท์</th>
+    <th>วันที่ยื่น</th>
+    <th>ชื่อ-นามสกุล</th>
+    <th>ชื่อเล่น</th>
+    <th>ประเภท</th>
+    <th>เริ่มต้น</th>
+    <th>สิ้นสุด</th>
   </tr>
-  @foreach($user as $u)
+  @foreach($leave as $leaves)
     <tr>
-        <td>{{ $u['id'] }}</td>
-        <td>{{ $u['name'] }}</td>
-        <td>{{ $u['email'] }}</td>
-        <td>{{ $u['phone'] }}</td>
+        <td>{{ $leaves['date_leave'] }}</td>
+        <td>{{ $leaves['surname'] }}</td>
+        <td>{{ $leaves['nickname'] }}</td>
+        <td>{{ $leaves['type_leave'] }}</td>
+        <td>{{ $leaves['nstart_day'] }}</td>
+        <td>{{ $leaves['nend_day'] }}</td>
     </tr>
 @endforeach
 </table>

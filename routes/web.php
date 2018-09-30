@@ -28,9 +28,11 @@ Route::get('export-excel-emplo', 'ExportController@exportExcelLib')->name('expor
 Route::get('export-excel-tomonth', 'ExportController@exportExcelTomonth')->name('export.exceltomonth');
 
 //Export PDF
-Route::get('/pdf', 'PDFController@pdf');
 Route::get('/pdf/pdf_user', 'PDFController@pdf_user');
-
+Route::get('/pdf/pdf_dep', 'PDFController@pdf_dep');
+Route::get('/pdf/pdf_pos', 'PDFController@pdf_pos');
+Route::get('/pdf/pdf_lib', 'PDFController@pdf_lib');
+Route::get('/pdf/pdf_leave', 'PDFController@pdf_leave');
 
 //admin
 Route::resource('manage_Users', 'UserController');

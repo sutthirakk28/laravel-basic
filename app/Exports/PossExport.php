@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Pos;
+use DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class PossExport implements FromCollection
@@ -12,6 +12,8 @@ class PossExport implements FromCollection
     */
     public function collection()
     {
-        return Pos::select('id_pos','name_pos','created_at', 'updated_at')->get();
+    	return DB::table('pos')
+        	->select('id_pos','name_pos','created_at', 'updated_at')
+        	->get();
     }
 }

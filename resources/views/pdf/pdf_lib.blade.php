@@ -59,20 +59,26 @@
 </style>
 </head>
 <body>
-<h2>ข้อมูลผู้ดูแล</h2>
+<h2>ข้อมูลพนักงาน</h2>
 <table id="customers">
   <tr>
-    <th>id</th>
-    <th>ชื่อ</th>
-    <th>อีเมล</th>
-    <th>เบอร์โทรศัพท์</th>
+    <th>รหัส</th>
+    <th>ชื่อ-นามสกุล</th>
+    <th>ชื่อเล่น</th>
+    <th>อายุ</th>
+    <th>เริ่มงาน</th>
+    <th >ตำแหน่ง</th>
+    <th>เบอร์โทร</th>
   </tr>
-  @foreach($user as $u)
+  @foreach($lib as $libs)
     <tr>
-        <td>{{ $u['id'] }}</td>
-        <td>{{ $u['name'] }}</td>
-        <td>{{ $u['email'] }}</td>
-        <td>{{ $u['phone'] }}</td>
+        <td>{{ $libs['id_employ'] }}</td>
+        <td>{{ $libs['surname'] }}</td>
+        <td>{{ $libs['nickname'] }}</td>
+        <td>{{ $libs['age'] }}</td>
+        <td>{{ $libs['job_start'] }}</td>
+        <td>{{ $libs['name_pos'] }}</td>
+        <td>{{ $libs['phone'] }}</td>
     </tr>
 @endforeach
 </table>

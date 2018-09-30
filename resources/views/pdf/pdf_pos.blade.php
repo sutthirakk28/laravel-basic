@@ -59,20 +59,20 @@
 </style>
 </head>
 <body>
-<h2>ข้อมูลผู้ดูแล</h2>
+<h2>ข้อมูลตำแหน่ง</h2>
 <table id="customers">
   <tr>
     <th>id</th>
-    <th>ชื่อ</th>
-    <th>อีเมล</th>
-    <th>เบอร์โทรศัพท์</th>
+    <th>ชื่อตำแหน่ง</th>
+    <th>สร้างเมื่อ</th>
+    <th>แก้ไขล่าสุด</th>
   </tr>
-  @foreach($user as $u)
+  @foreach($pos as $poss)
     <tr>
-        <td>{{ $u['id'] }}</td>
-        <td>{{ $u['name'] }}</td>
-        <td>{{ $u['email'] }}</td>
-        <td>{{ $u['phone'] }}</td>
+        <td>{{ $poss['id_pos'] }}</td>
+        <td>{{ $poss['name_pos'] }}</td>
+        <td>{{ $poss['created_at'] }}</td>
+        <td>{{ $poss['updated_at'] }}</td>
     </tr>
 @endforeach
 </table>

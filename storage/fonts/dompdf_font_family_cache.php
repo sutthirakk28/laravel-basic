@@ -82,5 +82,8 @@
   ),
   'thsarabunnew' => array(
     'normal' => $fontDir . '\f52f9fabe3bc819fb2199b9ba76b67d8',
+    'bold' => $fontDir . '\2a69e00bff3b5ccaa02495ace662b1e2',
+    'italic' => $fontDir . '\303c013e4748367802714e34c4680a05',
+    'bold_italic' => $fontDir . '\170252890f165b9e8971e7091f3402f5',
   ),
 ) ?>

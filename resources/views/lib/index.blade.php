@@ -54,7 +54,7 @@ function count_day($day1){
 	<div class="row-fluid">
 	  <div class="span12">
 			<a href="{{ route('export.excellib') }}" title="Excel" class="btn thead">Excel <i class="fa fa-file-excel-o" aria-hidden="true" style="font-size:14px"></i></a>
-      <a href="{{ url('manage_Users/pdf') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
+      <a href="{{ url('/pdf/pdf_lib') }}" title="Excel" class="btn thead">PDF <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:13.5px"></i></a>
       <a id="print" href="#" title="Excel" class="btn thead">Print <i class="fa fa-print" aria-hidden="true" style="font-size:15px"></i></a>
 	    <div class="widget-box">
 	      <div class="widget-title">
