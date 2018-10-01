@@ -177,7 +177,11 @@ class UserController extends Controller
             $message = $client->message()->send([
                 'to' => $user->phone,
                 'from' => 'TPM(1980)_HR',
+<<<<<<< HEAD
                 'text' => $user->name.' Login BY '.$user->email,
+=======
+                'text' => $user->name.' Login โดย '.$user->email,
+>>>>>>> 794add73c0a73786fa16b466dd1053c4f6d02724
                 'type' => 'unicode'
             ]);
              
@@ -188,6 +192,7 @@ class UserController extends Controller
             return response()->json($response);
         }
     }
+<<<<<<< HEAD
     public function nexmo1(Request $request)
     {
         if($request->ajax())
@@ -219,6 +224,10 @@ class UserController extends Controller
             return response()->json($response);
         }
     }
+=======
+
+
+>>>>>>> 794add73c0a73786fa16b466dd1053c4f6d02724
     /**
      * Update the specified resource in storage.
      *

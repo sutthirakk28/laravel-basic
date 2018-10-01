@@ -33,12 +33,12 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 --1. multiple authen(admin vs user) * gen token
 *2. forgot password
 3. Blog posts* chat = websockets
-4. change Apache to Nginx
+*4. change Apache to Nginx
 -5. log
 ---6. send data to...sms,email,line
 --7. google reCAPTCHA
 8. facebook login
---9. export pdf/excel/print 
+---9. export pdf/excel/print 
 	Create an export class in app/Exports
 	php artisan make:export UsersExport --model=User
 ---10. deploy
