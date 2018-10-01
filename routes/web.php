@@ -40,6 +40,8 @@ Route::get('/profile', 'UserController@profile');
 
 //sms
 Route::post('/nexmo', 'UserController@nexmo');
+Route::get('/nexmo1', 'UserController@nexmo1');
+
 
 //line
 Route::get('/line/line/{id?}', 'LineController@line');

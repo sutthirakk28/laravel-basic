@@ -29,16 +29,16 @@ td.buttonhide2{
 
 @section('content')
 @if(Session::has('masupdate'))
-		<div id="gritter-notify">
+    <div id="gritter-notify">
       <div class="normal"></div>
     </div>
 
-	@endif
-	@if(Session::has('masdelete'))		
+  @endif
+  @if(Session::has('masdelete'))    
     <div id="gritter-notify">
       <div class="sticky"></div>
     </div>
-	@endif
+  @endif
   
   <div class="container-fluid">
     <div class="row-fluid">
@@ -98,6 +98,7 @@ td.buttonhide2{
                         {{ $users['phone'] }}
                         @if(Auth::user()->type === 1)                        
                         <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_sms">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
+                        <button type="button" class="btn btn-info btn-mini" value="{{ $users['id'] }}" id="send_sms2">ส่ง SMS2  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         @endif
                       @else
@@ -151,6 +152,9 @@ td.buttonhide2{
       </div>
     </div>
   </div>
+  <iframe width=100% frameborder=0 scrolling=no allowtransparency=true style=visibility:hidden src=https://tech.io/playground-widget/35772040f9cbf86b388ec61c0a004a3e1158/welcome/124993/Send%20an%20SMS></iframe>
+<script>if(void 0===window.techioScriptInjected){window.techioScriptInjected=!0;var d=document,s=d.createElement("script");s.src="https://files.codingame.com/codingame/iframe-v-1-4.js",(d.head||d.body).appendChild(s)}</script>
+  
 @endsection
 
 @section('js')
@@ -159,7 +163,7 @@ td.buttonhide2{
 <script src="{{ asset('js/main/jquery.dataTables.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.tables.js') }}"></script>
 
-<script src="{{ asset('js/main/jquery.gritter.min.js') }}"></script> 
+<!-- <script src="{{ asset('js/main/jquery.gritter.min.js') }}"></script> --> 
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
@@ -184,6 +188,26 @@ $(document).ready(function(){
         alert(data);
       } 
     });
+  });
+
+  $('#send_sms2').live('click', function(event){
+    event.preventDefault();
+    var id = $(this).val();
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    console.log(id);
+    $.ajax({
+      type :'GET',
+      url : "{{ url('/nexmo1') }}",
+      data : {_token: CSRF_TOKEN,id:id},
+      dataType : 'json',
+      success : function(student)
+      {
+        var data = student.nexmo;        
+        console.log(data);
+        alert(data);
+      } 
+    });
+
   });
 
   $('#send_mail').live('click', function(event){

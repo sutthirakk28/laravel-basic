@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\User;
 use Response;
 use Session;
 use DB;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class UserController extends Controller
 {
@@ -178,11 +178,43 @@ class UserController extends Controller
                 'to' => $user->phone,
                 'from' => 'TPM(1980)_HR',
                 'text' => $user->name.' Login BY '.$user->email,
+                'type' => 'unicode'
             ]);
              
             $result = "SMS ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";
             $response = array(
             'nexmo' => $result
+            );
+            return response()->json($response);
+        }
+    }
+    public function nexmo1(Request $request)
+    {
+        if($request->ajax())
+        {
+            $user = User::find($request->id);
+
+            // Nexmo::message()->send([
+            //     'to'   => '66896901952',
+            //     'from' => 'ตุ่ย',
+            //     'text' => 'การแจ้งเตือน',
+            //     'type' => 'unicode'
+            // ]);
+            $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
+                    'api_key' => 'ae2c69eb',
+                    'api_secret' => '4SXJVnnhqka0kK5g',
+                    'to' => '66896901952',
+                    'from' => '66896901952',
+                    'text' => 'Hello from Nexmo'
+                ]);
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+
+            $result = "SMS ส่งข้อมูลผู้ดูแลของ ".$user->name." เรียบร้อยแล้ว";
+            $response = array(
+                'nexmo' => $result
             );
             return response()->json($response);
         }
