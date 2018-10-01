@@ -10,6 +10,7 @@ use App\User;
 use Response;
 use Session;
 use DB;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class UserController extends Controller
 {
@@ -177,7 +178,8 @@ class UserController extends Controller
             $message = $client->message()->send([
                 'to' => $user->phone,
                 'from' => 'TPM(1980)_HR',
-                'text' => $user->name.' Login BY '.$user->email,
+                'text' => $user->name.' Login โดย '.$user->email,
+                'type' => 'unicode'
             ]);
              
             $result = "SMS ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว";
@@ -187,6 +189,8 @@ class UserController extends Controller
             return response()->json($response);
         }
     }
+
+
     /**
      * Update the specified resource in storage.
      *

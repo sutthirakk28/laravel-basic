@@ -40,6 +40,17 @@ Route::get('/profile', 'UserController@profile');
 
 //sms
 Route::post('/nexmo', 'UserController@nexmo');
+Route::get('/sms/send/{to}', function(\Nexmo\Client $nexmo, $to){
+    $message = $nexmo->message()->send([
+        'to' => $to,
+        'from' => '@leggetter',
+        'text' => 'Sending SMS from Laravel. Woohoo!'
+    ]);
+	Log::info('sent message: ' . $message['message-id']);
+	Log::alert('sent message: ' . $message['message-id']);
+	Log::notice('sent message: ' . $message['message-id']);
+});
+
 
 //line
 Route::get('/line/line/{id?}', 'LineController@line');
