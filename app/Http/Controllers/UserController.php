@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\User;
 use Response;
@@ -29,15 +30,15 @@ class UserController extends Controller
 
         $result = json_decode($user, true);
         $data = array(
-            'user' => $result,
+            'user'  => $result,
             'style' => $aCss,
         );
+        Log::info('Index ข้อมูล admin.index โดย '.Auth::user()->name);
         return view('admin.index',$data);
     }
 
     public function profile()
-    {
-        
+    {        
         $id = Auth::id();
 
         $aCss=array('css/admin/style.css');
@@ -49,8 +50,9 @@ class UserController extends Controller
         $result = json_decode($user, true);
         $data = array(
             'profile' => $result,
-            'style' => $aCss,
+            'style'   => $aCss,
         );
+        Log::info('Profile แก้ไขข้อมูล admin.profile โดย '.Auth::user()->name);
         return view('admin.profile',$data);
     }
 
@@ -67,6 +69,7 @@ class UserController extends Controller
         $data = array(
             'style' => $aCss,
         );
+        Log::info('Create ข้อมูล admin.create โดย '.Auth::user()->name);
         return view('admin.create',$data);
     }
 
@@ -81,38 +84,24 @@ class UserController extends Controller
         $token2 = $request->input('g-recaptcha-response');
         if(strlen($token2) >= 0){
             $now = new Carbon();
-            /* $client = new Client();
-            $reponse = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-                'form_params' => array(
-                    'secret' => '6Levm3AUAAAAAOm1FFyN3OCKOl8Ksw46XJfn9S3t',
-                    'response' => $token2
-                )
-            ]);
-            $results = json_decode($reponse->getBody()->getContents());
-            if($results->success){
-                dd($results);
-                Session::flash('success','You we know you are human');
-            }else{
-                Session::flash('erroe','You are probably a robot!');
-            }*/
-
             $this->validate($request,[
                 'username' => 'required|max:100',
-                'email' => 'required|email|max:100|unique:users',
+                'email'    => 'required|email|max:100|unique:users',
                 'password' => 'required|string|min:6|confirmed',
-                'phone' => 'max:15',
+                'phone'    => 'max:15',
             ]);
             
             User::create([
-                'name' => $request->username,
-                'email' => $request->email,
+                'name'     => $request->username,
+                'email'    => $request->email,
                 'password' => bcrypt($request->password),
-                'type' => 2,
-                'phone' => $request->phone,
-                'active' => 0,
-                'created_at' => $now,
+                'type'     => 2,
+                'phone'    => $request->phone,
+                'active'   => 0,
+                'created_at'=> $now,
                 
-            ]);  
+            ]);
+            Log::info('Store ข้อมูล /manage_Users โดย '.Auth::user()->name);  
             return redirect('/manage_Users');
         }else{
             return view('admin.create');
@@ -137,9 +126,10 @@ class UserController extends Controller
         $result = json_decode($user, true);
 
         $data = array(
-            'user' => $result,
+            'user'  => $result,
             'style' => $aCss
         );
+        Log::info('Show ข้อมูล admin.show โดย '.Auth::user()->name);
         return view('admin.show',$data);
     }
 
@@ -159,9 +149,10 @@ class UserController extends Controller
                 ->get();
             $result = json_decode($user, true);
             $data = array(
-                'user' => $result,
+                'user'  => $result,
                 'style' => $aCss
-            ); 
+            );
+            Log::info('Edit ข้อมูล admin.edit โดย '.Auth::user()->name); 
             return view('admin.edit',$data);
         }
     }
@@ -175,13 +166,9 @@ class UserController extends Controller
             $basic  = new \Nexmo\Client\Credentials\Basic('ae2c69eb', '4SXJVnnhqka0kK5g');
             $client = new \Nexmo\Client($basic);
             $message = $client->message()->send([
-                'to' => $user->phone,
+                'to'   => $user->phone,
                 'from' => 'TPM(1980)_HR',
-<<<<<<< HEAD
                 'text' => $user->name.' Login BY '.$user->email,
-=======
-                'text' => $user->name.' Login โดย '.$user->email,
->>>>>>> 794add73c0a73786fa16b466dd1053c4f6d02724
                 'type' => 'unicode'
             ]);
              
@@ -189,10 +176,10 @@ class UserController extends Controller
             $response = array(
             'nexmo' => $result
             );
+            Log::alert('SMS ส่งข้อมูลผู้ดูแลเรียบร้อยแล้ว โดย '.Auth::user()->name);
             return response()->json($response);
         }
     }
-<<<<<<< HEAD
     public function nexmo1(Request $request)
     {
         if($request->ajax())
@@ -205,29 +192,16 @@ class UserController extends Controller
             //     'text' => 'การแจ้งเตือน',
             //     'type' => 'unicode'
             // ]);
-            $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
-                    'api_key' => 'ae2c69eb',
-                    'api_secret' => '4SXJVnnhqka0kK5g',
-                    'to' => '66896901952',
-                    'from' => '66896901952',
-                    'text' => 'Hello from Nexmo'
-                ]);
 
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
 
             $result = "SMS ส่งข้อมูลผู้ดูแลของ ".$user->name." เรียบร้อยแล้ว";
             $response = array(
                 'nexmo' => $result
             );
+            Log::alert($result);
             return response()->json($response);
         }
     }
-=======
-
-
->>>>>>> 794add73c0a73786fa16b466dd1053c4f6d02724
     /**
      * Update the specified resource in storage.
      *
@@ -248,29 +222,30 @@ class UserController extends Controller
         if($request->password === NULL){
             $adminUpdate = User::where('id',$id)
             ->update([
-                'name' => $request->username,
-                'email' => $request->email,
-                'updated_at' => $now,
-                'phone' => $request->phone,
+                'name'      => $request->username,
+                'email'     => $request->email,
+                'updated_at'=> $now,
+                'phone'     => $request->phone,
             ]);
         }else{
             $adminUpdate = User::where('id',$id)
             ->update([
-                'name' => $request->username,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'updated_at' => $now,
-                'phone' => $request->phone,
+                'name'      => $request->username,
+                'email'     => $request->email,
+                'password'  => bcrypt($request->password),
+                'updated_at'=> $now,
+                'phone'     => $request->phone,
             ]);
-        } 
+        }         
 
         if($request->id_user == 'profile'){
+            Log::info('Update ข้อมูล /profile โดย '.Auth::user()->name);
             return redirect('/profile');
         }else{
+            Log::info('Update ข้อมูล /manage_Users โดย '.Auth::user()->name);
             Session::flash('masupdate','แก้ไขข้อมูลผู้ดูแลเรียบร้อยแล้ว');
             return redirect('/manage_Users');
         }
-
         return back()->withInput();
     }
 
@@ -285,6 +260,7 @@ class UserController extends Controller
         $user = User::find($request->depId);
         $user->delete();
         if($user){
+            Log::info('Destroy ข้อมูล /manage_Users โดย '.Auth::user()->name);
             Session::flash('masdelete','ลบข้อมูลผู้ดูแลเรียบร้อยแล้ว');
             return redirect('/manage_Users');
         }

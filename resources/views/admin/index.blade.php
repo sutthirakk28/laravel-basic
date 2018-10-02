@@ -152,9 +152,6 @@ td.buttonhide2{
       </div>
     </div>
   </div>
-  <iframe width=100% frameborder=0 scrolling=no allowtransparency=true style=visibility:hidden src=https://tech.io/playground-widget/35772040f9cbf86b388ec61c0a004a3e1158/welcome/124993/Send%20an%20SMS></iframe>
-<script>if(void 0===window.techioScriptInjected){window.techioScriptInjected=!0;var d=document,s=d.createElement("script");s.src="https://files.codingame.com/codingame/iframe-v-1-4.js",(d.head||d.body).appendChild(s)}</script>
-  
 @endsection
 
 @section('js')

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class LoginController extends Controller
 {
@@ -33,32 +35,21 @@ class LoginController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-        
-    //     $this->middleware('guest')->except('logout');
-    //     return redirect('/hello');
-    // }
     protected function authenticated()
     {
         $user = auth()->user();
         $user->active = 1;
         $user->save();
+        Log::notice('Login โดย '.Auth::user()->name);
     }
     protected function logout()
     {
+
         $user = auth()->user();
         $user->active = 0;
         $user->save();
-        $this->middleware('guest')->except('logout');
-        
+        Log::notice('Logout โดย '.Auth::user()->name);
+        $this->middleware('guest')->except('logout');        
         return redirect('/');
     }
-    // public function form1()
-    // {
-    //     return 'wellcome to from';
-    // }
-    // public function poll(){
-    //     return "wellcom to poll";
-    // }
 }

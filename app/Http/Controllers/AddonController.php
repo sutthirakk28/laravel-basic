@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use DB;
-use App\Leave;
-use App\Lib;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\User;
+use App\Lib;
+use App\Leave;
+
 
 class AddonController extends Controller
 {
@@ -24,7 +27,7 @@ class AddonController extends Controller
     public function index()
     {
         $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', 'http://localhost/laravel-basic/public/api/products');
+        $res = $client->request('GET', 'http://www.pkwallpaper.esy.es/api/products');
         $status = $res->getStatusCode();        
         $Header = $res->getHeaderLine('content-type');
         $body = $res->getBody();
@@ -35,7 +38,7 @@ class AddonController extends Controller
         $data = array(
             'leave' => $result,
         );
-        //dd($data);
+        Log::info('Index ข้อมูล addon.apiFetchdata โดย '.Auth::user()->name);
         return view('addon.apiFetchdata',$data);
     }
 
@@ -58,9 +61,8 @@ class AddonController extends Controller
         $piechart = DB::table('libs')
             ->selectRaw("COUNT(surname) AS woman,(SELECT COUNT(surname) FROM libs WHERE surname LIKE ('นาย%')) AS man")
             ->whereRaw("surname LIKE ('นาง%')")
-            ->get();
-            
-        DB::statement('SET GLOBAL group_concat_max_len = 1000000');
+            ->get();            
+        
         $wordcloud = Leave::selectRaw("GROUP_CONCAT(reason_leave) as text")
             ->whereRaw("reason_leave != '' ")
             ->get();
@@ -77,7 +79,7 @@ class AddonController extends Controller
             ->groupBy(DB::raw("leaves.id_per,type_leave"))
             ->get();
 
-        $result = json_decode($pos, true);
+        $result  = json_decode($pos, true);
         $result1 = json_decode($barcharthorizontal, true);
         $result2 = json_decode($piechart, true);
         $result3 = json_decode($wordcloud, true);
@@ -85,14 +87,14 @@ class AddonController extends Controller
         $result6 = json_decode($barchart2, true);
 
         $data = array(
-            'pos' => $result,
-            'thorizontal' => $result1,
-            'piechart' => $result2,
+            'pos'       => $result,
+            'thorizontal'=> $result1,
+            'piechart'  => $result2,
             'wordcloud' => $result3,
             'piechart2' => $result4,
             'barchart2' => $result6,
         );
-        //dd($data);
+        Log::info('Graph ข้อมูล addon.graph โดย '.Auth::user()->name);
         return view('addon.graph',$data);
     }
 
@@ -103,6 +105,7 @@ class AddonController extends Controller
      */
     public function admin()
     {
+        Log::info('admin ข้อมูล admin.manage_Users โดย '.Auth::user()->name);
         return view('admin.manage_Users');
     }
 
@@ -112,16 +115,13 @@ class AddonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
     public function organiz()
     {   
         $aCss=array('css/addon/style.css');
         $data = array(
             'style' => $aCss
         );
+        Log::info('organiz ข้อมูล addon.organiz โดย '.Auth::user()->name);
         return view('addon.organiz',$data);
     }
     /**
@@ -139,64 +139,33 @@ class AddonController extends Controller
             'style' => $aCss,
             'user' => $result
         );
+        Log::alert('chat ข้อมูล addon.chat โดย '.Auth::user()->name);
         return view('addon.chat',$data);
     }
 
     public function gallery()
     {
         $aCss=array('css/addon/style.css');
-        $lib = Lib::all();
+        $lib = DB::table('libs')->get(); 
         $result = json_decode($lib, true);
         $data = array(
             'lib' => $result,
             'style' => $aCss
         );
+        Log::info('gallery ข้อมูล addon.gallery โดย '.Auth::user()->name);
         return view('addon.gallery',$data);
     }
 
     public function calendar()
     {
         $aCss=array('css/addon/style.css');
-        $lib = Lib::all();
+        $lib = DB::table('libs')->get();
         $result = json_decode($lib, true);
         $data = array(
             'lib' => $result,
             'style' => $aCss
         );
+        Log::info('calendar ข้อมูล addon.calendar โดย '.Auth::user()->name);
         return view('addon.calendar',$data);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

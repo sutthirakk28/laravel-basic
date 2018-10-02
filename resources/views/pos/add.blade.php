@@ -50,7 +50,7 @@
 		                    <div class="controls select2">
 								<select name="name_dep" id="name_dep" required>
 				                    @foreach($dep as $d)
-								    <option value="{{ $d->id_dep }}">{{ $d['name_dep'] }}</option>
+								    <option value="{{ $d['id_dep'] }}">{{ $d['name_dep'] }}</option>
 								  	@endforeach
 				                </select>                        
 		                    </div>

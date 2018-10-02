@@ -40,20 +40,7 @@ Route::get('/profile', 'UserController@profile');
 
 //sms
 Route::post('/nexmo', 'UserController@nexmo');
-<<<<<<< HEAD
 Route::get('/nexmo1', 'UserController@nexmo1');
-=======
-Route::get('/sms/send/{to}', function(\Nexmo\Client $nexmo, $to){
-    $message = $nexmo->message()->send([
-        'to' => $to,
-        'from' => '@leggetter',
-        'text' => 'Sending SMS from Laravel. Woohoo!'
-    ]);
-	Log::info('sent message: ' . $message['message-id']);
-	Log::alert('sent message: ' . $message['message-id']);
-	Log::notice('sent message: ' . $message['message-id']);
-});
->>>>>>> 794add73c0a73786fa16b466dd1053c4f6d02724
 
 
 //line

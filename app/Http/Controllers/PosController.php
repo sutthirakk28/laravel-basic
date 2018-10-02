@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Lib;
 use App\Dep;
@@ -44,6 +46,7 @@ class PosController extends Controller
             'style' => $aCss,
             'script'=> $aScript,
         );
+        Log::info('index ข้อมูล pos.index โดย '.Auth::user()->name);
         return view('pos.index',$data);
     }
 
@@ -55,11 +58,15 @@ class PosController extends Controller
     public function create()
     {
         $aCss=array('css/pos/style.css');
-        $dep = Dep::all();
+        $dep = DB::table('deps')
+            ->select('deps.*')
+            ->get();
+        $result = json_decode($dep, true);
         $data = array(
             'style' => $aCss,
-            'dep' => $dep,
+            'dep' => $result,
         );
+        Log::info('create ข้อมูล pos.add โดย '.Auth::user()->name);
         return view('pos.add',$data);
     }
 
@@ -76,12 +83,13 @@ class PosController extends Controller
             'name_pos' => 'required|max:100',
         ]);
         $now = new Carbon();
-        $pos = new Pos;        
-
-        $pos->name_pos = $request->name_pos;
-        $pos->id_dep = $request->name_dep;
-        $pos->created_at = $now;
-        $pos->save();
+        DB::table('pos')
+            ->insert([
+            'name_pos'  => $request->name_pos,
+            'id_dep'    => $request->name_dep, 
+            'created_at'=> $now,
+        ]);
+        Log::info('store ข้อมูล pos โดย '.Auth::user()->name);
         return redirect('pos');
     }
 
@@ -113,7 +121,8 @@ class PosController extends Controller
             'lib' => $result2,
             'style' => $aCss
         );
-         return view('pos.show',$data);
+        Log::info('show ข้อมูล pos.show โดย '.Auth::user()->name);
+        return view('pos.show',$data);
     }
 
     /**
@@ -126,18 +135,20 @@ class PosController extends Controller
     {
         if($id !== ''){
             $aCss=array('css/pos/style.css');
-            $dep = Dep::all();       
+            $dep = DB::table('deps')->get();       
             $pos = DB::table('pos')
                 ->join('deps', 'deps.id_dep', '=', 'pos.id_dep')
                 ->select('pos.*','name_dep')
                 ->where('id_pos','=',$id)
                 ->get();
             $result = json_decode($pos, true);
+            $result2 = json_decode($dep, true);
             $data = array(
                 'pos' => $result,
                 'style' => $aCss,
-                'dep' => $dep,
+                'dep' => $result2,
             );
+            Log::info('edit ข้อมูล pos.from โดย '.Auth::user()->name);
             return view('pos.from',$data);
         }
     }
@@ -157,18 +168,17 @@ class PosController extends Controller
         ]);
 
         $now = new Carbon();
-        $posUpdate = Pos::where('id_pos',$id)
-        ->update([
-            'name_pos' => $request->input('name_pos'),
-            'id_dep' => $request->input('id_dep'),
-            'updated_at' => $now,
-        ]);
-
+        $posUpdate = DB::table('pos')
+            ->where('id_pos', $id)
+            ->update([
+                'name_pos'  => $request->input('name_pos'),
+                'id_dep'    => $request->input('id_dep'),
+                'updated_at'=> $now,
+                ]);
         if($posUpdate){
+            Log::info('update ข้อมูล pos โดย '.Auth::user()->name);
             Session::flash('masupdate','แก้ไขข้อมูลตำแหน่งเรียบร้อยแล้ว');
             return redirect('pos');
-            // return redirect('dep')
-            // ->with('success', 'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
         }
         return back()->withInput();
     }
@@ -181,10 +191,12 @@ class PosController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $posDelete = Pos::where('id_pos',$request->depId)
+        $posDelete = DB::table('pos')
+            ->where('id_pos', '=', $request->depId)
             ->delete();
 
         if($posDelete){
+            Log::info('destroy ข้อมูล pos โดย '.Auth::user()->name);
             Session::flash('masdelete','ลบข้อมูลตำแหน่งเรียบร้อยแล้ว');
             return redirect('pos');
         }

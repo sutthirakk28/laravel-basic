@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -21,6 +23,7 @@ class PDFController extends Controller
             'user' => $result,
         );
         $pdf = PDF::loadView('pdf.pdf_user',$data);
+        Log::info('PDF ข้อมูล pdf_user โดย '.Auth::user()->name);
         return $pdf->download('ข้อมูลผู้ดูแล.pdf');
     }
 
@@ -35,6 +38,7 @@ class PDFController extends Controller
             'dep' => $result,
         );
         $pdf = PDF::loadView('pdf.pdf_dep',$data);
+        Log::info('PDF ข้อมูล pdf_dep โดย '.Auth::user()->name);
         return $pdf->download('ข้อมูลฝ่าย.pdf');
     }
 
@@ -49,6 +53,7 @@ class PDFController extends Controller
             'pos' => $result,
         );
         $pdf = PDF::loadView('pdf.pdf_pos',$data);
+        Log::info('PDF ข้อมูล pdf_pos โดย '.Auth::user()->name);
         return $pdf->download('ข้อมูลตำแหน่ง.pdf');
     }
 
@@ -66,6 +71,7 @@ class PDFController extends Controller
             'lib' => $result,
         );
         $pdf = PDF::loadView('pdf.pdf_lib',$data);
+        Log::info('PDF ข้อมูล pdf_lib โดย '.Auth::user()->name);
         return $pdf->download('ข้อมูลพนักงาน.pdf');
     }
 
@@ -84,6 +90,7 @@ class PDFController extends Controller
             'leave' => $result,
         );
         $pdf = PDF::loadView('pdf.pdf_leave',$data);
+        Log::info('PDF ข้อมูล pdf_leave โดย '.Auth::user()->name);
         return $pdf->download('ข้อมูลการลาเดือนนี้.pdf');
     }
     

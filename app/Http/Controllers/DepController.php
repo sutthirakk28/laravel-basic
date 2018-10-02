@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Lib;
-use App\Dep;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use DateTime;
 use Carbon\Carbon;
 use Session;
@@ -23,9 +23,9 @@ class DepController extends Controller
      */
     public function index()
     {   
-        $aCss=array('css/dep/style.css');
-        $aScript=array('js/dep/main.js'); 
-        $dep = DB::table('deps')
+        $aCss = array('css/dep/style.css');
+        $aScript = array('js/dep/main.js'); 
+        $dep  = DB::table('deps')
             ->select('deps.*')
             ->get();       
 
@@ -40,16 +40,17 @@ class DepController extends Controller
              ->groupBy('pos.id_dep')
              ->get();     
 
-        $result = json_decode($dep, true);
+        $result  = json_decode($dep, true);
         $result2 = json_decode($pos, true);
         $result3 = json_decode($lib, true);  
         $data = array(
-            'dep' => $result,
-            'pos' => $result2,
-            'lib' => $result3,
+            'dep'   => $result,
+            'pos'   => $result2,
+            'lib'   => $result3,
             'style' => $aCss,
             'script'=> $aScript,
         );
+        Log::info('index ข้อมูล dep.index โดย '.Auth::user()->name);
         return view('dep.index',$data);    
     }
 
@@ -60,12 +61,13 @@ class DepController extends Controller
      */
     public function create()
     {
-        $aCss=array('css/dep/style.css');
-        $aScript=array('js/dep/main.js'); 
-        $data = array(
+        $aCss   = array('css/dep/style.css');
+        $aScript= array('js/dep/main.js'); 
+        $data   = array(
             'style' => $aCss,
             'style' => $aCss,
         );
+        Log::info('create ข้อมูล dep.add โดย '.Auth::user()->name);
         return view('dep.add',$data);
     }
 
@@ -81,13 +83,12 @@ class DepController extends Controller
             'name_dep' => 'required|max:100'
         ]);
         $now = new Carbon();
-        $dep = new Dep;        
-
-        $dep->name_dep = $requestdep->name_dep;
-
-        $dep->created_at = $now;
-        
-        $dep->save();
+        DB::table('deps')
+            ->insert([
+            'name_dep'  => $requestdep->name_dep, 
+            'created_at'=> $now
+        ]);
+        Log::info('store ข้อมูล dep โดย '.Auth::user()->name);
         return redirect('dep');
     }
 
@@ -99,35 +100,36 @@ class DepController extends Controller
      */
     public function show($id)
     {
-        $aCss=array('css/dep/style.css');
-        $dep = DB::table('deps')
+        $aCss = array('css/dep/style.css');
+        $dep  = DB::table('deps')
             ->select('deps.*')
             ->where('id_dep','=',$id)
             ->get();
 
         $pos = DB::table('pos')
-             ->select(DB::raw('count(*) as count_id, id_dep'))
-             ->where('id_dep',$id)
-             ->groupBy('id_dep')
-             ->get();
+            ->select(DB::raw('count(*) as count_id, id_dep'))
+            ->where('id_dep',$id)
+            ->groupBy('id_dep')
+            ->get();
 
         $lib = DB::table('libs')
-             ->select(DB::raw('count(libs.position) as count_id, pos.id_dep'))
-             ->join('pos', 'pos.id_pos', '=', 'libs.position')
-             ->where('pos.id_dep',$id)
-             ->groupBy('pos.id_dep')
-             ->get();
+            ->select(DB::raw('count(libs.position) as count_id, pos.id_dep'))
+            ->join('pos', 'pos.id_pos', '=', 'libs.position')
+            ->where('pos.id_dep',$id)
+            ->groupBy('pos.id_dep')
+            ->get();
 
-        $result = json_decode($dep, true);
+        $result  = json_decode($dep, true);
         $result2 = json_decode($pos, true);
         $result3 = json_decode($lib, true); 
-        $data = array(
+        $data    = array(
             'dep' => $result,
             'pos' => $result2,
             'lib' => $result3,
             'style' => $aCss
         );
-         return view('dep.show',$data);
+        Log::info('show ข้อมูล dep.show โดย '.Auth::user()->name);
+        return view('dep.show',$data);
     }
 
     /**
@@ -139,16 +141,17 @@ class DepController extends Controller
     public function edit($ib)
     {   
         if($ib !== ''){
-            $aCss=array('css/dep/style.css');       
-            $dep = DB::table('deps')
+            $aCss = array('css/dep/style.css');       
+            $dep  = DB::table('deps')
                 ->select('deps.*')
                 ->where('id_dep','=',$ib)
                 ->get();
             $result = json_decode($dep, true);
             $data = array(
-                'dep' => $result,
+                'dep'   => $result,
                 'style' => $aCss
             );
+            Log::info('edit ข้อมูล dep.from โดย '.Auth::user()->name);
             return view('dep.from',$data);
         }
     }
@@ -166,17 +169,17 @@ class DepController extends Controller
           'name_dep' => 'required|max:100'
         ]);
         $now = new Carbon();
-        $depUpdate = Dep::where('id_dep',$id)
-        ->update([
-            'name_dep' => $request->input('name_dep'),
-            'updated_at' => $now,
-        ]);
+        $depUpdate = DB::table('deps')
+            ->where('id_dep', $id)
+            ->update([
+                'name_dep'   => $request->input('name_dep'),
+                'updated_at' => $now,
+                ]);
 
         if($depUpdate){
+            Log::info('update ข้อมูล dep โดย '.Auth::user()->name);
             Session::flash('masupdate','แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('dep');
-            // return redirect('dep')
-            // ->with('success', 'แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
         }
         return back()->withInput();
     }
@@ -189,11 +192,12 @@ class DepController extends Controller
      */
     public function destroy(Request $request,$id)
     {   
-        //$dep = Dep::find($id);
-        $depDelete = Dep::where('id_dep',$request->depId)
+        $depDelete = DB::table('deps')
+            ->where('id_dep', '=', $request->depId)
             ->delete();
 
         if($depDelete){
+            Log::info('destroy ข้อมูล dep โดย '.Auth::user()->name);
             Session::flash('masdelete','ลบข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('dep');
         }

@@ -50,10 +50,10 @@
 		                    <div class="controls select2">		                        
 								<select name="id_dep" id="id_dep" required>
 				                    @foreach($dep as $d)
-									  	@if($d->id_dep == $poss['id_dep'])
-									  		<option value="{{ $d->id_dep }}" selected>{{ $d['name_dep'] }}</option>
+									  	@if($d['id_dep'] == $poss['id_dep'])
+									  		<option value="{{ $d['id_dep']  }}" selected>{{ $d['name_dep'] }}</option>
 									  	@else
-									  		<option value="{{ $d->id_dep }}">{{ $d['name_dep'] }}</option>
+									  		<option value="{{ $d['id_dep'] }}">{{ $d['name_dep'] }}</option>
 									  	@endif					    
 								  	@endforeach
 				                </select>                       

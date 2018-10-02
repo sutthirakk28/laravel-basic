@@ -34,7 +34,7 @@ and the clear config cache using (php artisan config:clear)will solve this probl
 *2. forgot password
 3. Blog posts* chat = websockets
 *4. change Apache to Nginx
--5. log
+--5. log
 ---6. send data to...sms,email,line
 --7. google reCAPTCHA
 8. facebook login

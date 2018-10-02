@@ -9,12 +9,9 @@ use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\ProductCollection;
 
 class ProductController extends Controller
-{
-    
+{    
     public function show ()
     {
-        // $lib = DB::table('libs')
-        //     ->get();
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->selectRaw("leaves.id_per, libs.surname, libs.nickname, leaves.type_leave, leaves.nstart_day, leaves.nend_day")

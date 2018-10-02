@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Lib;
 use App\Dep;
 use App\Leave;
@@ -20,14 +22,7 @@ class LeaveController extends Controller
 {
     public function __construct()
     {
-        //All below Auth normal
         $this->middleware('auth');
-
-        //Only Function
-        //$this->middleware('auth',['only' => ['index','form'] ]);
-
-        //Except Function
-        //$this->middleware('auth',['except' => ['index'] ]);
     }
     /**
      * Display a listing of the resource.
@@ -50,6 +45,7 @@ class LeaveController extends Controller
             'style' => $aCss,
             'script'=> $aScript,
         );
+        Log::info('index ข้อมูล leave.index โดย '.Auth::user()->name);
         return view('leave.index',$data);
     }
 
@@ -60,19 +56,20 @@ class LeaveController extends Controller
      */
     public function create()
     {
-        $aCss=array('css/leave/style.css');
-        $aScript=array('js/leave/main.js');
+        $aCss   = array('css/leave/style.css');
+        $aScript= array('js/leave/main.js');
         $lib = DB::table('libs')
             ->select('surname', 'nickname','id')
             ->get();
         $now = Carbon::today()->toDateString();
         $result = json_decode($lib, true);
         $data = array(
-            'lib' => $result,
+            'lib'   => $result,
             'style' => $aCss,
             'script'=> $aScript,
-            'now1' => $now,
+            'now1'  => $now,
         );
+        Log::info('create ข้อมูล leave.add โดย '.Auth::user()->name);
         return view('leave.add',$data);
     }
 
@@ -86,14 +83,14 @@ class LeaveController extends Controller
     {
 
         $this->validate($request,[
-            'id_per' => 'required|max:100',
+            'id_per'     => 'required|max:100',
             'type_leave' => 'required|max:100',
             'date_leave' => 'required|date_format:Y-m-d',
             'nstart_day' => 'required|max:100',
-            'nend_day' => 'required|max:100',
-            'approved' => 'required|max:100'
+            'nend_day'   => 'required|max:100',
+            'approved'   => 'required|max:100'
         ]);
-        $now = new Carbon();
+        $now  = new Carbon();
         $now1 = Carbon::today()->toDateString();
 
         if(isset($request->proof_leave)){
@@ -102,22 +99,22 @@ class LeaveController extends Controller
             $checkBox ='';
         }
 
-
         $leave = new Leave;
-        $leave->id_per = $request->id_per;
+        $leave->id_per     = $request->id_per;
         $leave->type_leave = $request->type_leave;
         $leave->date_leave = $request->date_leave;
         $leave->reason_leave = $request->reason_leave;
         $leave->dstart_leave = $now1;
         $leave->dend_leave = $now1;
         $leave->nstart_day = $request->nstart_day;
-        $leave->nend_day = $request->nend_day;
-        $leave->proof_leave = $checkBox;
-        $leave->approved = $request->approved;
+        $leave->nend_day   = $request->nend_day;
+        $leave->proof_leave= $checkBox;
+        $leave->approved   = $request->approved;
         $leave->status_leave = $request->status_leave;
         $leave->created_at = $now;
         $leave->save();
 
+        Log::info('store ข้อมูล leave โดย '.Auth::user()->name);
         return redirect('leave');
     }
 
@@ -129,8 +126,8 @@ class LeaveController extends Controller
      */
     public function show($id)
     {
-        $aCss=array('css/leave/style.css');
-        $aScript=array('js/leave/main.js'); 
+        $aCss = array('css/leave/style.css');
+        $aScript = array('js/leave/main.js'); 
         $leave = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo','libs.id as lib_id','libs.job_start')
@@ -144,28 +141,30 @@ class LeaveController extends Controller
             'style' => $aCss,
             'script'=> $aScript,
         );
-         return view('leave.show',$data);
+        Log::info('show ข้อมูล leave.show โดย '.Auth::user()->name);
+        return view('leave.show',$data);
     }
 
     public function report($id)
     {
-        $aCss=array('css/leave/style.css');
-        $aScript=array('js/leave/main.js'); 
-        $lib = DB::table('leaves')
+        $aCss   = array('css/leave/style.css');
+        $aScript= array('js/leave/main.js'); 
+        $lib    = DB::table('leaves')
             ->join('libs', 'libs.id', '=', 'leaves.id_per')
             ->select('leaves.*','libs.surname','libs.nickname','libs.job_start')
             ->where('leaves.id_per','=',$id)
             ->orderBy('leaves.nstart_day', 'ASC')
             ->get();        
-        $lib2 = DB::table('libs')->select('id','surname','nickname  as i','job_start')->where('id', $id)->first();
+        $lib2   = DB::table('libs')->select('id','surname','nickname  as i','job_start')->where('id', $id)->first();
         $result = json_decode($lib, true); 
-        $result2 = json_decode(json_encode($lib2),true);
+        $result2= json_decode(json_encode($lib2),true);
         $data = array(
-            'lib' => $result,
-            'tuy' => $result2,            
+            'lib'   => $result,
+            'tuy'   => $result2,            
             'style' => $aCss,
             'script'=> $aScript,
         );
+        Log::info('report ข้อมูล leave.report โดย '.Auth::user()->name);
         return view('leave.report',$data);
     }
         
@@ -178,32 +177,18 @@ class LeaveController extends Controller
     {
         if($request->ajax())
         {            
-             $student = Leave::where('id_per', '=', $request->studentid)
+            $student = Leave::where('id_per', '=', $request->studentid)
                 ->select('id_per','type_leave','nstart_day','nend_day')
                 ->orderBy('type_leave', 'asc')
                 ->take(100)
-                ->get();            
-
-
-             //$student = Leave::where('id_per', $request->studentid)->first();
-             // $student = Leave::find($request->studentid);
-            //$student = leave::where('id_per', '=', $request->studentid)->get();
-
-            // $student = DB::table('leaves')->where('id_per', '=', $request->studentid)->get();
-             $result = json_decode($student, true);  
-             $response = array(
+                ->get();
+            $result  = json_decode($student, true);  
+            $response= array(
                 'leave' => $result
-              );
-              
-              return response()->json($response);
+            );
+            Log::info('getDataScore ข้อมูล leave โดย '.Auth::user()->name);
+            return response()->json($response);
 
-            // $id_per = $student->id_per;
-            // $type_leave = $student->type_leave;
-            // $nstart_day = $student->nstart_day;
-            // $nend_day = $student->nend_day;
-
-            // return response(['id_per'=>$id_per ,'type_leave'=>$type_leave ,'nstart_day'=>$nstart_day ,'nend_day'=>$nend_day ]);
-            
         }
     }
 
@@ -217,9 +202,9 @@ class LeaveController extends Controller
     public function edit($id)
     {
         if($id !== ''){
-            $aCss=array('css/leave/style.css');
-            $aScript=array('js/leave/main.js');
-            $leave = DB::table('leaves')
+            $aCss    = array('css/leave/style.css');
+            $aScript = array('js/leave/main.js');
+            $leave   = DB::table('leaves')
                 ->join('libs', 'libs.id', '=', 'leaves.id_per')
                 ->select('leaves.*', 'libs.surname','libs.nickname','libs.user_photo')
                 ->orderBy('leaves.date_leave', 'DESC')
@@ -229,14 +214,15 @@ class LeaveController extends Controller
                 ->select('id', 'surname','nickname')
                 ->get();
             
-            $result = json_decode($leave, true);
+            $result  = json_decode($leave, true);
             $result2 = json_decode($lib, true);
-            $data = array(
+            $data    = array(
                 'leave' => $result,
-                'lib' => $result2,
+                'lib'   => $result2,
                 'style' => $aCss,                
                 'script'=> $aScript
             );
+            Log::info('edit ข้อมูล leave.from โดย '.Auth::user()->name);
             return view('leave.from',$data);
         }
     }
@@ -251,12 +237,12 @@ class LeaveController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-          'id_per' => 'required|max:100',
+          'id_per'     => 'required|max:100',
           'type_leave' => 'required|max:100',
           'date_leave' => 'required|date_format:Y-m-d',
           'nstart_day' => 'required|max:100',
-          'nend_day' => 'required|max:100',
-          'approved' => 'required|max:100'
+          'nend_day'   => 'required|max:100',
+          'approved'   => 'required|max:100'
         ]);
 
         $now = new Carbon();
@@ -270,21 +256,22 @@ class LeaveController extends Controller
 
         $leaveUpdate = Leave::where('id',$id)
         ->update([
-            'id_per' => $request->id_per,
-            'type_leave' => $request->type_leave,
-            'date_leave' => $request->date_leave,
-            'reason_leave' => $request->reason_leave,
-            'dstart_leave' => $now1,
-            'dend_leave' => $now1,
-            'nstart_day' => $request->nstart_day,
-            'nend_day' => $request->nend_day,
-            'proof_leave' => $checkBox,
-            'approved' => $request->approved,
-            'status_leave' => $request->status_leave,
-            'updated_at' => $now,
+            'id_per'        => $request->id_per,
+            'type_leave'    => $request->type_leave,
+            'date_leave'    => $request->date_leave,
+            'reason_leave'  => $request->reason_leave,
+            'dstart_leave'  => $now1,
+            'dend_leave'    => $now1,
+            'nstart_day'    => $request->nstart_day,
+            'nend_day'      => $request->nend_day,
+            'proof_leave'   => $checkBox,
+            'approved'      => $request->approved,
+            'status_leave'  => $request->status_leave,
+            'updated_at'    => $now,
         ]);
 
         if($leaveUpdate){
+            Log::info('update ข้อมูล leave โดย '.Auth::user()->name);
             Session::flash('masupdate','แก้ไขข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('leave');
         }
@@ -303,6 +290,7 @@ class LeaveController extends Controller
             ->delete();
 
         if($leaveDelete){
+            Log::info('destroy ข้อมูล leave โดย '.Auth::user()->name);
             Session::flash('masdelete','ลบข้อมูลฝ่ายเรียบร้อยแล้ว');
             return redirect('leave');
         }

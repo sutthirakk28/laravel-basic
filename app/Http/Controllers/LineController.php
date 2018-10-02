@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Response;
 
 class LineController extends Controller
@@ -20,6 +22,7 @@ class LineController extends Controller
             'style' => $aCss,
             'massage' => $a,
         );
+        Log::alert('index ข้อมูล line.index โดย '.Auth::user()->name);
         return view('line.index',$data);
     }
 
@@ -32,6 +35,7 @@ class LineController extends Controller
             'style' => $aCss,
             'massage' => $a,
         );
+        Log::alert('line ข้อมูล line.line โดย '.Auth::user()->name);
         return view('line.line',$data);
     }
 
@@ -47,7 +51,7 @@ class LineController extends Controller
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL); 
             
-            $accToken = "DveiwigtPYZhh0e88Z6qfd1AIGOpiqOqcs9ZnfAa4AT";
+            $accToken  = "DveiwigtPYZhh0e88Z6qfd1AIGOpiqOqcs9ZnfAa4AT";
             $notifyURL = "https://notify-api.line.me/api/notify";
             
             $headers = array(
@@ -71,80 +75,22 @@ class LineController extends Controller
             curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec( $ch );
-            curl_close( $ch ); 
-
-            //var_dump($result); 
+            curl_close( $ch );  
             
             $result = json_decode($result,TRUE);       
 
             if(!is_null($result) && array_key_exists('status',$result)){
                 if($result['status']==200){
-                    //echo "Pass"; 
                     $result2 = "ส่งแล้ว";        
                     $response2 = array(
                         'line' => $result2,
                         'status' => $result['status'],
                     );
+                    Log::alert('create ข้อมูล line โดย '.Auth::user()->name);
                     return response()->json($response2);                   
                 }
-            }
-            
+            }            
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

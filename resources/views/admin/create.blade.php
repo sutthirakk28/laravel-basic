@@ -80,7 +80,7 @@
 						</div>
 						<div class="control-group">
 		                    <div class="controls">
-							<div class="g-recaptcha" data-sitekey="6Levm3AUAAAAANy9lY37DKWcLtTuV3cO32oWs_YX"></div>    
+							<div class="g-recaptcha" data-sitekey="6Ld6dhoUAAAAALelzMg8gH_XGYszwSHFcjqKm73h"></div>    
                             </div>
 						</div>
 						

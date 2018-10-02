@@ -10,19 +10,14 @@ use Response;
 use Session;
 use Validator;
 use Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TasksController extends Controller
 {
     public function __construct()
     {
-        //All below Auth normal
         $this->middleware('auth');
-
-        //Only Function
-        //$this->middleware('auth',['only' => ['index','form'] ]);
-
-        //Except Function
-        //$this->middleware('auth',['except' => ['index'] ]);
     }
     /**
      * Display a listing of the resource.
@@ -38,7 +33,7 @@ class TasksController extends Controller
             'tasks' => $result,
             'style' => $aCss
         );
-
+        Log::info('index ข้อมูล tasks.index โดย '.Auth::user()->name);
         return view('tasks.index', $data);
     }
 
@@ -49,6 +44,7 @@ class TasksController extends Controller
      */
     public function create()
     {
+        Log::info('create ข้อมูล tasks.create โดย '.Auth::user()->name);
         return view('tasks.create');
     }
 
@@ -61,58 +57,19 @@ class TasksController extends Controller
     public function store(Request $request)
     {        
         $now = new Carbon();
-
         $Tasks = new Task();
         $Tasks->name = $request->name;
         $Tasks->description = $request->description;
         $Tasks->task_date = $request->task_date;
         $Tasks->created_at = $now;
-
         $Tasks->save();
 
-        // $tasks_show = Task::all();            
-        // $result = json_decode($tasks_show, true);
         $data = array(
             'id' => $Tasks->id,
             'success' => 'เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว',
         );
+        Log::info('store ข้อมูล tasks โดย '.Auth::user()->name);
         return response()->json($data);
-         
-        //return response()->json(['success'=>'เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     public function edit_task(Request $request)
@@ -125,11 +82,7 @@ class TasksController extends Controller
             'task_date' => $request->task_date,
             'updated_at' => $now,
         ]);
-        // $success1 = 'Data is successfully Edit';
-        // $data = array(
-        //     'success' => $success1,
-        // );
-        // return response()->json($data);
+        Log::info('edit_task ข้อมูล tasks โดย '.Auth::user()->name);
         return response()->json(['success'=>'แก้ไขข้อมูลเรียบร้อยแล้ว']);
         
     }
@@ -142,6 +95,7 @@ class TasksController extends Controller
     public function destroy(Request $request)
     {
         Task::destroy($request->id);
+        Log::info('destroy ข้อมูล tasks โดย '.Auth::user()->name);
         return response()->json(['success'=>'ลบข้อมูลเรียบร้อยแล้ว']);
     }
 }

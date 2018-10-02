@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Response;
 use App\User;
 use App\Lib;
@@ -96,65 +98,70 @@ class HomeController extends Controller
             ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("libs.id"))
             ->get();
-        $result = json_decode($leave, true);
-        $result2 = json_decode($ctl, true);
-        $result3 = json_decode($ctl_month, true);
-        $result4 = json_decode($ctl_month2, true);
-        $result5 = json_decode($barchart, true);
-        $result6 = json_decode($piechart, true);
-        $result7 = json_decode($max_min, true);
-        $result8 = json_decode($barchartgrouped, true);
-        $result9 = json_decode($barchartgrouped1, true);
+        $result   = json_decode($leave, true);
+        $result2  = json_decode($ctl, true);
+        $result3  = json_decode($ctl_month, true);
+        $result4  = json_decode($ctl_month2, true);
+        $result5  = json_decode($barchart, true);
+        $result6  = json_decode($piechart, true);
+        $result7  = json_decode($max_min, true);
+        $result8  = json_decode($barchartgrouped, true);
+        $result9  = json_decode($barchartgrouped1, true);
         $result10 = json_decode($barchartgrouped2, true);
         $result11 = json_decode($barchartgrouped3, true);
         $result12 = json_decode($barchartgrouped4, true);
         $result13 = json_decode($polarchart, true);
         $data = array(
-            'leave' => $result,
-            'ctl' => $result2,
+            'leave'     => $result,
+            'ctl'       => $result2,
             'ctl_month' => $result3,
-            'ctl_month2' => $result4,
-            'barchart' => $result5,
-            'piechart' => $result6,
-            'max_min' => $result7,
-            'barchartgrouped' => $result8,
+            'ctl_month2'=> $result4,
+            'barchart'  => $result5,
+            'piechart'  => $result6,
+            'max_min'   => $result7,
+            'barchartgrouped'  => $result8,
             'barchartgrouped1' => $result9,
             'barchartgrouped2' => $result10,
             'barchartgrouped3' => $result11,
             'barchartgrouped4' => $result12,
-            'polarchart' => $result13,
+            'polarchart'=> $result13,
         );
-        //dd($data);
+        Log::info('index ข้อมูล home โดย '.Auth::user()->name);
         return view('home', $data);
     }
 
     public function list_leave()
     {
         $leave = Leave::all();
+        Log::info('list_leave ข้อมูล home โดย '.Auth::user()->name);
         return response()->json(['leave'=>$leave]);
     }
 
     public function sum_leave()
     {
         $sum_leave = Leave::count('id');
+        Log::info('sum_leave ข้อมูล home โดย '.Auth::user()->name);
         return response()->json(['sum_leave'=>$sum_leave]);
     }
 
     public function sum_admin()
     {
         $sum_admin = User::count('id');
+        Log::info('sum_admin ข้อมูล home โดย '.Auth::user()->name);
         return response()->json(['sum_admin'=>$sum_admin]);
     }
 
     public function sum_per()
     {
         $sum_per = Lib::count('id');
+        Log::info('sum_per ข้อมูล home โดย '.Auth::user()->name);
         return response()->json(['sum_per'=>$sum_per]);
     }
 
     public function sum_task()
     {
         $sum_task = Task::count('id');
+        Log::info('sum_task ข้อมูล home โดย '.Auth::user()->name);
         return response()->json(['sum_task'=>$sum_task]);
     }
     
