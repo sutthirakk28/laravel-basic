@@ -49,7 +49,7 @@ class LoginController extends Controller
         $user->active = 0;
         $user->save();
         Log::notice('Logout โดย '.Auth::user()->name);
-        $this->middleware('guest')->except('logout');        
+        Auth::logout();        
         return redirect('/');
     }
 }
