@@ -383,38 +383,28 @@ strong.sum_month {
       </div>
     </div>
     <div class="span6">
-      <div class="widget-box widget-chat">
-        <div class="widget-title"> <span class="icon"> <i class="icon-comment"></i> </span>
-          <h5>มาคุยกันเถอะ!</h5>
-        </div>
-        <div class="widget-content nopadding">
-          <div class="chat-users panel-right2">
-            <div class="panel-title">
-              <h5>Online Users</h5>
-            </div>
-            <div class="panel-content nopadding">
-              <ul class="contact-list">
-                <li id="user-Sunil" class="online"><a href=""><img alt="" src="images/img/demo/av1.jpg" /> <span>เกศสุดา</span></a></li>
-                <li id="user-Laukik"><a href=""><img alt="" src="images/img/demo/av2.jpg" /> <span>สุชิน</span></a></li>
-                <li id="user-vijay" class="online new"><a href=""><img alt="" src="images/img/demo/av3.jpg" /> <span>บรรลังฤทธิ์ะ</span></a><span class="msg-count badge badge-info">3</span></li>
-                <li id="user-Jignesh" class="online"><a href=""><img alt="" src="images/img/demo/av4.jpg" /> <span>สมชัย</span></a></li>
-                <li id="user-Malay" class="online"><a href=""><img alt="" src="images/img/demo/av5.jpg" /> <span>เกศสุดา</span></a></li>
-              </ul>
-            </div>
+      <div class="widget-box">
+          <div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
+            <h5>Latest Posts</h5>
           </div>
-          <div class="chat-content panel-left2">
-            <div class="chat-messages" id="chat-messages">
-              <div id="chat-messages-inner"></div>
-            </div>
-            <div class="chat-message well">
-              <button class="btn btn-success">Send</button>
-              <span class="input-box">
-              <input type="text" name="msg-box" id="msg-box" />
-              </span> </div>
+          <div class="widget-content nopadding">
+            <ul class="recent-posts">
+              @foreach($Latest_Posts as $L_Posts)                      
+                <li>
+                  <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/av1.jpg"> </div>
+                  <div class="article-post"> <span class="user-info"> By: {{$L_Posts['user_id']}} / Date: {{$L_Posts['updated_at']}} / Time:{{$L_Posts['updated_at']}} AM </span>
+                    <p>{{$L_Posts['title']}}  <a href="#">substr({!!$L_Posts['content']!!},0,20)</a> </p>
+                  </div>
+                </li>
+              @endforeach
+              <li>
+                <a class="btn btn-info btn-mini"  href="{{ url('/posts') }}">ดูบทความทั้งหมด</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
     </div>
+    
   </div>
   <hr>
 </div>

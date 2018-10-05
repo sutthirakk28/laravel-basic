@@ -28,8 +28,8 @@
 				</div>
 				<div class="widget-content nopadding f_th3">
 					{{ Form::open(array('url' => url('/posts'), 'class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate')) }}
-          {{ csrf_field() }}
-          @if(count($errors) > 0 )
+						{{ csrf_field() }}
+						@if(count($errors) > 0 )
 							<div class=" alert alert-danger">
 								<ul>
 									@foreach($errors->all() as $error)
@@ -47,8 +47,9 @@
             <div class="control-group">
                 <label class="control-label"><span class="request">*</span> เนื้อหาบทความ : </label>
                 <div class="controls">	                        
-                  <textarea class="form-control" rows="10" id="post_content" name="content" placeholder="Write something amazing..." value="{{ old('content') }}" required /></textarea>  	                        
-                </div>
+                  <textarea class="form-control" style="width: 81%;" id="mytextarea" name="content" placeholder="Write something amazing..." value="{{ old('content') }}" required /></textarea>  	                        
+                 
+				</div>
             </div>
             <div class="control-group">
                 <label class="control-label"> Published : </label>
@@ -68,4 +69,14 @@
 @endsection
 @section('js')
 <script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+	menubar:false, 
+	theme: 'modern',
+    height: 300,
+	
+  });
+  </script>
 @endsection

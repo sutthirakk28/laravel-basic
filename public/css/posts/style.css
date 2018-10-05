@@ -42,13 +42,19 @@ span.request{
   td.center{
     text-align: center;
 }
-textarea
-{
-  border:1px solid #999999;
-  width:80%;
-  margin:5px 0;
-  padding:3px;
-}
 button.btn.btn-primary {
   margin-left: 180px;
+}
+.head,.foot{
+  padding-left:10%;
+}
+.content{
+  padding-left:10%;
+  padding-right:10%;
+}
+img.media-object {
+    float: left;
+}
+.media-body {
+    padding-left: 1%;
 }

@@ -98,7 +98,6 @@ td.buttonhide2{
                         {{ $users['phone'] }}
                         @if(Auth::user()->type === 1)                        
                         <button type="button" class="btn btn-primary btn-mini" value="{{ $users['id'] }}" id="send_sms">ส่ง SMS  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
-                        <button type="button" class="btn btn-info btn-mini" value="{{ $users['id'] }}" id="send_sms2">ส่ง SMS2  <i class="fa fa-mobile-phone" style="font-size:18px;color:white"></i></button>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         @endif
                       @else
@@ -185,27 +184,7 @@ $(document).ready(function(){
         alert(data);
       } 
     });
-  });
-
-  $('#send_sms2').live('click', function(event){
-    event.preventDefault();
-    var id = $(this).val();
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    console.log(id);
-    $.ajax({
-      type :'GET',
-      url : "{{ url('/nexmo1') }}",
-      data : {_token: CSRF_TOKEN,id:id},
-      dataType : 'json',
-      success : function(student)
-      {
-        var data = student.nexmo;        
-        console.log(data);
-        alert(data);
-      } 
-    });
-
-  });
+  });  
 
   $('#send_mail').live('click', function(event){
     event.preventDefault();

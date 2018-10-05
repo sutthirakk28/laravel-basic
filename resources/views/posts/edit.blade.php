@@ -10,7 +10,7 @@
 	<div id="breadcrumb">
 		<a href="{{ url('/posts/') }}" title="กลับไปหน้าบทความ" class="tip-bottom">
 			<i class="icon-book"></i> บทความ</a>
-		<a href="#">เพิ่มบทความ</a>
+		<a href="#">แก้ไขบทความ</a>
 	</div>
 </div> 
 @endsection
@@ -45,10 +45,10 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label"><span class="request">*</span> เนื้อหาบทความ : </label>
-                <div class="controls">	                        
-                  <textarea class="form-control" cols="20" rows="10" id="post_content" name="content" placeholder="Write something amazing..." value="{{ old('content') }}" required />{{ $post->content }}</textarea>  	                        
-                </div>
+							<label class="control-label"><span class="request">*</span> เนื้อหาบทความ : </label>
+							<div class="controls">              	                        
+								<textarea class="form-control" style="width: 81%;" id="mytextarea" name="content" placeholder="Write something amazing..." value="{{ old('content') }}" required />{{ $post->content }}</textarea>  	                        
+							</div>
             </div>
             <div class="control-group">
                 <label class="control-label"> Published : </label>
@@ -92,4 +92,14 @@
 
 @section('js')
 <script src="{{ asset('js/main/maruti.form_validation.js') }}"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+	menubar:false, 
+	theme: 'modern',
+    height: 300,
+	
+  });
+  </script>
 @endsection

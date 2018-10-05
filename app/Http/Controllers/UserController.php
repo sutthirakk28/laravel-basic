@@ -180,28 +180,6 @@ class UserController extends Controller
             return response()->json($response);
         }
     }
-    public function nexmo1(Request $request)
-    {
-        if($request->ajax())
-        {
-            $user = User::find($request->id);
-
-            // Nexmo::message()->send([
-            //     'to'   => '66896901952',
-            //     'from' => 'ตุ่ย',
-            //     'text' => 'การแจ้งเตือน',
-            //     'type' => 'unicode'
-            // ]);
-
-
-            $result = "SMS ส่งข้อมูลผู้ดูแลของ ".$user->name." เรียบร้อยแล้ว";
-            $response = array(
-                'nexmo' => $result
-            );
-            Log::alert($result);
-            return response()->json($response);
-        }
-    }
     /**
      * Update the specified resource in storage.
      *

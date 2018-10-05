@@ -98,6 +98,11 @@ class HomeController extends Controller
             ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("libs.id"))
             ->get();
+        $Latest_Posts = DB::table('posts')
+            ->whereRaw("posts.published = 1")
+            ->orderBy('posts.id', 'desc')
+            ->limit(4)
+            ->get();
         $result   = json_decode($leave, true);
         $result2  = json_decode($ctl, true);
         $result3  = json_decode($ctl_month, true);
@@ -111,6 +116,7 @@ class HomeController extends Controller
         $result11 = json_decode($barchartgrouped3, true);
         $result12 = json_decode($barchartgrouped4, true);
         $result13 = json_decode($polarchart, true);
+        $result14 = json_decode($Latest_Posts, true);
         $data = array(
             'leave'     => $result,
             'ctl'       => $result2,
@@ -125,6 +131,7 @@ class HomeController extends Controller
             'barchartgrouped3' => $result11,
             'barchartgrouped4' => $result12,
             'polarchart'=> $result13,
+            'Latest_Posts'=> $result14,
         );
         Log::info('index ข้อมูล home โดย '.Auth::user()->name);
         return view('home', $data);

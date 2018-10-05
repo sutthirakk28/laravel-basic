@@ -50,7 +50,10 @@
                   <th>{{ $post['id'] }}</th>
                   <td>{{ $post['title'] }}</td>
                   <td class="center">{{ $post['published'] ? "Published" : "Draft" }}</td>
-                  <td class="center"><a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-warning">Edit</a></td>
+                  <td class="center">
+                  <a href="{{ url('posts/'.$post['id']) }}" class="btn btn-success"><i class="icon-eye-open"></i> อ่านบทความ</a>
+                  <a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-warning">Edit</a>
+                  </td>
                 </tr>
               @endforeach
               </tbody>
