@@ -88,6 +88,9 @@ Route::get('addon/graph','AddonController@graph');
 Route::get('addon/organiz','AddonController@organiz');
 Route::get('addon/apiFetchdata','AddonController@index');
 
+//posts
+Route::resource('/posts', 'PostController');
+
 
 /*
 //test
