@@ -393,9 +393,12 @@ strong.sum_month {
                 <li>
                   <div class="user-thumb"> <img width="40" height="40" alt="User" src="images/img/demo/blog.png"> </div>
                   <div class="article-post"> <span class="user-info"> By: {{$L_Posts['name']}} / Date: {{date_format (new DateTime($L_Posts['updated_at']), 'D M Y')}} / Time: {{date_format (new DateTime($L_Posts['updated_at']), 'g:i A')}}</span>
-                    
-                    <p><h4>{{$L_Posts['title']}}</h4>{{ substr(strip_tags($L_Posts['content']),0,300) }}{{ strlen(strip_tags($L_Posts['content'])) > 300 ? "...." : "" }}<a href="{{ url('posts/'.$L_Posts['id']) }} "> อ่านต่อ</a></p>
-                    
+                    <p>
+                      <h4>{{$L_Posts['title']}}</h4>
+                      {{ substr(strip_tags($L_Posts['content']),0,200) }}
+                      {{ strlen(strip_tags($L_Posts['content'])) > 300 ? "..." : "" }}
+                      <a href="{{ url('posts/'.$L_Posts['id']) }} "> อ่านต่อ</a>
+                    </p>                    
                   </div>
                 </li>
               @endforeach

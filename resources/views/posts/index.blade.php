@@ -51,7 +51,7 @@
                   <th>{{ $post['id'] }}</th>
                   <td>{{ $post['title'] }}</td>
                   <td class="center">
-                    <div id="published" class="published" >{{ $post['published'] ? "Published" : "Draft" }}</div>
+                    <p id="{{ $post['id'] }}" class="published" >{{ $post['published'] ? "Published" : "Draft" }}</p>
                     <p>
                       <input type="checkbox" name="check-1" value="{{ $post['id'] }}" class="lcs_check" {{ $post['published'] ? "checked" : "" }} autocomplete="off" />
                     </p>
@@ -89,21 +89,19 @@
           var status 	= ($(this).is(':checked')) ? 'checked' : 'unchecked',
         subj 	= ($(this).attr('type') == 'radio') ? 'radio #' : 'checkbox #',
         num		= $(this).val(); 
-          alert(status);
-          
+
           var id = $(this).val();
           var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
           
           $.ajax({
             type :'GET',
             url : "{{ url('/published') }}",
-            data : {_token: CSRF_TOKEN,id:id},
+            data : {_token: CSRF_TOKEN,id:id,status:status},
             dataType : 'json',
             success : function(checks)
             {
-              var data = checks.publish;        
-              console.log(data);
-              alert(data);
+              var data = checks.publish;               
+              $('p#'+id).text(data)
             } 
           });
       // $('#third_div ul').prepend('<li><em>[lcs-statuschange]</em>'+ subj + num +' changed status: '+ status +'</li>');

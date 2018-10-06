@@ -103,7 +103,7 @@ class HomeController extends Controller
             ->select('posts.*','users.name')
             ->whereRaw("posts.published = 1")
             ->orderBy('posts.id', 'desc')
-            ->limit(3)
+            ->limit(4)
             ->get();
         $result   = json_decode($leave, true);
         $result2  = json_decode($ctl, true);

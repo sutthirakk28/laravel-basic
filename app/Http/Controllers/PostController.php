@@ -132,20 +132,26 @@ class PostController extends Controller
       return redirect()->route('posts.index');
     }
 
-    public function published(Request $request){
-
-      $id = $request->id;
-
-        if($request->ajax())
-        {               
-             
-            $result = $id;
-            $response = array(
-              'publish' => $result
-            );
-            Log::alert('เปลี่ยนแปลงข้อมล publish โดย '.Auth::user()->name);
-            return response()->json($response);
+    public function published(Request $request)
+    {        
+      if($request->ajax())
+      {   
+        if($request->status == 'checked'){
+          $published = 1; $result = 'Published';
+        }else{
+          $published = 0; $result = 'Draft';
         }
+
+        $post = Post::findOrFail($request->id);
+        $post->published = $published;
+        $post->save();
+        
+        $response = array(
+          'publish' => $result
+        );
+        Log::info('เปลี่ยนแปลงข้อมล publish โดย '.Auth::user()->name);
+        return response()->json($response);
+      }
    }
 
     /**
