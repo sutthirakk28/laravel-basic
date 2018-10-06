@@ -89,6 +89,7 @@ Route::get('addon/apiFetchdata','AddonController@index');
 
 //posts
 Route::resource('/posts', 'PostController');
+Route::get('/published', 'PostController@published');
 
 
 /*

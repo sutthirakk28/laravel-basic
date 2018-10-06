@@ -98,10 +98,12 @@ class HomeController extends Controller
             ->whereRaw("leaves.nstart_day = $now->year")
             ->groupBy(DB::raw("libs.id"))
             ->get();
-        $Latest_Posts = DB::table('posts')
+        $Latest_Posts = DB::table('posts')            
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->select('posts.*','users.name')
             ->whereRaw("posts.published = 1")
             ->orderBy('posts.id', 'desc')
-            ->limit(4)
+            ->limit(3)
             ->get();
         $result   = json_decode($leave, true);
         $result2  = json_decode($ctl, true);
@@ -133,6 +135,7 @@ class HomeController extends Controller
             'polarchart'=> $result13,
             'Latest_Posts'=> $result14,
         );
+        
         Log::info('index ข้อมูล home โดย '.Auth::user()->name);
         return view('home', $data);
     }

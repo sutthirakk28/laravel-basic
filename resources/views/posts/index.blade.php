@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/jquery.gritter.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main/Switch/lc_switch.css') }}" />
 @endsection
 
 @section('content-header')
@@ -49,7 +50,12 @@
                 <tr>
                   <th>{{ $post['id'] }}</th>
                   <td>{{ $post['title'] }}</td>
-                  <td class="center">{{ $post['published'] ? "Published" : "Draft" }}</td>
+                  <td class="center">
+                    <div id="published" class="published" >{{ $post['published'] ? "Published" : "Draft" }}</div>
+                    <p>
+                      <input type="checkbox" name="check-1" value="{{ $post['id'] }}" class="lcs_check" {{ $post['published'] ? "checked" : "" }} autocomplete="off" />
+                    </p>
+                  </td>
                   <td class="center">
                   <a href="{{ url('posts/'.$post['id']) }}" class="btn btn-success"><i class="icon-eye-open"></i> อ่านบทความ</a>
                   <a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-warning">Edit</a>
@@ -73,6 +79,37 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('js/main/Switch/lc_switch.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+      $('input').lc_switch();
+  
+      // triggered each time a field changes status
+      $(document).on('lcs-statuschange', '.lcs_check', function() {
+          var status 	= ($(this).is(':checked')) ? 'checked' : 'unchecked',
+        subj 	= ($(this).attr('type') == 'radio') ? 'radio #' : 'checkbox #',
+        num		= $(this).val(); 
+          alert(status);
+          
+          var id = $(this).val();
+          var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+          
+          $.ajax({
+            type :'GET',
+            url : "{{ url('/published') }}",
+            data : {_token: CSRF_TOKEN,id:id},
+            dataType : 'json',
+            success : function(checks)
+            {
+              var data = checks.publish;        
+              console.log(data);
+              alert(data);
+            } 
+          });
+      // $('#third_div ul').prepend('<li><em>[lcs-statuschange]</em>'+ subj + num +' changed status: '+ status +'</li>');
+      });
+    });
+</script>
 <script src="{{ asset('js/main/jquery.uniform.js') }}"></script>
 <script src="{{ asset('js/main/select2.min.js') }}"></script> 
 <script src="{{ asset('js/main/jquery.dataTables_desc.min.js') }}"></script>
@@ -82,6 +119,5 @@
 <script src="{{ asset('js/main/jquery.peity.min.js') }}"></script> 
 <script src="{{ asset('js/main/maruti.interface.js') }}"></script>
 <script src="{{ asset('js/main/maruti.popover.js') }}"></script>
-<script>
-</script>
+
 @endsection

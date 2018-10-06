@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Post;
 use Auth;
 use DB;
@@ -130,6 +131,22 @@ class PostController extends Controller
 
       return redirect()->route('posts.index');
     }
+
+    public function published(Request $request){
+
+      $id = $request->id;
+
+        if($request->ajax())
+        {               
+             
+            $result = $id;
+            $response = array(
+              'publish' => $result
+            );
+            Log::alert('เปลี่ยนแปลงข้อมล publish โดย '.Auth::user()->name);
+            return response()->json($response);
+        }
+   }
 
     /**
      * Remove the specified resource from storage.

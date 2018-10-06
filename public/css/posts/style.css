@@ -58,3 +58,6 @@ img.media-object {
 .media-body {
     padding-left: 1%;
 }
+div.checker input {
+  display: none;
+}
