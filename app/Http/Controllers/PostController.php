@@ -85,10 +85,17 @@ class PostController extends Controller
     public function show($id)
     {
       $post = Post::findOrFail($id);
+      $comment = DB::table('posts')
+            ->join('comments', 'comments.post_id', '=', 'posts.id')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->select('posts.id','posts.title','users.name','comments.body','comments.updated_at')
+            ->where('posts.id','=',$id)
+            ->get();
       $aCss=array('css/posts/style.css');
       $data = array(
-        'style' => $aCss,
-        'post' => $post
+        'style'   => $aCss,
+        'post'    => $post,
+        'comment' => $comment
       );
       return view('posts.show',$data);
     }

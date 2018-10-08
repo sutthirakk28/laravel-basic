@@ -3,6 +3,44 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main/uniform.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/main/select2.css') }}" />
+<style>
+  .chat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+  }
+
+  .chat li .chat-body p {
+    margin: 0;
+    color: #777777;
+  }
+
+  .panel-body {
+    overflow-y: scroll;
+    height: 350px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+  }
+</style>
 @endsection
 
 @section('content-header')
@@ -48,23 +86,48 @@
           <div class="foot">
             <h3>Comments:</h3>
             <div style="margin-bottom:50px;">
+            {{ Form::open(array('url' => url('/comments'), 'class'=>'form-horizontal', 'name'=>'basic_validate', 'novalidate'=>'novalidate', 'id'=>'basic_validate')) }}
+					    {{ csrf_field() }}
+              <Input type="hidden" name="post_id" value="{{$post->id}}" >
               <textarea class="form-control" rows="3" name="body" placeholder="แสดงความคิดเห็นของท่าน"></textarea>
-              <button class="btn btn-success" style="margin-top:10px">Save Comment</button>
+              <button class="btn btn-success" style="margin-top:10px" type="submit" >Save Comment</button>
+            {{ Form::close() }}	
+            <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Chats</div>
+
+                <div class="panel-body">
+                    <chat-messages :messages="messages"></chat-messages>
+                </div>
+                <div class="panel-footer">
+                    <chat-form
+                        v-on:messagesent="addMessage"
+                        :user="{{ Auth::user() }}"
+                    ></chat-form>
+                </div>
             </div>
-            <div class="media" style="margin-top:20px;">
-            <div class="media-left">
-              <a href="#">
-                <img class="media-object" src="http://placeimg.com/80/80" alt="...">
-              </a>
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">John Doe said...</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <span style="color: #aaa;">on Dec 15, 2017</span>
-            </div>
-          </div>
+        </div>
+    </div>
+</div>
+            </div> 
+              @foreach($comment as $c)
+              <div class="media" style="margin-top:20px;">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="http://placeimg.com/80/80" alt="...">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">{{ $c->name }} พูดว่า...</h4>
+                  <p>
+                    {{ $c->body }}
+                  </p>
+                  <span style="color: #aaa;">on {{date_format (new DateTime($c->updated_at), 'D M Y H:i')}} น.</span>              
+                </div>
+              </div>
+              @endforeach            
           </div>
 
         </div>

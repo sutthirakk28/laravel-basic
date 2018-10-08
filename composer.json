@@ -17,7 +17,8 @@
         "laravelcollective/html": "~5.0",
         "maatwebsite/excel": "^3.0",
         "nesbot/carbon": "^1.32",
-        "nexmo/laravel": "^1.1"
+        "nexmo/laravel": "^1.1",
+        "pusher/pusher-php-server": "^3.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

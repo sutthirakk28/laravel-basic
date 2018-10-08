@@ -91,6 +91,11 @@ Route::get('addon/apiFetchdata','AddonController@index');
 Route::resource('/posts', 'PostController');
 Route::get('/published', 'PostController@published');
 
+//comment
+Route::resource('/comments', 'CommentController');
+// Route::get('/', 'ChatsController@index');
+Route::get('messages', 'CommentController@fetchMessages');
+Route::post('messages', 'CommentController@sendMessage');
 
 /*
 //test
