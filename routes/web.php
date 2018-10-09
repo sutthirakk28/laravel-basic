@@ -1,8 +1,5 @@
 <?php
 
-// use App\Lib;
-// use App\Http\Resources\User as UserResource;
-// use App\Http\Resources\UserCollection;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,9 +90,10 @@ Route::get('/published', 'PostController@published');
 
 //comment
 Route::resource('/comments', 'CommentController');
-// Route::get('/', 'ChatsController@index');
-Route::get('messages', 'CommentController@fetchMessages');
-Route::post('messages', 'CommentController@sendMessage');
+
+Route::get('/message', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
 
 /*
 //test

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,55 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+
+    <style>
+        .chat {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat li {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #B3A9A9;
+        }
+
+        .chat li .chat-body p {
+            margin: 0;
+            color: #777777;
+        }
+
+        .panel-body {
+            overflow-y: scroll;
+            height: 350px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #555;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'pusherKey' => config('broadcasting.connections.pusher.key'),
+            'pusherCluster' => config('broadcasting.connections.pusher.options.cluster')
+        ]) !!};
+    </script>
 </head>
 <body>
     <div id="app">
@@ -28,8 +76,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        <!--{{ config('app.name', 'Laravel') }} -->บริษัท ทีพีเอ็ม(1980) จำกัด
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 
@@ -75,6 +123,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
