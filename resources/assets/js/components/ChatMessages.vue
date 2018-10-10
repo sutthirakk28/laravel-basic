@@ -7,12 +7,15 @@
                         {{ message.user.name }}
                     </strong>
                 </div>
+                <span class="time">
+                    {{ message.created_at }}
+                </span>
                 <p>
                     {{ message.message }}
                 </p>
             </div>
         </li>
-    </ul>
+    </ul>  
 </template>
 
 <script>
@@ -20,3 +23,4 @@ export default {
   props: ['messages']
 };
 </script>
+

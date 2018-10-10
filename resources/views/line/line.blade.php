@@ -5,8 +5,7 @@
 
 @section('content-header')
 <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book
-"></i> ข้อมูลพนักงาน</a></div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-book"></i> ข้อมูลพนักงาน</a></div>
   </div>  
 @endsection
 

@@ -1,9 +1,44 @@
+
 @extends('layouts.tpm')
 
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css">
-[class^="icon-"], [class*=" icon-"] {    
+<style>
+    .container-fluid{
+        font-family: Maitree;
+
+    }
+    .chat {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chat li .chat-body p {
+        margin: 0;
+        color: #777777;
+    }
+
+    .panel-body {
+        overflow-y: scroll;
+        height: 350px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+    [class^="icon-"], [class*=" icon-"] {    
     background-image: url("../images/img/glyphicons-halflings.png");
 }
 .icon-white, .nav-pills>.active>a>[class^="icon-"], .nav-pills>.active>a>[class*=" icon-"], .nav-list>.active>a>[class^="icon-"], .nav-list>.active>a>[class*=" icon-"], .navbar-inverse .nav>.active>a>[class^="icon-"], .navbar-inverse .nav>.active>a>[class*=" icon-"], .dropdown-menu>li>a:hover>[class^="icon-"], .dropdown-menu>li>a:focus>[class^="icon-"], .dropdown-menu>li>a:hover>[class*=" icon-"], .dropdown-menu>li>a:focus>[class*=" icon-"], .dropdown-menu>.active>a>[class^="icon-"], .dropdown-menu>.active>a>[class*=" icon-"], .dropdown-submenu:hover>a>[class^="icon-"], .dropdown-submenu:focus>a>[class^="icon-"], .dropdown-submenu:hover>a>[class*=" icon-"], .dropdown-submenu:focus>a>[class*=" icon-"] {
@@ -48,6 +83,31 @@
     height: 1em;
     
 }
+.chat-message input[type=text] {
+	margin-bottom: 0 !important;
+	width: 90%;
+}
+.panel-body {
+    overflow-y: scroll;
+    height: 400px;
+}
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 0 1px rgba(0, 0, 0, 0.05);
+    display: block;
+    margin-left: 0px;
+    padding: 10px;
+    position: relative;
+}
+p {
+    display: block;
+    margin-top: 13px;
+    border-top: 1px solid #dadada;
+}
 </style>
 @endsection
 
@@ -91,23 +151,30 @@
                                     @if($users['id'] != Auth::id())
                                         <li id="user-Sunil" class="online"><a href=""><img alt="" src="{{asset('../images/org_man2.png')}}" /> <span>{{$users['name']}}</span>       <span class="indicator online"></span></a></li>
                                     @else
-                                        <li id="user-vijay" class="online new"><a href=""><img alt="" src="{{asset('../images/org_man1.png')}}" /> <span>{{$users['name']}}</span>       <span class="indicator online"></span></a><span class="msg-count badge badge-info">3</span></li>
+                                        <li id="user-vijay" class="online new"><a href=""><img alt="" src="{{asset('../images/org_man1.png')}}" /> <span>{{$users['name']}}</span>       <span class="indicator online"></span></a><span class="msg-count badge badge-info">☆</span></li>
                                     @endif                                
                                 @endforeach
                                 
                             </ul>
                         </div>
                     </div>
-                    <div class="chat-content panel-left2">
-                        <div class="chat-messages" id="chat-messages">
-                            <div id="chat-messages-inner"></div>
-                        </div>
-                        <div class="chat-message well">
-                            <button class="btn btn-info"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                            <span class="input-box">
-                                <input type="text" name="msg-box" id="msg-box" />
-                                <meta name="csrf-token" content="{{ csrf_token() }}">
-                            </span> 
+                    <div id="app">  
+                        <div class="chat-content panel-left2">
+                            <div class="chat-messages" id="chat-messages">
+                                <div id="chat-messages-inner">                                
+                                    <div class="panel-body">
+                                        <chat-messages :messages="messages"></chat-messages>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-message well">
+                                <!-- <button class="btn btn-info"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                <span class="input-box">
+                                    <input type="text" name="msg-box" id="msg-box" />
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                                </span> -->
+                                <chat-form v-on:messagesent="addMessage" :user="{{ Auth::user() }}"></chat-form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,81 +185,13 @@
 @endsection
 
 @section('js')
-<script >
-
-$(document).ready(function(){
-	
-	var msg_template = '<p><span class="msg-block"><strong></strong><span class="time"></span><span class="msg"></span></span></p>';
-	
-	$('.chat-message button').click(function(){
-		var input = $(this).siblings('span').children('input[type=text]');		
-		if(input.val() != ''){
-			add_message('You','../images/img/demo/av1.jpg',input.val(),true);
-            
-		}		
-	});
-	
-	$('.chat-message input').keypress(function(e){
-		if(e.which == 13) {	
-			if($(this).val() != ''){
-				add_message('You','../images/img/demo/av1.jpg',$(this).val(),true);
-                
-			}		
-		}
-	});
-    
-   	var i = 0;
-	function add_message(name,img,msg,clear) {
-        i = i + 1;
-        var  inner = $('#chat-messages-inner');
-        var time = new Date();
-        var hours = time.getHours();
-        var minutes = time.getMinutes();
-        if(hours < 10) hours = '0' + hours;
-        if(minutes < 10) minutes = '0' + minutes;
-        var id = 'msg-'+i;
-        var idname = name.replace(' ','-').toLowerCase();
-
-        /*start ajax */
-        if(msg != ''){
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');            
-            $.ajax({
-                type :'GET',
-                url : "{{ url('/line/index/') }}",
-                data : {_token: CSRF_TOKEN,id:msg},
-                dataType : 'json',
-                success : function(result)
-                {
-                    var data = result.line;
-                    var data2 = result.status;        
-                    console.log(data);
-                    
-                    inner.append('<p id="'+id+'" class="user-'+idname+'">'
-                        +'<span class="msg-block"><img src="'+img+'" alt="" /><strong>'+name+'</strong> <span class="time"> '+data+' '+hours+':'+minutes+' น.</span>'
-					    +'<span class="msg">'+msg+'</span></span></p>');        
-                    
-                } 
-            });
-        }
-        /* End ajax*/
-
-		$('#'+id).hide().fadeIn(800);
-		if(clear) {
-			$('.chat-message input').val('').focus();
-		}
-		$('#chat-messages').animate({ scrollTop: inner.height() },1000);
-	}
-    function remove_user(userid,name) {
-        i = i + 1;
-        $('.contact-list li#user-'+userid).addClass('offline').delay(1000).slideUp(800,function(){
-            $(this).remove();
-        });
-        var  inner = $('#chat-messages-inner');
-        var id = 'msg-'+i;
-        inner.append('<p class="offline" id="'+id+'"><span>User '+name+' ออกจากแชท</span></p>');
-        $('#'+id).hide().fadeIn(800);
-    }
-});
+<script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'pusherKey' => config('broadcasting.connections.pusher.key'),
+        'pusherCluster' => config('broadcasting.connections.pusher.options.cluster')
+    ]) !!};    
 
 </script>
+<script src="/js/app.js"></script>
 @endsection

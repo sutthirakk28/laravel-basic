@@ -1079,6 +1079,7 @@ module.exports = __webpack_require__(47);
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53162,11 +53163,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user'],
+
     data: function data() {
         return {
             newMessage: ''
         };
     },
+
 
     methods: {
         sendMessage: function sendMessage() {
@@ -53174,6 +53177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 user: this.user,
                 message: this.newMessage
             });
+
             this.newMessage = '';
         }
     }
