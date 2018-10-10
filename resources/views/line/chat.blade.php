@@ -91,18 +91,6 @@
     overflow-y: scroll;
     height: 400px;
 }
-.chat li {
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #cccccc;
-    box-shadow: 1px 1px 0 1px rgba(0, 0, 0, 0.05);
-    display: block;
-    margin-left: 0px;
-    padding: 10px;
-    position: relative;
-}
 p {
     display: block;
     margin-top: 13px;

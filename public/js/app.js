@@ -1112,7 +1112,8 @@ var app = new Vue({
         Echo.private('chat').listen('MessageSent', function (e) {
             _this.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                created_at: e.message.created_at
             });
         });
     },
@@ -53046,6 +53047,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['messages']
@@ -53065,20 +53069,22 @@ var render = function() {
     _vm._l(_vm.messages, function(message) {
       return _c("li", { staticClass: "left clearfix" }, [
         _c("div", { staticClass: "chat-body clearfix" }, [
-          _c("div", { staticClass: "header" }, [
-            _c("strong", { staticClass: "primary-font" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(message.user.name) +
-                  "\n                "
-              )
-            ])
-          ]),
-          _vm._v(" "),
           _c("p", [
-            _vm._v(
-              "\n                " + _vm._s(message.message) + "\n            "
-            )
+            _c("span", { staticClass: "msg-block" }, [
+              _c("img", {
+                attrs: { src: "/images/img/demo/av1.jpg", alt: "" }
+              }),
+              _vm._v(" "),
+              _c("strong", [_vm._v(_vm._s(message.user.name))]),
+              _vm._v(" "),
+              _c("span", { staticClass: "time" }, [
+                _vm._v("ส่งแล้ว " + _vm._s(message.created_at) + " น.")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v(_vm._s(message.message))
+              ])
+            ])
           ])
         ])
       ])
@@ -53175,7 +53181,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                created_at: this.created_at
             });
 
             this.newMessage = '';
@@ -53206,7 +53213,7 @@ var render = function() {
         id: "btn-input",
         type: "text",
         name: "message",
-        placeholder: "Type your message here..."
+        placeholder: "พิมพ์ข้อความของคุณที่นี่ ..."
       },
       domProps: { value: _vm.newMessage },
       on: {
