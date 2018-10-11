@@ -94,7 +94,7 @@
 p {
     display: block;
     margin-top: 13px;
-    border-top: 1px solid #dadada;
+    /* border-top: 1px solid #dadada; */
 }
 </style>
 @endsection

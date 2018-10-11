@@ -42,6 +42,9 @@ Route::post('/nexmo', 'UserController@nexmo');
 //line
 Route::get('/line/line/{id?}', 'LineController@line');
 Route::get('/line/index/{id?}', 'LineController@create');
+Route::get('/message', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
 
 //mail
 Route::get('/sendbasicemail','MailController@basic_email');
@@ -90,10 +93,6 @@ Route::get('/published', 'PostController@published');
 
 //comment
 Route::resource('/comments', 'CommentController');
-
-Route::get('/message', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
 
 /*
 //test
